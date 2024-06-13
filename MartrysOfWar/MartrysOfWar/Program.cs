@@ -10,7 +10,10 @@ using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddCors();
+builder.Services.AddCors(opt => opt.AddPolicy("MyPolicy", policy =>
+{
+    policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+}));
 builder.Services.AddControllers();
 builder.Services.AddScoped<IUserBL, UserBL>();
 builder.Services.AddScoped<IUserDL, UserDL>();
@@ -62,7 +65,7 @@ builder.Services.AddDbContext<MartyrsofwarContext>(options =>
 
 var app = builder.Build();
 
-app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+app.UseCors("MyPolicy");
 
 // Configure the HTTP request pipeline.
 
