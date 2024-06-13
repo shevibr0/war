@@ -1,0 +1,14 @@
+C:\Users\Owner\Desktop\פרויקט סיום\MartrysOfWar\DL\bin\Release\net6.0\DL.deps.json
+C:\Users\Owner\Desktop\פרויקט סיום\MartrysOfWar\DL\bin\Release\net6.0\DL.runtimeconfig.json
+C:\Users\Owner\Desktop\פרויקט סיום\MartrysOfWar\DL\bin\Release\net6.0\DL.dll
+C:\Users\Owner\Desktop\פרויקט סיום\MartrysOfWar\DL\bin\Release\net6.0\DL.pdb
+C:\Users\Owner\Desktop\פרויקט סיום\MartrysOfWar\DL\obj\Release\net6.0\DL.csproj.AssemblyReference.cache
+C:\Users\Owner\Desktop\פרויקט סיום\MartrysOfWar\DL\obj\Release\net6.0\DL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Owner\Desktop\פרויקט סיום\MartrysOfWar\DL\obj\Release\net6.0\DL.AssemblyInfoInputs.cache
+C:\Users\Owner\Desktop\פרויקט סיום\MartrysOfWar\DL\obj\Release\net6.0\DL.AssemblyInfo.cs
+C:\Users\Owner\Desktop\פרויקט סיום\MartrysOfWar\DL\obj\Release\net6.0\DL.csproj.CoreCompileInputs.cache
+C:\Users\Owner\Desktop\פרויקט סיום\MartrysOfWar\DL\obj\Release\net6.0\DL.dll
+C:\Users\Owner\Desktop\פרויקט סיום\MartrysOfWar\DL\obj\Release\net6.0\refint\DL.dll
+C:\Users\Owner\Desktop\פרויקט סיום\MartrysOfWar\DL\obj\Release\net6.0\DL.pdb
+C:\Users\Owner\Desktop\פרויקט סיום\MartrysOfWar\DL\obj\Release\net6.0\DL.genruntimeconfig.cache
+C:\Users\Owner\Desktop\פרויקט סיום\MartrysOfWar\DL\obj\Release\net6.0\ref\DL.dll

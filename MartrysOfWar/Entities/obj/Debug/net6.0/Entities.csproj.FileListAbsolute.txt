@@ -1,0 +1,60 @@
+C:\Users\Owner\Desktop\פרויקט סיום\MartrysOfWar\Entities\bin\Debug\net6.0\Entities.deps.json
+C:\Users\Owner\Desktop\פרויקט סיום\MartrysOfWar\Entities\bin\Debug\net6.0\Entities.dll
+C:\Users\Owner\Desktop\פרויקט סיום\MartrysOfWar\Entities\bin\Debug\net6.0\Entities.pdb
+C:\Users\Owner\Desktop\פרויקט סיום\MartrysOfWar\Entities\obj\Debug\net6.0\Entities.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Owner\Desktop\פרויקט סיום\MartrysOfWar\Entities\obj\Debug\net6.0\Entities.AssemblyInfoInputs.cache
+C:\Users\Owner\Desktop\פרויקט סיום\MartrysOfWar\Entities\obj\Debug\net6.0\Entities.AssemblyInfo.cs
+C:\Users\Owner\Desktop\פרויקט סיום\MartrysOfWar\Entities\obj\Debug\net6.0\Entities.csproj.CoreCompileInputs.cache
+C:\Users\Owner\Desktop\פרויקט סיום\MartrysOfWar\Entities\obj\Debug\net6.0\Entities.dll
+C:\Users\Owner\Desktop\פרויקט סיום\MartrysOfWar\Entities\obj\Debug\net6.0\refint\Entities.dll
+C:\Users\Owner\Desktop\פרויקט סיום\MartrysOfWar\Entities\obj\Debug\net6.0\Entities.pdb
+C:\Users\Owner\Desktop\פרויקט סיום\MartrysOfWar\Entities\obj\Debug\net6.0\ref\Entities.dll
+C:\Users\Owner\Desktop\פרויקט סיום\MartrysOfWar\Entities\bin\Debug\net6.0\DL.dll
+C:\Users\Owner\Desktop\פרויקט סיום\MartrysOfWar\Entities\bin\Debug\net6.0\DL.pdb
+C:\Users\Owner\Desktop\פרויקט סיום\MartrysOfWar\Entities\obj\Debug\net6.0\Entities.csproj.AssemblyReference.cache
+C:\Users\Owner\Desktop\פרויקט סיום\MartrysOfWar\Entities\obj\Debug\net6.0\Entities.csproj.CopyComplete
+C:\Users\shula\Downloads\MartrysOfWar-main (3)\MartrysOfWar-main\MartrysOfWar\Entities\obj\Debug\net6.0\Entities.csproj.AssemblyReference.cache
+C:\Users\shula\Downloads\MartrysOfWar-main (3)\MartrysOfWar-main\MartrysOfWar\Entities\obj\Debug\net6.0\Entities.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\shula\Downloads\MartrysOfWar-main (3)\MartrysOfWar-main\MartrysOfWar\Entities\obj\Debug\net6.0\Entities.AssemblyInfoInputs.cache
+C:\Users\shula\Downloads\MartrysOfWar-main (3)\MartrysOfWar-main\MartrysOfWar\Entities\obj\Debug\net6.0\Entities.AssemblyInfo.cs
+C:\Users\shula\Downloads\MartrysOfWar-main (3)\MartrysOfWar-main\MartrysOfWar\Entities\obj\Debug\net6.0\Entities.csproj.CoreCompileInputs.cache
+C:\Users\shula\Downloads\MartrysOfWar-main (3)\MartrysOfWar-main\MartrysOfWar\Entities\obj\Debug\net6.0\Entities.dll
+C:\Users\shula\Downloads\MartrysOfWar-main (3)\MartrysOfWar-main\MartrysOfWar\Entities\obj\Debug\net6.0\refint\Entities.dll
+C:\Users\shula\Downloads\MartrysOfWar-main (3)\MartrysOfWar-main\MartrysOfWar\Entities\obj\Debug\net6.0\Entities.pdb
+C:\Users\shula\Downloads\MartrysOfWar-main (3)\MartrysOfWar-main\MartrysOfWar\Entities\bin\Debug\net6.0\Entities.deps.json
+C:\Users\shula\Downloads\MartrysOfWar-main (3)\MartrysOfWar-main\MartrysOfWar\Entities\bin\Debug\net6.0\Entities.dll
+C:\Users\shula\Downloads\MartrysOfWar-main (3)\MartrysOfWar-main\MartrysOfWar\Entities\bin\Debug\net6.0\Entities.pdb
+C:\Users\shula\Downloads\MartrysOfWar-main (3)\MartrysOfWar-main\MartrysOfWar\Entities\bin\Debug\net6.0\DL.dll
+C:\Users\shula\Downloads\MartrysOfWar-main (3)\MartrysOfWar-main\MartrysOfWar\Entities\bin\Debug\net6.0\DL.pdb
+C:\Users\shula\Downloads\MartrysOfWar-main (3)\MartrysOfWar-main\MartrysOfWar\Entities\obj\Debug\net6.0\Entities.csproj.CopyComplete
+C:\Users\shula\Downloads\MartrysOfWar-main (3)\MartrysOfWar-main\MartrysOfWar\Entities\obj\Debug\net6.0\ref\Entities.dll
+C:\Users\Owner\Desktop\פרויקט חללי ברזל\MartrysOfWar\Entities\bin\Debug\net6.0\Entities.deps.json
+C:\Users\Owner\Desktop\פרויקט חללי ברזל\MartrysOfWar\Entities\bin\Debug\net6.0\Entities.dll
+C:\Users\Owner\Desktop\פרויקט חללי ברזל\MartrysOfWar\Entities\bin\Debug\net6.0\Entities.pdb
+C:\Users\Owner\Desktop\פרויקט חללי ברזל\MartrysOfWar\Entities\bin\Debug\net6.0\DL.dll
+C:\Users\Owner\Desktop\פרויקט חללי ברזל\MartrysOfWar\Entities\bin\Debug\net6.0\DL.pdb
+C:\Users\Owner\Desktop\פרויקט חללי ברזל\MartrysOfWar\Entities\obj\Debug\net6.0\Entities.csproj.AssemblyReference.cache
+C:\Users\Owner\Desktop\פרויקט חללי ברזל\MartrysOfWar\Entities\obj\Debug\net6.0\Entities.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Owner\Desktop\פרויקט חללי ברזל\MartrysOfWar\Entities\obj\Debug\net6.0\Entities.AssemblyInfoInputs.cache
+C:\Users\Owner\Desktop\פרויקט חללי ברזל\MartrysOfWar\Entities\obj\Debug\net6.0\Entities.AssemblyInfo.cs
+C:\Users\Owner\Desktop\פרויקט חללי ברזל\MartrysOfWar\Entities\obj\Debug\net6.0\Entities.csproj.CoreCompileInputs.cache
+C:\Users\Owner\Desktop\פרויקט חללי ברזל\MartrysOfWar\Entities\obj\Debug\net6.0\Entities.csproj.CopyComplete
+C:\Users\Owner\Desktop\פרויקט חללי ברזל\MartrysOfWar\Entities\obj\Debug\net6.0\Entities.dll
+C:\Users\Owner\Desktop\פרויקט חללי ברזל\MartrysOfWar\Entities\obj\Debug\net6.0\refint\Entities.dll
+C:\Users\Owner\Desktop\פרויקט חללי ברזל\MartrysOfWar\Entities\obj\Debug\net6.0\Entities.pdb
+C:\Users\Owner\Desktop\פרויקט חללי ברזל\MartrysOfWar\Entities\obj\Debug\net6.0\ref\Entities.dll
+C:\Users\Owner\Desktop\‏‏פרויקט חללי ברזל - עותק\MartrysOfWar\Entities\bin\Debug\net6.0\Entities.deps.json
+C:\Users\Owner\Desktop\‏‏פרויקט חללי ברזל - עותק\MartrysOfWar\Entities\bin\Debug\net6.0\Entities.dll
+C:\Users\Owner\Desktop\‏‏פרויקט חללי ברזל - עותק\MartrysOfWar\Entities\bin\Debug\net6.0\Entities.pdb
+C:\Users\Owner\Desktop\‏‏פרויקט חללי ברזל - עותק\MartrysOfWar\Entities\bin\Debug\net6.0\DL.dll
+C:\Users\Owner\Desktop\‏‏פרויקט חללי ברזל - עותק\MartrysOfWar\Entities\bin\Debug\net6.0\DL.pdb
+C:\Users\Owner\Desktop\‏‏פרויקט חללי ברזל - עותק\MartrysOfWar\Entities\obj\Debug\net6.0\Entities.csproj.AssemblyReference.cache
+C:\Users\Owner\Desktop\‏‏פרויקט חללי ברזל - עותק\MartrysOfWar\Entities\obj\Debug\net6.0\Entities.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Owner\Desktop\‏‏פרויקט חללי ברזל - עותק\MartrysOfWar\Entities\obj\Debug\net6.0\Entities.AssemblyInfoInputs.cache
+C:\Users\Owner\Desktop\‏‏פרויקט חללי ברזל - עותק\MartrysOfWar\Entities\obj\Debug\net6.0\Entities.AssemblyInfo.cs
+C:\Users\Owner\Desktop\‏‏פרויקט חללי ברזל - עותק\MartrysOfWar\Entities\obj\Debug\net6.0\Entities.csproj.CoreCompileInputs.cache
+C:\Users\Owner\Desktop\‏‏פרויקט חללי ברזל - עותק\MartrysOfWar\Entities\obj\Debug\net6.0\Entities.csproj.CopyComplete
+C:\Users\Owner\Desktop\‏‏פרויקט חללי ברזל - עותק\MartrysOfWar\Entities\obj\Debug\net6.0\Entities.dll
+C:\Users\Owner\Desktop\‏‏פרויקט חללי ברזל - עותק\MartrysOfWar\Entities\obj\Debug\net6.0\refint\Entities.dll
+C:\Users\Owner\Desktop\‏‏פרויקט חללי ברזל - עותק\MartrysOfWar\Entities\obj\Debug\net6.0\Entities.pdb
+C:\Users\Owner\Desktop\‏‏פרויקט חללי ברזל - עותק\MartrysOfWar\Entities\obj\Debug\net6.0\ref\Entities.dll
