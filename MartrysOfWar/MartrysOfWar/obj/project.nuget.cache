@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ikv04uCIytI+/FxATC1XNdWA3vbdq0AxhlTv4FItrAc1uZmVcdayz2jfkB3LCL5d1pTgM+i4JLPAIBZYYC97dQ==",
+  "dgSpecHash": "EF0BYfOKE2oabh1/E3d+bMhAzZoBY0y3kCjMp9NMj59f7gUeOIt3WJEkoROhQBaMA/ks7I641VfXM1nkLldb+A==",
   "success": true,
   "projectFilePath": "C:\\Users\\Owner\\Desktop\\‏‏פרויקט חללי ברזל - עותק\\MartrysOfWar\\MartrysOfWar\\MartrysOfWar.csproj",
   "expectedPackageFiles": [
@@ -123,6 +123,7 @@
     "C:\\Users\\Owner\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.1\\microsoft.netcore.platforms.1.1.1.nupkg.sha512",
     "C:\\Users\\Owner\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Users\\Owner\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\Owner\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.19.4\\microsoft.visualstudio.azure.containers.tools.targets.1.19.4.nupkg.sha512",
     "C:\\Users\\Owner\\.nuget\\packages\\microsoft.visualstudio.debugger.contracts\\17.2.0\\microsoft.visualstudio.debugger.contracts.17.2.0.nupkg.sha512",
     "C:\\Users\\Owner\\.nuget\\packages\\microsoft.visualstudio.web.codegeneration\\6.0.16\\microsoft.visualstudio.web.codegeneration.6.0.16.nupkg.sha512",
     "C:\\Users\\Owner\\.nuget\\packages\\microsoft.visualstudio.web.codegeneration.core\\6.0.16\\microsoft.visualstudio.web.codegeneration.core.6.0.16.nupkg.sha512",
