@@ -1,7 +1,7 @@
 import axios from 'axios';
 console.log("yes2")
 const api = axios.create({
-    baseURL: "https://localhost:44303/api/",
+    baseURL: "https://war-24zn.onrender.com",
     headers: {
         "Content-Type": "application/json"
     }
