@@ -136,7 +136,7 @@ const Register = () => {
                 </div>
             </nav>
             <div className="flex flex-wrap justify-center items-center h-screen">
-                <div className="mt-4">
+                <div className="mt-4 items-center">
                     <span>אם אתה רשום <span onClick={() => nav('/')} className="text-blue-500 cursor-pointer">התחבר כעת</span></span>
                 </div>
                 <div className="border border-black p-9 rounded-md" style={{ direction: 'rtl' }}>
