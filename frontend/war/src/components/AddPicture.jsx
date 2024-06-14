@@ -107,7 +107,7 @@ const AddPicture = () => {
             user_message: `A new picture has been added. URL: ${downloadURL}`,
         };
 
-        emailjs.send('service_id', 'template_id', templateParams, 'user_id')
+        emailjs.send('service_9rnvzfp', 'template_j3x5far', templateParams, "6no79izXNNDe1YECd")
             .then((response) => {
                 console.log('SUCCESS!', response.status, response.text);
             }, (error) => {
