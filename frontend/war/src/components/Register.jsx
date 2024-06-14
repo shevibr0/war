@@ -141,7 +141,7 @@ const Register = () => {
             <div className="flex flex-wrap justify-center items-center h-screen">
 
                 <div className="border border-black p-9 rounded-md" style={{ direction: 'rtl' }}>
-                    <h1 className="text-black text-4xl font-bold font-['Alef'] mb-4 text-center">הרשמה</h1>
+                    <h1 className="text-black text-4xl font-bold font-['Alef'] text-center">הרשמה</h1>
 
                     <div className="flex flex-col items-center">
                         <label htmlFor="name">שם</label>
