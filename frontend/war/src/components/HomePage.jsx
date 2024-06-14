@@ -8,7 +8,7 @@ const HomePage = () => {
     const user = useSelector(state => state.user.connectedUser);
 
     return (
-        <div className="bg-gray-200 h-screen">
+        <div className="bg-gray-200 h-screen font-sans">
             <button className="lg:hidden md:hidden sm:hidden" onClick={() => { setIsOpen(!isOpen) }} >
                 <svg className="w-6 h-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 11h16M4 16h16" />
