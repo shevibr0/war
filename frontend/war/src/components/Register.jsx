@@ -13,9 +13,34 @@ const Register = () => {
     const [isOpen, setIsOpen] = useState(false);
     const user = useSelector(state => state.user.connectedUser);
 
+    const validateEmail = (email) => {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(String(email).toLowerCase());
+    }
+
+    const validatePhone = (phone) => {
+        const re = /^\d{10}$/;
+        return re.test(String(phone));
+    }
+
     const handleRegistration = async () => {
         if (name === "" || email === "" || password === "" || phone === "") {
             setError('Please fill in all fields');
+            return;
+        }
+
+        if (!validateEmail(email)) {
+            setError('Please enter a valid email address');
+            return;
+        }
+
+        if (!validatePhone(phone)) {
+            setError('Please enter a valid phone number');
+            return;
+        }
+
+        if (password.length < 3) {
+            setError('Password must be at least 3 characters long');
             return;
         }
 
@@ -111,13 +136,16 @@ const Register = () => {
                 </div>
             </nav>
             <div className="flex flex-wrap justify-center items-center h-screen">
-                <div className="border border-black p-9 rounded-md">
+                <div className="mt-4">
+                    <span>אם אתה רשום <span onClick={() => nav('/')} className="text-blue-500 cursor-pointer">התחבר כעת</span></span>
+                </div>
+                <div className="border border-black p-9 rounded-md" style={{ direction: 'rtl' }}>
                     <h1 className="text-black text-4xl font-bold font-['Alef'] mb-4 text-center">הרשמה</h1>
                     <div className="flex flex-col items-center">
                         <label htmlFor="name">שם</label>
-                        <input name="name" type="text" placeholder="הכנס שם" value={name} onChange={handleChangeName} style={{ direction: 'rtl' }} /><br />
+                        <input name="name" type="text" placeholder="הכנס שם" value={name} onChange={handleChangeName} /><br />
                         <label htmlFor="email">מייל</label>
-                        <input name="email" type="email" placeholder="הכנס מייל" value={email} onChange={handleChangeEmail} style={{ direction: 'rtl' }} /><br />
+                        <input name="email" type="email" placeholder="הכנס מייל" value={email} onChange={handleChangeEmail} /><br />
                         <label htmlFor="password">סיסמא</label>
                         <input name="password" type="password" placeholder="הכנס סיסמא" value={password} onChange={handleChangePassword} /><br />
                         <label htmlFor="phone">טלפון</label>

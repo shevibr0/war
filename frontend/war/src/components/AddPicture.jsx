@@ -5,6 +5,7 @@ import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { storage } from "./firebase";
 import { v4 as uuidv4 } from "uuid";
 import { addPicture } from '../utils/PictureUtil';
+import emailjs from 'emailjs-com';
 
 const AddPicture = () => {
     const nav = useNavigate();
@@ -13,6 +14,7 @@ const AddPicture = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const [alertMessage, setAlertMessage] = useState('');
 
     const initialPictureDetails = {
         Picture: {
@@ -41,10 +43,13 @@ const AddPicture = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
         if (!user) {
+            setAlertMessage('עליך להיות מחובר כדי להוסיף תמונה.');
             nav('/register');
             return;
         }
+
         if (!image) {
             alert('Please select an image');
             return;
@@ -85,6 +90,7 @@ const AddPicture = () => {
             });
 
             console.log('Picture added successfully:', response);
+            sendEmailNotification(downloadURL);
             nav(`/soldierInfo/${id}/pictures`);
         } catch (error) {
             console.error('Error saving picture to database:', error);
@@ -92,6 +98,21 @@ const AddPicture = () => {
         } finally {
             setIsLoading(false);
         }
+    };
+
+    const sendEmailNotification = (downloadURL) => {
+        const templateParams = {
+            user_name: user.Name,
+            user_email: user.Email,
+            user_message: `A new picture has been added. URL: ${downloadURL}`,
+        };
+
+        emailjs.send('service_id', 'template_id', templateParams, 'user_id')
+            .then((response) => {
+                console.log('SUCCESS!', response.status, response.text);
+            }, (error) => {
+                console.error('FAILED...', error);
+            });
     };
 
     return (
@@ -140,6 +161,7 @@ const AddPicture = () => {
                 <img className="mt-3 ml-5 max-w-[1%] lg:max-w-[1%] lg:mr-15 md:max-w-[1%] sm:max-w-[1%]" src="/חץ חזור.svg" alt="Logo" onClick={() => nav(-1)} />
             </div>
             <h2 className="flex justify-center text-3xl font-bold">הוספת תמונה</h2>
+            {alertMessage && <p style={{ color: 'red' }}>{alertMessage}</p>}
             {error && <p style={{ color: 'red' }}>{error}</p>}
             <div className="flex justify-center bg-gray-200">
                 <form onSubmit={handleSubmit} className="bg-gray-400 space-y-4 p-8 border-2 border-black mt-4">
@@ -154,14 +176,6 @@ const AddPicture = () => {
                             className="w-full p-2 border"
                             placeholder="כמה מילים אישיות על התמונה"
                             style={{ direction: 'rtl' }} />
-                    </div>
-                    {isLoading && (
-                        <div className="flex justify-center items-center">
-                            <div className="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12 mb-4"></div>
-                        </div>
-                    )}
-                    <div className="progress-bar bg-blue-600 text-xs leading-none py-1 text-center text-white rounded mt-2" style={{ width: `${progresspercent}%` }}>
-                        {progresspercent}%
                     </div>
                     <div className='flex justify-center'>
                         <button type="submit" disabled={isLoading} className="bg-gray-900 text-white py-2 px-4 rounded">הוסף תמונה</button>
