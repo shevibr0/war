@@ -76,7 +76,7 @@ const HomePage = () => {
                 </div>
 
                 <div className="flex items-center justify-center  flex-wrap ">
-                    <div className="ml-8 mr-8 w-[578px] h-[600px] lg:w-[678px] lg:h-96 lg:mr-2 md:w-[678px] md:h-[440px] sm:w-[578px] sm:h-[540px] mt-4   p-1 text-center text-gray-600 text-m font-bold font-['Ploni Yad v2 AAA'] leading-[42.67px] tracking-wider bg-white border border-gray-700 ">
+                    <div className="ml-8 mr-8 w-[578px] h-[800px] lg:w-[678px] lg:h-96 lg:mr-2 md:w-[678px] md:h-[440px] sm:w-[578px] sm:h-[540px] mt-4   p-1 text-center text-gray-600 text-m font-bold font-['Ploni Yad v2 AAA'] leading-[42.67px] tracking-wider bg-white border border-gray-700 ">
                         המיזם "מנציחים את זכרם" הוקם בעקבות הרצון להכיר את הגיבורים שלנו מקרוב         <br />להשאיר פיסות מידע ואפשרות לחברים וקרובי משפחה להשאיר פיסת זכרון שתהיה פתוחה ונגישה לכל מי שרוצה לזכור, להזכר ולקבל השראה מהקדושים שנהרגו על קידוש ד' רק מעצם היותם יהודים<br />נשמח שתוסיפו מידע על חלל שהכרתם, מתכון שאהב, תמונה שלכם יחד, זכרון מתוק שיש לכם ואתם רוצים לשתף ממנו ולכל אלו שאינם מכירים<br />יש אפשרות לקבל על עצמכם התנדבות ולקרוא פרקי תהילים לעילוי נשמת החללים<br />לכל שאלה, בקשה או הבהרה מוזמנים לכתוב לנו בלשונית יצירת קשר <br />אלישבע ושלומית
                     </div>
 
@@ -87,7 +87,7 @@ const HomePage = () => {
                     </button>
                 </div>
 
-                <div className="w-full bottom-0 mt-5 left-0  flex justify-center bg-gray-200 h-screen">
+                <div className="w-full bottom-0 mt-5 left-0  flex justify-center bg-gray-200">
                     <div className="flex items-center gap-4">
                         <div className="relative">
                             <img className="w-[20.15px] h-[26.55px] transition-opacity duration-300 ease-in-out opacity-100 hover:opacity-0" src="/לינקדאין.svg" alt="LinkedIn" />
