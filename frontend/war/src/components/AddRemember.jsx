@@ -57,6 +57,11 @@ const AddRemember = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        if (!user) {
+            alert("על מנת להוסיף זכרון יש להרשם ולהתחבר לאתר");
+            nav('/register');
+            return;
+        }
         setIsLoading(true);
         try {
             const memoryPayload = memory.Memory;
@@ -143,6 +148,7 @@ const AddRemember = () => {
                             <textarea
                                 name="Remember"
                                 value={memory.Memory.Remember}
+                                placeholder="הוסף זכרון אישי"
                                 onChange={handleChange}
                                 style={{ direction: 'rtl' }}
                                 className='text-gray-700 h-60 border border-gray-600 rounded mb-1'

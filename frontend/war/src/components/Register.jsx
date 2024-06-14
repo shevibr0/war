@@ -135,8 +135,8 @@ const Register = () => {
                     אודות
                 </div>
             </nav>
-            <div className="mt-4 items-center">
-                <span>אם אתה רשום <span onClick={() => nav('/')} className="text-blue-500 cursor-pointer">התחבר כעת</span></span>
+            <div className="items-center text-center">
+                <span>אם אתה רשום <span onClick={() => nav('/login')} className="text-blue-500 cursor-pointer">התחבר כעת</span></span>
             </div>
             <div className="flex flex-wrap justify-center items-center h-screen">
 
