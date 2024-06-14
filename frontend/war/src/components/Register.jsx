@@ -135,14 +135,12 @@ const Register = () => {
                     אודות
                 </div>
             </nav>
-            <div className="items-center text-center">
+            <div className="text-center">
                 <span>אם אתה רשום <span onClick={() => nav('/login')} className="text-blue-500 cursor-pointer">התחבר כעת</span></span>
             </div>
             <div className="flex flex-wrap justify-center items-center h-screen">
-
                 <div className="border border-black p-9 rounded-md" style={{ direction: 'rtl' }}>
                     <h1 className="text-black text-4xl font-bold font-['Alef'] text-center">הרשמה</h1>
-
                     <div className="flex flex-col items-center">
                         <label htmlFor="name">שם</label>
                         <input name="name" type="text" placeholder="הכנס שם" value={name} onChange={handleChangeName} /><br />
