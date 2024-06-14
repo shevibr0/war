@@ -41,10 +41,7 @@ const AddPicture = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (!user) {
-            navigate('/register');
-            return;
-        }
+
         if (!image) {
             alert('Please select an image');
             return;
@@ -73,6 +70,10 @@ const AddPicture = () => {
     };
 
     const handleSaveToDatabase = async (downloadURL) => {
+        if (!user) {
+            navigate('/register');
+            return;
+        }
         try {
             console.log("user", user)
             console.log("user", pictureDetails)
