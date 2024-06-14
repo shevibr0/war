@@ -192,7 +192,7 @@ const Soldiers = () => {
                 </div>
                 {loading ? (
                     <div className='bg-white'>
-                        <p className=''>Loading...</p>
+                        <p className='text-black'>Loading...</p>
                     </div>
                 ) : (
                     <>
