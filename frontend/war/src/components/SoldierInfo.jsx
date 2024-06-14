@@ -154,7 +154,7 @@ const SoldierInfo = () => {
                             </div>
                         </div>
                     ) : (
-                        <p>Loading...</p>
+                        <p className='bg-gray-200 h-screen'>Loading...</p>
                     )}
                 </div>
             </div>
