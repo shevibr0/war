@@ -18,6 +18,7 @@ const Soldiers = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [searchMessage, setSearchMessage] = useState('');
     const [isOpen, setIsOpen] = useState(false);
+    const [loading, setLoading] = useState(false);
     const user = useSelector(state => state.user.connectedUser);
     // const pageSize = 30;
     // const totalCount = 0;
@@ -192,7 +193,7 @@ const Soldiers = () => {
                     <button
                         onClick={() => handlePageChange(currentPage - 1)}
                         disabled={currentPage === 1 && !isPrev}
-                        className="px-4 py-1 bg-gray-200 text-black rounded-md mr-4"
+                        className="px-4 py-1 bg-gray-200 text-black rounded-md mr-4 border border-black"
                     >
                         דף קודם
                     </button>
@@ -200,48 +201,52 @@ const Soldiers = () => {
                     <button
                         onClick={() => handlePageChange(currentPage + 1)}
                         disabled={currentPage == count && !isNext || !isNext}
-                        className="px-4 py-1 bg-gray-200 text-black rounded-md ml-4"
+                        className="px-4 py-1 bg-gray-200 text-black rounded-md ml-4 border border-black"
                     >
                         דף הבא
                     </button>
                 </div>
-                <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-2">
-                    {searchMessage === "" ? solidersArr.map((soldier) => (
-                        <div key={soldier.Id} className="text-center  border border-gray-500 rounded-sm p-2">
-                            <div className='flex justify-center'>
-                                <img className="h-64 w-64 object-cover" src={soldier.Image} alt={`${soldier.firstName} ${soldier.lastName}`} />
+                {loading ? (
+                    <div className="flex justify-center items-center">
+                        <div className="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12 mb-4"></div>
+                    </div>
+                ) : (
+                    <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-2">
+                        {searchMessage === "" ? solidersArr.map((soldier) => (
+                            <div key={soldier.Id} className="text-center  border border-gray-500 rounded-sm p-2">
+                                <div className='flex justify-center'>
+                                    <img className="h-64 w-64 object-cover" src={soldier.Image} alt={`${soldier.firstName} ${soldier.lastName}`} />
+                                </div>
+                                <h3>{`${soldier.FirstName} ${soldier.LastName}`}</h3>
+                                <p>{`גיל: ${soldier.Age}`}</p>
+                                <p>{`עיר: ${soldier.City}`}</p>
+                                <button className="font-semibold mb-2 mt-4 border border-black text-black p-2 rounded-md hover:opacity-80  hover:text-black hover:font-extrabold hover:border-black" onClick={() => nav(`/soldierInfo/${soldier.Id}`)}>לפרטים נוספים</button>
                             </div>
-                            <h3>{`${soldier.FirstName} ${soldier.LastName}`}</h3>
-                            <p>{`גיל: ${soldier.Age}`}</p>
-                            <p>{`עיר: ${soldier.City}`}</p>
+                        )) : <span>{searchMessage}</span>}
+                    </div>
+                )}
 
-                            <button className="font-semibold mb-2 mt-4 border border-black text-black p-2 rounded-md hover:opacity-80  hover:text-black hover:font-extrabold hover:border-black" onClick={() => nav(`/soldierInfo/${soldier.Id}`)}>לפרטים נוספים</button>
-                        </div>
-                    )) : <span>{searchMessage}</span>}
+                <div className="flex justify-center items-center mt-8">
+                    <button
+                        onClick={() => handlePageChange(currentPage - 1)}
+                        disabled={currentPage === 1 && !isPrev}
+                        className="px-4 py-1 bg-gray-200 text-black rounded-md mr-4 border border-black"
+                    >
+                        דף קודם
+                    </button>
+                    <span className="text-lg font-bold"> {currentPage}</span>
+                    <button
+                        onClick={() => handlePageChange(currentPage + 1)}
+                        disabled={currentPage == count && !isNext || !isNext}
+                        className="px-4 py-1 bg-gray-200 text-black rounded-md ml-4 border border-black"
+                    >
+                        דף הבא
+                    </button>
                 </div>
-            </div>
+            </div >
 
-            <div className="flex justify-center items-center mt-8">
-                <button
-                    onClick={() => handlePageChange(currentPage - 1)}
-                    disabled={currentPage === 1 && !isPrev}
-                    className="px-4 py-1 bg-gray-200 text-black rounded-md mr-4"
-                >
-                    דף קודם
-                </button>
-                <span className="text-lg font-bold"> {currentPage}</span>
-                <button
-                    onClick={() => handlePageChange(currentPage + 1)}
-                    disabled={currentPage == count && !isNext || !isNext}
-                    className="px-4 py-1 bg-gray-200 text-black rounded-md ml-4"
-                >
-                    דף הבא
-                </button>
-            </div>
-        </div >
-
-    );
+            );
 };
 
-export default Soldiers;
+            export default Soldiers;
 
