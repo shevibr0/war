@@ -107,7 +107,7 @@ const Login = () => {
                 </div>
             </nav>
 
-            <div className="flex flex-wrap justify-center h-screen">
+            <div className="flex flex-wrap justify-center items-center h-screen">
                 <div className="border border-black p-8 rounded-md">
                     <h1 className="text-black text-4xl font-bold font-['Alef'] mb-4 text-center">התחברות</h1>
                     <div className="flex flex-col items-center">
