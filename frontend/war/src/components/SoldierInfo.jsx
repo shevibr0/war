@@ -109,7 +109,7 @@ const SoldierInfo = () => {
                 <div className='flex cursor-pointer border border-gray-600  p-2  rounded-lg justify-center' onClick={() => nav(`/soldierInfo/${id}/theilim`)} >אמירת תהילים לעילוי נשמתו</div>
                 <div className='flex cursor-pointer border border-gray-600  p-2  rounded-lg justify-center' onClick={() => nav(`/soldierInfo/${id}/volunteering`)} >התנדבויות לעילוי נשמתו</div>
             </div>
-            <div className='flex justify-center items-center'>
+            <div className='flex justify-center items-center bg-gray-200'>
                 <div className="bg-white p-8 rounded-lg text-black mt-4 border border-black">
                     {soldier !== null ? (
                         <div className="">
