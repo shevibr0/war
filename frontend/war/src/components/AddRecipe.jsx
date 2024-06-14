@@ -112,6 +112,11 @@ const AddRecipe = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (!user) {
+            alert("על מנת להוסיף מתכון יש להרשם ולהתחבר לאתר");
+            nav('/register');
+            return;
+        }
         setIsLoading(true);
         console.log("Submitting this data:", recipeDetails);
         const completeRecipeData = {
