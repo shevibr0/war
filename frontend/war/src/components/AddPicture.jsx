@@ -41,6 +41,10 @@ const AddPicture = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        if (!user) {
+            navigate('/register');
+            return;
+        }
         if (!image) {
             alert('Please select an image');
             return;
