@@ -136,11 +136,12 @@ const Register = () => {
                 </div>
             </nav>
             <div className="flex flex-wrap justify-center items-center h-screen">
-                <div className="mt-4 items-center">
+                <div className="mt-4 flex flex-wrap justify-center items-center">
                     <span>אם אתה רשום <span onClick={() => nav('/')} className="text-blue-500 cursor-pointer">התחבר כעת</span></span>
                 </div>
                 <div className="border border-black p-9 rounded-md" style={{ direction: 'rtl' }}>
                     <h1 className="text-black text-4xl font-bold font-['Alef'] mb-4 text-center">הרשמה</h1>
+
                     <div className="flex flex-col items-center">
                         <label htmlFor="name">שם</label>
                         <input name="name" type="text" placeholder="הכנס שם" value={name} onChange={handleChangeName} /><br />
@@ -149,7 +150,7 @@ const Register = () => {
                         <label htmlFor="password">סיסמא</label>
                         <input name="password" type="password" placeholder="הכנס סיסמא" value={password} onChange={handleChangePassword} /><br />
                         <label htmlFor="phone">טלפון</label>
-                        <input name="phone" type="tel" placeholder="הכנס טלפון" value={phone} onChange={handleChangePhoneNumber} /><br />
+                        <input name="phone" type="tel" placeholder="הכנס טלפון" value={phone} onChange={handleChangePhoneNumber} style={{ direction: 'rtl' }} /><br />
                         <span>{error}</span>
                         <button onClick={handleRegistration} className="bg-black text-white px-4 py-2 rounded-md">הרשמה</button>
                     </div>
