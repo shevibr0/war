@@ -34,7 +34,7 @@ namespace BL
                     _logger.LogInformation("Running my background task");
                     await apiService.FetchDataFromApiAsync();
                 }
-               await Task.Delay(TimeSpan.FromHours(2), stoppingToken);
+               await Task.Delay(TimeSpan.FromSeconds(2), stoppingToken);
             }
 
         }
