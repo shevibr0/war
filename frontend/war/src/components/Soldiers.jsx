@@ -188,6 +188,23 @@ const Soldiers = () => {
                         className="border border-black px-4 py-2 rounded-md" style={{ direction: 'rtl' }}
                     />
                 </div>
+                <div className="flex justify-center items-center mt-8">
+                    <button
+                        onClick={() => handlePageChange(currentPage - 1)}
+                        disabled={currentPage === 1 && !isPrev}
+                        className="px-4 py-1 bg-gray-200 text-black rounded-md mr-4"
+                    >
+                        דף קודם
+                    </button>
+                    <span className="text-lg font-bold"> {currentPage}</span>
+                    <button
+                        onClick={() => handlePageChange(currentPage + 1)}
+                        disabled={currentPage == count && !isNext || !isNext}
+                        className="px-4 py-1 bg-gray-200 text-black rounded-md ml-4"
+                    >
+                        דף הבא
+                    </button>
+                </div>
                 <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-2">
                     {searchMessage === "" ? solidersArr.map((soldier) => (
                         <div key={soldier.Id} className="text-center  border border-gray-500 rounded-sm p-2">
@@ -208,7 +225,7 @@ const Soldiers = () => {
                 <button
                     onClick={() => handlePageChange(currentPage - 1)}
                     disabled={currentPage === 1 && !isPrev}
-                    className="px-4 py-1 bg-black text-white rounded-md mr-4"
+                    className="px-4 py-1 bg-gray-200 text-black rounded-md mr-4"
                 >
                     דף קודם
                 </button>
@@ -216,7 +233,7 @@ const Soldiers = () => {
                 <button
                     onClick={() => handlePageChange(currentPage + 1)}
                     disabled={currentPage == count && !isNext || !isNext}
-                    className="px-4 py-1 bg-black text-white rounded-md ml-4"
+                    className="px-4 py-1 bg-gray-200 text-black rounded-md ml-4"
                 >
                     דף הבא
                 </button>

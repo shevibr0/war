@@ -82,7 +82,7 @@ const HomePage = () => {
 
                 </div>
                 <div className="h-1 mt-10  flex items-center justify-center">
-                    <button onClick={() => nav('/soldiers')} className="rounded-md text-right pr-6 pl-6 text-indigo-50 text-2xl font-bold font-['Alef']  bg-gray-600  hover:bg-white  hover:text-gray-600 hover:border border-gray-600" style={{ transitionProperty: 'background-color, color' }}>
+                    <button onClick={() => nav('/soldiers')} className="rounded-md text-right pr-6 pl-6 text-2xl font-bold  bg-gray-600  hover:bg-white  hover:text-gray-600 hover:border border-gray-600" style={{ transitionProperty: 'background-color, color' }}>
                         חיפוש חללי חרבות ברזל
                     </button>
                 </div>
