@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router';
 
@@ -6,10 +6,6 @@ const HomePage = () => {
     const nav = useNavigate();
     const [isOpen, setIsOpen] = useState(false);
     const user = useSelector(state => state.user.connectedUser);
-
-    useEffect(() => {
-        console.log(user);
-    }, []);
 
     return (
         <div className="bg-gray-200 h-screen">
@@ -91,7 +87,7 @@ const HomePage = () => {
                     </button>
                 </div>
 
-                <div className="w-full bottom-0 mt-5 left-0  flex justify-center">
+                <div className="w-full bottom-0 mt-5 left-0  flex justify-center bg-gray-200 h-screen">
                     <div className="flex items-center gap-4">
                         <div className="relative">
                             <img className="w-[20.15px] h-[26.55px] transition-opacity duration-300 ease-in-out opacity-100 hover:opacity-0" src="/לינקדאין.svg" alt="LinkedIn" />

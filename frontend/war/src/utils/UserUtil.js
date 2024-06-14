@@ -11,6 +11,7 @@ const GetByEmailAndPassword = async (email, password) => {
     return await api.get(`User/${email}/${password}`).then(res => res.data);
 }
 const addUser = async (user) => {
+    console.log("iiiii")
     return await api.post("User", user).then(res => res)
 }
 const updateUser = async (id, user) => {
