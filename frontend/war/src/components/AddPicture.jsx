@@ -70,10 +70,6 @@ const AddPicture = () => {
     };
 
     const handleSaveToDatabase = async (downloadURL) => {
-        if (!user) {
-            navigate('/register');
-            return;
-        }
         try {
             console.log("user", user)
             console.log("user", pictureDetails)
@@ -155,6 +151,14 @@ const AddPicture = () => {
                             className="w-full p-2 border"
                             placeholder="כמה מילים אישיות על התמונה"
                             style={{ direction: 'rtl' }} />
+                    </div>
+                    {isLoading && (
+                        <div className="flex justify-center items-center">
+                            <div className="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12 mb-4"></div>
+                        </div>
+                    )}
+                    <div className="progress-bar bg-blue-600 text-xs leading-none py-1 text-center text-white rounded mt-2" style={{ width: `${progresspercent}%` }}>
+                        {progresspercent}%
                     </div>
                     <div className='flex justify-center'>
                         <button type="submit" disabled={isLoading} className="bg-gray-900 text-white py-2 px-4 rounded">הוסף תמונה</button>
