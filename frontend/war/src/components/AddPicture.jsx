@@ -137,12 +137,12 @@ const AddPicture = () => {
                             <div onClick={() => nav('/logOut')} className='transition duration-100 hover:text-yellow-400'> <BiLogOutCircle /></div>
                         </>
                     )}
-                    <div onClick={() => nav('/contact')} className='transition duration-100 hover:text-yellow-400'> <FaUserAlt /></div>
+                    <div onClick={() => nav('/contact')} className='transition duration-100 hover:text-yellow-400'>  <FaComments /></div>
                     <div onClick={() => nav('/soldiers')} className='transition duration-100 hover:text-yellow-400'> <FaUserAlt /></div>
-                    <div onClick={() => nav('/homePage')} className='transition duration-100 hover:text-yellow-400'> <FaUserAlt /></div>
+                    <div onClick={() => nav('/homePage')} className='transition duration-100 hover:text-yellow-400'> <FaHome /></div>
                 </nav>
             )}
-            <nav className="hidden lg:flex md:flex sm:flex left-0 top-0  bg-gray-200 justify-center items-center text-2xl text-gray-800 h-[80px] mt-4 sm:mt-0 cursor-pointer space-x-11">
+            <nav className="hidden lg:flex md:flex sm:flex left-0 top-0  bg-gray-200 justify-center items-center text-xl text-gray-800 h-[80px] mt-4 sm:mt-0 cursor-pointer space-x-11">
                 {!user && (
                     <>
                         <div onClick={() => nav('/register')} className='transition duration-100 hover:text-yellow-400'><FaRegRegistered /></div>
@@ -159,29 +159,31 @@ const AddPicture = () => {
                 <div onClick={() => nav('/homePage')} className='transition duration-100 hover:text-yellow-400'><FaHome /></div>
             </nav>
             <div className='flex items-center mb-1'>
-                <img className="mt-3 ml-5 max-w-[1%] mr-15 " src="/חץ חזור.svg" alt="Logo" onClick={() => nav(-1)} />
+                <img className="mt-3 ml-5 w-[2%] mr-15 " src="/חץ חזור.svg" alt="Logo" onClick={() => nav(-1)} />
             </div>
-            <h2 className="flex justify-center text-3xl font-bold">הוספת תמונה</h2>
-            {alertMessage && <p style={{ color: 'red' }}>{alertMessage}</p>}
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-            <div className="flex justify-center bg-gray-200">
-                <form onSubmit={handleSubmit} className="bg-gray-400 space-y-4 p-8 border-2 border-black mt-4">
-                    <div>
-                        <input type="file" accept="image/*" onChange={(e) => setImage(e.target.files[0])} required className='p-2 m-2 border border-black' />
-                    </div>
-                    <div className=''>
-                        <h2 className="flex justify-center text-3xl font-bold">בנימה אישית</h2>
-                    </div>
-                    <div className='flex justify-center'>
-                        <textarea name="PersonalWords" value={pictureDetails.Picture.PersonalWords} onChange={handleChange}
-                            className="w-full p-2 border"
-                            placeholder="כמה מילים אישיות על התמונה"
-                            style={{ direction: 'rtl' }} />
-                    </div>
-                    <div className='flex justify-center'>
-                        <button type="submit" disabled={isLoading} className="bg-gray-900 text-white py-2 px-4 rounded">הוסף תמונה</button>
-                    </div>
-                </form>
+            <div className=''>
+                <h2 className="flex justify-center  text-3xl font-bold">הוספת תמונה</h2>
+                {alertMessage && <p style={{ color: 'red' }}>{alertMessage}</p>}
+                {error && <p style={{ color: 'red' }}>{error}</p>}
+                <div className="flex justify-center bg-gray-200">
+                    <form onSubmit={handleSubmit} className="bg-gray-400 space-y-4 p-8 border-2 border-black mt-4">
+                        <div>
+                            <input type="file" accept="image/*" onChange={(e) => setImage(e.target.files[0])} required className='p-2 m-2 border border-black' />
+                        </div>
+                        <div className=''>
+                            <h2 className="flex justify-center text-3xl font-bold">בנימה אישית</h2>
+                        </div>
+                        <div className='flex justify-center'>
+                            <textarea name="PersonalWords" value={pictureDetails.Picture.PersonalWords} onChange={handleChange}
+                                className="w-full p-2 border"
+                                placeholder="כמה מילים אישיות על התמונה"
+                                style={{ direction: 'rtl' }} />
+                        </div>
+                        <div className='flex justify-center'>
+                            <button type="submit" disabled={isLoading} className="bg-gray-900 text-white py-2 px-4 rounded">הוסף תמונה</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     );
