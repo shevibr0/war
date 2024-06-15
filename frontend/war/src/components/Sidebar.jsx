@@ -1,7 +1,8 @@
 import React from 'react';
-import { FaHome, FaUserAlt, FaGraduationCap, FaLayerGroup, FaRegRegistered, FaComments, FaBars } from 'react-icons/fa';
+import { FaHome, FaUserAlt, FaRegRegistered, FaComments } from 'react-icons/fa';
 import { IoMdLogIn } from "react-icons/io";
 import { BiLogOutCircle } from "react-icons/bi";
+
 const Sidebar = () => {
 
 
