@@ -122,7 +122,7 @@ const AddPicture = () => {
                 <FaBars className="text-white" />
             </button>
             {isOpen && (
-                <nav className="lg:hidden md:hidden sm:hidden left-0 top-0 flex shadow bg-gray-200 justify-around items-center text-black lg:text-3xl lg:h-[80px] md:text-2m md:h-[30px] sm:text-sm text-xs mt-4 sm:mt-0 font-normal font-['Alef'] leading-[45px] cursor-pointer">
+                <nav className="lg:hidden md:hidden sm:hidden left-0 top-0 flex  bg-gray-200 justify-around items-center text-black lg:text-3xl lg:h-[80px] md:text-2m md:h-[30px] sm:text-sm text-xs mt-4 sm:mt-0 font-normal font-['Alef'] leading-[45px] cursor-pointer">
                     {!user && (
                         <>
 
@@ -140,21 +140,21 @@ const AddPicture = () => {
                     <div onClick={() => nav('/homePage')}> <FaUserAlt /></div>
                 </nav>
             )}
-            <nav className="hidden lg:flex md:flex sm:flex left-0 top-0 shadow bg-white justify-center items-center text-black lg:text-2xl lg:h-[47px] md:text-xl md:h-[40px] sm:text-s sm:h-[20px] mt-4 sm:mt-0 font-normal font-['Alef'] leading-[45px] cursor-pointer space-x-11">
+            <nav className="hidden lg:flex md:flex sm:flex left-0 top-0 shadow bg-gray-200 justify-center items-center text-black lg:text-2xl lg:h-[47px] md:text-xl md:h-[40px] sm:text-s sm:h-[20px] mt-4 sm:mt-0 font-normal font-['Alef'] leading-[45px] cursor-pointer space-x-11">
                 {!user && (
                     <>
-                        <div onClick={() => nav('/register')}> <FaUserAlt /></div>
-                        <div onClick={() => nav('/')}> <FaUserAlt /></div>
+                        <div onClick={() => nav('/register')} className="text-2xl text-gray-800 font-bold transition duration-1000 hover:text-yellow-400"> <FaUserAlt /></div>
+                        <div onClick={() => nav('/')} className="text-2xl text-gray-800 font-bold transition duration-1000 hover:text-yellow-400"> <FaUserAlt /></div>
                     </>
                 )}
                 {user && (
                     <>
-                        <div onClick={() => nav('/logOut')}> <FaUserAlt /></div>
+                        <div onClick={() => nav('/logOut')} className="text-2xl text-gray-800 font-bold transition duration-1000 hover:text-yellow-400"> <FaUserAlt /></div>
                     </>
                 )}
-                <div onClick={() => nav('/contact')}> <FaUserAlt /></div>
+                <div onClick={() => nav('/contact')} className="text-2xl text-gray-800 font-bold transition duration-1000 hover:text-yellow-400"> <FaUserAlt /></div>
                 <div onClick={() => nav('/soldiers')} className='font-bold'> <FaUserAlt /></div>
-                <div onClick={() => nav('/homePage')}> <FaUserAlt /></div>
+                <div onClick={() => nav('/homePage')} className="text-2xl text-gray-800 font-bold transition duration-1000 hover:text-yellow-400"> <FaUserAlt /></div>
             </nav>
             <div className='flex items-center mb-1'>
                 <img className="mt-3 ml-5 max-w-[1%] lg:max-w-[1%] lg:mr-15 md:max-w-[1%] sm:max-w-[1%]" src="/חץ חזור.svg" alt="Logo" onClick={() => nav(-1)} />
