@@ -32,7 +32,7 @@ function App() {
 
   // }, []);
   return (
-    <AppRouter />
+    <AppRouter className="font-sans" />
   );
 }
 

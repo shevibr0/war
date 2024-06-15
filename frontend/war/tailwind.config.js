@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Open Sans', 'sans-serif'],
+        sans: ['Rubik', 'sans-serif'],
       },
       // Add custom utilities to extend
       utilities: {
