@@ -139,8 +139,8 @@ const AddPicture = () => {
             <div className='flex items-center mb-1'>
                 <img className="mt-3 ml-5 w-[10px] mr-15 " src="/חץ חזור.svg" alt="Logo" onClick={() => nav(-1)} />
             </div>
-            <div className='items-center'>
-                <h2 className="flex justify-center  text-3xl font-bold">הוספת תמונה</h2>
+            <div className='flex justify-center items-center'>
+                <h2 className="text-3xl font-bold">הוספת תמונה</h2>
                 {alertMessage && <p style={{ color: 'red' }}>{alertMessage}</p>}
                 {error && <p style={{ color: 'red' }}>{error}</p>}
                 <div className="flex justify-center bg-gray-200">
@@ -158,7 +158,7 @@ const AddPicture = () => {
                                 style={{ direction: 'rtl' }} />
                         </div>
                         <div className='flex justify-center'>
-                            <button type="submit" disabled={isLoading} className="bg-gray-900 text-white py-2 px-4 rounded-md  hover:animate-button-push">הוסף תמונה</button>
+                            <button type="submit" disabled={isLoading} className="btn bg-gray-900 text-white py-2 px-4 rounded-md  hover:animate-button-push">הוסף תמונה</button>
                         </div>
                     </form>
                 </div>
