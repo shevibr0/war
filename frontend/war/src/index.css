@@ -5,6 +5,16 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Custom Utilities */
+@layer utilities {
+  .writing-mode-vertical-rl {
+    writing-mode: vertical-rl;
+  }
+  .rotate-180 {
+    transform: rotate(180deg);
+  }
+}
+
 body {
   font-family: 'Open Sans', sans-serif;
 }
