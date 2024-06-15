@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { FaHome, FaUserAlt, FaGraduationCap, FaLayerGroup, FaStickyNote, FaComments, FaBars } from 'react-icons/fa';
 
 const Sidebar = () => {
     const [toggle, showMenu] = useState(false);
@@ -14,37 +15,37 @@ const Sidebar = () => {
                         <ul className="flex flex-col space-y-4">
                             <li className="nav__item">
                                 <a href="#home" className="text-2xl text-white font-bold transition duration-1000 hover:text-yellow-400">
-                                    <i className="icon-home"></i>
+                                    <FaHome />
                                 </a>
                             </li>
 
                             <li className="nav__item">
                                 <a href="#about" className="text-2xl text-white font-bold transition duration-1000 hover:text-yellow-400">
-                                    <i className="icon-user-following"></i>
+                                    <FaUserAlt />
                                 </a>
                             </li>
 
                             <li className="nav__item">
                                 <a href="#resume" className="text-2xl text-white font-bold transition duration-1000 hover:text-yellow-400">
-                                    <i className="icon-graduation"></i>
+                                    <FaGraduationCap />
                                 </a>
                             </li>
 
                             <li className="nav__item">
                                 <a href="#portfolio" className="text-2xl text-white font-bold transition duration-1000 hover:text-yellow-400">
-                                    <i className="icon-layers"></i>
+                                    <FaLayerGroup />
                                 </a>
                             </li>
 
                             <li className="nav__item">
                                 <a href="#recommendations" className="text-2xl text-white font-bold transition duration-1000 hover:text-yellow-400">
-                                    <i className="icon-note"></i>
+                                    <FaStickyNote />
                                 </a>
                             </li>
 
                             <li className="nav__item">
                                 <a href="#contact" className="text-2xl text-white font-bold transition duration-1000 hover:text-yellow-400">
-                                    <i className="icon-bubble"></i>
+                                    <FaComments />
                                 </a>
                             </li>
                         </ul>
@@ -60,7 +61,7 @@ const Sidebar = () => {
                 className={`fixed top-5 left-7 cursor-pointer h-10 w-11 bg-gray-800 border border-gray-700 flex justify-center items-center z-10 transition-all duration-300 ${toggle ? "left-36" : ""}`}
                 onClick={() => showMenu(!toggle)}
             >
-                <i className="icon-menu text-white"></i>
+                <FaBars className="text-white" />
             </div>
         </>
     );
