@@ -2,10 +2,12 @@ import React from 'react';
 import { FaHome, FaUserAlt, FaRegRegistered, FaComments } from 'react-icons/fa';
 import { IoMdLogIn } from "react-icons/io";
 import { BiLogOutCircle } from "react-icons/bi";
+import { useNavigate } from 'react-router';
+import { useSelector } from 'react-redux';
 
 const Sidebar = () => {
-
-
+    const user = useSelector(state => state.user.connectedUser);
+    const nav = useNavigate();
     return (
         <>
             <nav className="flex left-0 top-0  bg-gray-200 justify-center items-center text-3xl text-gray-800 h-[80px]  cursor-pointer space-x-11">

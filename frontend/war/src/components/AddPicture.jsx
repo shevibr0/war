@@ -13,7 +13,6 @@ const AddPicture = () => {
     const nav = useNavigate();
     const { id } = useParams();
     const user = useSelector(state => state.user.connectedUser);
-    const [isOpen, setIsOpen] = useState(false);
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [alertMessage, setAlertMessage] = useState('');
