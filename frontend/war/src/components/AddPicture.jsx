@@ -6,9 +6,8 @@ import { storage } from "./firebase";
 import { v4 as uuidv4 } from "uuid";
 import { addPicture } from '../utils/PictureUtil';
 import emailjs from 'emailjs-com';
-import { FaHome, FaUserAlt, FaGraduationCap, FaLayerGroup, FaRegRegistered, FaComments, FaBars } from 'react-icons/fa';
-import { IoMdLogIn } from "react-icons/io";
-import { BiLogOutCircle } from "react-icons/bi";
+import Sidebar from './Sidebar';
+
 
 const AddPicture = () => {
     const nav = useNavigate();
@@ -120,31 +119,13 @@ const AddPicture = () => {
 
     return (
         <div className="bg-gray-200 h-screen">
-            <nav className="flex left-0 top-0  bg-gray-200 justify-center items-center text-3xl text-gray-800 h-[80px]  cursor-pointer space-x-11">
-                {!user && (
-                    <>
-                        <div onClick={() => nav('/register')} className='transition duration-100 hover:text-yellow-400'><FaRegRegistered /></div>
-                        <div onClick={() => nav('/')} className='transition duration-100 hover:text-yellow-400'> <IoMdLogIn /></div>
-                    </>
-                )}
-                {user && (
-                    <>
-                        <div onClick={() => nav('/logOut')} className='transition duration-100 hover:text-yellow-400' > <BiLogOutCircle /></div>
-                    </>
-                )}
-                <div onClick={() => nav('/contact')} className='transition duration-100 hover:text-yellow-400'> <FaComments /></div>
-                <div onClick={() => nav('/soldiers')} className='transition duration-100 hover:text-yellow-400' > <FaUserAlt /></div>
-                <div onClick={() => nav('/homePage')} className='transition duration-100 hover:text-yellow-400'><FaHome /></div>
-            </nav>
-            <div className='flex items-center mb-1'>
-                <img className="mt-3 ml-5 w-[10px] mr-15 " src="/חץ חזור.svg" alt="Logo" onClick={() => nav(-1)} />
-            </div>
+            <Sidebar />
             <div className='text-center'>
                 <h2 className="flex justify-center  text-3xl font-bold">הוספת תמונה</h2>
                 {alertMessage && <p style={{ color: 'red' }}>{alertMessage}</p>}
                 {error && <p style={{ color: 'red' }}>{error}</p>}
                 <div className="flex justify-center bg-gray-200">
-                    <form onSubmit={handleSubmit} className="bg-gray-400 space-y-4 p-8  mt-4 rounded-2xl shadow-2 shadow-black text-center">
+                    <form onSubmit={handleSubmit} className="bg-gray-400 space-y-4 p-8  mt-4 rounded-2xl shadow-xl shadow-black text-center">
                         <div>
                             <input className="rounded-2xl text-center" type="file" accept="image/*" onChange={(e) => setImage(e.target.files[0])} required className='p-2 m-2 border border-black' />
                         </div>
