@@ -122,10 +122,11 @@ const AddPicture = () => {
                 <FaBars className="text-white" />
             </button>
             {isOpen && (
-                <nav className="lg:hidden md:hidden sm:hidden left-0 top-0 flex shadow bg-white justify-around items-center text-black lg:text-3xl lg:h-[80px] md:text-2m md:h-[30px] sm:text-sm text-xs mt-4 sm:mt-0 font-normal font-['Alef'] leading-[45px] cursor-pointer">
+                <nav className="lg:hidden md:hidden sm:hidden left-0 top-0 flex shadow bg-gray-200 justify-around items-center text-black lg:text-3xl lg:h-[80px] md:text-2m md:h-[30px] sm:text-sm text-xs mt-4 sm:mt-0 font-normal font-['Alef'] leading-[45px] cursor-pointer">
                     {!user && (
                         <>
-                            <div onClick={() => nav('/register')}> <FaUserAlt /></div>
+
+                            <div onClick={() => nav('/register')} className="text-2xl text-gray-800 font-bold transition duration-1000 hover:text-yellow-400"> <FaUserAlt /></div>
                             <div onClick={() => nav('/')}> <FaUserAlt /></div>
                         </>
                     )}
