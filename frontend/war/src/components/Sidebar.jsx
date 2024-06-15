@@ -62,41 +62,39 @@ const Sidebar = () => {
                 >
                     <FaBars className="text-white" />
                 </div>
-                <aside className={`${toggle ? "left-0" : "-left-full"} fixed top-0 w-full h-full bg-gray-800 flex flex-col justify-center items-center z-10 transition-all duration-300`}>
-                    <nav className="nav">
-                        <div className="nav__menu">
-                            <ul className="flex flex-col space-y-4 text-center">
-                                <li className="nav__item">
-                                    <a href="#home" className="text-2xl text-white font-bold transition duration-1000 hover:text-yellow-400" onClick={() => showMenu(false)}>
-                                        <FaHome />
-                                    </a>
-                                </li>
-                                <li className="nav__item">
-                                    <a href="#about" className="text-2xl text-white font-bold transition duration-1000 hover:text-yellow-400" onClick={() => showMenu(false)}>
-                                        <FaUserAlt />
-                                    </a>
-                                </li>
-                                <li className="nav__item">
-                                    <a href="#resume" className="text-2xl text-white font-bold transition duration-1000 hover:text-yellow-400" onClick={() => showMenu(false)}>
-                                        <FaGraduationCap />
-                                    </a>
-                                </li>
-                                <li className="nav__item">
-                                    <a href="#portfolio" className="text-2xl text-white font-bold transition duration-1000 hover:text-yellow-400" onClick={() => showMenu(false)}>
-                                        <FaLayerGroup />
-                                    </a>
-                                </li>
-                                <li className="nav__item">
-                                    <a href="#recommendations" className="text-2xl text-white font-bold transition duration-1000 hover:text-yellow-400" onClick={() => showMenu(false)}>
-                                        <FaStickyNote />
-                                    </a>
-                                </li>
-                                <li className="nav__item">
-                                    <a href="#contact" className="text-2xl text-white font-bold transition duration-1000 hover:text-yellow-400" onClick={() => showMenu(false)}>
-                                        <FaComments />
-                                    </a>
-                                </li>
-                            </ul>
+                <aside className={`${toggle ? "top-0" : "-top-full"} fixed w-full bg-gray-800 flex flex-col justify-center items-center z-10 transition-all duration-300`}>
+                    <nav className="nav w-full">
+                        <div className="nav__menu flex flex-col space-y-4 text-center p-4">
+                            <li className="nav__item">
+                                <a href="#home" className="text-2xl text-white font-bold transition duration-1000 hover:text-yellow-400" onClick={() => showMenu(false)}>
+                                    <FaHome />
+                                </a>
+                            </li>
+                            <li className="nav__item">
+                                <a href="#about" className="text-2xl text-white font-bold transition duration-1000 hover:text-yellow-400" onClick={() => showMenu(false)}>
+                                    <FaUserAlt />
+                                </a>
+                            </li>
+                            <li className="nav__item">
+                                <a href="#resume" className="text-2xl text-white font-bold transition duration-1000 hover:text-yellow-400" onClick={() => showMenu(false)}>
+                                    <FaGraduationCap />
+                                </a>
+                            </li>
+                            <li className="nav__item">
+                                <a href="#portfolio" className="text-2xl text-white font-bold transition duration-1000 hover:text-yellow-400" onClick={() => showMenu(false)}>
+                                    <FaLayerGroup />
+                                </a>
+                            </li>
+                            <li className="nav__item">
+                                <a href="#recommendations" className="text-2xl text-white font-bold transition duration-1000 hover:text-yellow-400" onClick={() => showMenu(false)}>
+                                    <FaStickyNote />
+                                </a>
+                            </li>
+                            <li className="nav__item">
+                                <a href="#contact" className="text-2xl text-white font-bold transition duration-1000 hover:text-yellow-400" onClick={() => showMenu(false)}>
+                                    <FaComments />
+                                </a>
+                            </li>
                         </div>
                     </nav>
                     <div className="nav footer text-white mt-8">
