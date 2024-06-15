@@ -139,12 +139,12 @@ const AddPicture = () => {
             <div className='flex items-center mb-1'>
                 <img className="mt-3 ml-5 w-[10px] mr-15 " src="/חץ חזור.svg" alt="Logo" onClick={() => nav(-1)} />
             </div>
-            <div className=''>
+            <div className='items-center'>
                 <h2 className="flex justify-center  text-3xl font-bold">הוספת תמונה</h2>
                 {alertMessage && <p style={{ color: 'red' }}>{alertMessage}</p>}
                 {error && <p style={{ color: 'red' }}>{error}</p>}
                 <div className="flex justify-center bg-gray-200">
-                    <form onSubmit={handleSubmit} className="bg-gray-400 space-y-4 p-8  mt-4 rounded-2xl shadow-5xl shadow-black">
+                    <form onSubmit={handleSubmit} className="bg-gray-400 space-y-4 p-8  mt-4 rounded-2xl shadow shadow-black">
                         <div>
                             <input className="rounded-2xl text-center" type="file" accept="image/*" onChange={(e) => setImage(e.target.files[0])} required className='p-2 m-2 border border-black' />
                         </div>
@@ -158,7 +158,7 @@ const AddPicture = () => {
                                 style={{ direction: 'rtl' }} />
                         </div>
                         <div className='flex justify-center'>
-                            <button type="submit" disabled={isLoading} className="bg-gray-900 text-white py-2 px-4 rounded">הוסף תמונה</button>
+                            <button type="submit" disabled={isLoading} className="bg-gray-900 text-white py-2 px-4 rounded-md  hover:animate-button-push">הוסף תמונה</button>
                         </div>
                     </form>
                 </div>

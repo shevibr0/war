@@ -1,17 +1,29 @@
-/* index.css */
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Custom Utilities */
 @layer utilities {
   .writing-mode-vertical-rl {
     writing-mode: vertical-rl;
   }
   .rotate-180 {
     transform: rotate(180deg);
+  }
+  @keyframes button-push {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(0.9);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  .animate-button-push {
+    animation: button-push 0.3s linear 1;
   }
 }
 
