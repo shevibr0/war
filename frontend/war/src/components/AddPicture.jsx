@@ -122,7 +122,7 @@ const AddPicture = () => {
                 <FaBars className="text-gray-800" />
             </button>
             {isOpen && (
-                <nav className="lg:hidden md:hidden sm:hidden left-0 top-0 flex  bg-gray-200 justify-around items-center text-xxl text-gray-800 h-[80px] mt-4 sm:mt-0 cursor-pointer space-x-11">
+                <nav className="lg:hidden md:hidden sm:hidden left-0 top-0 flex  bg-gray-200 justify-around items-center text-3xl text-gray-800 h-[80px] mt-4 sm:mt-0 cursor-pointer space-x-11">
                     {!user && (
                         <>
 
@@ -140,10 +140,10 @@ const AddPicture = () => {
                     <div onClick={() => nav('/homePage')}> <FaUserAlt /></div>
                 </nav>
             )}
-            <nav className="hidden lg:flex md:flex sm:flex left-0 top-0  bg-gray-200 justify-center items-center text-xxl text-gray-800 h-[80px] mt-4 sm:mt-0 cursor-pointer space-x-30">
+            <nav className="hidden lg:flex md:flex sm:flex left-0 top-0  bg-gray-200 justify-center items-center text-xl text-gray-800 h-[80px] mt-4 sm:mt-0 cursor-pointer space-x-11">
                 {!user && (
                     <>
-                        <div onClick={() => nav('/register')} className='transition duration-100 hover:text-gray-200'> <FaUserAlt /></div>
+                        <div onClick={() => nav('/register')} className='transition duration-100 hover:text-red-400'> <FaUserAlt /></div>
                         <div onClick={() => nav('/')}> <FaUserAlt /></div>
                     </>
                 )}
@@ -156,8 +156,8 @@ const AddPicture = () => {
                 <div onClick={() => nav('/soldiers')} > <FaUserAlt /></div>
                 <div onClick={() => nav('/homePage')} ><FaHome /></div>
             </nav>
-            <div className='flex items-center mb-1 transition duration-100 hover:text-yellow-400'>
-                <img className="mt-3 ml-5 max-w-[3%] mr-15 " src="/חץ חזור.svg" alt="Logo" onClick={() => nav(-1)} />
+            <div className='flex items-center mb-1 transition duration-100 hover:bg-yellow-400'>
+                <img className="mt-3 ml-5 max-w-[1%] mr-15 " src="/חץ חזור.svg" alt="Logo" onClick={() => nav(-1)} />
             </div>
             <h2 className="flex justify-center text-3xl font-bold">הוספת תמונה</h2>
             {alertMessage && <p style={{ color: 'red' }}>{alertMessage}</p>}
