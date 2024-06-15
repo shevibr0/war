@@ -142,20 +142,19 @@ const AddPicture = () => {
             <nav className="hidden lg:flex md:flex sm:flex left-0 top-0 shadow bg-white justify-center items-center text-black lg:text-2xl lg:h-[47px] md:text-xl md:h-[40px] sm:text-s sm:h-[20px] mt-4 sm:mt-0 font-normal font-['Alef'] leading-[45px] cursor-pointer space-x-11">
                 {!user && (
                     <>
-                        <div onClick={() => nav('/register')}>הרשמה</div>
-                        <div onClick={() => nav('/')}>התחברות</div>
+                        <div onClick={() => nav('/register')}> <FaUserAlt /></div>
+                        <div onClick={() => nav('/')}> <FaUserAlt /></div>
                     </>
                 )}
                 {user && (
                     <>
-                        <div onClick={() => nav('/logOut')}>התנתקות</div>
+                        <div onClick={() => nav('/logOut')}> <FaUserAlt /></div>
                     </>
                 )}
-                <div onClick={() => nav('/contact')}>צור קשר</div>
-                <div onClick={() => nav('/soldiers')} className='font-bold'>חיפוש</div>
-                <div onClick={() => nav('/homePage')}>אודות</div>
+                <div onClick={() => nav('/contact')}> <FaUserAlt /></div>
+                <div onClick={() => nav('/soldiers')} className='font-bold'> <FaUserAlt /></div>
+                <div onClick={() => nav('/homePage')}> <FaUserAlt /></div>
             </nav>
-
             <div className='flex items-center mb-1'>
                 <img className="mt-3 ml-5 max-w-[1%] lg:max-w-[1%] lg:mr-15 md:max-w-[1%] sm:max-w-[1%]" src="/חץ חזור.svg" alt="Logo" onClick={() => nav(-1)} />
             </div>
