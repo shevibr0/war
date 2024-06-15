@@ -6,7 +6,8 @@ const Sidebar = () => {
 
     return (
         <>
-            <aside className={`${toggle ? "left-0" : "-left-28"} fixed top-0 bg-white border-r border-gray-700 p-10 w-28 min-h-screen flex flex-col justify-between z-10 transition-all duration-300`}>
+            {/* Sidebar for large screens */}
+            <aside className={`hidden lg:flex fixed top-0 left-0 bg-gray-800 border-r border-gray-700 p-10 w-28 min-h-screen flex-col justify-between z-10`}>
                 <a href="#home" className="nav__logo text-white">
                     {/* Logo goes here */}
                 </a>
@@ -14,37 +15,32 @@ const Sidebar = () => {
                     <div className="nav__menu">
                         <ul className="flex flex-col space-y-4">
                             <li className="nav__item">
-                                <a href="#home" className="text-2xl text-gray-800 font-bold transition duration-1000 hover:text-yellow-400">
+                                <a href="#home" className="text-2xl text-white font-bold transition duration-1000 hover:text-yellow-400">
                                     <FaHome />
                                 </a>
                             </li>
-
                             <li className="nav__item">
-                                <a href="#about" className="text-2xl text-gray-800 font-bold transition duration-1000 hover:text-yellow-400">
+                                <a href="#about" className="text-2xl text-white font-bold transition duration-1000 hover:text-yellow-400">
                                     <FaUserAlt />
                                 </a>
                             </li>
-
                             <li className="nav__item">
-                                <a href="#resume" className="text-2xl text-gray-800 font-bold transition duration-1000 hover:text-yellow-400">
+                                <a href="#resume" className="text-2xl text-white font-bold transition duration-1000 hover:text-yellow-400">
                                     <FaGraduationCap />
                                 </a>
                             </li>
-
                             <li className="nav__item">
-                                <a href="#portfolio" className="text-2xl text-gray-800 font-bold transition duration-1000 hover:text-yellow-400">
+                                <a href="#portfolio" className="text-2xl text-white font-bold transition duration-1000 hover:text-yellow-400">
                                     <FaLayerGroup />
                                 </a>
                             </li>
-
                             <li className="nav__item">
-                                <a href="#recommendations" className="text-2xl text-gray-800 font-bold transition duration-1000 hover:text-yellow-400">
+                                <a href="#recommendations" className="text-2xl text-white font-bold transition duration-1000 hover:text-yellow-400">
                                     <FaStickyNote />
                                 </a>
                             </li>
-
                             <li className="nav__item">
-                                <a href="#contact" className="text-2xl text-gray-800 font-bold transition duration-1000 hover:text-yellow-400">
+                                <a href="#contact" className="text-2xl text-white font-bold transition duration-1000 hover:text-yellow-400">
                                     <FaComments />
                                 </a>
                             </li>
@@ -57,11 +53,58 @@ const Sidebar = () => {
                     </span>
                 </div>
             </aside>
-            <div
-                className={`fixed top-5 left-7 cursor-pointer h-10 w-11 bg-gray-800 border border-gray-700 flex justify-center items-center z-10 transition-all duration-300 ${toggle ? "left-36" : ""}`}
-                onClick={() => showMenu(!toggle)}
-            >
-                <FaBars className="text-white" />
+
+            {/* Sidebar for small and medium screens */}
+            <div className="lg:hidden">
+                <div
+                    className={`fixed top-5 left-7 cursor-pointer h-10 w-11 bg-gray-800 border border-gray-700 flex justify-center items-center z-10 transition-all duration-300`}
+                    onClick={() => showMenu(!toggle)}
+                >
+                    <FaBars className="text-white" />
+                </div>
+                <aside className={`${toggle ? "left-0" : "-left-full"} fixed top-0 w-full h-full bg-gray-800 flex flex-col justify-center items-center z-10 transition-all duration-300`}>
+                    <nav className="nav">
+                        <div className="nav__menu">
+                            <ul className="flex flex-col space-y-4 text-center">
+                                <li className="nav__item">
+                                    <a href="#home" className="text-2xl text-white font-bold transition duration-1000 hover:text-yellow-400" onClick={() => showMenu(false)}>
+                                        <FaHome />
+                                    </a>
+                                </li>
+                                <li className="nav__item">
+                                    <a href="#about" className="text-2xl text-white font-bold transition duration-1000 hover:text-yellow-400" onClick={() => showMenu(false)}>
+                                        <FaUserAlt />
+                                    </a>
+                                </li>
+                                <li className="nav__item">
+                                    <a href="#resume" className="text-2xl text-white font-bold transition duration-1000 hover:text-yellow-400" onClick={() => showMenu(false)}>
+                                        <FaGraduationCap />
+                                    </a>
+                                </li>
+                                <li className="nav__item">
+                                    <a href="#portfolio" className="text-2xl text-white font-bold transition duration-1000 hover:text-yellow-400" onClick={() => showMenu(false)}>
+                                        <FaLayerGroup />
+                                    </a>
+                                </li>
+                                <li className="nav__item">
+                                    <a href="#recommendations" className="text-2xl text-white font-bold transition duration-1000 hover:text-yellow-400" onClick={() => showMenu(false)}>
+                                        <FaStickyNote />
+                                    </a>
+                                </li>
+                                <li className="nav__item">
+                                    <a href="#contact" className="text-2xl text-white font-bold transition duration-1000 hover:text-yellow-400" onClick={() => showMenu(false)}>
+                                        <FaComments />
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                    <div className="nav footer text-white mt-8">
+                        <span className="text-gray-400 text-xs">
+                            &copy;2024
+                        </span>
+                    </div>
+                </aside>
             </div>
         </>
     );
