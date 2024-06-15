@@ -122,7 +122,7 @@ const AddPicture = () => {
                 <FaBars className="text-gray-800" />
             </button>
             {isOpen && (
-                <nav className="lg:hidden md:hidden sm:hidden left-0 top-0 flex  bg-gray-200 justify-around items-center  mt-4 sm:mt-0 font-normal font-['Alef'] leading-[45px] cursor-pointer space-x-11">
+                <nav className="lg:hidden md:hidden sm:hidden left-0 top-0 flex  bg-gray-200 justify-around items-center text-black text-3xl h-[80px] mt-4 font-normal font-['Alef'] leading-[45px] cursor-pointer space-x-11">
                     {!user && (
                         <>
 
@@ -140,7 +140,7 @@ const AddPicture = () => {
                     <div onClick={() => nav('/homePage')}> <FaUserAlt /></div>
                 </nav>
             )}
-            <nav className="hidden lg:flex md:flex sm:flex left-0 top-0  bg-gray-200 justify-center items-center text-black  mt-4 sm:mt-0 font-normal font-['Alef'] leading-[45px] cursor-pointer space-x-20">
+            <nav className="hidden lg:flex md:flex sm:flex left-0 top-0  bg-gray-200 justify-center items-center text-black text-3xl h-[80px] mt-4 sm:mt-0 font-normal font-['Alef'] leading-[45px] cursor-pointer space-x-11">
                 {!user && (
                     <>
                         <div onClick={() => nav('/register')} className="text-2xl text-gray-800 font-bold transition duration-100 hover:text-yellow-400"> <FaUserAlt /></div>
