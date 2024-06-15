@@ -124,7 +124,7 @@ const AddPicture = () => {
                 {alertMessage && <p style={{ color: 'red' }}>{alertMessage}</p>}
                 {error && <p style={{ color: 'red' }}>{error}</p>}
                 <div className="flex justify-center bg-gray-200">
-                    <form onSubmit={handleSubmit} className="bg-gray-400 space-y-4 p-8  mt-4 rounded-2xl shadow-xl shadow-black text-center">
+                    <form onSubmit={handleSubmit} className="bg-gray-400 space-y-4 p-8  mt-4 mr-1 ml-1 rounded-2xl shadow-xl shadow-white text-center">
                         <div>
                             <input className="rounded-2xl text-center" type="file" accept="image/*" onChange={(e) => setImage(e.target.files[0])} required className='p-2 m-2 border border-black' />
                         </div>
