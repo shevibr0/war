@@ -120,7 +120,7 @@ const AddPicture = () => {
 
     return (
         <div className="bg-gray-200 h-screen">
-            <nav className="flex left-0 top-0  bg-gray-200 justify-center items-center text-3xl text-gray-800 h-[80px] mt-4 sm:mt-0 cursor-pointer space-x-11">
+            <nav className="flex left-0 top-0  bg-gray-200 justify-center items-center text-3xl text-gray-800 h-[80px] mt-4  cursor-pointer space-x-11">
                 {!user && (
                     <>
                         <div onClick={() => nav('/register')} className='transition duration-100 hover:text-yellow-400'><FaRegRegistered /></div>
@@ -137,14 +137,14 @@ const AddPicture = () => {
                 <div onClick={() => nav('/homePage')} className='transition duration-100 hover:text-yellow-400'><FaHome /></div>
             </nav>
             <div className='flex items-center mb-1'>
-                <img className="mt-3 ml-5 w-[20px] mr-15 " src="/חץ חזור.svg" alt="Logo" onClick={() => nav(-1)} />
+                <img className="mt-3 ml-5 w-[10px] mr-15 " src="/חץ חזור.svg" alt="Logo" onClick={() => nav(-1)} />
             </div>
             <div className=''>
                 <h2 className="flex justify-center  text-3xl font-bold">הוספת תמונה</h2>
                 {alertMessage && <p style={{ color: 'red' }}>{alertMessage}</p>}
                 {error && <p style={{ color: 'red' }}>{error}</p>}
                 <div className="flex justify-center bg-gray-200">
-                    <form onSubmit={handleSubmit} className="bg-gray-400 space-y-4 p-8 border-2 border-black mt-4">
+                    <form onSubmit={handleSubmit} className="bg-gray-400 space-y-4 p-8  mt-4 rounded-2xl shadow-xl shadow-white">
                         <div>
                             <input type="file" accept="image/*" onChange={(e) => setImage(e.target.files[0])} required className='p-2 m-2 border border-black' />
                         </div>
