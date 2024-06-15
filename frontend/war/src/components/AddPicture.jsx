@@ -6,8 +6,8 @@ import { storage } from "./firebase";
 import { v4 as uuidv4 } from "uuid";
 import { addPicture } from '../utils/PictureUtil';
 import emailjs from 'emailjs-com';
-import { FaHome, FaUserAlt, FaGraduationCap, FaLayerGroup, FaStickyNote, FaComments, FaBars } from 'react-icons/fa';
-import { IoMdLogIn, FaRegRegistered } from "react-icons/io";
+import { FaHome, FaUserAlt, FaGraduationCap, FaLayerGroup, FaRegRegistered, FaComments, FaBars } from 'react-icons/fa';
+import { IoMdLogIn } from "react-icons/io";
 import { BiLogOutCircle } from "react-icons/bi";
 
 const AddPicture = () => {
