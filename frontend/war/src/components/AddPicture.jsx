@@ -120,29 +120,8 @@ const AddPicture = () => {
 
     return (
         <div className="bg-gray-200 h-screen">
-            <button className="lg:hidden md:hidden sm:hidden" onClick={() => { setIsOpen(!isOpen) }} >
-                <FaBars className="text-gray-800" />
-            </button>
-            {isOpen && (
-                <nav className="lg:hidden md:hidden sm:hidden left-0 top-0 flex  bg-gray-200 justify-around items-center text-xl text-gray-800 h-[80px] mt-4 sm:mt-0 cursor-pointer space-x-11">
-                    {!user && (
-                        <>
 
-                            <div onClick={() => nav('/register')} className='transition duration-100 hover:text-yellow-400'> <FaRegRegistered /></div>
-                            <div onClick={() => nav('/')} className='transition duration-100 hover:text-yellow-400'> <IoMdLogIn /></div>
-                        </>
-                    )}
-                    {user && (
-                        <>
-                            <div onClick={() => nav('/logOut')} className='transition duration-100 hover:text-yellow-400'> <BiLogOutCircle /></div>
-                        </>
-                    )}
-                    <div onClick={() => nav('/contact')} className='transition duration-100 hover:text-yellow-400'>  <FaComments /></div>
-                    <div onClick={() => nav('/soldiers')} className='transition duration-100 hover:text-yellow-400'> <FaUserAlt /></div>
-                    <div onClick={() => nav('/homePage')} className='transition duration-100 hover:text-yellow-400'> <FaHome /></div>
-                </nav>
-            )}
-            <nav className="hidden lg:flex md:flex sm:flex left-0 top-0  bg-gray-200 justify-center items-center text-xl text-gray-800 h-[80px] mt-4 sm:mt-0 cursor-pointer space-x-11">
+            <nav className="hidden lg:flex md:flex sm:flex left-0 top-0  bg-gray-200 justify-center items-center text-3xl text-gray-800 h-[80px] mt-4 sm:mt-0 cursor-pointer space-x-11">
                 {!user && (
                     <>
                         <div onClick={() => nav('/register')} className='transition duration-100 hover:text-yellow-400'><FaRegRegistered /></div>
