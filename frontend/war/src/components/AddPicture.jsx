@@ -120,7 +120,7 @@ const AddPicture = () => {
 
     return (
         <div className="bg-gray-200 h-screen">
-            <nav className="flex left-0 top-0  bg-gray-200 justify-center items-center text-3xl text-gray-800 h-[80px] mt-4  cursor-pointer space-x-11">
+            <nav className="flex left-0 top-0  bg-gray-200 justify-center items-center text-3xl text-gray-800 h-[80px]  cursor-pointer space-x-11">
                 {!user && (
                     <>
                         <div onClick={() => nav('/register')} className='transition duration-100 hover:text-yellow-400'><FaRegRegistered /></div>
@@ -144,16 +144,16 @@ const AddPicture = () => {
                 {alertMessage && <p style={{ color: 'red' }}>{alertMessage}</p>}
                 {error && <p style={{ color: 'red' }}>{error}</p>}
                 <div className="flex justify-center bg-gray-200">
-                    <form onSubmit={handleSubmit} className="bg-gray-400 space-y-4 p-8  mt-4 rounded-2xl shadow-xl shadow-white">
+                    <form onSubmit={handleSubmit} className="bg-gray-400 space-y-4 p-8  mt-4 rounded-2xl shadow-5xl shadow-black">
                         <div>
-                            <input type="file" accept="image/*" onChange={(e) => setImage(e.target.files[0])} required className='p-2 m-2 border border-black' />
+                            <input className="rounded-2xl text-center" type="file" accept="image/*" onChange={(e) => setImage(e.target.files[0])} required className='p-2 m-2 border border-black' />
                         </div>
                         <div className=''>
                             <h2 className="flex justify-center text-3xl font-bold">בנימה אישית</h2>
                         </div>
                         <div className='flex justify-center'>
                             <textarea name="PersonalWords" value={pictureDetails.Picture.PersonalWords} onChange={handleChange}
-                                className="w-full p-2 border"
+                                className="w-full p-2 border rounded-2xl"
                                 placeholder="כמה מילים אישיות על התמונה"
                                 style={{ direction: 'rtl' }} />
                         </div>
