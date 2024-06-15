@@ -118,8 +118,8 @@ const AddPicture = () => {
 
     return (
         <div className="bg-gray-200 h-screen">
-            <Sidebar />
 
+            <Sidebar />
             <div className='flex items-center mb-1'>
                 <img className="mt-3 ml-5 max-w-[1%] lg:max-w-[1%] lg:mr-15 md:max-w-[1%] sm:max-w-[1%]" src="/חץ חזור.svg" alt="Logo" onClick={() => nav(-1)} />
             </div>
