@@ -118,29 +118,29 @@ const AddPicture = () => {
 
     return (
         <div className="bg-gray-200 h-screen">
-            <button className="lg:hidden md:hidden sm:hidden fixed top-0 bg-white border-r border-gray-700 p-10 w-28 min-h-screen flex flex-col justify-between z-10 transition-all duration-300" onClick={() => { setIsOpen(!isOpen) }} >
-                <FaBars className="text-white" />
+            <button className="lg:hidden md:hidden sm:hidden" onClick={() => { setIsOpen(!isOpen) }} >
+                <FaBars className="text-gray-800" />
             </button>
             {isOpen && (
                 <nav className="lg:hidden md:hidden sm:hidden left-0 top-0 flex  bg-gray-200 justify-around items-center text-black lg:text-3xl lg:h-[80px] md:text-2m md:h-[30px] sm:text-sm text-xs mt-4 sm:mt-0 font-normal font-['Alef'] leading-[45px] cursor-pointer">
                     {!user && (
                         <>
 
-                            <div onClick={() => nav('/register')} className="text-2xl text-gray-800 font-bold transition duration-100 hover:text-yellow-400"> <FaUserAlt /></div>
-                            <div onClick={() => nav('/')} className="text-2xl text-gray-800 font-bold transition duration-100 hover:text-yellow-400"> <FaUserAlt /></div>
+                            <div onClick={() => nav('/register')} className="text-2xl text-gray-800 font-bold transition duration-100 hover:text-yellow-100"> <FaUserAlt /></div>
+                            <div onClick={() => nav('/')}> <FaUserAlt /></div>
                         </>
                     )}
                     {user && (
                         <>
-                            <div onClick={() => nav('/logOut')} className="text-2xl text-gray-800 font-bold transition duration-100 hover:text-yellow-400"> <FaUserAlt /></div>
+                            <div onClick={() => nav('/logOut')}> <FaUserAlt /></div>
                         </>
                     )}
-                    <div onClick={() => nav('/contact')} className="text-2xl text-gray-800 font-bold transition duration-100 hover:text-yellow-400"> <FaUserAlt /></div>
-                    <div onClick={() => nav('/soldiers')} className="text-2xl text-gray-800 font-bold transition duration-100 hover:text-yellow-400"> <FaUserAlt /></div>
-                    <div onClick={() => nav('/homePage')} className="text-2xl text-gray-800 font-bold transition duration-100 hover:text-yellow-400"> <FaUserAlt /></div>
+                    <div onClick={() => nav('/contact')}> <FaUserAlt /></div>
+                    <div onClick={() => nav('/soldiers')} className='font-bold'> <FaUserAlt /></div>
+                    <div onClick={() => nav('/homePage')}> <FaUserAlt /></div>
                 </nav>
             )}
-            <nav className="hidden lg:flex md:flex sm:flex left-0 top-0  bg-gray-200 justify-center items-center text-black lg:text-2xl lg:h-[47px] md:text-xl md:h-[40px] sm:text-s sm:h-[20px] mt-4 sm:mt-0 font-normal font-['Alef'] leading-[45px] cursor-pointer space-x-20">
+            <nav className="hidden lg:flex md:flex sm:flex left-0 top-0  bg-gray-200 justify-center items-center text-black lg:text-2xl lg:h-[47px] md:text-xl md:h-[40px] sm:text-s sm:h-[20px] mt-4 sm:mt-0 font-normal font-['Alef'] leading-[45px] cursor-pointer space-x-11">
                 {!user && (
                     <>
                         <div onClick={() => nav('/register')} className="text-2xl text-gray-800 font-bold transition duration-100 hover:text-yellow-400"> <FaUserAlt /></div>
