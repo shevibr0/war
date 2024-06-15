@@ -7,6 +7,8 @@ import { v4 as uuidv4 } from "uuid";
 import { addPicture } from '../utils/PictureUtil';
 import emailjs from 'emailjs-com';
 import { FaHome, FaUserAlt, FaGraduationCap, FaLayerGroup, FaStickyNote, FaComments, FaBars } from 'react-icons/fa';
+import { IoMdLogIn, FaRegRegistered } from "react-icons/io";
+import { BiLogOutCircle } from "react-icons/bi";
 
 const AddPicture = () => {
     const nav = useNavigate();
@@ -126,13 +128,13 @@ const AddPicture = () => {
                     {!user && (
                         <>
 
-                            <div onClick={() => nav('/register')} className='transition duration-100 hover:text-yellow-400'> <FaUserAlt /></div>
-                            <div onClick={() => nav('/')} className='transition duration-100 hover:text-yellow-400'> <FaUserAlt /></div>
+                            <div onClick={() => nav('/register')} className='transition duration-100 hover:text-yellow-400'> <FaRegRegistered /></div>
+                            <div onClick={() => nav('/')} className='transition duration-100 hover:text-yellow-400'> <IoMdLogIn /></div>
                         </>
                     )}
                     {user && (
                         <>
-                            <div onClick={() => nav('/logOut')} className='transition duration-100 hover:text-yellow-400'> <FaUserAlt /></div>
+                            <div onClick={() => nav('/logOut')} className='transition duration-100 hover:text-yellow-400'> <BiLogOutCircle /></div>
                         </>
                     )}
                     <div onClick={() => nav('/contact')} className='transition duration-100 hover:text-yellow-400'> <FaUserAlt /></div>
@@ -143,13 +145,13 @@ const AddPicture = () => {
             <nav className="hidden lg:flex md:flex sm:flex left-0 top-0  bg-gray-200 justify-center items-center text-2xl text-gray-800 h-[80px] mt-4 sm:mt-0 cursor-pointer space-x-11">
                 {!user && (
                     <>
-                        <div onClick={() => nav('/register')} className='transition duration-100 hover:text-yellow-400'> <FaUserAlt /></div>
-                        <div onClick={() => nav('/')} className='transition duration-100 hover:text-yellow-400'> <FaUserAlt /></div>
+                        <div onClick={() => nav('/register')} className='transition duration-100 hover:text-yellow-400'><FaRegRegistered /></div>
+                        <div onClick={() => nav('/')} className='transition duration-100 hover:text-yellow-400'> <IoMdLogIn /></div>
                     </>
                 )}
                 {user && (
                     <>
-                        <div onClick={() => nav('/logOut')} className='transition duration-100 hover:text-yellow-400' > <FaUserAlt /></div>
+                        <div onClick={() => nav('/logOut')} className='transition duration-100 hover:text-yellow-400' > <BiLogOutCircle /></div>
                     </>
                 )}
                 <div onClick={() => nav('/contact')} className='transition duration-100 hover:text-yellow-400'> <FaComments /></div>
