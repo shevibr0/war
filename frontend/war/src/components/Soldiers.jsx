@@ -128,11 +128,11 @@ const Soldiers = () => {
             </nav>
             <div className="bg-gray-200">
                 <div className=''>
-                    <h2 className="text-gray-800 text-4xl font-bold mb-6 mt-6 text-center">לזכרם של הנופלים</h2>
+                    <h2 className="text-gray-800 text-4xl font-bold mb-6 mt-6 text-center"></h2>
                 </div>
                 <div className="text-center mb-4">
                     <div className="relative flex items-center justify-center">
-                        <BiSearchAlt className="left-0 text-gray-500" />
+                        <BiSearchAlt className="right-0 text-gray-500" />
                         <input
                             type="text"
                             placeholder="חיפוש"
@@ -147,8 +147,7 @@ const Soldiers = () => {
                     <button
                         onClick={() => handlePageChange(currentPage - 1)}
                         disabled={currentPage === 1 && !isPrev}
-                        className="btn bg-gray-200 text-gray-800 py-2 px-4 rounded-md hover:animate-button-push"
-                    >
+                        className="btn bg-gray-200 text-gray-800 py-2 px-4 rounded-md hover:animate-button-push">
                         <MdOutlineNavigateBefore className="text-2xl" />
                     </button>
                     <span className="text-lg font-bold mx-4">{currentPage}</span>
@@ -166,9 +165,9 @@ const Soldiers = () => {
                     </div>
                 ) : (
                     <>
-                        <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-2">
+                        <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-2  mr-2 ml-2 text-center">
                             {searchMessage === "" ? solidersArr.map((soldier) => (
-                                <div key={soldier.Id} className=" w-full mx-4 bg-white text-center p-4 rounded-2xl hover:animate-button-push hover:shadow-xl hover:shadow-gray-700">
+                                <div key={soldier.Id} className="w-full mx-4 bg-white text-center p-4 rounded-2xl hover:animate-button-push hover:shadow-xl hover:shadow-gray-700">
                                     <div className='flex justify-center'>
                                         <img className="h-64 w-64 object-cover" src={soldier.Image} alt={`${soldier.FirstName} ${soldier.LastName}`} />
                                     </div>
