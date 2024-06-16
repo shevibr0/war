@@ -147,7 +147,7 @@ const Soldiers = () => {
                     <button
                         onClick={() => handlePageChange(currentPage - 1)}
                         disabled={currentPage === 1 && !isPrev}
-                        className="btn bg-white text-gray-800 py-2 px-4 rounded-md hover:animate-button-push"
+                        className="btn bg-gray-200 text-gray-800 py-2 px-4 rounded-md hover:animate-button-push"
                     >
                         <MdOutlineNavigateBefore className="text-2xl" />
                     </button>
@@ -155,7 +155,7 @@ const Soldiers = () => {
                     <button
                         onClick={() => handlePageChange(currentPage + 1)}
                         disabled={(currentPage === count && !isNext) || !isNext}
-                        className="btn bg-white text-gray-800 py-2 px-4 rounded-md hover:animate-button-push"
+                        className="btn text-gray-800 py-2 px-4 rounded-md hover:animate-button-push"
                     >
                         <MdNavigateNext className="text-2xl" />
                     </button>
