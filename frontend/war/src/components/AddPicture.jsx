@@ -120,7 +120,6 @@ const AddPicture = () => {
         <div className="bg-gray-200 h-screen">
             <Sidebar />
             <div className="text-center">
-                <h2 className="flex justify-center text-3xl font-bold">הוספת תמונה</h2>
                 <div className='w-full text-center'>
                     {alertMessage && <p style={{ color: 'red' }}>{alertMessage}</p>}
                     {error && <p style={{ color: 'red' }}>{error}</p>}
