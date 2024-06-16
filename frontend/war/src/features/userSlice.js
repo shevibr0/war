@@ -1,22 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    connectedUser: JSON.parse(sessionStorage.getItem('user')) || null,
+    connectedUser: JSON.parse(localStorage.getItem('user')) || null,
     users: []
 }
+
 const userSlice = createSlice({
     name: "user",
     initialState,
     reducers: {
         setConnectedUser: (state, action) => {
             state.connectedUser = action.payload;
-            sessionStorage.setItem('user', JSON.stringify(action.payload));
-
+            localStorage.setItem('user', JSON.stringify(action.payload));
         },
-
         setUnConnectedUser: (state, action) => {
             state.connectedUser = null;
-            sessionStorage.removeItem('user');
+            localStorage.removeItem('user');
         }
     }
 });
