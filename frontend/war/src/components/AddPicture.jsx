@@ -119,30 +119,41 @@ const AddPicture = () => {
     return (
         <div className="bg-gray-200 h-screen">
             <Sidebar />
-            <div className='text-center'>
-                <h2 className="flex justify-center  text-3xl font-bold">הוספת תמונה</h2>
+            <div className="text-center">
+                <h2 className="flex justify-center text-3xl font-bold">הוספת תמונה</h2>
                 {alertMessage && <p style={{ color: 'red' }}>{alertMessage}</p>}
                 {error && <p style={{ color: 'red' }}>{error}</p>}
                 <div className="flex justify-center bg-gray-200 mt-4 mr-2 ml-2">
-                    <form onSubmit={handleSubmit} className="bg-gray-400 space-y-4 p-8   rounded-2xl shadow-xl shadow-gray-700 text-center">
+                    <form onSubmit={handleSubmit} className="bg-gray-400 space-y-4 p-8 rounded-2xl shadow-xl shadow-gray-700 text-center w-full max-w-lg mx-4">
                         <div>
-                            <input className="rounded-2xl text-center" type="file" accept="image/*" onChange={(e) => setImage(e.target.files[0])} required className='p-2 m-2 border border-black' />
+                            <input
+                                className="rounded-2xl text-center p-2 m-2 border border-black"
+                                type="file"
+                                accept="image/*"
+                                onChange={(e) => setImage(e.target.files[0])}
+                                required
+                            />
                         </div>
-                        <div className=''>
+                        <div>
                             <h2 className="flex justify-center text-3xl font-bold">בנימה אישית</h2>
                         </div>
-                        <div className='flex justify-center'>
-                            <textarea name="PersonalWords" value={pictureDetails.Picture.PersonalWords} onChange={handleChange}
+                        <div className="flex justify-center">
+                            <textarea
+                                name="PersonalWords"
+                                value={pictureDetails.Picture.PersonalWords}
+                                onChange={handleChange}
                                 className="w-full p-2 border rounded-2xl"
                                 placeholder="כמה מילים אישיות על התמונה"
-                                style={{ direction: 'rtl' }} />
+                                style={{ direction: 'rtl' }}
+                            />
                         </div>
-                        <div className='flex justify-center'>
-                            <button type="submit" disabled={isLoading} className="btn bg-gray-900 text-white py-2 px-4 rounded-md  hover:animate-button-push">הוסף תמונה</button>
+                        <div className="flex justify-center">
+                            <button type="submit" disabled={isLoading} className="btn bg-gray-900 text-white py-2 px-4 rounded-md hover:animate-button-push">הוסף תמונה</button>
                         </div>
                     </form>
                 </div>
             </div>
+
         </div>
     );
 };
