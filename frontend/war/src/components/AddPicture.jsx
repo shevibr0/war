@@ -123,8 +123,8 @@ const AddPicture = () => {
                 <h2 className="flex justify-center  text-3xl font-bold">הוספת תמונה</h2>
                 {alertMessage && <p style={{ color: 'red' }}>{alertMessage}</p>}
                 {error && <p style={{ color: 'red' }}>{error}</p>}
-                <div className="flex justify-center bg-gray-200">
-                    <form onSubmit={handleSubmit} className="bg-gray-400 space-y-4 p-8  mt-4 mr-2 ml-2 rounded-2xl shadow-xl shadow-gray text-center">
+                <div className="flex justify-center bg-gray-200 mt-4 mr-2 ml-2">
+                    <form onSubmit={handleSubmit} className="bg-gray-400 space-y-4 p-8   rounded-2xl shadow-xl shadow-gray-700 text-center">
                         <div>
                             <input className="rounded-2xl text-center" type="file" accept="image/*" onChange={(e) => setImage(e.target.files[0])} required className='p-2 m-2 border border-black' />
                         </div>

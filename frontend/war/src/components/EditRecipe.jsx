@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { updateRecipy, getRecipyById } from '../utils/RecipyUtil';
 import { useNavigate, useParams } from 'react-router';
 import { useSelector } from 'react-redux';
+import Sidebar from './Sidebar';
 
 const EditRecipe = () => {
     const nav = useNavigate();
@@ -82,6 +83,7 @@ const EditRecipe = () => {
 
     return (
         <div className="bg-gray-200 h-screen">
+            <Sidebar />
             <h2 className="text-center text-3xl font-bold">עריכת מתכון</h2>
             {error && <p className="text-red-500 text-center">{error}</p>}
             <form onSubmit={handleSubmit} className="max-w-4xl mx-auto p-8 bg-white shadow-md rounded">
