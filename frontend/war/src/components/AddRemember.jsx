@@ -88,7 +88,7 @@ const AddRemember = () => {
             <Sidebar />
             <div className="flex justify-center h-screen">
                 <div className='text-black mt-1 w-80 text-center'>
-                    <form onSubmit={handleSubmit} className='flex flex-col py-6 px-4 border-2 border-black mt-0'>
+                    <form onSubmit={handleSubmit} className='flex flex-col py-6 px-4  bg-gray-400 shadow-xl shadow-gray-800 mt-0 w-full max-w-lg mx-4'>
                         <label className='flex flex-col'>
                             <textarea
                                 name="Remember"
