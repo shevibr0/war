@@ -132,7 +132,7 @@ const Soldiers = () => {
                 </div>
                 <div className="text-center mb-4">
                     <div className="relative flex items-center justify-center">
-                        <BiSearchAlt className="left-3 text-gray-500" />
+                        <BiSearchAlt className="left-0 text-gray-500" />
                         <input
                             type="text"
                             placeholder="חיפוש"
