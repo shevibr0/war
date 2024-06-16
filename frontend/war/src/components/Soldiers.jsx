@@ -132,14 +132,17 @@ const Soldiers = () => {
                     <h2 className="text-gray-800 text-4xl font-bold  mb-6 mt-6 text-center">לזכרם של הנופלים</h2>
                 </div>
                 <div className="text-center mb-4">
-                    <input
-                        type="text"
-                        placeholder="חיפוש"
-                        value={searchQuery}
-                        onChange={handleSearchValue}
-                        className="border border-black px-4 py-2 rounded-md"
-                        style={{ direction: 'rtl' }}
-                    />
+                    <div className="flex items-center justify-center">
+                        <BiSearchAlt className="text-gray-500 mr-2" />
+                        <input
+                            type="text"
+                            placeholder="חיפוש"
+                            value={searchQuery}
+                            onChange={handleSearchValue}
+                            className="border border-black px-4 py-2 rounded-md"
+                            style={{ direction: 'rtl' }}
+                        />
+                    </div>
                 </div>
                 <div className="flex justify-center items-center mt-8">
                     <button
