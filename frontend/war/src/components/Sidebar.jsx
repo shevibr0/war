@@ -14,7 +14,7 @@ const Sidebar = () => {
                 {!user && (
                     <>
                         <div onClick={() => nav('/register')} className='transition duration-100 hover:text-yellow-400'><FaRegRegistered /></div>
-                        <div onClick={() => nav('/')} className='transition duration-100 hover:text-yellow-400'> <IoMdLogIn /></div>
+                        <div onClick={() => nav('/login')} className='transition duration-100 hover:text-yellow-400'> <IoMdLogIn /></div>
                     </>
                 )}
                 {user && (

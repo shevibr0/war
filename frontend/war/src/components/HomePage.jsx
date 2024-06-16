@@ -17,7 +17,7 @@ const HomePage = () => {
                 </div>
 
                 <div className="flex items-center justify-center  flex-wrap ">
-                    <div className="ml-9 mr-9 w-[578px] h-[650px] lg:w-[678px] lg:h-96 lg:mr-2 md:w-[678px] md:h-[440px] sm:w-[578px] sm:h-[540px] mt-4   p-1 text-center text-gray-600 text-m font-light leading-[42.67px] tracking-wider bg-white border border-gray-700 ">
+                    <div className="ml-9 mr-9 w-[578px] h-[650px] lg:w-[678px] lg:h-96 lg:mr-2 md:w-[678px] md:h-[440px] sm:w-[578px] sm:h-[540px] mt-4   p-1 text-center text-gray-600 text-m font-light leading-[42.67px] tracking-wider bg-white shadow-lg shadow-black ">
                         המיזם "מנציחים את זכרם" הוקם בעקבות הרצון להכיר את הגיבורים שלנו מקרוב         <br />להשאיר פיסות מידע ואפשרות לחברים וקרובי משפחה להשאיר פיסת זכרון שתהיה פתוחה ונגישה לכל מי שרוצה לזכור, להזכר ולקבל השראה מהקדושים שנהרגו על קידוש ד' רק מעצם היותם יהודים<br />נשמח שתוסיפו מידע על חלל שהכרתם, מתכון שאהב, תמונה שלכם יחד, זכרון מתוק שיש לכם ואתם רוצים לשתף ממנו ולכל אלו שאינם מכירים<br />יש אפשרות לקבל על עצמכם התנדבות ולקרוא פרקי תהילים לעילוי נשמת החללים<br />לכל שאלה, בקשה או הבהרה מוזמנים לכתוב בלשונית יצירת קשר <br />
                     </div>
 
