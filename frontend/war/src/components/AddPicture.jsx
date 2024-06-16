@@ -121,8 +121,10 @@ const AddPicture = () => {
             <Sidebar />
             <div className="text-center">
                 <h2 className="flex justify-center text-3xl font-bold">הוספת תמונה</h2>
-                {alertMessage && <p style={{ color: 'red' }}>{alertMessage}</p>}
-                {error && <p style={{ color: 'red' }}>{error}</p>}
+                <div className='w-full text-center'>
+                    {alertMessage && <p style={{ color: 'red' }}>{alertMessage}</p>}
+                    {error && <p style={{ color: 'red' }}>{error}</p>}
+                </div>
                 <div className="flex justify-center bg-gray-200 mt-4 mr-2 ml-2">
                     <form onSubmit={handleSubmit} className="bg-gray-400 space-y-4 p-8 rounded-2xl shadow-xl shadow-gray-700 text-center w-full max-w-lg mx-4">
                         <div>
