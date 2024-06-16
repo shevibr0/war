@@ -89,7 +89,7 @@ const AddRemember = () => {
             <div className="flex justify-center h-screen">
                 <div className='text-black  mt-4 mr-2 ml-2 text-center'>
                     <form onSubmit={handleSubmit} className='space-y-4 p-8 rounded-2xl bg-gray-400 shadow-xl shadow-gray-800  w-full max-w-lg mx-4'>
-                        <label className=''>
+                        <label className='flex flex-col'>
                             <textarea
                                 name="Remember"
                                 value={memory.Memory.Remember}
@@ -99,13 +99,15 @@ const AddRemember = () => {
                                 className='text-gray-700 h-60 border border-gray-600 space-y-4 p-8 rounded-2xl mb-1'
                             />
                         </label>
-                        <button type="submit"
-                            disabled={isLoading}
-                            className={`btn bg-gray-900 text-white py-2 px-4 rounded-md ${isLoading ? 'opacity-50 cursor-not-allowed' : ' hover:animate-button-push'
-                                }`}
-                        >
-                            {isLoading ? 'Adding...' : (isEditing ? 'עריכת זכרון' : 'הוספת זכרון')}
-                        </button>
+                        <div className='flex justify-center'>
+                            <button type="submit"
+                                disabled={isLoading}
+                                className={`btn bg-gray-900 text-white py-2 px-4 rounded-md ${isLoading ? 'opacity-50 cursor-not-allowed' : ' hover:animate-button-push'
+                                    }`}
+                            >
+                                {isLoading ? 'Adding...' : (isEditing ? 'עריכת זכרון' : 'הוספת זכרון')}
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>
