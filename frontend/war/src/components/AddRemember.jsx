@@ -88,7 +88,7 @@ const AddRemember = () => {
             <Sidebar />
             <div className="flex justify-center h-screen">
                 <div className='text-black mt-1 w-80 text-center'>
-                    <form onSubmit={handleSubmit} className='flex flex-col py-6 px-4  bg-gray-400 shadow-xl shadow-gray-800 mt-0 w-full max-w-lg mx-4'>
+                    <form onSubmit={handleSubmit} className='flex flex-col py-6 px-4 rounded-2xl bg-gray-400 shadow-xl shadow-gray-800 mt-0 w-full max-w-lg mx-4'>
                         <label className='flex flex-col'>
                             <textarea
                                 name="Remember"
@@ -96,7 +96,7 @@ const AddRemember = () => {
                                 placeholder="הוסף זכרון אישי"
                                 onChange={handleChange}
                                 style={{ direction: 'rtl' }}
-                                className='text-gray-700 h-60 border border-gray-600 rounded mb-1'
+                                className='text-gray-700 h-60 border border-gray-600 space-y-4 p-8 rounded-2xl mb-1'
                             />
                         </label>
                         <button type="submit"

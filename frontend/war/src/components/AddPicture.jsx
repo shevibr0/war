@@ -129,7 +129,7 @@ const AddPicture = () => {
                     <form onSubmit={handleSubmit} className="bg-gray-400 space-y-4 p-8 rounded-2xl shadow-xl shadow-gray-700 text-center w-full max-w-lg mx-4">
                         <div className='text-center'>
                             <input
-                                className="rounded-2xl text-center p-2 m-2 border border-black w-full"
+                                className="rounded-2xl text-center p-3 m-3 border border-black w-full"
                                 type="file"
                                 accept="image/*"
                                 onChange={(e) => setImage(e.target.files[0])}
