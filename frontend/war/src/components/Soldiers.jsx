@@ -128,7 +128,7 @@ const Soldiers = () => {
             </nav>
             <div className="bg-gray-200">
                 <div className=''>
-                    <h2 className="text-black text-4xl font-bold font-['Alef'] mb-6 mt-6 text-center">לזכרם של הנופלים במלחמת חרבות ברזל</h2>
+                    <h2 className="text-black text-4xl font-bold font-['Alef'] mb-6 mt-6 text-center">לזכרם של הנופלים</h2>
                 </div>
                 <div className="text-center mb-4">
                     <input
@@ -165,7 +165,7 @@ const Soldiers = () => {
                     <>
                         <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-2">
                             {searchMessage === "" ? solidersArr.map((soldier) => (
-                                <div key={soldier.Id} className="text-center border border-gray-500 rounded-sm p-2">
+                                <div key={soldier.Id} className="bg-white text-center p-4 rounded-2xl shadow-xl shadow-gray-700">
                                     <div className='flex justify-center'>
                                         <img className="h-64 w-64 object-cover" src={soldier.Image} alt={`${soldier.FirstName} ${soldier.LastName}`} />
                                     </div>
