@@ -20,14 +20,14 @@ const HomePage = () => {
                 </div>
 
                 <div className="flex items-center justify-center  flex-wrap ">
-                    <div className="max-w-lg w-full mx-4  mt-4 p-1 text-center text-gray-600 text-xl font-light tracking-wider bg-white shadow-lg shadow-gray-800 rounded-2xl">
+                    <div className="max-w-lg w-full mx-4  mt-4 p-3 text-center text-gray-600 text-xl font-light tracking-wider bg-white shadow-lg shadow-gray-800 rounded-2xl">
                         המיזם "מנציחים את זכרם" נוצר מתוך רצון להכיר את גיבורינו מקרוב ולהשאיר פיסות זיכרון פתוחות ונגישות לכולם<br />
                         אנו מזמינים אתכם להוסיף מידע על חללים שהכרתם, כמו מתכון אהוב, תמונה משותפת או זיכרון מתוק שתרצו לשתף<br />
                         בנוסף, ישנה אפשרות להתנדב לקריאת פרקי תהילים לעילוי נשמת החללים<br />
                     </div>
                 </div>
             </div>
-            <div className="flex justify-center mt-1">
+            <div className="flex justify-center mt-8">
                 <button onClick={() => nav('/soldiers')} className="btn bg-gray-900 text-white py-2 px-4 rounded-md hover:animate-button-push">
                     חיפוש</button>
             </div>
