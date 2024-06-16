@@ -46,8 +46,8 @@ const HomePage = () => {
                             <FontAwesomeIcon icon={faEnvelope} />
                         </a>
                     </div>
-                    <div className="relative transition duration-100 hover:text-yellow-400">
-                        <a href="https://www.instagram.com/elisheva_einhoren/" target="_blank" rel="noopener noreferrer">
+                    <div className="relative">
+                        <a className='transition duration-100 hover:text-yellow-400' href="https://www.instagram.com/elisheva_einhoren/" target="_blank" rel="noopener noreferrer">
                             <FontAwesomeIcon icon={faInstagram} />
                         </a>
                     </div>
