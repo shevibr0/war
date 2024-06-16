@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router';
 import Sidebar from './Sidebar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLinkedin, faInstagram, faEmail } from '@fortawesome/free-brands-svg-icons';
+import { faLinkedin, faInstagram, faEmail, faMailchimp } from '@fortawesome/free-brands-svg-icons';
 
 
 const HomePage = () => {
@@ -43,7 +43,7 @@ const HomePage = () => {
                     <div className="relative">
                         <img className="w-[26.55px] h-[26.55px] transition-opacity duration-300 ease-in-out opacity-100 hover:opacity-0" src="/מייל.svg" alt="Email" />
                         <a href="mailto:mepe.leos@gmail.com">
-                            <FontAwesomeIcon icon={faEmail} />
+                            <FontAwesomeIcon icon={faMailchimp} />
                         </a>
                     </div>
                     <div className="relative">
