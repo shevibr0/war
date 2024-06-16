@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router';
 import Sidebar from './Sidebar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLinkedin, faGithub, faFacebook } from '@fortawesome/free-brands-svg-icons';
+import { faLinkedin, faInstagram, faEmail } from '@fortawesome/free-brands-svg-icons';
 
 
 const HomePage = () => {
@@ -20,16 +20,14 @@ const HomePage = () => {
                 </div>
 
                 <div className="flex items-center justify-center  flex-wrap ">
-                    <div className="max-w-lg w-full mx-4  mt-4 p-1 text-center text-gray-600 text-2xl font-light tracking-wider bg-white shadow-lg shadow-gray-800 rounded-2xl">
+                    <div className="max-w-lg w-full mx-4  mt-4 p-1 text-center text-gray-600 text-xl font-light tracking-wider bg-white shadow-lg shadow-gray-800 rounded-2xl">
                         המיזם "מנציחים את זכרם" נוצר מתוך רצון להכיר את גיבורינו מקרוב ולהשאיר פיסות זיכרון פתוחות ונגישות לכולם<br />
                         אנו מזמינים אתכם להוסיף מידע על חללים שהכרתם, כמו מתכון אהוב, תמונה משותפת או זיכרון מתוק שתרצו לשתף<br />
                         בנוסף, ישנה אפשרות להתנדב לקריאת פרקי תהילים לעילוי נשמת החללים<br />
                     </div>
-
-
                 </div>
             </div>
-            <div className="flex justify-center">
+            <div className="flex justify-center mt-1">
                 <button onClick={() => nav('/soldiers')} className="btn bg-gray-900 text-white py-2 px-4 rounded-md hover:animate-button-push">
                     חיפוש</button>
             </div>
@@ -37,31 +35,21 @@ const HomePage = () => {
             <div className="w-full bottom-0 mt-7 left-0  flex justify-center bg-gray-200">
                 <div className="flex items-center gap-4">
                     <div className="relative">
-                        <img className="w-[20.15px] h-[26.55px] transition-opacity duration-300 ease-in-out opacity-100 hover:opacity-0" src="/לינקדאין.svg" alt="LinkedIn" />
-                        <a href="https://www.linkedin.com/in/elisheva-einhoren-43b1b3220/" target="_blank" rel="noopener noreferrer">
+                        <FontAwesomeIcon icon={faLinkedin} />                        <a href="https://www.linkedin.com/in/elisheva-einhoren-43b1b3220/" target="_blank" rel="noopener noreferrer">
                             <img className="w-[20.15px] h-[26.55px] absolute inset-0 transition-opacity duration-300 ease-in-out opacity-0 hover:opacity-100" src="/לינקדאין מעבר עכבר.svg" alt="LinkedIn Hover" />
-                        </a>
-                        <a href="https://www.linkedin.com/in/elisheva-einhoren-43b1b3220/" className="home__social-link text-gray-800 text-xl transition duration-300 hover:text-yellow-400" target="_blank" rel="noopener noreferrer">
-                            <FontAwesomeIcon icon={faLinkedin} />
                         </a>
                     </div>
 
                     <div className="relative">
                         <img className="w-[26.55px] h-[26.55px] transition-opacity duration-300 ease-in-out opacity-100 hover:opacity-0" src="/מייל.svg" alt="Email" />
                         <a href="mailto:mepe.leos@gmail.com">
-                            <img className="w-[26.55px] h-[26.55px] absolute inset-0 transition-opacity duration-300 ease-in-out opacity-0 hover:opacity-100" src="/מייל מעבר עכבר.svg" alt="Email" />
-                        </a>
-                        <a href="https://www.facebook.com/profile.php?id=100014888320823" className="home__social-link text-gray-800 text-xl transition duration-300 hover:text-yellow-400" target="_blank" rel="noopener noreferrer">
-                            <FontAwesomeIcon icon={faFacebook} />
+                            <FontAwesomeIcon icon={faEmail} />
                         </a>
                     </div>
                     <div className="relative">
                         <img className="w-[18.96px] h-[26.55px] transition-opacity duration-300 ease-in-out opacity-100 hover:opacity-0" src="/אינסטגרם.svg" alt="Instagram" />
                         <a href="https://www.instagram.com/elisheva_einhoren/" target="_blank" rel="noopener noreferrer">
-                            <img className="w-[18.96px] h-[26.55px] absolute inset-0 transition-opacity duration-300 ease-in-out opacity-0 hover:opacity-100" src="/אינסטגרם מעבר עכבר.svg" alt="Instagram" />
-                        </a>
-                        <a href="https://github.com/shevibr0" className="home__social-link text-gray-800 text-xl transition duration-300 hover:text-yellow-400" target="_blank" rel="noopener noreferrer">
-                            <FontAwesomeIcon icon={faGithub} />
+                            <FontAwesomeIcon icon={faInstagram} />
                         </a>
                     </div>
                 </div>
