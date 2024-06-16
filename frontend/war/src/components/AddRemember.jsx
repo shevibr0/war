@@ -87,9 +87,9 @@ const AddRemember = () => {
         <div className="bg-gray-200 h-screen">
             <Sidebar />
             <div className="flex justify-center h-screen">
-                <div className='text-black mt-1 w-80 text-center'>
-                    <form onSubmit={handleSubmit} className='flex flex-col py-6 px-4 rounded-2xl bg-gray-400 shadow-xl shadow-gray-800 mt-0 w-full max-w-lg mx-4'>
-                        <label className='flex flex-col'>
+                <div className='text-black  mt-4 mr-2 ml-2 text-center'>
+                    <form onSubmit={handleSubmit} className='space-y-4 p-8 rounded-2xl bg-gray-400 shadow-xl shadow-gray-800  w-full max-w-lg mx-4'>
+                        <label className=''>
                             <textarea
                                 name="Remember"
                                 value={memory.Memory.Remember}
