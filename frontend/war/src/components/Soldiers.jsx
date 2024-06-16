@@ -3,6 +3,9 @@ import { GetCountSoliders, getSoldiers, globalSearchSoldiers } from '../utils/So
 import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSearchSoliders, setSoliders } from '../features/soliderSlice';
+import { FaHome, FaUserAlt, FaRegRegistered, FaComments } from 'react-icons/fa';
+import { IoMdLogIn } from "react-icons/io";
+import { BiLogOutCircle } from "react-icons/bi";
 
 const Soldiers = () => {
     const nav = useNavigate();

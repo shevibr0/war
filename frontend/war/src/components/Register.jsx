@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import { addUser } from "../utils/UserUtil";
 import { useSelector } from 'react-redux';
+import { FaHome, FaUserAlt, FaRegRegistered, FaComments } from 'react-icons/fa';
+import { IoMdLogIn } from "react-icons/io";
+import { BiLogOutCircle } from "react-icons/bi";
 
 const Register = () => {
     const nav = useNavigate();

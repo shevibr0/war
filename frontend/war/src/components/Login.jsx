@@ -5,6 +5,9 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setConnectedUser } from "../features/userSlice";
 import { GetByEmailAndPassword } from "../utils/UserUtil";
+import { FaHome, FaUserAlt, FaRegRegistered, FaComments } from 'react-icons/fa';
+import { IoMdLogIn } from "react-icons/io";
+import { BiLogOutCircle } from "react-icons/bi";
 
 const Login = () => {
     const nav = useNavigate()
