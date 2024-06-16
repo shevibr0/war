@@ -20,7 +20,7 @@ const HomePage = () => {
                     <h2 className='text-gray-700 text-3xl font-bold'>מנציחים את זיכרם</h2><br />
                 </div>
 
-                <div className="flex items-center justify-center  flex-wrap ">
+                <div className="flex items-center justify-center  flex-wrap">
                     <div className="max-w-lg w-full mx-4  mt-4 p-3 text-center text-gray-600 text-xl font-light tracking-wider bg-white shadow-lg shadow-gray-800 rounded-2xl">
                         המיזם "מנציחים את זכרם" נוצר מתוך רצון להכיר את גיבורינו מקרוב ולהשאיר פיסות זיכרון פתוחות ונגישות לכולם<br />
                         אנו מזמינים אתכם להוסיף מידע על חללים שהכרתם, כמו מתכון אהוב, תמונה משותפת או זיכרון מתוק שתרצו לשתף<br />
@@ -35,18 +35,18 @@ const HomePage = () => {
 
             <div className="w-full bottom-0 mt-7 left-0  flex justify-center bg-gray-200">
                 <div className="flex items-center gap-4">
-                    <div className="relative">
+                    <div className="relative transition duration-100 hover:text-yellow-400">
                         <a href="https://www.linkedin.com/in/elisheva-einhoren-43b1b3220/" target="_blank" rel="noopener noreferrer">
                             <FontAwesomeIcon icon={faLinkedin} />
                         </a>
                     </div>
 
-                    <div className="relative">
+                    <div className="relative transition duration-100 hover:text-yellow-400">
                         <a href="mailto:mepe.leos@gmail.com">
                             <FontAwesomeIcon icon={faEnvelope} />
                         </a>
                     </div>
-                    <div className="relative">
+                    <div className="relative transition duration-100 hover:text-yellow-400">
                         <a href="https://www.instagram.com/elisheva_einhoren/" target="_blank" rel="noopener noreferrer">
                             <FontAwesomeIcon icon={faInstagram} />
                         </a>
