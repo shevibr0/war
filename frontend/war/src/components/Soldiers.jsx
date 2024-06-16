@@ -175,7 +175,7 @@ const Soldiers = () => {
                                     <h3>{`${soldier.FirstName} ${soldier.LastName}`}</h3>
                                     <p>{`גיל: ${soldier.Age}`}</p>
                                     <p>{`עיר: ${soldier.City}`}</p>
-                                    <button className="btn bg-gray-800 text-white py-2 px-4 rounded-md hover:animate-button-push" onClick={() => nav(`/soldierInfo/${soldier.Id}`)}>לפרטים נוספים</button>
+                                    <button className="btn bg-gray-300 text-gray-800 py-2 px-4 rounded-md hover:animate-button-push" onClick={() => nav(`/soldierInfo/${soldier.Id}`)}>לפרטים נוספים</button>
                                 </div>
                             )) : <span>{searchMessage}</span>}
                         </div>
