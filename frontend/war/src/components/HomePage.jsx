@@ -17,11 +17,10 @@ const HomePage = () => {
                 </div>
 
                 <div className="flex items-center justify-center  flex-wrap ">
-                    <div className="ml-9 mr-9 w-[578px] h-[650px] lg:w-[678px] lg:h-96 lg:mr-2 md:w-[678px] md:h-[440px] sm:w-[578px] sm:h-[540px] mt-4 p-1 text-center text-gray-600 text-m font-light leading-[42.67px] tracking-wider bg-white shadow-lg shadow-black">
-                        המיזם "מנציחים את זכרם" נוצר מתוך רצון להכיר את גיבורינו מקרוב ולהשאיר פיסות זיכרון פתוחות ונגישות לכולם.<br /><br />
-                        אנו מזמינים אתכם להוסיף מידע על חללים שהכרתם, כמו מתכון אהוב, תמונה משותפת או זיכרון מתוק שתרצו לשתף.<br /><br />
-                        בנוסף, ישנה אפשרות להתנדב לקריאת פרקי תהילים לעילוי נשמת החללים.<br /><br />
-                        לכל שאלה או הבהרה, אנא פנו אלינו דרך לשונית "יצירת קשר".
+                    <div className="max-w-lg w-full mx-4  mt-4 p-1 text-center text-gray-600 text-l font-light tracking-wider bg-white shadow-lg shadow-gray-800 rounded-2xl">
+                        המיזם "מנציחים את זכרם" נוצר מתוך רצון להכיר את גיבורינו מקרוב ולהשאיר פיסות זיכרון פתוחות ונגישות לכולם<br />
+                        אנו מזמינים אתכם להוסיף מידע על חללים שהכרתם, כמו מתכון אהוב, תמונה משותפת או זיכרון מתוק שתרצו לשתף<br />
+                        בנוסף, ישנה אפשרות להתנדב לקריאת פרקי תהילים לעילוי נשמת החללים<br />
                     </div>
 
 
