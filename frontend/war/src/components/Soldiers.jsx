@@ -7,6 +7,7 @@ import { FaHome, FaUserAlt, FaRegRegistered, FaComments } from 'react-icons/fa';
 import { BiSearchAlt } from "react-icons/bi";
 import { IoMdLogIn } from "react-icons/io";
 import { BiLogOutCircle } from "react-icons/bi";
+import { MdNavigateNext, MdOutlineNavigateBefore } from "react-icons/md";
 
 const Soldiers = () => {
     const nav = useNavigate();
@@ -111,35 +112,33 @@ const Soldiers = () => {
 
     return (
         <div className="bg-gray-200 h-screen">
-            <nav className="flex left-0 top-0  bg-gray-200 justify-center items-center text-3xl text-gray-800 h-[80px]  cursor-pointer space-x-11">
+            <nav className="flex left-0 top-0 bg-gray-200 justify-center items-center text-3xl text-gray-800 h-[80px] cursor-pointer space-x-11">
                 {!user && (
                     <>
                         <div onClick={() => nav('/register')} className='transition duration-100 hover:text-yellow-400'><FaRegRegistered /></div>
-                        <div onClick={() => nav('/login')} className='transition duration-100 hover:text-yellow-400'> <IoMdLogIn /></div>
+                        <div onClick={() => nav('/login')} className='transition duration-100 hover:text-yellow-400'><IoMdLogIn /></div>
                     </>
                 )}
                 {user && (
-                    <>
-                        <div onClick={() => nav('/logOut')} className='transition duration-100 hover:text-yellow-400' > <BiLogOutCircle /></div>
-                    </>
+                    <div onClick={() => nav('/logOut')} className='transition duration-100 hover:text-yellow-400'><BiLogOutCircle /></div>
                 )}
-                <div onClick={() => nav('/contact')} className='transition duration-100 hover:text-yellow-400'> <FaComments /></div>
-                <div onClick={() => nav('/soldiers')} className='transition duration-100 hover:text-yellow-400' > <FaUserAlt /></div>
+                <div onClick={() => nav('/contact')} className='transition duration-100 hover:text-yellow-400'><FaComments /></div>
+                <div onClick={() => nav('/soldiers')} className='transition duration-100 hover:text-yellow-400'><FaUserAlt /></div>
                 <div onClick={() => nav('/homePage')} className='transition duration-100 hover:text-yellow-400'><FaHome /></div>
             </nav>
             <div className="bg-gray-200">
                 <div className=''>
-                    <h2 className="text-gray-800 text-4xl font-bold  mb-6 mt-6 text-center">לזכרם של הנופלים</h2>
+                    <h2 className="text-gray-800 text-4xl font-bold mb-6 mt-6 text-center">לזכרם של הנופלים</h2>
                 </div>
                 <div className="text-center mb-4">
-                    <div className="flex items-center justify-center">
-                        <BiSearchAlt className="text-gray-500 mr-2" />
+                    <div className="relative flex items-center justify-center">
+                        <BiSearchAlt className="absolute left-3 text-gray-500" />
                         <input
                             type="text"
                             placeholder="חיפוש"
                             value={searchQuery}
                             onChange={handleSearchValue}
-                            className="border border-black px-4 py-2 rounded-md"
+                            className="border border-black px-10 py-2 rounded-md"
                             style={{ direction: 'rtl' }}
                         />
                     </div>
@@ -150,15 +149,15 @@ const Soldiers = () => {
                         disabled={currentPage === 1 && !isPrev}
                         className="btn bg-white text-gray-800 py-2 px-4 rounded-md hover:animate-button-push"
                     >
-                        דף קודם
+                        <MdOutlineNavigateBefore className="text-2xl" />
                     </button>
-                    <span className="text-lg font-bold"> {currentPage}</span>
+                    <span className="text-lg font-bold mx-4">{currentPage}</span>
                     <button
                         onClick={() => handlePageChange(currentPage + 1)}
-                        disabled={currentPage === count && !isNext || !isNext}
+                        disabled={(currentPage === count && !isNext) || !isNext}
                         className="btn bg-white text-gray-800 py-2 px-4 rounded-md hover:animate-button-push"
                     >
-                        דף הבא
+                        <MdNavigateNext className="text-2xl" />
                     </button>
                 </div>
                 {loading ? (
@@ -169,7 +168,7 @@ const Soldiers = () => {
                     <>
                         <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-2">
                             {searchMessage === "" ? solidersArr.map((soldier) => (
-                                <div key={soldier.Id} className="bg-white text-center p-4 rounded-2xl hover:animate-button-push shadow-xl shadow-gray-700">
+                                <div key={soldier.Id} className="bg-white text-center p-4 rounded-2xl hover:animate-button-push hover:shadow-xl hover:shadow-gray-700">
                                     <div className='flex justify-center'>
                                         <img className="h-64 w-64 object-cover" src={soldier.Image} alt={`${soldier.FirstName} ${soldier.LastName}`} />
                                     </div>
@@ -186,19 +185,18 @@ const Soldiers = () => {
                                 disabled={currentPage === 1 && !isPrev}
                                 className="px-4 py-1 bg-gray-200 text-black rounded-md mr-4 border border-black"
                             >
-                                דף קודם
+                                <MdOutlineNavigateBefore className="text-2xl" />
                             </button>
                             <span className="text-lg font-bold"> {currentPage}</span>
                             <button
                                 onClick={() => handlePageChange(currentPage + 1)}
-                                disabled={currentPage === count && !isNext || !isNext}
+                                disabled={(currentPage === count && !isNext) || !isNext}
                                 className="px-4 py-1 bg-gray-200 text-black rounded-md ml-4 border border-black"
                             >
-                                דף הבא
+                                <MdNavigateNext className="text-2xl" />
                             </button>
                         </div>
                     </>
-
                 )}
             </div>
         </div>
