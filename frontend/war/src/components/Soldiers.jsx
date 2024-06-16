@@ -107,57 +107,21 @@ const Soldiers = () => {
 
     return (
         <div className="bg-gray-200 h-screen">
-            <button className="lg:hidden md:hidden sm:hidden" onClick={() => { setIsOpen(!isOpen) }} >
-                <svg className="w-6 h-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 11h16M4 16h16" />
-                </svg>
-            </button>
-            {isOpen && (
-                <nav className="lg:hidden md:hidden sm:hidden left-0 top-0 flex shadow bg-white justify-around items-center text-black lg:text-3xl lg:h-[80px] md:text-2m md:h-[30px] sm:text-sm text-xs mt-4 sm:mt-0 font-normal font-['Alef'] leading-[45px] cursor-pointer">
-                    {!user && (
-                        <>
-                            <div onClick={() => nav('/register')}>הרשמה</div>
-                            <div onClick={() => nav('/login')}>התחברות</div>
-                        </>
-                    )}
-                    {user && (
-                        <>
-                            <div onClick={() => nav('/logOut')}>התנתקות</div>
-                        </>
-                    )}
-
-                    <div onClick={() => nav('/contact')}>
-                        צור קשר
-                    </div>
-                    <div onClick={() => nav('/soldiers')} className='font-bold'>
-                        חיפוש
-                    </div>
-                    <div onClick={() => nav('/homePage')}>
-                        אודות
-                    </div>
-                </nav>
-            )}
-            <nav className="hidden lg:flex md:flex sm:flex left-0 top-0 shadow bg-white justify-center items-center text-black lg:text-2xl lg:h-[47px] md:text-xl md:h-[40px] sm:text-s sm:h-[20px] mt-4 sm:mt-0 font-normal font-['Alef'] leading-[45px] cursor-pointer space-x-11">
+            <nav className="flex left-0 top-0  bg-gray-200 justify-center items-center text-3xl text-gray-800 h-[80px]  cursor-pointer space-x-11">
                 {!user && (
                     <>
-                        <div onClick={() => nav('/register')}>הרשמה</div>
-                        <div onClick={() => nav('/login')}>התחברות</div>
+                        <div onClick={() => nav('/register')} className='transition duration-100 hover:text-yellow-400'><FaRegRegistered /></div>
+                        <div onClick={() => nav('/')} className='transition duration-100 hover:text-yellow-400'> <IoMdLogIn /></div>
                     </>
                 )}
                 {user && (
                     <>
-                        <div onClick={() => nav('/logOut')}>התנתקות</div>
+                        <div onClick={() => nav('/logOut')} className='transition duration-100 hover:text-yellow-400' > <BiLogOutCircle /></div>
                     </>
                 )}
-                <div onClick={() => nav('/contact')}>
-                    צור קשר
-                </div>
-                <div onClick={() => nav('/soldiers')} className='font-bold'>
-                    חיפוש
-                </div>
-                <div onClick={() => nav('/homePage')}>
-                    אודות
-                </div>
+                <div onClick={() => nav('/contact')} className='transition duration-100 hover:text-yellow-400'> <FaComments /></div>
+                <div onClick={() => nav('/soldiers')} className='transition duration-100 hover:text-yellow-400' > <FaUserAlt /></div>
+                <div onClick={() => nav('/homePage')} className='transition duration-100 hover:text-yellow-400'><FaHome /></div>
             </nav>
             <div className="bg-gray-200">
                 <div className=''>
