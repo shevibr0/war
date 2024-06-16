@@ -132,15 +132,15 @@ const Soldiers = () => {
                 </div>
                 <div className="text-center mb-4">
                     <div className="relative flex items-center justify-center">
-                        <BiSearchAlt className="right-0 text-gray-500" />
                         <input
                             type="text"
                             placeholder="חיפוש"
                             value={searchQuery}
                             onChange={handleSearchValue}
-                            className="border border-black px-10 py-2 rounded-md"
+                            className="border border-black pl-10 pr-4 py-2 rounded-md"
                             style={{ direction: 'rtl' }}
                         />
+                        <BiSearchAlt className="absolute left-3 text-gray-500" />
                     </div>
                 </div>
                 <div className="flex justify-center items-center mt-4 mb-4">
@@ -165,9 +165,9 @@ const Soldiers = () => {
                     </div>
                 ) : (
                     <>
-                        <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-2  mr-2 ml-2 text-center">
+                        <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-2 text-center w-full mx-4">
                             {searchMessage === "" ? solidersArr.map((soldier) => (
-                                <div key={soldier.Id} className="w-full mx-4 bg-white text-center p-4 rounded-2xl hover:animate-button-push hover:shadow-xl hover:shadow-gray-700">
+                                <div key={soldier.Id} className="bg-white text-center p-4 rounded-2xl hover:animate-button-push hover:shadow-xl hover:shadow-gray-700">
                                     <div className='flex justify-center'>
                                         <img className="h-64 w-64 object-cover" src={soldier.Image} alt={`${soldier.FirstName} ${soldier.LastName}`} />
                                     </div>
