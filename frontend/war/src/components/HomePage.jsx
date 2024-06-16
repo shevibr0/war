@@ -35,19 +35,17 @@ const HomePage = () => {
             <div className="w-full bottom-0 mt-7 left-0  flex justify-center bg-gray-200">
                 <div className="flex items-center gap-4">
                     <div className="relative">
-                        <FontAwesomeIcon icon={faLinkedin} />                        <a href="https://www.linkedin.com/in/elisheva-einhoren-43b1b3220/" target="_blank" rel="noopener noreferrer">
-                            <img className="w-[20.15px] h-[26.55px] absolute inset-0 transition-opacity duration-300 ease-in-out opacity-0 hover:opacity-100" src="/לינקדאין מעבר עכבר.svg" alt="LinkedIn Hover" />
+                        <a href="https://www.linkedin.com/in/elisheva-einhoren-43b1b3220/" target="_blank" rel="noopener noreferrer">
+                            <FontAwesomeIcon icon={faLinkedin} />
                         </a>
                     </div>
 
                     <div className="relative">
-                        <img className="w-[26.55px] h-[26.55px] transition-opacity duration-300 ease-in-out opacity-100 hover:opacity-0" src="/מייל.svg" alt="Email" />
                         <a href="mailto:mepe.leos@gmail.com">
                             <FontAwesomeIcon icon={faMailchimp} />
                         </a>
                     </div>
                     <div className="relative">
-                        <img className="w-[18.96px] h-[26.55px] transition-opacity duration-300 ease-in-out opacity-100 hover:opacity-0" src="/אינסטגרם.svg" alt="Instagram" />
                         <a href="https://www.instagram.com/elisheva_einhoren/" target="_blank" rel="noopener noreferrer">
                             <FontAwesomeIcon icon={faInstagram} />
                         </a>
