@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSearchSoliders, setSoliders } from '../features/soliderSlice';
 import { FaHome, FaUserAlt, FaRegRegistered, FaComments } from 'react-icons/fa';
+import { BiSearchAlt } from "react-icons/bi";
 import { IoMdLogIn } from "react-icons/io";
 import { BiLogOutCircle } from "react-icons/bi";
 
@@ -128,7 +129,7 @@ const Soldiers = () => {
             </nav>
             <div className="bg-gray-200">
                 <div className=''>
-                    <h2 className="text-black text-4xl font-bold font-['Alef'] mb-6 mt-6 text-center">לזכרם של הנופלים</h2>
+                    <h2 className="text-gray-800 text-4xl font-bold  mb-6 mt-6 text-center">לזכרם של הנופלים</h2>
                 </div>
                 <div className="text-center mb-4">
                     <input
@@ -144,7 +145,7 @@ const Soldiers = () => {
                     <button
                         onClick={() => handlePageChange(currentPage - 1)}
                         disabled={currentPage === 1 && !isPrev}
-                        className="px-4 py-1 bg-gray-200 text-black rounded-md mr-4 border border-black"
+                        className="btn bg-white text-gray-800 py-2 px-4 rounded-md hover:animate-button-push"
                     >
                         דף קודם
                     </button>
@@ -152,7 +153,7 @@ const Soldiers = () => {
                     <button
                         onClick={() => handlePageChange(currentPage + 1)}
                         disabled={currentPage === count && !isNext || !isNext}
-                        className="px-4 py-1 bg-gray-200 text-black rounded-md ml-4 border border-black"
+                        className="btn bg-white text-gray-800 py-2 px-4 rounded-md hover:animate-button-push"
                     >
                         דף הבא
                     </button>
@@ -165,14 +166,14 @@ const Soldiers = () => {
                     <>
                         <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-2">
                             {searchMessage === "" ? solidersArr.map((soldier) => (
-                                <div key={soldier.Id} className="bg-white text-center p-4 rounded-2xl shadow-xl shadow-gray-700">
+                                <div key={soldier.Id} className="bg-white text-center p-4 rounded-2xl hover:animate-button-push shadow-xl shadow-gray-700">
                                     <div className='flex justify-center'>
                                         <img className="h-64 w-64 object-cover" src={soldier.Image} alt={`${soldier.FirstName} ${soldier.LastName}`} />
                                     </div>
                                     <h3>{`${soldier.FirstName} ${soldier.LastName}`}</h3>
                                     <p>{`גיל: ${soldier.Age}`}</p>
                                     <p>{`עיר: ${soldier.City}`}</p>
-                                    <button className="font-semibold mb-2 mt-4 border border-black text-black p-2 rounded-md hover:opacity-80 hover:text-black hover:font-extrabold hover:border-black" onClick={() => nav(`/soldierInfo/${soldier.Id}`)}>לפרטים נוספים</button>
+                                    <button className="btn bg-white text-gray-800 py-2 px-4 rounded-md hover:animate-button-push" onClick={() => nav(`/soldierInfo/${soldier.Id}`)}>לפרטים נוספים</button>
                                 </div>
                             )) : <span>{searchMessage}</span>}
                         </div>

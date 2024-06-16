@@ -22,9 +22,9 @@ const HomePage = () => {
 
                 <div className="flex items-center justify-center  flex-wrap">
                     <div className="max-w-lg w-full mx-4  mt-4 p-3 text-center text-gray-600 text-xl font-light tracking-wider bg-white shadow-lg shadow-gray-800 rounded-2xl">
-                        המיזם "מנציחים את זיכרם" נוצר מתוך רצון להכיר את גיבורינו מקרוב ולהשאיר פיסות זיכרון נגישות לכולם<br /><br />
-                        אנו מזמינים אתכם להוסיף מידע על חללים שהכרתם, כמו מתכון אהוב, תמונה משותפת או זיכרון מתוק שתרצו לשתף על יקירכם<br />
-                        בנוסף, ישנה אפשרות לקחת התנדבות ולקרוא פרקי תהילים לעילוי נשמת החללים<br />
+                        המיזם "מנציחים את זכרם" הוקם מתוך רצון עמוק להכיר מקרוב את גיבורינו שנפלו, להנציח את זיכרונם ולהשאיר אותו פתוח ונגיש לכולם<br /><br />
+                        אנו מזמינים אתכם לקחת חלק במסע מרגש זה, להקדיש מעשה טוב או פרק תהלים לעילוי נשמתם<br />
+                        לחלוק איתנו סיפורים, תמונות, זיכרונות מתוקים ואף מתכונים אהובים שהיו קשורים לחללים<br />
                     </div>
                 </div>
             </div>
@@ -35,19 +35,19 @@ const HomePage = () => {
 
             <div className="w-full bottom-0 mt-7 left-0  flex justify-center bg-gray-200 text-gray-800">
                 <div className="flex items-center gap-4">
-                    <div className="relative transition duration-100 hover:text-yellow-400  text-xl">
+                    <div className="relative transition duration-100 hover:text-yellow-400  text-2xl">
                         <a href="https://www.linkedin.com/in/elisheva-einhoren-43b1b3220/" target="_blank" rel="noopener noreferrer">
                             <FontAwesomeIcon icon={faLinkedin} />
                         </a>
                     </div>
 
-                    <div className="relative transition duration-100 hover:text-yellow-400  text-xl">
+                    <div className="relative transition duration-100 hover:text-yellow-400  text-2xl">
                         <a href="mailto:mepe.leos@gmail.com">
                             <FontAwesomeIcon icon={faEnvelope} />
                         </a>
                     </div>
                     <div className="relative">
-                        <a className='transition duration-100 hover:text-yellow-400 text-xl' href="https://www.instagram.com/elisheva_einhoren/" target="_blank" rel="noopener noreferrer">
+                        <a className='transition duration-100 hover:text-yellow-400 text-2xl' href="https://www.instagram.com/elisheva_einhoren/" target="_blank" rel="noopener noreferrer">
                             <FontAwesomeIcon icon={faInstagram} />
                         </a>
                     </div>
