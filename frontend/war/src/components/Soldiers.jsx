@@ -140,7 +140,7 @@ const Soldiers = () => {
                             className="border border-gray-800 pl-10 pr-4 py-2 rounded-md"
                             style={{ direction: 'rtl' }}
                         />
-                        <BiSearchAlt className="absolute left-7 mr-3 text-gray-500" />
+                        <BiSearchAlt className="absolute left-7  text-gray-500" />
                     </div>
                 </div>
                 <div className="flex justify-center items-center mt-4 mb-4">
@@ -165,9 +165,9 @@ const Soldiers = () => {
                     </div>
                 ) : (
                     <div className='ml-2 mr-2 text-gray-800'>
-                        <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-2 text-center w-full shadow-top  shadow-gray-800">
+                        <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-2 text-center w-full">
                             {searchMessage === "" ? solidersArr.map((soldier) => (
-                                <div key={soldier.Id} className="bg-white text-center p-4 rounded-2xl hover:animate-button-push hover:shadow-xl hover:shadow-gray-700">
+                                <div key={soldier.Id} className="bg-white text-center shadow-top  shadow-gray-800 p-4 rounded-2xl hover:animate-button-push hover:shadow-xl hover:shadow-gray-700">
                                     <div className='flex justify-center'>
                                         <img className="h-64 w-64 object-cover" src={soldier.Image} alt={`${soldier.FirstName} ${soldier.LastName}`} />
                                     </div>
