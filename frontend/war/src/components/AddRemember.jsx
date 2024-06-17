@@ -88,14 +88,14 @@ const AddRemember = () => {
             <Sidebar />
             <div className="flex justify-center h-screen">
                 <div className='text-black mt-4 mr-2 ml-2 text-center'>
-                    <form onSubmit={handleSubmit} className='space-y-4 p-6 rounded-2xl bg-gray-400 shadow-xl shadow-gray-800  w-full max-w-4xl'>
+                    <form onSubmit={handleSubmit} className='space-y-4 p-6 rounded-2xl bg-gray-400 shadow-xl shadow-gray-800 w-full max-w-4xl'>
                         <label className='flex flex-col'>
                             <textarea
                                 name="Remember"
                                 value={memory.Memory.Remember}
                                 placeholder="הוסף זכרון אישי"
                                 onChange={handleChange}
-                                style={{ direction: 'rtl' }}
+                                style={{ direction: 'rtl', wordWrap: 'break-word' }}
                                 className='text-gray-700 h-60 border border-gray-600 space-y-4 p-8 rounded-2xl mb-1'
                             />
                         </label>
