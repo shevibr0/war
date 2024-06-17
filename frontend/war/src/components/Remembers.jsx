@@ -59,7 +59,7 @@ const Remembers = () => {
                 <ul style={{ direction: 'rtl' }} className="flex flex-wrap justify-center bg-gray-200">
                     {remembers.map((remember, index) => (
                         <li key={index} className="bg-yellow-100 shadow-lg p-4 m-2 rounded-lg hover:shadow-2xl transition-shadow duration-300 flex flex-col justify-between">
-                            <strong className="">{remember.Remember}</strong><br />
+                            <strong className="break-words whitespace-pre-wrap">{remember.Remember}</strong><br />
                             <p className='text-gray-400 text-sm'>נכתב בתאריך {new Date(remember.Date).toLocaleDateString()}</p>
                             <p className='text-gray-400'>ע"י {remember.IdUserNavigation.Name}</p>
                             <div className="flex mt-0 pt-2 justify-end">
