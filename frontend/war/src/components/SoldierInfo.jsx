@@ -49,13 +49,13 @@ const SoldierInfo = () => {
         <div className=" bg-gray-200 h-screen">
             <Sidebar />
             <div className='grid lg:grid-cols-5  md:grid-cols-3 sm:grid-cols-2 gap-2  items-center mt-0 font-bold'>
-                <div className='flex cursor-pointer bg-white shadow-lg shadow-gray-500  p-2  rounded-lg justify-center' onClick={() => nav(`/soldierInfo/${id}/memories`)} >פתקי זכרון</div>
+                <div className='flex cursor-pointer bg-white shadow-lg shadow-gray-500 rounded-lg justify-center' onClick={() => nav(`/soldierInfo/${id}/memories`)} >פתקי זכרון</div>
                 <div className='flex cursor-pointer border border-gray-600  p-2  rounded-lg justify-center' onClick={() => nav(`/soldierInfo/${id}/pictures`)} >תמונות</div>
                 <div className='flex cursor-pointer border border-gray-600  p-2  rounded-lg justify-center' onClick={() => nav(`/soldierInfo/${id}/theilim`)} >אמירת תהילים לעילוי נשמתו</div>
                 <div className='flex cursor-pointer border border-gray-600  p-2  rounded-lg justify-center' onClick={() => nav(`/soldierInfo/${id}/volunteering`)} >התנדבויות לעילוי נשמתו</div>
                 <div className='flex cursor-pointer border border-gray-600  p-2  rounded-lg justify-center' onClick={() => nav(`/soldierInfo/${id}/recepies`)} >מתכונים </div>
             </div>
-            <div className='flex justify-center items-center bg-gray-200 w-full ml-2 mr-2'>
+            <div className='flex justify-center items-center bg-gray-200  w-full'>
                 <div className="bg-white p-8 rounded-lg text-black mt-4 border border-black">
                     {soldier !== null ? (
                         <div className="">
