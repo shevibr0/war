@@ -56,7 +56,7 @@ const SoldierInfo = () => {
                 <div className='flex cursor-pointer border border-gray-600  p-2  rounded-lg justify-center' onClick={() => nav(`/soldierInfo/${id}/recepies`)} >מתכונים </div>
             </div>
             <div className='flex justify-center items-center bg-gray-200 shadow-lg shadow-gray-500'>
-                <div className="bg-white p-8 rounded-lg w-full mx-8">
+                <div className="bg-white p-8 rounded-lg  mx-8">
                     {soldier !== null ? (
                         <div className="">
                             <h1 className='text-center text-2xl mb-2'>{`${soldier.FirstName} ${soldier.LastName}`}</h1>
