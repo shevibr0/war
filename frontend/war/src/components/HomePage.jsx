@@ -29,7 +29,7 @@ const HomePage = () => {
                 </div>
             </div>
             <div className="flex justify-center mt-8">
-                <button onClick={() => nav('/soldiers')} className="btn bg-gray-900 text-white py-2 px-4 rounded-md hover:animate-button-push">
+                <button onClick={() => nav('/soldiers')} className="btn bg-gray-800 text-white py-2 px-4 rounded-md hover:animate-button-push">
                     חיפוש</button>
             </div>
 

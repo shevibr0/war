@@ -48,15 +48,15 @@ const SoldierInfo = () => {
     return (
         <div className="bg-gray-200 h-screen text-gray-800 px-4">
             <Sidebar />
-            <div className='grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 gap-2 items-center mt-0 font-bold'>
+            <div className='grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 gap-2 items-center mt-2 font-bold'>
                 <div className='flex cursor-pointer bg-white shadow-lg shadow-gray-700 py-1 px-1 rounded-lg justify-center' onClick={() => nav(`/soldierInfo/${id}/memories`)}>פתקי זכרון</div>
                 <div className='flex cursor-pointer  bg-white shadow-lg shadow-gray-700 p-2 rounded-lg justify-center' onClick={() => nav(`/soldierInfo/${id}/pictures`)}>תמונות</div>
                 <div className='flex cursor-pointer  bg-white shadow-lg shadow-gray-700 p-2 rounded-lg justify-center' onClick={() => nav(`/soldierInfo/${id}/theilim`)}>אמירת תהילים לעילוי נשמתו</div>
                 <div className='flex cursor-pointer  bg-white shadow-lg shadow-gray-700 p-2 rounded-lg justify-center' onClick={() => nav(`/soldierInfo/${id}/volunteering`)}>התנדבויות לעילוי נשמתו</div>
                 <div className='flex cursor-pointer  bg-white shadow-lg shadow-gray-700 p-2 rounded-lg justify-center' onClick={() => nav(`/soldierInfo/${id}/recepies`)}>מתכונים</div>
             </div>
-            <div className='flex justify-center items-center bg-gray-200 mt-8'>
-                <div className="bg-white p-8 rounded-lg shadow-lg shadow-gray-500 w-full max-w-4xl">
+            <div className='flex justify-center items-center bg-gray-200 mt-8 mb-1'>
+                <div className="bg-white p-8 rounded-lg shadow-top w-full max-w-4xl">
                     {soldier !== null ? (
                         <div className="">
                             <h1 className='text-center text-2xl mb-2'>{`${soldier.FirstName} ${soldier.LastName}`}</h1>
@@ -65,9 +65,8 @@ const SoldierInfo = () => {
                             </div>
                             <div className='flex flex-col items-center'>
                                 <div className='flex justify-center'>
-                                    <a onClick={handleCopyLink} className="flex text-black hover:text-black cursor-pointer">
+                                    <a onClick={handleCopyLink} className="flex text-center hover:cursor-pointer ">
                                         <img className='w-5 h-5 bg-white mr-3 mt-1' src="/share.png" alt="share" />
-                                        <span>לחץ לשתף אנשים בקישור זה</span>
                                     </a>
                                 </div>
                                 <div>

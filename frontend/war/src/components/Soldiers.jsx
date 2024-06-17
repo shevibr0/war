@@ -137,7 +137,7 @@ const Soldiers = () => {
                             placeholder="חיפוש"
                             value={searchQuery}
                             onChange={handleSearchValue}
-                            className="border border-black pl-10 pr-4 py-2 rounded-md"
+                            className="border border-gray-800 pl-10 pr-4 py-2 rounded-md"
                             style={{ direction: 'rtl' }}
                         />
                         <BiSearchAlt className="absolute left-7 mr-3 text-gray-500" />
@@ -161,10 +161,10 @@ const Soldiers = () => {
                 </div>
                 {loading ? (
                     <div className='text-center'>
-                        <p className='text-black'>Loading...</p>
+                        <p className='text-gray-800'>Loading...</p>
                     </div>
                 ) : (
-                    <div className='ml-2 mr-2'>
+                    <div className='ml-2 mr-2 text-gray-800'>
                         <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-2 text-center w-full">
                             {searchMessage === "" ? solidersArr.map((soldier) => (
                                 <div key={soldier.Id} className="bg-white text-center p-4 rounded-2xl hover:animate-button-push hover:shadow-xl hover:shadow-gray-700">
