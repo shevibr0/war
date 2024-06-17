@@ -55,8 +55,8 @@ const SoldierInfo = () => {
                 <div className='flex cursor-pointer  bg-white shadow-top shadow-gray-500 p-2 rounded-lg justify-center' onClick={() => nav(`/soldierInfo/${id}/volunteering`)}>התנדבויות לעילוי נשמתו</div>
                 <div className='flex cursor-pointer  bg-white shadow-top shadow-gray-500  p-2 rounded-lg justify-center' onClick={() => nav(`/soldierInfo/${id}/recepies`)}>מתכונים</div>
             </div>
-            <div className='flex justify-center items-center bg-gray-200 mt-8 mb-4'>
-                <div className="bg-white p-8 rounded-lg shadow-top shadow-gray-500 w-full max-w-4xl">
+            <div className='flex justify-center items-center bg-gray-200 mt-8'>
+                <div className="bg-white p-8 rounded-lg shadow-top shadow-gray-800 w-full max-w-4xl mb-6">
                     {soldier !== null ? (
                         <div className="">
                             <h1 className='text-center text-2xl mb-2'>{`${soldier.FirstName} ${soldier.LastName}`}</h1>
@@ -79,12 +79,11 @@ const SoldierInfo = () => {
                             <div className='text-center mt-4'>
                                 <p><strong>גיל:</strong> {soldier.Age}</p>
                                 <p><strong>עיר:</strong> {soldier.City}</p>
-                                <p><strong>תאריך פטירה לועזי:</strong> {new Date(soldier.DateOfDeath).toDateString()}</p>
-                                <p><strong>מקום הפטירה:</strong> {soldier.PlaceOfDeath}</p>
+                                <p>{new Date(soldier.DateOfDeath).toDateString()}<strong> :תאריך פטירה</strong> </p>                                <p><strong>מקום הפטירה:</strong> {soldier.PlaceOfDeath}</p>
                                 <p><strong>דרגה:</strong> {soldier.RankName}</p>
                                 <p><strong>תפקיד:</strong> {soldier.Role}</p>
                                 <p><strong>תאור קצר:</strong> {soldier.ShortDescription}</p>
-                                <div className='flex justify-center'>
+                                <div className='flex justify-center max-w-2xl'>
                                     <p className='w-56'><strong>:תאור ארוך</strong> {soldier.LongDescription}</p>
                                 </div>
                                 <p><a target="_blank" href={soldier.UrlToArticle}>{soldier.UrlToArticle}<strong>:כתובת אתר למאמר</strong></a></p>
