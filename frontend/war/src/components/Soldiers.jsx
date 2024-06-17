@@ -134,13 +134,13 @@ const Soldiers = () => {
                     <div className="relative flex items-center justify-center">
                         <input
                             type="text"
-                            placeholder="חיפוש"
+                            placeholder='<BiSearchAlt/>'
                             value={searchQuery}
                             onChange={handleSearchValue}
                             className="border border-gray-800 pl-10 pr-4 py-2 rounded-md"
                             style={{ direction: 'rtl' }}
                         />
-                        <BiSearchAlt className="absolute  text-gray-500" />
+
                     </div>
                 </div>
                 <div className="flex justify-center items-center mt-4 mb-4">

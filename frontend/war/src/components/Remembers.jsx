@@ -50,8 +50,10 @@ const Remembers = () => {
     return (
         <div className="bg-gray-200 h-screen text-gray-800">
             <Sidebar />
-            <div className='flex justify-center cursor-pointer btn bg-gray-300 font-bold text-gray-800 py-2 px-4 rounded-md hover:animate-button-push"' onClick={() => nav(`/soldierInfo/${id}/addMemory`)}>
-                + הוסף זכרון
+            <div className='mt-4'>
+                <button className='flex justify-center cursor-pointer btn bg-white font-bold  rounded-lg hover:animate-button-push"' onClick={() => nav(`/soldierInfo/${id}/addMemory`)}>
+                    + הוסף זכרון
+                </button>
             </div>
             <div className="mt-3">
                 <ul style={{ direction: 'rtl' }} className="flex flex-wrap justify-center bg-gray-200">
