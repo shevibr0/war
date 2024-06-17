@@ -49,14 +49,14 @@ const SoldierInfo = () => {
         <div className=" bg-gray-200 h-screen text-gray-800">
             <Sidebar />
             <div className='grid lg:grid-cols-5  md:grid-cols-3 sm:grid-cols-2 gap-2  items-center mt-0 font-bold'>
-                <div className='flex cursor-pointer bg-white shadow-lg shadow-gray-500 p-2 w-auto rounded-lg justify-center' onClick={() => nav(`/soldierInfo/${id}/memories`)} >פתקי זכרון</div>
+                <div className='flex cursor-pointer bg-white shadow-lg shadow-gray-500 p-2 px-4 rounded-lg justify-center' onClick={() => nav(`/soldierInfo/${id}/memories`)} >פתקי זכרון</div>
                 <div className='flex cursor-pointer border border-gray-600  p-2  rounded-lg justify-center' onClick={() => nav(`/soldierInfo/${id}/pictures`)} >תמונות</div>
                 <div className='flex cursor-pointer border border-gray-600  p-2  rounded-lg justify-center' onClick={() => nav(`/soldierInfo/${id}/theilim`)} >אמירת תהילים לעילוי נשמתו</div>
                 <div className='flex cursor-pointer border border-gray-600  p-2  rounded-lg justify-center' onClick={() => nav(`/soldierInfo/${id}/volunteering`)} >התנדבויות לעילוי נשמתו</div>
                 <div className='flex cursor-pointer border border-gray-600  p-2  rounded-lg justify-center' onClick={() => nav(`/soldierInfo/${id}/recepies`)} >מתכונים </div>
             </div>
-            <div className='flex justify-center items-center bg-gray-200 shadow-lg shadow-gray-500  w-full'>
-                <div className="bg-white p-8 rounded-lg mt-4 mx-4">
+            <div className='flex justify-center items-center bg-gray-200 shadow-lg shadow-gray-500'>
+                <div className="bg-white p-8 rounded-lg w-full mx-8">
                     {soldier !== null ? (
                         <div className="">
                             <h1 className='text-center text-2xl mb-2'>{`${soldier.FirstName} ${soldier.LastName}`}</h1>
@@ -83,7 +83,6 @@ const SoldierInfo = () => {
                                 {/* <p>{soldier.Gender}<strong> :מין</strong></p> */}
                                 <p><strong>עיר:</strong> {soldier.City}</p>
                                 <p>{new Date(soldier.DateOfDeath).toDateString()}<strong> :תאריך פטירה</strong> </p>
-                                <p>{new Date(soldier.HebrewDate).toDateString()}<strong> :תאריך פטירה עברי</strong> </p>
                                 <p><strong>מקום הפטירה:</strong> {soldier.PlaceOfDeath}</p>
                                 <p><strong>דרגה:</strong> {soldier.RankName}</p>
                                 <p><strong>תפקיד:</strong> {soldier.Role}</p>
