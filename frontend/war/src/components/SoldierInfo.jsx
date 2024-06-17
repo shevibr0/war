@@ -55,7 +55,7 @@ const SoldierInfo = () => {
                 <div className='flex cursor-pointer border border-gray-600  p-2  rounded-lg justify-center' onClick={() => nav(`/soldierInfo/${id}/theilim`)} >אמירת תהילים לעילוי נשמתו</div>
                 <div className='flex cursor-pointer border border-gray-600  p-2  rounded-lg justify-center' onClick={() => nav(`/soldierInfo/${id}/volunteering`)} >התנדבויות לעילוי נשמתו</div>
             </div>
-            <div className='flex justify-center items-center bg-gray-200'>
+            <div className='flex justify-center items-center bg-gray-200 w-full ml-2 mr-2'>
                 <div className="bg-white p-8 rounded-lg text-black mt-4 border border-black">
                     {soldier !== null ? (
                         <div className="">
@@ -82,6 +82,7 @@ const SoldierInfo = () => {
                                 <p><strong>גיל:</strong> {soldier.Age}</p>
                                 {/* <p>{soldier.Gender}<strong> :מין</strong></p> */}
                                 <p><strong>עיר:</strong> {soldier.City}</p>
+                                <p>{new Date(soldier.DateOfDeath).toDateString()}<strong> :תאריך פטירה</strong> </p>
                                 <p>{new Date(soldier.DateOfDeath).toDateString()}<strong> :תאריך פטירה</strong> </p>
                                 <p><strong>מקום הפטירה:</strong> {soldier.PlaceOfDeath}</p>
                                 <p><strong>דרגה:</strong> {soldier.RankName}</p>
