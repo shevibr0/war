@@ -111,7 +111,7 @@ const Soldiers = () => {
     };
 
     return (
-        <div className="bg-gray-200 h-screen px-4">
+        <div className="bg-gray-200 h-screen">
             <nav className="flex left-0 top-0 bg-gray-200 justify-center items-center text-3xl text-gray-800 h-[80px] cursor-pointer space-x-11">
                 {!user && (
                     <>
@@ -128,11 +128,10 @@ const Soldiers = () => {
             </nav>
             <div className="bg-gray-200">
                 <div className=''>
-                    <h2 className="text-gray-800 text-4xl font-bold mb-6 mt-6 text-center">לזכרם של הנופלים</h2>
+                    <h2 className="text-gray-800 text-4xl font-bold mb-6 mt-6 text-center"></h2>
                 </div>
                 <div className="text-center mb-4">
                     <div className="relative flex items-center justify-center">
-                        <BiSearchAlt className="absolute left-3 text-gray-500" />
                         <input
                             type="text"
                             placeholder="חיפוש"
@@ -141,38 +140,63 @@ const Soldiers = () => {
                             className="border border-black pl-10 pr-4 py-2 rounded-md"
                             style={{ direction: 'rtl' }}
                         />
+                        <BiSearchAlt className="left-30 text-gray-500" />
                     </div>
                 </div>
-                <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-2 text-center w-full">
-                    {searchMessage === "" ? solidersArr.map((soldier) => (
-                        <div key={soldier.Id} className="bg-white text-center p-4 rounded-2xl hover:animate-button-push hover:shadow-xl hover:shadow-gray-700">
-                            <div className='flex justify-center'>
-                                <img className="h-64 w-64 object-cover" src={soldier.Image} alt={`${soldier.FirstName} ${soldier.LastName}`} />
-                            </div>
-                            <h3>{`${soldier.FirstName} ${soldier.LastName}`}</h3>
-                            <p>{`גיל: ${soldier.Age}`}</p>
-                            <p>{`עיר: ${soldier.City}`}</p>
-                            <button className="btn bg-gray-300 font-bold text-gray-800 py-2 px-4 rounded-md hover:animate-button-push" onClick={() => nav(`/soldierInfo/${soldier.Id}`)}>עוד על {soldier.FirstName}</button>
-                        </div>
-                    )) : <span>{searchMessage}</span>}
-                </div>
-                <div className="flex justify-center items-center mt-8">
+                <div className="flex justify-center items-center mt-4 mb-4">
                     <button
                         onClick={() => handlePageChange(currentPage - 1)}
                         disabled={currentPage === 1 && !isPrev}
-                        className="px-4 py-1 bg-gray-200 text-black rounded-md mr-4 border border-black"
-                    >
+                        className="btn bg-gray-200 text-gray-800 py-2 px-4 rounded-md hover:animate-button-push">
                         <MdOutlineNavigateBefore className="text-2xl" />
                     </button>
-                    <span className="text-lg font-bold"> {currentPage}</span>
+                    <span className="text-lg font-bold mx-4">{currentPage}</span>
                     <button
                         onClick={() => handlePageChange(currentPage + 1)}
                         disabled={(currentPage === count && !isNext) || !isNext}
-                        className="px-4 py-1 bg-gray-200 text-black rounded-md ml-4 border border-black"
+                        className="btn text-gray-800 py-2 px-4 rounded-md hover:animate-button-push"
                     >
                         <MdNavigateNext className="text-2xl" />
                     </button>
                 </div>
+                {loading ? (
+                    <div className='text-center'>
+                        <p className='text-black'>Loading...</p>
+                    </div>
+                ) : (
+                    <>
+                        <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-2 text-center w-full">
+                            {searchMessage === "" ? solidersArr.map((soldier) => (
+                                <div key={soldier.Id} className="bg-white text-center p-4 rounded-2xl hover:animate-button-push hover:shadow-xl hover:shadow-gray-700">
+                                    <div className='flex justify-center'>
+                                        <img className="h-64 w-64 object-cover" src={soldier.Image} alt={`${soldier.FirstName} ${soldier.LastName}`} />
+                                    </div>
+                                    <h3>{`${soldier.FirstName} ${soldier.LastName}`}</h3>
+                                    <p>{`גיל: ${soldier.Age}`}</p>
+                                    <p>{`עיר: ${soldier.City}`}</p>
+                                    <button className="btn bg-gray-300 font-bold text-gray-800 py-2 px-4 rounded-md hover:animate-button-push" onClick={() => nav(`/soldierInfo/${soldier.Id}`)}>עוד על {soldier.FirstName}</button>
+                                </div>
+                            )) : <span>{searchMessage}</span>}
+                        </div>
+                        <div className="flex justify-center items-center mt-4 mb-4">
+                            <button
+                                onClick={() => handlePageChange(currentPage - 1)}
+                                disabled={currentPage === 1 && !isPrev}
+                                className="btn bg-gray-200 text-gray-800 py-2 px-4 rounded-md hover:animate-button-push"
+                            >
+                                <MdOutlineNavigateBefore className="text-2xl" />
+                            </button>
+                            <span className="text-lg font-bold mx-4">{currentPage}</span>
+                            <button
+                                onClick={() => handlePageChange(currentPage + 1)}
+                                disabled={(currentPage === count && !isNext) || !isNext}
+                                className="btn text-gray-800 py-2 px-4 rounded-md hover:animate-button-push"
+                            >
+                                <MdNavigateNext className="text-2xl" />
+                            </button>
+                        </div>
+                    </>
+                )}
             </div>
         </div>
     );
