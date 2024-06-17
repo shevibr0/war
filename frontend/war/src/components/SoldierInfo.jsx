@@ -81,7 +81,6 @@ const SoldierInfo = () => {
                                 <p><strong>גיל:</strong> {soldier.Age}</p>
                                 <p><strong>עיר:</strong> {soldier.City}</p>
                                 <p><strong>תאריך פטירה לועזי:</strong> {new Date(soldier.DateOfDeath).toDateString()}</p>
-                                <p><strong>תאריך פטירה עברי:</strong> {hebrewDateString}</p>
                                 <p><strong>מקום הפטירה:</strong> {soldier.PlaceOfDeath}</p>
                                 <p><strong>דרגה:</strong> {soldier.RankName}</p>
                                 <p><strong>תפקיד:</strong> {soldier.Role}</p>
