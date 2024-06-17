@@ -21,7 +21,7 @@ const HomePage = () => {
                 </div>
 
                 <div className="flex items-center justify-center  flex-wrap">
-                    <div className="max-w-lg w-full mx-4  mt-4 p-5 text-center text-gray-600 text-xl font-light tracking-wider bg-white shadow-lg shadow-gray-800 rounded-2xl">
+                    <div className="max-w-lg w-full mx-4  mt-4 p-5 text-center text-gray-600 text-xl font-light bg-white shadow-lg shadow-gray-800 rounded-2xl">
                         המיזם הוקם מתוך רצון עמוק להכיר מקרוב את גיבורינו שנפלו, להנציח את זיכרונם ולהשאיר אותו פתוח ונגיש לכולם<br /><br />
                         אנו מזמינים אתכם לקחת חלק במסע מרגש זה, להקדיש מעשה טוב או פרק תהלים לעילוי נשמתם<br /><br />
                         לחלוק איתנו סיפורים, תמונות, מתכונים שאהבו וזכרונות מתוקים<br />
@@ -34,7 +34,7 @@ const HomePage = () => {
             </div>
 
             <div className="w-full bottom-0 mt-7 left-0  flex justify-center bg-gray-200 text-gray-800">
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-4 rounded-lg">
                     <div className="relative transition duration-100 hover:text-yellow-400  text-2xl">
                         <a href="https://www.linkedin.com/in/elisheva-einhoren-43b1b3220/" target="_blank" rel="noopener noreferrer">
                             <FontAwesomeIcon icon={faLinkedin} />

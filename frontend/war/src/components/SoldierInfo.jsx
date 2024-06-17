@@ -79,7 +79,8 @@ const SoldierInfo = () => {
                             <div className='text-center mt-4'>
                                 <p><strong>גיל </strong> {soldier.Age}</p>
                                 <p><strong>עיר </strong> {soldier.City}</p>
-                                <p>{new Date(soldier.DateOfDeath).toDateString()}<strong> :תאריך פטירה</strong> </p>                                <p><strong>מקום הפטירה:</strong> {soldier.PlaceOfDeath}</p>
+                                <p>{new Date(soldier.DateOfDeath).toDateString()}<strong>תאריך פטירה </strong> </p>
+                                <p><strong>מקום הפטירה </strong> {soldier.PlaceOfDeath}</p>
                                 <p><strong>דרגה </strong> {soldier.RankName}</p>
                                 <p><strong>תפקיד </strong> {soldier.Role}</p>
                                 <p><strong>תאור קצר </strong> {soldier.ShortDescription}</p>
