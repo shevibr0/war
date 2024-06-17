@@ -51,7 +51,7 @@ const Remembers = () => {
         <div className="bg-gray-200 h-screen text-gray-800">
             <Sidebar />
             <div className='mt-4 flex justify-center'>
-                <button className='btn bg-white font-bold cursor-pointer p-2  rounded-lg shadow-top shadow-gray-500  hover:animate-button-push"' onClick={() => nav(`/soldierInfo/${id}/addMemory`)}>
+                <button className='btn bg-white font-bold cursor-pointer p-2 rounded-lg shadow-top shadow-gray-500  hover:animate-button-push' onClick={() => nav(`/soldierInfo/${id}/addMemory`)}>
                     + הוסף זכרון
                 </button>
             </div>
