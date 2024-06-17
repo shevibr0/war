@@ -95,7 +95,7 @@ const AddRemember = () => {
                                 value={memory.Memory.Remember}
                                 placeholder="הוסף זכרון אישי"
                                 onChange={handleChange}
-                                style={{ direction: 'rtl', wordWrap: 'break-word' }}
+                                style={{ direction: 'rtl', wordWrap: 'break-word', whiteSpace: 'pre-wrap' }}
                                 className='text-gray-700 h-60 border border-gray-600 space-y-4 p-8 rounded-2xl mb-1'
                             />
                         </label>
