@@ -140,7 +140,7 @@ const Soldiers = () => {
                             className="border border-gray-800 pl-10 pr-4 py-2 rounded-md"
                             style={{ direction: 'rtl' }}
                         />
-                        <BiSearchAlt className="absolute left-7  text-gray-500" />
+                        <BiSearchAlt className="absolute  text-gray-500" />
                     </div>
                 </div>
                 <div className="flex justify-center items-center mt-4 mb-4">
