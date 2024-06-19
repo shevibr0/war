@@ -61,8 +61,10 @@ const Pictures = () => {
     return (
         <div className="bg-gray-200 h-screen">
             <Sidebar />
-            <div className='flex justify-center cursor-pointer' onClick={() => nav(`/soldierInfo/${id}/addPicture`)}>
-                + הוסף תמונה
+            <div className='mt-4 flex justify-center'>
+                <button className='btn bg-white font-bold cursor-pointer p-2 rounded-lg shadow-top shadow-gray-500  hover:animate-button-push' onClick={() => nav(`/soldierInfo/${id}/addMemory`)}>
+                    + הוסף תמונה
+                </button>
             </div>
             <div className="flex flex-wrap justify-center bg-gray-200">
                 {images.map((image, index) => (
