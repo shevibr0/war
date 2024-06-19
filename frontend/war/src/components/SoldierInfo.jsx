@@ -87,8 +87,8 @@ const SoldierInfo = () => {
                                 <div className='flex justify-center max-w-2xl'>
                                     <p className='w-56'><strong>תאור ארוך </strong> {soldier.LongDescription}</p>
                                 </div>
-                                <p><a target="_blank" href={soldier.UrlToArticle}>{soldier.UrlToArticle}<br />
-                                    <strong>כתובת אתר למאמר </strong></a></p>
+                                <p>  <strong>כתובת אתר למאמר </strong><a target="_blank" href={soldier.UrlToArticle}>{soldier.UrlToArticle}<br />
+                                </a></p>
                                 <p><strong>מקום השירות </strong> {soldier.PlaceOfService}</p>
                                 <p><strong>מקום הקבורה </strong> {soldier.BurialPlace}</p>
                                 <p><strong>ילד </strong> {soldier.IsChild ? 'כן' : 'לא'}</p>
