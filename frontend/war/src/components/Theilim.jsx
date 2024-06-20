@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import { useSelector } from 'react-redux';
+import emailjs from 'emailjs-com';
 import { addTehilim, getByUserCountTehilimForSoliderId, getCountTehilimBySoliderId, getTehilimBySoliderIdUser, updateTehilim } from '../utils/TehilimUtil';
 import Sidebar from './Sidebar';
 
@@ -65,6 +66,7 @@ const Theilim = () => {
                 setNum(prevNum => prevNum + 1);
                 setUserNum(prevUserNum => prevUserNum + 1);
                 setShowPopup(false);
+                sendEmailNotification(theilimEmpty);
             });
         } else {
             let _theilimUser = { ...theilimUser };
@@ -75,8 +77,27 @@ const Theilim = () => {
                 setTheilimUser(_theilimUser);
                 setNum(prevNum => prevNum + 1);
                 setShowPopup(false);
+                sendEmailNotification(_theilimUser);
             });
         }
+    };
+
+    const sendEmailNotification = (tehilimData) => {
+        const templateParams = {
+            name: user.Name,
+            email: user.Email,
+            subject: 'New Tehilim Added',
+            message: `A new Tehilim has been added. User: ${user.Name}, Soldier ID: ${tehilimData.IdSoldier}, Count: ${tehilimData.Count}. View it at: https://matrysofwar.onrender.com/soldierInfo/${id}/tehilim`
+        };
+
+        console.log('Sending email with params:', templateParams);
+
+        emailjs.send('service_9rnvzfp', 'template_j3x5far', templateParams, "6no79izXNNDe1YECd")
+            .then((response) => {
+                console.log('SUCCESS!', response.status, response.text);
+            }, (error) => {
+                console.error('FAILED...', error);
+            });
     };
 
     const numberToHebrewLetter = (num) => {

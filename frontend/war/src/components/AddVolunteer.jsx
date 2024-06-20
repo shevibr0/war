@@ -93,6 +93,8 @@ const AddVolunteer = () => {
             message: `A new volunteering option has been added. Description: ${volunteeringData.Description}. View it at: https://matrysofwar.onrender.com/soldierInfo/${id}/volunteering`
         };
 
+        console.log('Sending email with params:', templateParams);
+
         emailjs.send('service_9rnvzfp', 'template_j3x5far', templateParams, "6no79izXNNDe1YECd")
             .then((response) => {
                 console.log('SUCCESS!', response.status, response.text);
