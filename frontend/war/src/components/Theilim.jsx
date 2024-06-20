@@ -66,6 +66,7 @@ const Theilim = () => {
                 setNum(prevNum => prevNum + 1);
                 setUserNum(prevUserNum => prevUserNum + 1);
                 setShowPopup(false);
+                console.log("Sending email notification for new Tehilim");
                 sendEmailNotification(theilimEmpty);
             });
         } else {
@@ -77,6 +78,7 @@ const Theilim = () => {
                 setTheilimUser(_theilimUser);
                 setNum(prevNum => prevNum + 1);
                 setShowPopup(false);
+                console.log("Sending email notification for updated Tehilim");
                 sendEmailNotification(_theilimUser);
             });
         }
