@@ -18,6 +18,6 @@ namespace Entities.DTO
       
 
         //public virtual Soldier IdSoldierNavigation { get; set; } = null!;
-        public virtual UserDTO? IdUserNavigation { get; set; } = null!;
+        //public virtual UserDTO? IdUserNavigation { get; set; } = null!;
     }
 }
