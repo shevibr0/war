@@ -3,6 +3,7 @@ using DL;
 using DL.Models;
 using Entities.DTO;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -54,12 +55,23 @@ namespace MartrysOfWar.Controllers
         }
 
 
-
         [HttpPost]
         public async Task<ActionResult> AddVolunteeringOption([FromBody] VolunteeringOptionDTO volunteeringOptionDto)
         {
-            await _volunteeringOptionBL.AddVolunteeringOptionAsync(volunteeringOptionDto);
-            return Ok(); // or return appropriate HTTP response for success
+            try
+            {
+                // הוסף כאן לוגים כדי לראות אילו נתונים מגיעים
+                Console.WriteLine("Received Volunteering Option: " + JsonConvert.SerializeObject(volunteeringOptionDto));
+
+                await _volunteeringOptionBL.AddVolunteeringOptionAsync(volunteeringOptionDto);
+                return Ok(); // or return appropriate HTTP response for success
+            }
+            catch (Exception ex)
+            {
+                // הוסף כאן לוגים לשגיאה
+                Console.WriteLine("Error in AddVolunteeringOption: " + ex.Message);
+                return StatusCode(500, "Internal server error");
+            }
         }
 
         [HttpPut("{id}")]
