@@ -17,7 +17,7 @@ namespace DL
         {
             try
             {
-                int pageSize = 4;
+                int pageSize = 15;
                 int startIndex = (page - 1) * pageSize;
 
                 // Using LINQ to skip records based on page number and take the specified page size
@@ -120,7 +120,7 @@ namespace DL
             {
                 try
                 {
-                    int pageSize = 4;
+                    int pageSize = 15;
                     int startIndex = (page - 1) * pageSize;
                     // Start with the full set of soldiers
                     //IQueryable<Soldier> query = _martyrsofwarContext.Soldiers.AsQueryable();
