@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { addMemory, getMemoryByIdAsyncRecipyId, updateMemory } from '../utils/MemoryUtil';
 import { useNavigate, useParams } from 'react-router';
 import { useSelector } from 'react-redux';
+import emailjs from 'emailjs-com';
 import Sidebar from './Sidebar';
 
 const AddRemember = () => {
@@ -69,10 +70,12 @@ const AddRemember = () => {
             if (memoryId) {
                 await updateMemory(memoryId, memoryPayload);
                 console.log('Memory updated successfully');
+                sendEmailNotification(memoryPayload);
                 nav(`/soldierInfo/${id}/memories`);
             } else {
                 await addMemory(memoryPayload);
                 console.log('Memory added successfully');
+                sendEmailNotification(memoryPayload);
                 nav(`/soldierInfo/${id}/memories`);
             }
         } catch (error) {
@@ -81,6 +84,22 @@ const AddRemember = () => {
         } finally {
             setIsLoading(false);
         }
+    };
+
+    const sendEmailNotification = (memoryPayload) => {
+        const templateParams = {
+            name: user.Name,
+            email: user.Email,
+            subject: 'New Memory Added',
+            message: `A new memory has been added. Memory: ${memoryPayload.Remember}. View it at: https://matrysofwar.onrender.com/soldierInfo/${id}/memories`
+        };
+
+        emailjs.send('service_9rnvzfp', 'template_j3x5far', templateParams, "6no79izXNNDe1YECd")
+            .then((response) => {
+                console.log('SUCCESS!', response.status, response.text);
+            }, (error) => {
+                console.error('FAILED...', error);
+            });
     };
 
     return (
