@@ -74,8 +74,10 @@ const Recepies = () => {
     return (
         <div className="bg-gray-200 h-screen">
             <Sidebar />
-            <div className='flex justify-center cursor-pointer' onClick={() => nav(`/soldierInfo/${id}/addRecepy`)}>
-                + הוסף מתכון
+            <div className='mt-4 flex justify-center'>
+                <button className='btn bg-white font-bold cursor-pointer p-2 rounded-lg shadow-top shadow-gray-500  hover:animate-button-push' onClick={() => nav(`/soldierInfo/${id}/addRecepy`)}>
+                    + הוסף מתכון
+                </button>
             </div>
             <div className='flex flex-wrap justify-center text-center bg-gray-200' style={{ direction: 'rtl' }}>
                 {recepies.map((recipe) => (

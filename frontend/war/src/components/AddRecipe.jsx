@@ -52,9 +52,7 @@ const AddRecipe = () => {
                         },
                         ProductsToRecipes: productsData.filter(product => product.IdRec === recipeData[0].Id),
                         Preparations: preparationData.filter(step => step.IdRec === recipeData[0].Id)
-
                     });
-
                 } else {
                     setError('Recipe not found.');
                     setRecipeDetails(initialRecipeDetails);
@@ -65,7 +63,9 @@ const AddRecipe = () => {
             });
         }
     }, [recipeId, user?.Id]);
+
     console.log(" recipeDetailsssss", recipeDetails)
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setRecipeDetails(prevRecipeDetails => ({
@@ -121,7 +121,7 @@ const AddRecipe = () => {
         setIsLoading(true);
         console.log("Submitting this data:", recipeDetails);
         const completeRecipeData = {
-            Name: recipeDetails?.Name,
+            Name: recipeDetails.Recipy?.Name,
             IdSoldier: recipeDetails.IdSoldier,
             IdUser: recipeDetails.IdUser,
             Date: recipeDetails.Date,
@@ -153,11 +153,9 @@ const AddRecipe = () => {
     return (
         <div className="bg-gray-200 h-screen">
             <Sidebar />
-            <h2 className="flex justify-center text-3xl font-bold">{isEditing ? 'עריכת מתכון' : 'הוספת מתכון'}</h2>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-            <div className="flex justify-center bg-gray-200">
-                <div className='text-black mt-9 w-80 text-center'>
-                    <form onSubmit={handleSubmit} className="bg-gray-400 space-y-4 p-8 border-2 border-black mt-4">
+            <div className="flex justify-center h-screen">
+                <div className='text-black mt-4 mr-2 ml-2 text-center'>
+                    <form onSubmit={handleSubmit} className='space-y-4 p-6 rounded-2xl bg-gray-400 shadow-xl shadow-gray-800 w-full max-w-4xl'>
                         <div>
                             <label htmlFor="recipeName" className="text-black">שם המתכון</label>
                             <input
@@ -175,6 +173,8 @@ const AddRecipe = () => {
                                 className="p-2 m-2 border"
                                 style={{ direction: 'rtl' }}
                             />
+                        </div>
+                        <div>
                             <button type="button" className="bg-gray-600 text-white py-2 px-4 rounded" onClick={addProduct}>מוצרים</button>
                             {recipeDetails.ProductsToRecipes.map((product, index) => (
                                 <input
@@ -187,8 +187,8 @@ const AddRecipe = () => {
                                 />
                             ))}
                         </div>
-                        <button type="button" className="bg-gray-600 text-white py-2 px-4 rounded" onClick={addPreparationStep}>הוראות הכנה</button>
                         <div>
+                            <button type="button" className="bg-gray-600 text-white py-2 px-4 rounded" onClick={addPreparationStep}>הוראות הכנה</button>
                             {recipeDetails.Preparations.map((step, index) => (
                                 <input
                                     key={step.Id}
@@ -212,9 +212,11 @@ const AddRecipe = () => {
                                 style={{ direction: 'rtl' }}
                             />
                         </div>
-                        <button type="submit" disabled={isLoading} className="bg-gray-900 text-white py-2 px-4 rounded">
-                            {isLoading ? 'Adding...' : (isEditing ? 'עריכת מתכון' : 'הוספת מתכון')}
-                        </button>
+                        <div className='flex justify-center'>
+                            <button type="submit" disabled={isLoading} className={`btn bg-gray-900 text-white py-2 px-4 rounded-md ${isLoading ? 'opacity-50 cursor-not-allowed' : ' hover:animate-button-push'}`}>
+                                {isLoading ? 'Adding...' : (isEditing ? 'עריכת מתכון' : 'הוספת מתכון')}
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>

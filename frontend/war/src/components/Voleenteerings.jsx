@@ -47,8 +47,10 @@ const Voleenteerings = () => {
     return (
         <div className="bg-gray-200 h-screen">
             <Sidebar />
-            <div className='flex justify-center cursor-pointer' onClick={() => nav(`/soldierInfo/${id}/addVolunteer`)}>
-                + הוסף התנדבות
+            <div className='mt-4 flex justify-center'>
+                <button className='btn bg-white font-bold cursor-pointer p-2 rounded-lg shadow-top shadow-gray-500  hover:animate-button-push' onClick={() => nav(`/soldierInfo/${id}/addVolunteer`)}>
+                    + הוסף התנדבות
+                </button>
             </div>
             <div className="mt-3">
                 <ul style={{ direction: 'rtl' }} className="flex flex-wrap justify-center bg-gray-200">
