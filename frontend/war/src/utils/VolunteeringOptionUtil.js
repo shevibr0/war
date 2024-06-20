@@ -11,6 +11,7 @@ const getVolunteeringOptionByIdAsyncOptionId = async (id, optionId) => {
     return await api.get(`VolunteeringOption/${id},${optionId}`).then(res => res.data)
 }
 const addVolunteeringOption = async (volunteeringOption) => {
+    console.log("option2", volunteeringOption)
     return await api.post("VolunteeringOption", volunteeringOption).then(res => res.data)
 }
 const updateVolunteeringOption = async (id, volunteeringOption) => {
