@@ -1,112 +1,242 @@
 import React, { useEffect, useState } from 'react';
+import { addCompleteRecipe, getRecipyByRecipyId, updateRecipy } from '../utils/RecipyUtil';
 import { useNavigate, useParams } from 'react-router';
-import { addVolunteeringOption, getVolunteeringOptionByIdAsyncOptionId, updateVolunteeringOption } from '../utils/VolunteeringOptionUtil';
 import { useSelector } from 'react-redux';
+import { getProductsToRecipeById } from '../utils/ProductsToRecipeUtil';
+import { getPreparationById } from '../utils/PreparationUtil';
+import emailjs from 'emailjs-com';
 import Sidebar from './Sidebar';
 
-const AddVolunteer = () => {
+const AddRecipe = () => {
     const nav = useNavigate();
+    const { id, recipeId } = useParams();
     const [isOpen, setIsOpen] = useState(false);
-    const [error, setError] = useState('');
-    const { id, optionId } = useParams();
-    const user = useSelector(state => state.user.connectedUser);
     const [isLoading, setIsLoading] = useState(false);
-    const [isEditing, setIsEditing] = useState(Boolean(optionId));
+    const [error, setError] = useState('');
+    const user = useSelector(state => state.user.connectedUser);
+    const [isEditing, setIsEditing] = useState(Boolean(recipeId));
 
-    const initialVolunteeringOptionDetails = {
-        volunteeringOption: {
+    const initialRecipeDetails = {
+        Recipy: {
             id: 0,
+            Name: '',
             IdSoldier: id,
-            IdUser: user?.Id || null,
-            Description: '',
-            Date: new Date().toISOString()
-        }
+            IdUser: user?.Id,
+            Date: new Date().toISOString(),
+            PersonalWords: ''
+        },
+        ProductsToRecipes: [],
+        Preparations: []
     };
-    const [volunteeringOption, setVolunteeringOption] = useState(initialVolunteeringOptionDetails);
+    const [recipeDetails, setRecipeDetails] = useState(initialRecipeDetails);
 
     useEffect(() => {
-        const fetchVolunteeringOption = async () => {
-            if (optionId) {
-                try {
-                    const volunteeringOptionData = await getVolunteeringOptionByIdAsyncOptionId(id, optionId);
-                    if (volunteeringOptionData && volunteeringOptionData.length > 0) {
-                        setVolunteeringOption({ volunteeringOption: volunteeringOptionData[0] });
-                    } else {
-                        console.log("No volunteering option found");
-                    }
-                } catch (error) {
-                    console.error("Error fetching volunteering option data:", error);
-                    setError('Error fetching volunteering option data. Please try again.');
+        if (recipeId) {
+            console.log("Fetching data for recipeId:", recipeId);
+            Promise.all([
+                getRecipyByRecipyId(recipeId),
+                getProductsToRecipeById(recipeId),
+                getPreparationById(recipeId)
+            ]).then(([recipeData, productsData, preparationData]) => {
+                if (recipeData) {
+                    console.log("Recipe data:", recipeData);
+                    console.log("Products data:", productsData);
+                    console.log("Preparation data:", preparationData);
+                    setRecipeDetails({
+                        Recipy: {
+                            id: recipeData[0].Id,
+                            Name: recipeData[0].Name,
+                            IdSoldier: recipeData[0].IdSoldier,
+                            IdUser: recipeData[0].IdUser,
+                            Date: recipeData[0].Date,
+                            PersonalWords: recipeData[0].PersonalWords
+                        },
+                        ProductsToRecipes: productsData.filter(product => product.IdRec === recipeData[0].Id),
+                        Preparations: preparationData.filter(step => step.IdRec === recipeData[0].Id)
+                    });
+                } else {
+                    setError('Recipe not found.');
+                    setRecipeDetails(initialRecipeDetails);
                 }
-            }
-        };
-        fetchVolunteeringOption();
-    }, [id, optionId]);
+            }).catch(error => {
+                console.error('Error fetching full recipe details:', error);
+                setError('Failed to load recipe details. Please try again.');
+            });
+        }
+    }, [recipeId, user?.Id]);
 
-    const handleChange = (event) => {
-        const { name, value } = event.target;
-        setVolunteeringOption(prev => ({
-            ...prev,
-            volunteeringOption: {
-                ...prev.volunteeringOption,
+    console.log(" recipeDetailsssss", recipeDetails);
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setRecipeDetails(prevRecipeDetails => ({
+            ...prevRecipeDetails,
+            Recipy: {
+                ...prevRecipeDetails.Recipy,
                 [name]: value
             }
+        }));
+    };
+
+    const handleChangeProduct = (index, e) => {
+        const { value } = e.target;
+        setRecipeDetails(prevRecipe => ({
+            ...prevRecipe,
+            ProductsToRecipes: prevRecipe.ProductsToRecipes.map((product, i) => (
+                i === index ? { ...product, Description: value } : product
+            ))
+        }));
+    };
+
+    const handleChangePreparationStep = (index, e) => {
+        const { value } = e.target;
+        setRecipeDetails(prevDetails => ({
+            ...prevDetails,
+            Preparations: prevDetails.Preparations.map((step, i) => (
+                i === index ? { ...step, Description: value } : step
+            ))
+        }));
+    };
+
+    const addProduct = () => {
+        setRecipeDetails(prev => ({
+            ...prev,
+            ProductsToRecipes: [...prev.ProductsToRecipes, { IdRec: recipeId, Description: '', Order: prev.ProductsToRecipes.length + 1 }]
+        }));
+    };
+
+    const addPreparationStep = () => {
+        setRecipeDetails(prev => ({
+            ...prev,
+            Preparations: [...prev.Preparations, { IdRec: recipeId, Description: '', Order: prev.Preparations.length + 1 }]
         }));
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!user) {
-            alert("על מנת להוסיף התנדבות יש להרשם ולהתחבר לאתר");
+            alert("על מנת להוסיף מתכון יש להרשם ולהתחבר לאתר");
             nav('/register');
             return;
         }
         setIsLoading(true);
-
+        console.log("Submitting this data:", recipeDetails);
+        const completeRecipeData = {
+            Name: recipeDetails.Recipy?.Name,
+            IdSoldier: recipeDetails.IdSoldier,
+            IdUser: recipeDetails.IdUser,
+            Date: recipeDetails.Date,
+            ProductsToRecipes: recipeDetails.ProductsToRecipes,
+            Preparations: recipeDetails.Preparations,
+            Recipy: recipeDetails.Recipy
+        };
         try {
-            const volunteeringOptionPayload = volunteeringOption.volunteeringOption;
-            if (optionId) {
-                await updateVolunteeringOption(optionId, volunteeringOptionPayload);
-                console.log('Volunteering option updated successfully');
-                nav(`/soldierInfo/${id}/volunteering`);
+            if (!isEditing) {
+                const addedRecipe = await addCompleteRecipe(completeRecipeData);
+                console.log('Recipe added successfully:', addedRecipe);
+                sendEmailNotification(completeRecipeData);
+                nav(`/soldierInfo/${id}/recepies`);
+                setError('')
             } else {
-                await addVolunteeringOption(volunteeringOptionPayload);
-                console.log('Volunteering option added successfully');
-                nav(`/soldierInfo/${id}/volunteering`);
+                console.log('Recipe recipeDetails:', recipeDetails);
+                const editRecipe = await updateRecipy(recipeDetails);
+                console.log('Recipe updated successfully:', editRecipe);
+                sendEmailNotification(recipeDetails.Recipy);
+                setError('');
+                nav(`/soldierInfo/${id}/recepies`);
             }
         } catch (error) {
-            console.error('Error adding/updating volunteering:', error);
-            setError('Error adding/updating volunteering. Please try again.');
+            console.error('Error adding/updating recipe:', error);
+            setError('Error adding/updating recipe. Please try again.');
         } finally {
             setIsLoading(false);
         }
     };
 
+    const sendEmailNotification = (recipeData) => {
+        const templateParams = {
+            name: user.Name,
+            email: user.Email,
+            subject: 'New Recipe Added',
+            message: `A new recipe has been added. Recipe: ${recipeData.Name}. View it at: https://matrysofwar.onrender.com/soldierInfo/${id}/recepies`
+        };
+
+        emailjs.send('service_9rnvzfp', 'template_j3x5far', templateParams, "6no79izXNNDe1YECd")
+            .then((response) => {
+                console.log('SUCCESS!', response.status, response.text);
+            }, (error) => {
+                console.error('FAILED...', error);
+            });
+    };
+
     return (
         <div className="bg-gray-200 h-screen">
             <Sidebar />
-            <div className="flex justify-center h-screen">
-                <div className='text-gray-800 mt-4 mr-2 ml-2 text-center bg-gray-200'>
+            <div className="flex justify-center bg-gray-200">
+                <div className='text-gray-800 mt-4 mr-2 ml-2 text-center mb-2 bg-gray-200'>
                     <form onSubmit={handleSubmit} className='space-y-4 p-6 rounded-2xl bg-gray-400 shadow-xl shadow-gray-800 w-full max-w-4xl'>
-                        <label className='flex flex-col'>
-                            <textarea
-                                name="Description"
-                                value={volunteeringOption.volunteeringOption.Description}
-                                placeholder="הוסיפי קבלה שאת/ה מעוניין/ת לקבל לעילוי נשמתו/ה"
-                                onChange={handleChange}
-                                style={{ direction: 'rtl', wordWrap: 'break-word', whiteSpace: 'pre-wrap' }}
-                                className='text-gray-700 h-60 border border-gray-600 space-y-4 p-8 rounded-2xl mb-1'
+                        <div className="flex flex-col space-y-4">
+                            <label htmlFor="recipeName" className="font-bold rounded-xl text-lg">שם המתכון</label>
+                            <input
+                                id="recipeName"
+                                type="text"
+                                placeholder="הכנס שם מתכון"
+                                value={recipeDetails.Recipy?.Name}
+                                onChange={(e) => setRecipeDetails({
+                                    ...recipeDetails,
+                                    Recipy: {
+                                        ...recipeDetails.Recipy,
+                                        Name: e.target.value
+                                    }
+                                })}
+                                className="p-2 m-2 border rounded-xl"
+                                style={{ direction: 'rtl', wordWrap: 'break-word', overflowWrap: 'break-word' }}
                             />
-                        </label>
+                        </div>
+                        <div className="flex flex-col space-y-4">
+                            <button type="button" className="bg-gray-600 text-white py-2 px-4 rounded-xl" onClick={addProduct}>+ מוצרים</button>
+                            {recipeDetails.ProductsToRecipes.map((product, index) => (
+                                <input
+                                    key={index}
+                                    value={product.Description}
+                                    onChange={(e) => handleChangeProduct(index, e)}
+                                    placeholder="הוסף מוצר וכמות"
+                                    className="p-2 m-2 border rounded-lg"
+                                    style={{ direction: 'rtl', wordWrap: 'break-word', overflowWrap: 'break-word' }}
+                                />
+                            ))}
+                        </div>
+                        <div className="flex flex-col space-y-4">
+                            <button type="button" className="bg-gray-600 text-white py-2 px-4 rounded-xl" onClick={addPreparationStep}>+ הוראות הכנה</button>
+                            {recipeDetails.Preparations.map((step, index) => (
+                                <input
+                                    key={index}
+                                    value={step.Description}
+                                    onChange={(e) => handleChangePreparationStep(index, e)}
+                                    placeholder="הוסף שלב הכנה"
+                                    className="p-2 m-2 border rounded-xl"
+                                    style={{ direction: 'rtl', wordWrap: 'break-word', overflowWrap: 'break-word' }}
+                                />
+                            ))}
+                        </div>
+                        <div className="flex flex-col space-y-4">
+                            <label htmlFor="personalWords" className="font-bold text-lg">בנימה אישית</label>
+                            <textarea
+                                id="personalWords"
+                                name="PersonalWords"
+                                value={recipeDetails.Recipy?.PersonalWords}
+                                onChange={handleChange}
+                                className="w-full p-2 border rounded-xl"
+                                placeholder="כמה מילים אישיות על המתכון"
+                                style={{ direction: 'rtl', wordWrap: 'break-word', overflowWrap: 'break-word' }}
+                            />
+                        </div>
                         <div className='flex justify-center'>
-                            <button type="submit"
-                                disabled={isLoading}
-                                className={`btn bg-gray-900 text-white py-2 px-4 rounded-md ${isLoading ? 'opacity-50 cursor-not-allowed' : ' hover:animate-button-push'
-                                    }`}
-                            >
-                                {isLoading ? 'Adding...' : (isEditing ? 'עריכת התנדבות' : 'הוספת התנדבות')}
+                            <button type="submit" disabled={isLoading} className={`btn bg-gray-800 text-white py-2 px-4 rounded-md ${isLoading ? 'opacity-50 cursor-not-allowed' : ' hover:animate-button-push'}`}>
+                                {isLoading ? 'Adding...' : (isEditing ? 'עריכת מתכון' : 'הוספת מתכון')}
                             </button>
                         </div>
+                        {error && <span className="text-red-500">{error}</span>}
                     </form>
                 </div>
             </div>
@@ -114,4 +244,4 @@ const AddVolunteer = () => {
     );
 };
 
-export default AddVolunteer;
+export default AddRecipe;
