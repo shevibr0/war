@@ -194,7 +194,7 @@ const Soldiers = () => {
                                     <p>בן {soldier.Age}</p>
                                     <p>{soldier.DateOfDeath ? new Date(soldier.DateOfDeath).toDateString() : 'לא זמין'} <strong>תאריך פטירה</strong> </p>
                                     <button className="btn bg-gray-300 font-bold text-gray-800 py-2 px-4 rounded-md hover:animate-button-push" onClick={() => nav(`/soldierInfo/${soldier.Id}`)}>עוד על {soldier.FirstName}</button>
-                                    <div className='flex flex-col items-center mb-1'>
+                                    {/* <div className='flex flex-col items-center mb-1'>
                                         <div className='flex justify-center'>
                                             <a onClick={handleCopyLink} className="flex text-center hover:cursor-pointer">
                                                 <img className='w-5 h-5 bg-white mr-3 mt-1' src="/share.png" alt="share" />
@@ -203,7 +203,7 @@ const Soldiers = () => {
                                         <div>
                                             {copySuccess && <p className="text-red-700">{copySuccess}</p>}
                                         </div>
-                                    </div>
+                                    </div> */}
                                 </div>
 
                             )) : <span>{searchMessage}</span>}
