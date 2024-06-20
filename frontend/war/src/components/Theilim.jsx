@@ -117,7 +117,7 @@ const Theilim = () => {
                 <p>מספר פרקי תהילים שנאמרו: {num} | כמות משתתפים: {userNum}</p>
             </div>
             <div className="bg-gray-200 min-h-screen flex flex-col items-center mt-0" style={{ direction: 'rtl' }}>
-                <h1 className="text-2xl font-semibold mb-5">בחר פרק תהילים</h1>
+                <h1 className="text-2xl text-gray-800 font-semibold mb-5">בחר פרק תהילים</h1>
                 <div className="grid lg:grid-cols-12 md:grid-cols-6 sm:grid-cols-3 gap-2">
                     {Array.from({ length: 150 }, (_, i) => (
                         <button
@@ -137,7 +137,7 @@ const Theilim = () => {
                             </div>
                             <div className='flex justify-center'>
                                 <button onClick={handleAddTheilimForSolider}
-                                    className="mt-4 bg-gray-600 hover:bg-white text-white hover:text-gray-600 hover:border border-gray-600 font-bold py-2 px-4 rounded">
+                                    className="btn mt-4 bg-gray-600 hover:bg-white text-white hover:text-gray-600 hover:border border-gray-600 font-bold py-2 px-4 rounded">
                                     קראתי את הפרק
                                 </button>
                                 <button onClick={() => setShowPopup(false)}
