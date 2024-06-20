@@ -122,7 +122,7 @@ const Theilim = () => {
                     {Array.from({ length: 150 }, (_, i) => (
                         <button
                             key={i + 1}
-                            className="bg-gray-600 hover:bg-white text-white shadow-xl shadow-gray-800 hover:text-gray-600 hover:border border-gray-600 font-bold py-2 px-7 rounded mb-2"
+                            className="bg-gray-600 hover:bg-white text-white hover:text-gray-600 hover:border border-gray-600 font-bold py-2 px-7 rounded mb-2"
                             onClick={() => fetchPsalms(i + 1)}>
                             {numberToHebrewLetter(i + 1)}
                         </button>
