@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { GetCountSoliders, getSoldiers, globalSearchSoldiers } from '../utils/SoldierUtil';
-import { useNavigate } from 'react-router';
+import { useNavigate, useLocation } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSearchSoliders, setSoliders } from '../features/soliderSlice';
 import { FaHome, FaUserAlt, FaRegRegistered, FaComments } from 'react-icons/fa';
@@ -10,6 +10,7 @@ import { BiLogOutCircle } from "react-icons/bi";
 import { MdNavigateNext, MdOutlineNavigateBefore } from "react-icons/md";
 
 const Soldiers = () => {
+    const location = useLocation();
     const nav = useNavigate();
     const soldiers = useSelector(state => state.solider.soliders);
     const searchSoldiers = useSelector(state => state.solider.searchSoliders);
