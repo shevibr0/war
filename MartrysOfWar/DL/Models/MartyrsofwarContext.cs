@@ -324,7 +324,7 @@ namespace DL.Models
 
             modelBuilder.Entity<VolunteeringOption>(entity =>
             {
-                entity.ToTable("VOLUNTEERING OPTIONS");
+                entity.ToTable("VOLUNTEERING_OPTIONS"); // שינוי שם הטבלה כאן
 
                 entity.Property(e => e.Id).HasColumnName("ID");
 
@@ -350,6 +350,7 @@ namespace DL.Models
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__VOLUNTEER__ID_US__787EE5A0");
             });
+
 
             OnModelCreatingPartial(modelBuilder);
         }
