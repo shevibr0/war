@@ -137,7 +137,7 @@ namespace DL.Models
 
             modelBuilder.Entity<ProductsToRecipe>(entity =>
             {
-                entity.ToTable("PRODUCTS TO RECIPE");
+                entity.ToTable("PRODUCTS_TO_RECIPE");
 
                 entity.Property(e => e.Id).HasColumnName("ID");
 

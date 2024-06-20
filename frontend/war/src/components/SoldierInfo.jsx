@@ -75,7 +75,7 @@ const SoldierInfo = () => {
                                 <p><strong>תפקיד</strong> {soldier.Role || 'לא זמין'}</p>
                                 <p><strong>תאור קצר</strong> {soldier.ShortDescription || 'לא זמין'}</p>
 
-                                <p className='w-56'><strong>תאור ארוך</strong><br />
+                                <p><strong>תאור ארוך</strong><br />
                                     {soldier.LongDescription || 'לא זמין'}</p>
 
                                 <p><strong>כתובת אתר למאמר</strong> <br />
