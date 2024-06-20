@@ -29,7 +29,7 @@ const Sidebar = () => {
             <div className='flex justify-center mt-2'>
                 {user && (
                     <div className="text-lg text-gray-800 font-semibold text-center">
-                        שלום, {user.Name}
+                        {user.Name}  שלום
                     </div>
                 )}
             </div>
