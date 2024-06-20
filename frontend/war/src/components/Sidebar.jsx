@@ -26,13 +26,15 @@ const Sidebar = () => {
                     <div onClick={() => nav('/contact')} className='transition duration-100 hover:text-yellow-400'> <FaComments /></div>
                     <div onClick={() => nav('/soldiers')} className='transition duration-100 hover:text-yellow-400' > <FaUserAlt /></div>
                     <div onClick={() => nav('/homePage')} className='transition duration-100 hover:text-yellow-400'><FaHome /></div>
-                </div><br />
+                </div>
+            </nav>
+            <div className='text-center'>
                 {user && (
                     <div className="text-lg text-gray-800 font-semibold text-center">
-                        שלום, {user.Name}
+                        {user.Name} ,שלום
                     </div>
                 )}
-            </nav>
+            </div>
             <div className='flex items-center mb-1'>
                 <img className="mt-3 ml-5 w-[10px] mr-15 " src="/חץ חזור.svg" alt="Logo" onClick={() => nav(-2)} />
             </div>
