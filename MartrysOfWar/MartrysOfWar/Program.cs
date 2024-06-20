@@ -12,8 +12,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddCors(opt => opt.AddPolicy("MyPolicy", policy =>
 {
-    policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+    policy.AllowAnyOrigin()
+          .AllowAnyMethod()
+          .AllowAnyHeader();
 }));
+
 builder.Services.AddControllers();
 builder.Services.AddScoped<IUserBL, UserBL>();
 builder.Services.AddScoped<IUserDL, UserDL>();
@@ -67,17 +70,9 @@ var app = builder.Build();
 
 app.UseCors("MyPolicy");
 
-app.Use(async (context, next) =>
-{
-    context.Response.Headers.Add("Access-Control-Allow-Origin", "*");
-    await next.Invoke();
-});
-
 // Configure the HTTP request pipeline.
-
 app.UseSwagger();
 app.UseSwaggerUI();
-
 
 app.UseHttpsRedirection();
 

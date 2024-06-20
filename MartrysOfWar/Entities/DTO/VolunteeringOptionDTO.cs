@@ -14,6 +14,7 @@ namespace Entities.DTO
         public int IdUser { get; set; }
         public string? Description { get; set; }
         public DateTime Date { get; set; }
+
       
 
         //public virtual Soldier IdSoldierNavigation { get; set; } = null!;
