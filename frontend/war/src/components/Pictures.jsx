@@ -21,7 +21,7 @@ const Pictures = () => {
             }
             try {
                 const pictures = await getPictureById(id);
-                console.log("pic", pictures);
+                console.log("Pictures fetched:", pictures);
                 setImages(pictures);
             } catch (error) {
                 console.error('Error fetching pictures:', error);
@@ -34,7 +34,7 @@ const Pictures = () => {
     const handleDelete = async (imageId, imageUrl) => {
         if (window.confirm("האם אתה בטוח שברצונך למחוק את התמונה?")) {
             try {
-                console.log("iddd", imageId);
+                console.log("Deleting image with id:", imageId);
 
                 // Create a reference to the file to delete
                 const imageRef = ref(storage, imageUrl);
@@ -44,7 +44,7 @@ const Pictures = () => {
 
                 // Now delete the record from the database
                 const data = await deletePicture(imageId);
-                console.log("data", data);
+                console.log("Picture deleted:", data);
 
                 setImages(currentImages => currentImages.filter(image => image.Id !== imageId));
             } catch (error) {
@@ -77,7 +77,9 @@ const Pictures = () => {
                         {user && user.Id === image.UserId && (
                             <div className="flex justify mt-0">
                                 <button onClick={() => handleDelete(image.Id, image.Url)} className="text-black hover:text-red-700">
-                                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                    </svg>
                                 </button>
                             </div>
                         )}
