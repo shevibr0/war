@@ -74,9 +74,10 @@ const SoldierInfo = () => {
                                 <p><strong>דרגה</strong> {soldier.RankName || 'לא זמין'}</p>
                                 <p><strong>תפקיד</strong> {soldier.Role || 'לא זמין'}</p>
                                 <p><strong>תאור קצר</strong> {soldier.ShortDescription || 'לא זמין'}</p>
-                                <div className='flex justify-center max-w-2xl'>
-                                    <p className='w-56'><strong>תאור ארוך</strong> {soldier.LongDescription || 'לא זמין'}</p>
-                                </div>
+
+                                <p className='w-56'><strong>תאור ארוך</strong><br />
+                                    {soldier.LongDescription || 'לא זמין'}</p>
+
                                 <p><strong>כתובת אתר למאמר</strong> <br />
                                     <a target="_blank" href={soldier.UrlToArticle || '#'}>{soldier.UrlToArticle || 'לא זמין'}<br /></a>
                                 </p>
