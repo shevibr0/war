@@ -22,7 +22,7 @@ import EditRecipe from '../components/EditRecipe'
 export const AppRouter = () => {
     return (
         <Routes>
-            <Route path="/" element={<Soldiers />} ></Route>
+            <Route path="/" element={<HomePage />} ></Route>
             <Route path="/login" element={<Login />} ></Route>
             <Route path="/logOut" element={<LogOut />} ></Route>
             <Route path="/register" element={<Register />} ></Route>
