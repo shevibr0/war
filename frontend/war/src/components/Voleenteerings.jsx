@@ -10,23 +10,18 @@ const Voleenteerings = () => {
     const { id } = useParams();
     const user = useSelector(state => state.user.connectedUser);
     const [volunteeringOptions, setVolunteeringOptions] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
 
 
-    useEffect(() => {
-        const fetchVolunteeringOptions = async () => {
-            try {
-                setIsLoading(true);
-                const options = await getVolunteeringOptionById(id);
-                setVolunteeringOptions(options);
-                console.log("volunteeringOptions", volunteeringOptions)
-            } catch (error) {
-                console.error('Error fetching volunteering options:', error);
-            } finally {
-                setIsLoading(false);
-            }
+    const fetchVolunteeringOptions = async () => {
+        try {
+            const options = await getVolunteeringOptionById(id);
+            setVolunteeringOptions(options);
+            console.log("volunteeringOptions", volunteeringOptions)
+        } catch (error) {
+            console.error('Error fetching volunteering options:', error);
         };
-
+    }
+    useEffect(() => {
         fetchVolunteeringOptions();
     }, [id]);
 
