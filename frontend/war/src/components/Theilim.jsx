@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import { useSelector } from 'react-redux';
 import { addTehilim, getByUserCountTehilimForSoliderId, getCountTehilimBySoliderId, getTehilimBySoliderIdUser, updateTehilim } from '../utils/TehilimUtil';
@@ -6,13 +6,13 @@ import Sidebar from './Sidebar';
 
 const Theilim = () => {
     const nav = useNavigate();
+    const { id } = useParams();
+    const user = useSelector(state => state.user.connectedUser);
     const [num, setNum] = useState(0);
     const [userNum, setUserNum] = useState(0);
     const [selectedPsalms, setSelectedPsalms] = useState(null);
     const [selectedPsalmsPart, setSelectedPsalmsPart] = useState(null);
     const [showPopup, setShowPopup] = useState(false);
-    const { id } = useParams();
-    const user = useSelector(state => state.user.connectedUser);
     const [theilimUser, setTheilimUser] = useState(null);
 
     useEffect(() => {
@@ -22,6 +22,7 @@ const Theilim = () => {
     }, [selectedPsalms]);
 
     const fetchTehilimBySoliderIdUser = async () => {
+        if (!user) return;
         try {
             const res = await getTehilimBySoliderIdUser(user.Id, id);
             if (res.status === 204) {
@@ -45,6 +46,11 @@ const Theilim = () => {
 
     const handleAddTheilimForSolider = async (e) => {
         e.preventDefault();
+        if (!user) {
+            alert("בבקשה התחבר על מנת להוסיף פרקי תהילים");
+            nav('/register'); // Redirect to registration page
+            return;
+        }
         if (theilimUser == null) {
             // add new theilim
             const theilimEmpty = {
