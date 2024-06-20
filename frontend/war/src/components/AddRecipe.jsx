@@ -153,7 +153,7 @@ const AddRecipe = () => {
     return (
         <div className="bg-gray-200 h-screen">
             <Sidebar />
-            <div className="flex justify-center">
+            <div className="flex justify-center bg-gray-200">
                 <div className='text-gray-800 mt-4 mr-2 ml-2 text-center bg-gray-200'>
                     <form onSubmit={handleSubmit} className='space-y-4 p-6 rounded-2xl bg-gray-400 shadow-xl shadow-gray-800 w-full max-w-4xl'>
                         <div className="flex flex-col space-y-4">
@@ -171,19 +171,19 @@ const AddRecipe = () => {
                                     }
                                 })}
                                 className="p-2 m-2 border rounded-xl"
-                                style={{ direction: 'rtl' }}
+                                style={{ direction: 'rtl', wordWrap: 'break-word', overflowWrap: 'break-word' }}
                             />
                         </div>
                         <div className="flex flex-col space-y-4">
                             <button type="button" className="bg-gray-600 text-white py-2 px-4 rounded-xl" onClick={addProduct}>+ מוצרים</button>
                             {recipeDetails.ProductsToRecipes.map((product, index) => (
                                 <input
-                                    key={product.Id}
+                                    key={index}
                                     value={product.Description}
                                     onChange={(e) => handleChangeProduct(index, e)}
                                     placeholder="הוסף מוצר וכמות"
                                     className="p-2 m-2 border rounded-lg"
-                                    style={{ direction: 'rtl' }}
+                                    style={{ direction: 'rtl', wordWrap: 'break-word', overflowWrap: 'break-word' }}
                                 />
                             ))}
                         </div>
@@ -191,12 +191,12 @@ const AddRecipe = () => {
                             <button type="button" className="bg-gray-600 text-white py-2 px-4 rounded-xl" onClick={addPreparationStep}>+ הוראות הכנה</button>
                             {recipeDetails.Preparations.map((step, index) => (
                                 <input
-                                    key={step.Id}
+                                    key={index}
                                     value={step.Description}
                                     onChange={(e) => handleChangePreparationStep(index, e)}
                                     placeholder="הוסף שלב הכנה"
                                     className="p-2 m-2 border rounded-xl"
-                                    style={{ direction: 'rtl' }}
+                                    style={{ direction: 'rtl', wordWrap: 'break-word', overflowWrap: 'break-word' }}
                                 />
                             ))}
                         </div>
@@ -209,7 +209,7 @@ const AddRecipe = () => {
                                 onChange={handleChange}
                                 className="w-full p-2 border rounded-xl"
                                 placeholder="כמה מילים אישיות על המתכון"
-                                style={{ direction: 'rtl' }}
+                                style={{ direction: 'rtl', wordWrap: 'break-word', overflowWrap: 'break-word' }}
                             />
                         </div>
                         <div className='flex justify-center'>
