@@ -85,21 +85,21 @@ const Recepies = () => {
                         <div>
                             <p>המתכון הועלה בתאריך {new Date(recipe.Date).toLocaleDateString()}</p>
                             <p>ע"י {recipe.IdUserNavigation.Name}</p>
-                            <h2 className='font-bold text-xl border-b border-black text-black mb-1'>{recipe.Name}</h2>
+                            <h2 className='font-bold text-xl border-b border-black text-black mb-1 break-words'>{recipe.Name}</h2>
                             <h3 className='font-bold text-black'>מרכיבים</h3>
                             {productsToRecipes.filter((product) => product.IdRec === recipe.Id).map((productToRecipe) => (
                                 <div key={productToRecipe.Id} className='flex justify-center text-center'>
-                                    <p className="text-gray-600">{productToRecipe.Description}</p>
+                                    <p className="text-gray-600 break-words">{productToRecipe.Description}</p>
                                 </div>
                             ))}
                             <h3 className='font-bold text-black'>הוראות הכנה</h3>
                             {preparations.filter((preparation) => preparation.IdRec === recipe.Id).map((preparation) => (
                                 <div key={preparation.Id} className='flex justify-center text-center'>
-                                    <p className="text-gray-600 text-center">{preparation.Description}</p>
+                                    <p className="text-gray-600 text-center break-words">{preparation.Description}</p>
                                 </div>
                             ))}
                             <h3 className='font-bold text-black'>בנימה אישית</h3>
-                            {recipe.PersonalWords && <p className='text-sm italic text-gray-500 mb-2'>{recipe.PersonalWords}</p>}
+                            {recipe.PersonalWords && <p className='text-sm italic text-gray-500 mb-2 break-words'>{recipe.PersonalWords}</p>}
                         </div>
                         <div className="flex mt-0 pt-2 justify-end">
                             <button onClick={() => handleEdit(recipe.Id)} className="text-black hover:text-red-700">
