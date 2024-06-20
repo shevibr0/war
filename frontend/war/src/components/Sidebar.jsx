@@ -26,9 +26,9 @@ const Sidebar = () => {
                     <div onClick={() => nav('/contact')} className='transition duration-100 hover:text-yellow-400'> <FaComments /></div>
                     <div onClick={() => nav('/soldiers')} className='transition duration-100 hover:text-yellow-400' > <FaUserAlt /></div>
                     <div onClick={() => nav('/homePage')} className='transition duration-100 hover:text-yellow-400'><FaHome /></div>
-                </div>
+                </div><br />
                 {user && (
-                    <div className="text-lg text-gray-800 font-semibold">
+                    <div className="text-lg text-gray-800 font-semibold text-center">
                         שלום, {user.Name}
                     </div>
                 )}
