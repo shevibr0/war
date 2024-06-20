@@ -10,31 +10,31 @@ const Sidebar = () => {
     const nav = useNavigate();
     return (
         <>
-            <nav className="flex left-0 top-0  bg-gray-200 justify-center items-center text-3xl text-gray-800 h-[80px]  cursor-pointer space-x-11">
+            <nav className="flex justify-center bg-gray-200 items-center text-3xl text-gray-800 h-[80px] cursor-pointer">
                 {!user && (
                     <>
-                        <div onClick={() => nav('/register')} className='transition duration-100 hover:text-yellow-400'><FaRegRegistered /></div>
-                        <div onClick={() => nav('/login')} className='transition duration-100 hover:text-yellow-400'> <IoMdLogIn /></div>
+                        <div onClick={() => nav('/register')} className='transition duration-100 hover:text-yellow-400 mx-4'><FaRegRegistered /></div>
+                        <div onClick={() => nav('/login')} className='transition duration-100 hover:text-yellow-400 mx-4'> <IoMdLogIn /></div>
                     </>
                 )}
                 {user && (
                     <>
-                        <div onClick={() => nav('/logOut')} className='transition duration-100 hover:text-yellow-400' > <BiLogOutCircle /></div>
+                        <div onClick={() => nav('/logOut')} className='transition duration-100 hover:text-yellow-400 mx-4' > <BiLogOutCircle /></div>
                     </>
                 )}
-                <div onClick={() => nav('/contact')} className='transition duration-100 hover:text-yellow-400'> <FaComments /></div>
-                <div onClick={() => nav('/soldiers')} className='transition duration-100 hover:text-yellow-400' > <FaUserAlt /></div>
-                <div onClick={() => nav('/homePage')} className='transition duration-100 hover:text-yellow-400'><FaHome /></div>
+                <div onClick={() => nav('/contact')} className='transition duration-100 hover:text-yellow-400 mx-4'> <FaComments /></div>
+                <div onClick={() => nav('/soldiers')} className='transition duration-100 hover:text-yellow-400 mx-4' > <FaUserAlt /></div>
+                <div onClick={() => nav('/homePage')} className='transition duration-100 hover:text-yellow-400 mx-4'><FaHome /></div>
             </nav>
-            <div className='flex items-center mb-1'>
-                <img className="mt-3 ml-5 w-[10px] mr-15 " src="/חץ חזור.svg" alt="Logo" onClick={() => nav(-2)} />
-            </div>
             <div className='flex justify-center mt-2'>
                 {user && (
                     <div className="text-lg text-gray-800 font-semibold text-center">
-                        {user.Name}  שלום
+                        שלום, {user.Name}
                     </div>
                 )}
+            </div>
+            <div className='flex items-center mb-1 justify-center'>
+                <img className="mt-3 w-[20px] mr-4" src="/חץ חזור.svg" alt="Logo" onClick={() => nav(-2)} />
             </div>
         </>
     );
