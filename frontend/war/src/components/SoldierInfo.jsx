@@ -4,13 +4,11 @@ import { getSoldiersById } from '../utils/SoldierUtil'; // Import the getSoldier
 import { useSelector } from 'react-redux';
 import Sidebar from './Sidebar';
 
-
 const SoldierInfo = () => {
     const location = useLocation();
-    const nav = useNavigate()
+    const nav = useNavigate();
     const { id } = useParams(); // Assuming you're using React Router's useParams hook
     const [soldier, setSoldier] = useState(null); // State to store the soldier's data
-    const [isOpen, setIsOpen] = useState(false);
     const [copySuccess, setCopySuccess] = useState('');
     const user = useSelector(state => state.user.connectedUser);
 
@@ -20,19 +18,14 @@ const SoldierInfo = () => {
                 // Fetch the soldier's data using the id
                 const soldierData = await getSoldiersById(id);
                 setSoldier(soldierData);
-                console.log("soldier", soldier)
             } catch (error) {
                 console.error('Error fetching soldier details:', error);
                 // Handle error
             }
         };
-        console.log("soldier", soldier)
         fetchSoldierDetails();
     }, [id]);
 
-    // if (!soldier) {
-    //     return <p>Loading...</p>;
-    // }
     const handleCopyLink = () => {
         const fullUrl = window.location.origin + location.pathname;
         navigator.clipboard.writeText(fullUrl).then(() => {
@@ -44,9 +37,8 @@ const SoldierInfo = () => {
         });
     };
 
-
     return (
-        <div className="bg-gray-200 h-screen text-gray-800 px-4">
+        <div className="bg-gray-200 min-h-screen text-gray-800 px-4">
             <Sidebar />
             <div className='grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 gap-2 items-center mt-4 font-bold'>
                 <div className='flex cursor-pointer bg-white shadow-top shadow-gray-500  p-2 rounded-lg justify-center hover:animate-button-push' onClick={() => nav(`/soldierInfo/${id}/memories`)}>פתקי זכרון</div>
@@ -58,14 +50,14 @@ const SoldierInfo = () => {
             <div className='flex justify-center items-center bg-gray-200 mt-8'>
                 <div className="bg-white p-8 rounded-lg shadow-top shadow-gray-800 w-full max-w-4xl mb-6">
                     {soldier !== null ? (
-                        <div className="">
+                        <div>
                             <h1 className='text-center text-2xl mb-2'>{`${soldier.FirstName} ${soldier.LastName}`}</h1>
-                            <div className="flex justify-center mb-2 ">
-                                <img className='h-40 w-40' src={soldier.Image} alt={`${soldier.FirstName} ${soldier.LastName}`} />
+                            <div className="flex justify-center mb-2">
+                                <img className='h-40 w-40 object-cover rounded-full' src={soldier.Image} alt={`${soldier.FirstName} ${soldier.LastName}`} />
                             </div>
                             <div className='flex flex-col items-center'>
                                 <div className='flex justify-center'>
-                                    <a onClick={handleCopyLink} className="flex text-center hover:cursor-pointer ">
+                                    <a onClick={handleCopyLink} className="flex text-center hover:cursor-pointer">
                                         <img className='w-5 h-5 bg-white mr-3 mt-1' src="/share.png" alt="share" />
                                     </a>
                                 </div>
@@ -76,24 +68,23 @@ const SoldierInfo = () => {
                             <div className="flex justify-center">
                                 <span className="bg-black w-56 h-[0.2px] mt-5"></span>
                             </div>
-                            <div className='text-center mt-4'>
-                                <p><strong>גיל </strong> {soldier.Age}</p>
-                                <p><strong>עיר </strong> {soldier.City}</p>
-                                <p>{new Date(soldier.DateOfDeath).toDateString()}<strong>תאריך פטירה </strong> </p>
-                                <p><strong>מקום הפטירה </strong> {soldier.PlaceOfDeath}</p>
-                                <p><strong>דרגה </strong> {soldier.RankName}</p>
-                                <p><strong>תפקיד </strong> {soldier.Role}</p>
-                                <p><strong>תאור קצר </strong> {soldier.ShortDescription}</p>
+                            <div className='text-center mt-4 space-y-2'>
+                                <p><strong>גיל: </strong> {soldier.Age}</p>
+                                <p><strong>עיר: </strong> {soldier.City}</p>
+                                <p><strong>תאריך פטירה: </strong> {new Date(soldier.DateOfDeath).toDateString()}</p>
+                                <p><strong>מקום הפטירה: </strong> {soldier.PlaceOfDeath}</p>
+                                <p><strong>דרגה: </strong> {soldier.RankName}</p>
+                                <p><strong>תפקיד: </strong> {soldier.Role}</p>
+                                <p><strong>תאור קצר: </strong> {soldier.ShortDescription}</p>
                                 <div className='flex justify-center max-w-2xl'>
-                                    <p className='w-56'><strong>תאור ארוך </strong> {soldier.LongDescription}</p>
+                                    <p className='w-56'><strong>תאור ארוך: </strong> {soldier.LongDescription}</p>
                                 </div>
-                                <p>  <strong>כתובת אתר למאמר </strong><a target="_blank" href={soldier.UrlToArticle}>{soldier.UrlToArticle}<br />
-                                </a></p>
-                                <p><strong>מקום השירות </strong> {soldier.PlaceOfService}</p>
-                                <p><strong>מקום הקבורה </strong> {soldier.BurialPlace}</p>
-                                <p><strong>ילד </strong> {soldier.IsChild ? 'כן' : 'לא'}</p>
-                                <p><strong>חוליית חירום </strong> {soldier.IsEmergencySquad ? 'כן' : 'לא'}</p>
-                                <p><strong>נהרג בנובה </strong> {soldier.AtNova ? 'כן' : 'לא'}</p>
+                                <p><strong>כתובת אתר למאמר: </strong><a target="_blank" href={soldier.UrlToArticle}>{soldier.UrlToArticle}<br /></a></p>
+                                <p><strong>מקום השירות: </strong> {soldier.PlaceOfService}</p>
+                                <p><strong>מקום הקבורה: </strong> {soldier.BurialPlace}</p>
+                                <p><strong>ילד: </strong> {soldier.IsChild ? 'כן' : 'לא'}</p>
+                                <p><strong>חוליית חירום: </strong> {soldier.IsEmergencySquad ? 'כן' : 'לא'}</p>
+                                <p><strong>נהרג בנובה: </strong> {soldier.AtNova ? 'כן' : 'לא'}</p>
                             </div>
                         </div>
                     ) : (
