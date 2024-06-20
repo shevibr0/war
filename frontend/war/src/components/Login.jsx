@@ -73,7 +73,7 @@ const Login = () => {
                 <div onClick={() => nav('/soldiers')} className='transition duration-100 hover:text-yellow-400'> <FaUserAlt /></div>
                 <div onClick={() => nav('/homePage')} className='transition duration-100 hover:text-yellow-400'><FaHome /></div>
             </nav>
-            <div className="flex flex-wrap justify-center mt-7 h-screen text-gray-800">
+            <div className="flex flex-col justify-center mt-7 h-screen text-gray-800">
                 <div className="text-center mt-4 mr-5 ml-5">
                     <form onSubmit={handleClickLogin} className="bg-white space-y-4 p-6 text-center w-full max-w-md shadow-top shadow-gray-800 rounded-2xl hover:animate-button-push hover:shadow-xl hover:shadow-gray-700">
                         <input name="email" type="text" placeholder="מייל" value={email} onChange={handleChangeEmail} style={{ direction: 'rtl' }} className="mb-2 bg-gray-200 rounded-lg p-2  text-center" />
