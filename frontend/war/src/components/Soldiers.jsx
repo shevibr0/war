@@ -193,7 +193,6 @@ const Soldiers = () => {
                                     <p>{`גיל: ${soldier.Age}`}</p>
                                     <p>{`תאריך פטירה: ${soldier.DateOfDeath ? new Date(soldier.DateOfDeath).toDateString() : ''}`}</p>
                                     <button className="btn bg-gray-300 font-bold text-gray-800 py-2 px-4 rounded-md hover:animate-button-push" onClick={() => nav(`/soldierInfo/${soldier.Id}`)}>עוד על {soldier.FirstName}</button>
-
                                     <div className='flex flex-col items-center'>
                                         <div className='flex justify-center'>
                                             <a onClick={handleCopyLink} className="flex text-center hover:cursor-pointer">
@@ -203,31 +202,33 @@ const Soldiers = () => {
                                         <div>
                                             {copySuccess && <p className="text-red-700">{copySuccess}</p>}
                                         </div>
-
-                                        )) : <span>{searchMessage}</span>}
-                                    </div>
-                                    <div className="flex justify-center items-center mt-4 mb-4">
-                                        <button
-                                            onClick={() => handlePageChange(currentPage - 1)}
-                                            disabled={currentPage === 1 && !isPrev}
-                                            className="btn bg-gray-200 text-gray-800 py-2 px-4 rounded-md hover:animate-button-push"
-                                        >
-                                            <MdOutlineNavigateBefore className="text-2xl" />
-                                        </button>
-                                        <span className="text-lg font-bold mx-4">{currentPage}</span>
-                                        <button
-                                            onClick={() => handlePageChange(currentPage + 1)}
-                                            disabled={(currentPage === count && !isNext) || !isNext}
-                                            className="btn text-gray-800 py-2 px-4 rounded-md hover:animate-button-push"
-                                        >
-                                            <MdNavigateNext className="text-2xl" />
-                                        </button>
                                     </div>
                                 </div>
-                            )}
+
+                            )) : <span>{searchMessage}</span>}
+                        </div>
+                        <div className="flex justify-center items-center mt-4 mb-4">
+                            <button
+                                onClick={() => handlePageChange(currentPage - 1)}
+                                disabled={currentPage === 1 && !isPrev}
+                                className="btn bg-gray-200 text-gray-800 py-2 px-4 rounded-md hover:animate-button-push"
+                            >
+                                <MdOutlineNavigateBefore className="text-2xl" />
+                            </button>
+                            <span className="text-lg font-bold mx-4">{currentPage}</span>
+                            <button
+                                onClick={() => handlePageChange(currentPage + 1)}
+                                disabled={(currentPage === count && !isNext) || !isNext}
+                                className="btn text-gray-800 py-2 px-4 rounded-md hover:animate-button-push"
+                            >
+                                <MdNavigateNext className="text-2xl" />
+                            </button>
                         </div>
                     </div>
-                );
+                )}
+            </div>
+        </div>
+    );
 };
 
-                export default Soldiers;
+export default Soldiers;
