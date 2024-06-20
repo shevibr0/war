@@ -75,8 +75,8 @@ const Pictures = () => {
                             src={image.Url}
                             alt={`Image ${index}`}
                         />
-                        <h3 className='font-bold text-black'>בנימה אישית</h3>
-                        {image.PersonalWords && <p className='text-sm italic text-gray-500 mb-2'>{image.PersonalWords}</p>}
+                        <h3 className='font-bold text-gray-800'>בנימה אישית</h3>
+                        {image.PersonalWords && <p className='text-sm italic text-gray-500 mb-2 break-words whitespace-pre-wrap'>{image.PersonalWords}</p>}
                         <div className="flex justify mt-0"> {/* Container for buttons */}
                             {/* <button onClick={() => handleEdit(image.Id)} className="text-black hover:text-red-700">
                                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21H3v-3.5L14.732 3.732z"></path></svg>

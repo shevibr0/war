@@ -103,7 +103,7 @@ const AddPicture = () => {
             name: user.Name,
             email: user.Email,
             subject: 'New Picture Added',
-            message: `A new picture has been added by ${user.Name}. URL: ${downloadURL}, Personal Words: ${pictureDetails.Picture.PersonalWords}`
+            message: `A new picture has been added by ${user.Name}. URL: ${downloadURL}, Personal Words: ${pictureDetails.Picture.PersonalWords}. View at: https://matrysofwar.onrender.com/soldierInfo/${id}/pictures`
         };
 
         emailjs.send('service_9rnvzfp', 'template_j3x5far', templateParams, "6no79izXNNDe1YECd")
@@ -143,7 +143,7 @@ const AddPicture = () => {
                                 onChange={handleChange}
                                 className="w-full p-2 border rounded-2xl"
                                 placeholder="כמה מילים אישיות על התמונה"
-                                style={{ direction: 'rtl' }}
+                                style={{ direction: 'rtl', wordWrap: 'break-word', whiteSpace: 'pre-wrap' }}
                             />
                         </div>
                         <div className="flex justify-center">
