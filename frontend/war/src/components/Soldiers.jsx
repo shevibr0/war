@@ -21,6 +21,7 @@ const Soldiers = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [searchMessage, setSearchMessage] = useState('');
     const [loading, setLoading] = useState(false);
+    const [copySuccess, setCopySuccess] = useState('');
     const user = useSelector(state => state.user.connectedUser);
     const dispatch = useDispatch();
 
@@ -111,7 +112,16 @@ const Soldiers = () => {
             dispatch(setSearchSoliders([]));
         }
     };
-
+    const handleCopyLink = () => {
+        const fullUrl = window.location.origin + location.pathname;
+        navigator.clipboard.writeText(fullUrl).then(() => {
+            setCopySuccess('הקישור הועתק');
+            setTimeout(() => setCopySuccess(''), 3000);
+        }, (err) => {
+            setCopySuccess('Failed to copy the link');
+            console.error('Failed to copy the link: ', err);
+        });
+    };
     return (
         <div className="bg-gray-200 h-screen">
             <nav className="flex left-0 top-0 bg-gray-200 justify-center items-center text-3xl text-gray-800 h-[80px] cursor-pointer space-x-11">
@@ -181,33 +191,43 @@ const Soldiers = () => {
                                     </div>
                                     <h3>{`${soldier.FirstName} ${soldier.LastName}`}</h3>
                                     <p>{`גיל: ${soldier.Age}`}</p>
-                                    <p>{`תאריך פטירה ${soldier.DateOfDeath ? new Date(soldier.DateOfDeath).toDateString() : ''}`}</p>
+                                    <p>{`תאריך פטירה: ${soldier.DateOfDeath ? new Date(soldier.DateOfDeath).toDateString() : ''}`}</p>
                                     <button className="btn bg-gray-300 font-bold text-gray-800 py-2 px-4 rounded-md hover:animate-button-push" onClick={() => nav(`/soldierInfo/${soldier.Id}`)}>עוד על {soldier.FirstName}</button>
+
+                                    <div className='flex flex-col items-center'>
+                                        <div className='flex justify-center'>
+                                            <a onClick={handleCopyLink} className="flex text-center hover:cursor-pointer">
+                                                <img className='w-5 h-5 bg-white mr-3 mt-1' src="/share.png" alt="share" />
+                                            </a>
+                                        </div>
+                                        <div>
+                                            {copySuccess && <p className="text-red-700">{copySuccess}</p>}
+                                        </div>
+
+                                        )) : <span>{searchMessage}</span>}
+                                    </div>
+                                    <div className="flex justify-center items-center mt-4 mb-4">
+                                        <button
+                                            onClick={() => handlePageChange(currentPage - 1)}
+                                            disabled={currentPage === 1 && !isPrev}
+                                            className="btn bg-gray-200 text-gray-800 py-2 px-4 rounded-md hover:animate-button-push"
+                                        >
+                                            <MdOutlineNavigateBefore className="text-2xl" />
+                                        </button>
+                                        <span className="text-lg font-bold mx-4">{currentPage}</span>
+                                        <button
+                                            onClick={() => handlePageChange(currentPage + 1)}
+                                            disabled={(currentPage === count && !isNext) || !isNext}
+                                            className="btn text-gray-800 py-2 px-4 rounded-md hover:animate-button-push"
+                                        >
+                                            <MdNavigateNext className="text-2xl" />
+                                        </button>
+                                    </div>
                                 </div>
-                            )) : <span>{searchMessage}</span>}
-                        </div>
-                        <div className="flex justify-center items-center mt-4 mb-4">
-                            <button
-                                onClick={() => handlePageChange(currentPage - 1)}
-                                disabled={currentPage === 1 && !isPrev}
-                                className="btn bg-gray-200 text-gray-800 py-2 px-4 rounded-md hover:animate-button-push"
-                            >
-                                <MdOutlineNavigateBefore className="text-2xl" />
-                            </button>
-                            <span className="text-lg font-bold mx-4">{currentPage}</span>
-                            <button
-                                onClick={() => handlePageChange(currentPage + 1)}
-                                disabled={(currentPage === count && !isNext) || !isNext}
-                                className="btn text-gray-800 py-2 px-4 rounded-md hover:animate-button-push"
-                            >
-                                <MdNavigateNext className="text-2xl" />
-                            </button>
+                            )}
                         </div>
                     </div>
-                )}
-            </div>
-        </div>
-    );
+                );
 };
 
-export default Soldiers;
+                export default Soldiers;
