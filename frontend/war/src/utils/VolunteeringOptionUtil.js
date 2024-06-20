@@ -11,8 +11,8 @@ const getVolunteeringOptionByIdAsyncOptionId = async (id, optionId) => {
     return await api.get(`VolunteeringOption/${id},${optionId}`).then(res => res.data)
 }
 const addVolunteeringOption = async (volunteeringOption) => {
-    console.log("option2", volunteeringOption)
-    return await api.post("VolunteeringOption", volunteeringOption).then(res => res.data)
+    console.log("Sending volunteeringOption:", volunteeringOption); // Debugging line
+    return await api.post("VolunteeringOption", { volunteeringOptionDto: volunteeringOption }).then(res => res.data);
 }
 const updateVolunteeringOption = async (id, volunteeringOption) => {
     return await api.put(`VolunteeringOption/${id}`, volunteeringOption).then(res => res.data)
