@@ -156,7 +156,7 @@ const AddRecipe = () => {
             <div className="flex justify-center h-screen">
                 <div className='text-gray-800 mt-4 mr-2 ml-2 text-center bg-gray-200'>
                     <form onSubmit={handleSubmit} className='space-y-4 p-6 rounded-2xl bg-gray-400 shadow-xl shadow-gray-800 w-full max-w-4xl'>
-                        <div>
+                        <div className="flex flex-col space-y-4">
                             <label htmlFor="recipeName" className="font-bold rounded-xl text-lg">שם המתכון</label>
                             <input
                                 id="recipeName"
@@ -174,7 +174,7 @@ const AddRecipe = () => {
                                 style={{ direction: 'rtl' }}
                             />
                         </div>
-                        <div>
+                        <div className="flex flex-col space-y-4">
                             <button type="button" className="bg-gray-600 text-white py-2 px-4 rounded-xl" onClick={addProduct}>+ מוצרים</button>
                             {recipeDetails.ProductsToRecipes.map((product, index) => (
                                 <input
@@ -187,7 +187,7 @@ const AddRecipe = () => {
                                 />
                             ))}
                         </div>
-                        <div>
+                        <div className="flex flex-col space-y-4">
                             <button type="button" className="bg-gray-600 text-white py-2 px-4 rounded-xl" onClick={addPreparationStep}>+ הוראות הכנה</button>
                             {recipeDetails.Preparations.map((step, index) => (
                                 <input
@@ -200,7 +200,7 @@ const AddRecipe = () => {
                                 />
                             ))}
                         </div>
-                        <div>
+                        <div className="flex flex-col space-y-4">
                             <label htmlFor="personalWords" className="font-bold text-lg">בנימה אישית</label>
                             <textarea
                                 id="personalWords"
@@ -217,6 +217,7 @@ const AddRecipe = () => {
                                 {isLoading ? 'Adding...' : (isEditing ? 'עריכת מתכון' : 'הוספת מתכון')}
                             </button>
                         </div>
+                        {error && <span className="text-red-500">{error}</span>}
                     </form>
                 </div>
             </div>
