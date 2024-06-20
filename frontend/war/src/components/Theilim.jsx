@@ -89,7 +89,7 @@ const Theilim = () => {
             name: user.Name,
             email: user.Email,
             subject: 'New Tehilim Added',
-            message: `A new Tehilim has been added. User: ${user.Name}, Soldier ID: ${tehilimData.IdSoldier}, Count: ${tehilimData.Count}. View it at: https://matrysofwar.onrender.com/soldierInfo/${id}/tehilim`
+            message: `A new Tehilim has been added. User: ${user.Name}, Soldier ID: ${tehilimData.IdSoldier}, Count: ${tehilimData.Count}. View it at: https://matrysofwar.onrender.com/soldierInfo/${id}/theilim`
         };
 
         console.log('Sending email with params:', templateParams);
