@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router';
 import { useSelector } from 'react-redux';
 import { getProductsToRecipeById } from '../utils/ProductsToRecipeUtil';
 import { getPreparationById } from '../utils/PreparationUtil';
+import emailjs from 'emailjs-com';
 import Sidebar from './Sidebar';
 
 const AddRecipe = () => {
@@ -63,8 +64,6 @@ const AddRecipe = () => {
             });
         }
     }, [recipeId, user?.Id]);
-
-    console.log(" recipeDetailsssss", recipeDetails)
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -133,12 +132,14 @@ const AddRecipe = () => {
             if (!isEditing) {
                 const addedRecipe = await addCompleteRecipe(completeRecipeData);
                 console.log('Recipe added successfully:', addedRecipe);
+                sendEmailNotification(completeRecipeData);
                 nav(`/soldierInfo/${id}/recepies`);
                 setError('')
             } else {
                 console.log('Recipe recipeDetails:', recipeDetails);
                 const editRecipe = await updateRecipy(recipeDetails);
                 console.log('Recipe updated successfully:', editRecipe);
+                sendEmailNotification(recipeDetails.Recipy);
                 setError('');
                 nav(`/soldierInfo/${id}/recepies`);
             }
@@ -148,6 +149,22 @@ const AddRecipe = () => {
         } finally {
             setIsLoading(false);
         }
+    };
+
+    const sendEmailNotification = (recipeData) => {
+        const templateParams = {
+            name: user.Name,
+            email: user.Email,
+            subject: 'New Recipe Added',
+            message: `A new recipe has been added. Recipe: ${recipeData.Name}. View it at: https://matrysofwar.onrender.com/soldierInfo/${id}/recepies`
+        };
+
+        emailjs.send('service_9rnvzfp', 'template_j3x5far', templateParams, "6no79izXNNDe1YECd")
+            .then((response) => {
+                console.log('SUCCESS!', response.status, response.text);
+            }, (error) => {
+                console.error('FAILED...', error);
+            });
     };
 
     return (
