@@ -85,7 +85,7 @@ const AddVolunteer = () => {
     };
 
     return (
-        <div className="bg-gray-200">
+        <div className="bg-gray-200 ">
             <Sidebar />
             <h2 className='flex justify-center text-3xl font-bold '>{isEditing ? 'עריכת התנדבות' : 'הוספת התנדבות'}</h2>
             {error && <p style={{ color: 'red' }}>{error}</p>}

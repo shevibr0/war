@@ -67,6 +67,12 @@ var app = builder.Build();
 
 app.UseCors("MyPolicy");
 
+app.Use(async (context, next) =>
+{
+    context.Response.Headers.Add("Access-Control-Allow-Origin", "*");
+    await next.Invoke();
+});
+
 // Configure the HTTP request pipeline.
 
 app.UseSwagger();
