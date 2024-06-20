@@ -113,7 +113,7 @@ const AddRecipe = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!user) {
-            alert("על מנת להוסיף מתכון יש להרשם ולהתחבר לאתר");
+            alert("על מנת להוסיף מתכון יש להרשם/להתחבר לאתר");
             nav('/register');
             return;
         }

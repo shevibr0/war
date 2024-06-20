@@ -60,7 +60,7 @@ const AddRemember = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         if (!user) {
-            alert("על מנת להוסיף זכרון יש להרשם ולהתחבר לאתר");
+            alert("על מנת להוסיף זכרון יש להרשם/להתחבר לאתר");
             nav('/register');
             return;
         }

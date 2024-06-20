@@ -45,7 +45,7 @@ const AddPicture = () => {
         e.preventDefault();
 
         if (!user) {
-            setAlertMessage('עליך להיות מחובר כדי להוסיף תמונה.');
+            setAlertMessage('על מנת להוסיף תמונה יש להרשם/להתחבר לאתר"');
             nav('/register');
             return;
         }

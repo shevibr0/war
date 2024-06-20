@@ -58,7 +58,7 @@ const AddVolunteer = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!user) {
-            alert("על מנת להוסיף התנדבות יש להרשם ולהתחבר לאתר");
+            alert("על מנת להוסיף התנדבות יש להרשם/להתחבר לאתר");
             nav('/register');
             return;
         }

@@ -48,7 +48,7 @@ const Theilim = () => {
     const handleAddTheilimForSolider = async (e) => {
         e.preventDefault();
         if (!user) {
-            alert("Please register to add Tehilim.");
+            alert("בבקשה להתחבר על מנת להוסיף פרק תהילים");
             nav('/register'); // Redirect to registration page
             return;
         }
