@@ -16,7 +16,7 @@ const Contact = () => {
         e.preventDefault();
 
         if (!name || !email || !message) {
-            setError('Please fill out all fields.');
+            setError('בבקש מלא את כל השדות');
             return;
         }
 
@@ -43,7 +43,7 @@ const Contact = () => {
     return (
         <div className="bg-gray-200 h-screen">
             <Sidebar />
-            <div className="flex justify-center mt-9 h-screen text-gray-800">
+            <div className="flex justify-center mt-9 bg-gray-200 text-gray-800">
                 <div className="text-center mt-4 mr-5 ml-5">
                     <form onSubmit={sendEmail} className="bg-white space-y-4 p-6 text-center w-full max-w-md shadow-top shadow-gray-800 rounded-2xl hover:animate-button-push hover:shadow-xl hover:shadow-gray-700">
                         <h1 className="text-gray-800 text-4xl font-bold font-['Alef'] text-center">צור קשר</h1>
