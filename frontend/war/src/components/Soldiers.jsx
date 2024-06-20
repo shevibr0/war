@@ -181,7 +181,7 @@ const Soldiers = () => {
                                     </div>
                                     <h3>{`${soldier.FirstName} ${soldier.LastName}`}</h3>
                                     <p>{`גיל: ${soldier.Age}`}</p>
-                                    <p>{`תאריך פטירה ${soldier.DateOfDeath}`}</p>
+                                    <p>{`תאריך פטירה ${soldier.DateOfDeath ? new Date(soldier.DateOfDeath).toDateString() : ''}`}</p>
                                     <button className="btn bg-gray-300 font-bold text-gray-800 py-2 px-4 rounded-md hover:animate-button-push" onClick={() => nav(`/soldierInfo/${soldier.Id}`)}>עוד על {soldier.FirstName}</button>
                                 </div>
                             )) : <span>{searchMessage}</span>}
