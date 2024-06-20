@@ -192,9 +192,9 @@ const Soldiers = () => {
                                     </div>
                                     <h3>{`${soldier.FirstName} ${soldier.LastName}`}</h3>
                                     <p>{`גיל: ${soldier.Age}`}</p>
-                                    <p>{`תאריך פטירה: ${soldier.DateOfDeath ? new Date(soldier.DateOfDeath).toDateString() : ''}`}</p>
+                                    <p>{` ${soldier.DateOfDeath ? new Date(soldier.DateOfDeath).toDateString() : ''} תאריך פטירה:`}</p>
                                     <button className="btn bg-gray-300 font-bold text-gray-800 py-2 px-4 rounded-md hover:animate-button-push" onClick={() => nav(`/soldierInfo/${soldier.Id}`)}>עוד על {soldier.FirstName}</button>
-                                    <div className='flex flex-col items-center'>
+                                    <div className='flex flex-col items-center mb-1'>
                                         <div className='flex justify-center'>
                                             <a onClick={handleCopyLink} className="flex text-center hover:cursor-pointer">
                                                 <img className='w-5 h-5 bg-white mr-3 mt-1' src="/share.png" alt="share" />
