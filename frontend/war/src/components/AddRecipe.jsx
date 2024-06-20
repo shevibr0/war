@@ -170,32 +170,32 @@ const AddRecipe = () => {
                                         Name: e.target.value
                                     }
                                 })}
-                                className="p-2 m-2 border rounded-xl"
+                                className="p-2 m-2 border rounded-xl w-full md:w-2/3"
                                 style={{ direction: 'rtl' }}
                             />
                         </div>
                         <div className="flex flex-col space-y-4">
-                            <button type="button" className="bg-gray-600 text-white py-2 px-4 rounded-xl" onClick={addProduct}>+ מוצרים</button>
+                            <button type="button" className="bg-gray-600 text-white py-2 px-4 rounded-xl w-full md:w-2/3" onClick={addProduct}>+ מוצרים</button>
                             {recipeDetails.ProductsToRecipes.map((product, index) => (
                                 <input
                                     key={product.Id}
                                     value={product.Description}
                                     onChange={(e) => handleChangeProduct(index, e)}
                                     placeholder="הוסף מוצר וכמות"
-                                    className="p-2 m-2 border rounded-lg"
+                                    className="p-2 m-2 border rounded-lg w-full md:w-2/3"
                                     style={{ direction: 'rtl' }}
                                 />
                             ))}
                         </div>
                         <div className="flex flex-col space-y-4">
-                            <button type="button" className="bg-gray-600 text-white py-2 px-4 rounded-xl" onClick={addPreparationStep}>+ הוראות הכנה</button>
+                            <button type="button" className="bg-gray-600 text-white py-2 px-4 rounded-xl w-full md:w-2/3" onClick={addPreparationStep}>+ הוראות הכנה</button>
                             {recipeDetails.Preparations.map((step, index) => (
                                 <input
                                     key={step.Id}
                                     value={step.Description}
                                     onChange={(e) => handleChangePreparationStep(index, e)}
                                     placeholder="הוסף שלב הכנה"
-                                    className="p-2 m-2 border rounded-xl"
+                                    className="p-2 m-2 border rounded-xl w-full md:w-2/3"
                                     style={{ direction: 'rtl' }}
                                 />
                             ))}
@@ -207,7 +207,7 @@ const AddRecipe = () => {
                                 name="PersonalWords"
                                 value={recipeDetails.Recipy?.PersonalWords}
                                 onChange={handleChange}
-                                className="w-full p-2 border rounded-xl"
+                                className="w-full md:w-2/3 p-2 border rounded-xl"
                                 placeholder="כמה מילים אישיות על המתכון"
                                 style={{ direction: 'rtl' }}
                             />

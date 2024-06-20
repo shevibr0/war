@@ -72,7 +72,7 @@ const Recepies = () => {
     };
 
     return (
-        <div className="bg-gray-200 h-screen">
+        <div className="bg-gray-200 min-h-screen">
             <Sidebar />
             <div className='mt-4 flex justify-center'>
                 <button className='btn bg-white font-bold cursor-pointer p-2 rounded-lg shadow-top shadow-gray-500  hover:animate-button-push' onClick={() => nav(`/soldierInfo/${id}/addRecepy`)}>
@@ -81,7 +81,7 @@ const Recepies = () => {
             </div>
             <div className='flex flex-wrap justify-center text-center bg-gray-200' style={{ direction: 'rtl' }}>
                 {recepies.map((recipe) => (
-                    <div key={recipe.Id} className="bg-yellow-100 shadow-l lg:w-1/5 md:w-1/4 sm:w-1/3 w-1/2 mr-1 ml-1 p-4 my-4 shadow-md text-gray-400 rounded-lg hover:shadow-2xl transition-shadow duration-300 flex flex-col justify-between">
+                    <div key={recipe.Id} className="bg-yellow-100 shadow-lg w-full lg:w-1/4 md:w-1/3 sm:w-1/2 p-4 m-2 shadow-md text-gray-800 rounded-lg hover:shadow-2xl transition-shadow duration-300 flex flex-col justify-between">
                         <div>
                             <p>המתכון הועלה בתאריך {new Date(recipe.Date).toLocaleDateString()}</p>
                             <p>ע"י {recipe.IdUserNavigation.Name}</p>

@@ -76,8 +76,8 @@ const SoldierInfo = () => {
                                 <p><strong>תאור קצר</strong> {soldier.ShortDescription || 'לא זמין'}</p>
 
                                 <p><strong>תאור ארוך</strong><br />
-                                    {soldier.LongDescription || 'לא זמין'}</p>
-
+                                    {soldier.LongDescription || 'לא זמין'}
+                                </p>
                                 <p><strong>כתובת אתר למאמר</strong> <br />
                                     <a target="_blank" href={soldier.UrlToArticle || '#'}>{soldier.UrlToArticle || 'לא זמין'}<br /></a>
                                 </p>
