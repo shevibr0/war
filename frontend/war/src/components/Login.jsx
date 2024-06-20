@@ -74,16 +74,14 @@ const Login = () => {
                 <div onClick={() => nav('/homePage')} className='transition duration-100 hover:text-yellow-400'><FaHome /></div>
             </nav>
 
-            <div className="flex flex-wrap justify-center items-center h-screen">
-                <div className="border border-black p-8 rounded-md">
-                    <h1 className="text-black text-4xl font-bold font-['Alef'] mb-4 text-center">התחברות</h1>
+            <div className="flex flex-wrap justify-center items-center h-screen text-gray-800">
+                <div className="bg-white text-center shadow-top  shadow-gray-800 p-4 rounded-2xl hover:animate-button-push hover:shadow-xl hover:shadow-gray-700">
+                    <h1 className="text-4xl font-bold mb-4 text-center">התחברות</h1>
                     <div className="flex flex-col items-center">
-                        <label htmlFor="email" className="text-black mb-2">מייל</label>
-                        <input name="email" type="text" placeholder="הכנס מייל" value={email} onChange={handleChangeEmail} style={{ direction: 'rtl' }} className="mb-2" />
-                        <label htmlFor="password" className="text-black mb-2">סיסמא</label>
-                        <input name="password" type="text" placeholder="הכנס סיסמא" value={password} onChange={handleChangePassword} style={{ direction: 'rtl' }} className="mb-2" />
+                        <input name="email" type="text" placeholder="הכנס מייל" value={email} onChange={handleChangeEmail} style={{ direction: 'rtl' }} className="mb-2 bg-gray-200" />
+                        <input name="password" type="text" placeholder="הכנס סיסמא" value={password} onChange={handleChangePassword} style={{ direction: 'rtl' }} className="mb-2 bg-gray-200" />
                         <span className="text-red-500 mb-2">{error}</span>
-                        <button onClick={handleClickLogin} className="bg-black text-white px-4 py-2 rounded-md">התחברות</button>
+                        <button onClick={handleClickLogin} className="btn bg-gray-800 text-white py-2 px-4 rounded-md hover:animate-button-push">התחברות</button>
                     </div>
                 </div>
             </div>

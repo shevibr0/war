@@ -55,8 +55,8 @@ const Voleenteerings = () => {
             <div className="mt-3">
                 <ul style={{ direction: 'rtl' }} className="flex flex-wrap justify-center bg-gray-200">
                     {volunteeringOptions.map(option => (
-                        <li key={option.Id} className="bg-yellow-100 shadow-l lg:w-1/5 md:w-1/4 sm:w-1/3 w-1/2 p-4 m-2 rounded-lg hover:shadow-2xl transition-shadow duration-300 flex flex-col justify-between">
-                            <strong className="text-black"> {option.Description} </strong><br />
+                        <li key={option.Id} className="bg-yellow-100 shadow-lg p-4 m-2 rounded-lg hover:shadow-2xl transition-shadow duration-300 flex flex-col justify-between  w-60">
+                            <strong className="break-words whitespace-pre-wrap"> {option.Description} </strong><br />
                             <p className='text-gray-400 text-sm'>נכתב בתאריך {new Date(option.Date).toLocaleDateString()}</p>
                             <p className=' text-gray-400'>ע"י {option.IdUserNavigation.Name}</p>
                             <div className="flex mt-0 pt-2 justify-end">
