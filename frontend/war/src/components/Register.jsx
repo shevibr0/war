@@ -13,7 +13,6 @@ const Register = () => {
     const [password, setPassword] = useState('');
     const [phone, setPhone] = useState('');
     const [error, setError] = useState('');
-    const [isOpen, setIsOpen] = useState(false);
     const user = useSelector(state => state.user.connectedUser);
 
     const validateEmail = (email) => {
@@ -26,7 +25,8 @@ const Register = () => {
         return re.test(String(phone));
     }
 
-    const handleRegistration = async () => {
+    const handleRegistration = async (event) => {
+        event.preventDefault();
         if (name === "" || email === "" || password === "" || phone === "") {
             setError('Please fill in all fields');
             return;
@@ -53,8 +53,7 @@ const Register = () => {
             console.log(response);
             if (response.status === 200) {
                 console.log("Registration Successful!");
-                // Optionally, you can redirect the user to the login page
-                nav("/");
+                nav("/login");
             } else {
                 setError("Registration failed");
             }
@@ -86,7 +85,7 @@ const Register = () => {
 
     return (
         <div className="bg-gray-200">
-            <nav className="flex left-0 top-0  bg-gray-200 justify-center items-center text-3xl text-gray-800 h-[80px]  cursor-pointer space-x-11">
+            <nav className="flex left-0 top-0 bg-gray-200 justify-center items-center text-3xl text-gray-800 h-[80px] cursor-pointer space-x-11">
                 {!user && (
                     <>
                         <div onClick={() => nav('/register')} className='transition duration-100 hover:text-yellow-400'><FaRegRegistered /></div>
@@ -95,27 +94,26 @@ const Register = () => {
                 )}
                 {user && (
                     <>
-                        <div onClick={() => nav('/logOut')} className='transition duration-100 hover:text-yellow-400' > <BiLogOutCircle /></div>
+                        <div onClick={() => nav('/logOut')} className='transition duration-100 hover:text-yellow-400'> <BiLogOutCircle /></div>
                     </>
                 )}
                 <div onClick={() => nav('/contact')} className='transition duration-100 hover:text-yellow-400'> <FaComments /></div>
-                <div onClick={() => nav('/soldiers')} className='transition duration-100 hover:text-yellow-400' > <FaUserAlt /></div>
+                <div onClick={() => nav('/soldiers')} className='transition duration-100 hover:text-yellow-400'> <FaUserAlt /></div>
                 <div onClick={() => nav('/homePage')} className='transition duration-100 hover:text-yellow-400'><FaHome /></div>
             </nav>
-            <div className="text-center">
+            <div className="text-center mt-4">
                 <span>אם אתה רשום <span onClick={() => nav('/login')} className="text-blue-500 cursor-pointer">התחבר כעת</span></span>
             </div>
-            <div className="flex flex-wrap justify-center items-center h-screen">
-                <div className="border border-black p-9 rounded-md" style={{ direction: 'rtl' }}>
-                    <h1 className="text-black text-4xl font-bold font-['Alef'] text-center">הרשמה</h1>
-                    <div className="flex flex-col items-center">
-                        <input name="name" type="text" placeholder="הכנס שם" value={name} onChange={handleChangeName} /><br />
-                        <input name="email" type="email" placeholder="הכנס מייל" value={email} onChange={handleChangeEmail} /><br />
-                        <input name="password" type="password" placeholder="הכנס סיסמא" value={password} onChange={handleChangePassword} /><br />
-                        <input name="phone" type="tel" placeholder="הכנס טלפון" value={phone} onChange={handleChangePhoneNumber} style={{ direction: 'rtl' }} /><br />
-                        <span>{error}</span>
-                        <button onClick={handleRegistration} className="bg-black text-white px-4 py-2 rounded-md">הרשמה</button>
-                    </div>
+            <div className="flex justify-center mt-9 h-screen text-gray-800">
+                <div className="text-center mt-4 mr-5 ml-5">
+                    <form onSubmit={handleRegistration} className="bg-white space-y-4 p-6 text-center w-full max-w-md shadow-top shadow-gray-800 rounded-2xl hover:animate-button-push hover:shadow-xl hover:shadow-gray-700">
+                        <input name="name" type="text" placeholder="הכנס שם" value={name} onChange={handleChangeName} style={{ direction: 'rtl' }} className="mb-2 bg-gray-200 rounded-lg p-2  text-center" />
+                        <input name="email" type="email" placeholder="הכנס מייל" value={email} onChange={handleChangeEmail} style={{ direction: 'rtl' }} className="mb-2 bg-gray-200 rounded-lg p-2  text-center" />
+                        <input name="password" type="password" placeholder="הכנס סיסמא" value={password} onChange={handleChangePassword} style={{ direction: 'rtl' }} className="mb-2 bg-gray-200 rounded-lg p-2  text-center" />
+                        <input name="phone" type="tel" placeholder="הכנס טלפון" value={phone} onChange={handleChangePhoneNumber} style={{ direction: 'rtl' }} className="mb-2 bg-gray-200 rounded-lg p-2  text-center" />
+                        {error && <span className="text-red-500 mb-2">{error}</span>}<br />
+                        <button type="submit" className="btn bg-gray-800 text-white py-2 px-4 rounded-md hover:animate-button-push">הרשמה</button>
+                    </form>
                 </div>
             </div>
         </div>
