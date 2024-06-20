@@ -128,6 +128,13 @@ const Soldiers = () => {
                 <div onClick={() => nav('/soldiers')} className='transition duration-100 hover:text-yellow-400'><FaUserAlt /></div>
                 <div onClick={() => nav('/homePage')} className='transition duration-100 hover:text-yellow-400'><FaHome /></div>
             </nav>
+            <div className='flex justify-center mt-2 mb-2'>
+                {user && (
+                    <div className="text-lg text-gray-800 font-semibold text-center">
+                        {user.Name}  שלום
+                    </div>
+                )}
+            </div>
             <div className="bg-gray-200">
                 <div className=''>
                     <h2 className="text-gray-800 text-4xl font-bold mb-6 mt-6 text-center"></h2>
