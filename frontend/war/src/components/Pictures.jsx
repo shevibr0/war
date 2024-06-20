@@ -83,6 +83,10 @@ const Pictures = () => {
                                 </button>
                             </div>
                         )}
+                        <div>
+                            <p>User ID: {user?.Id}</p>
+                            <p>Image User ID: {image.UserId}</p>
+                        </div>
                     </div>
                 ))}
             </div>
