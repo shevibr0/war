@@ -86,7 +86,7 @@ const AddVolunteer = () => {
         <div className="bg-gray-200 h-screen">
             <Sidebar />
             <div className="flex justify-center h-screen">
-                <div className='text-black mt-4 mr-2 ml-2 text-center'>
+                <div className='text-gray-800 mt-4 mr-2 ml-2 text-center bg-gray-200'>
                     <form onSubmit={handleSubmit} className='space-y-4 p-6 rounded-2xl bg-gray-400 shadow-xl shadow-gray-800 w-full max-w-4xl'>
                         <label className='flex flex-col'>
                             <textarea

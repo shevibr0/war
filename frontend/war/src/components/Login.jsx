@@ -73,15 +73,14 @@ const Login = () => {
                 <div onClick={() => nav('/soldiers')} className='transition duration-100 hover:text-yellow-400' > <FaUserAlt /></div>
                 <div onClick={() => nav('/homePage')} className='transition duration-100 hover:text-yellow-400'><FaHome /></div>
             </nav>
-
             <div className="flex flex-wrap justify-center mt-4 text-center h-screen text-gray-800">
-                <div className="bg-white text-center shadow-top  shadow-gray-800 rounded-2xl hover:animate-button-push hover:shadow-xl hover:shadow-gray-700">
-                    <div className="flex flex-col items-center">
-                        <input name="email" type="text" placeholder="מייל" value={email} onChange={handleChangeEmail} style={{ direction: 'rtl' }} className="mb-2 bg-gray-200 rounded-lg p-1" />
-                        <input name="password" type="text" placeholder="סיסמא" value={password} onChange={handleChangePassword} style={{ direction: 'rtl' }} className="mb-2 bg-gray-200 rounded-lg p-1" />
+                <div className="bg-white text-center space-y-4 p-6  shadow-top shadow-gray-800  rounded-2xl hover:animate-button-push hover:shadow-xl hover:shadow-gray-700 w-full max-w-md">
+                    <form onSubmit={handleClickLogin} className="flex flex-col items-center">
+                        <input name="email" type="text" placeholder="מייל" value={email} onChange={handleChangeEmail} style={{ direction: 'rtl' }} className="mb-2 bg-gray-200 rounded-lg p-2 w-full" />
+                        <input name="password" type="password" placeholder="סיסמא" value={password} onChange={handleChangePassword} style={{ direction: 'rtl' }} className="mb-2 bg-gray-200 rounded-lg p-2 w-full" />
                         <span className="text-red-500 mb-2">{error}</span>
-                        <button onClick={handleClickLogin} className="btn bg-gray-800 text-white py-1 px-2 rounded-md hover:animate-button-push">התחבר</button>
-                    </div>
+                        <button type="submit" className="btn bg-gray-800 text-white py-2 px-4 rounded-md hover:animate-button-push">התחבר</button>
+                    </form>
                 </div>
             </div>
         </div>
