@@ -8,7 +8,6 @@ import { addPicture } from '../utils/PictureUtil';
 import emailjs from 'emailjs-com';
 import Sidebar from './Sidebar';
 
-
 const AddPicture = () => {
     const nav = useNavigate();
     const { id } = useParams();
@@ -80,8 +79,6 @@ const AddPicture = () => {
 
     const handleSaveToDatabase = async (downloadURL) => {
         try {
-            console.log("user", user)
-            console.log("user", pictureDetails)
             const response = await addPicture({
                 IdSoldier: pictureDetails.Picture.idSoldier,
                 IdUser: pictureDetails.Picture.idUser,
@@ -103,9 +100,10 @@ const AddPicture = () => {
 
     const sendEmailNotification = (downloadURL) => {
         const templateParams = {
-            user_name: user.Name,
-            user_email: user.Email,
-            user_message: `A new picture has been added. URL: ${downloadURL}`,
+            name: user.Name,
+            email: user.Email,
+            subject: 'New Picture Added',
+            message: `A new picture has been added by ${user.Name}. URL: ${downloadURL}, Personal Words: ${pictureDetails.Picture.PersonalWords}`
         };
 
         emailjs.send('service_9rnvzfp', 'template_j3x5far', templateParams, "6no79izXNNDe1YECd")
@@ -154,7 +152,6 @@ const AddPicture = () => {
                     </form>
                 </div>
             </div>
-
         </div>
     );
 };
