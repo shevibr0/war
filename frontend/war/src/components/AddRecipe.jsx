@@ -151,7 +151,7 @@ const AddRecipe = () => {
     };
 
     return (
-        <div className="bg-gray-200 min-h-screen flex flex-col">
+        <div className="bg-gray-200 h-screen flex flex-col">
             <Sidebar />
             <div className="flex justify-center flex-1">
                 <div className='text-gray-800 mt-4 mr-2 ml-2 text-center bg-gray-200 flex-1'>
