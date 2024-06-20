@@ -49,7 +49,7 @@ const Contact = () => {
                     <h1 className="text-black text-4xl font-bold font-['Alef']  text-center">צור קשר</h1>
                     <div className="bg-gray-200" style={{ direction: 'rtl' }}>
                         <form onSubmit={sendEmail}>
-                            <input placeholder='שם' type="text" name="name" value={name} onChange={e => setName(e.target.value)} />
+                            <input placeholder='שם' type="text" name="name" value={name} onChange={e => setName(e.target.value)} /><br />
                             <input placeholder='מייל' type="email" name="email" value={email} onChange={e => setEmail(e.target.value)} />
                             <label>הודעה</label>
                             <textarea placeholder='דברו אלינו' name="massage" value={massage} onChange={e => setMassage(e.target.value)} />

@@ -75,9 +75,9 @@ const Login = () => {
             </nav>
 
             <div className="flex flex-wrap justify-center mt-4 text-center h-screen text-gray-800">
-                <div className="bg-white text-center shadow-top  shadow-gray-800 p-4 rounded-2xl hover:animate-button-push hover:shadow-xl hover:shadow-gray-700">
+                <div className="bg-white text-center shadow-top  shadow-gray-800 rounded-2xl hover:animate-button-push hover:shadow-xl hover:shadow-gray-700">
                     <div className="flex flex-col items-center">
-                        <input name="email" type="text" placeholder="מייל" value={email} onChange={handleChangeEmail} style={{ direction: 'rtl' }} className="mb-2 bg-gray-200 rounded-lg p-1" /><br />
+                        <input name="email" type="text" placeholder="מייל" value={email} onChange={handleChangeEmail} style={{ direction: 'rtl' }} className="mb-2 bg-gray-200 rounded-lg p-1" />
                         <input name="password" type="text" placeholder="סיסמא" value={password} onChange={handleChangePassword} style={{ direction: 'rtl' }} className="mb-2 bg-gray-200 rounded-lg p-1" />
                         <span className="text-red-500 mb-2">{error}</span>
                         <button onClick={handleClickLogin} className="btn bg-gray-800 text-white py-1 px-2 rounded-md hover:animate-button-push">התחבר</button>
