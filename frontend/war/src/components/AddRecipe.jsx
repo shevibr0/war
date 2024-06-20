@@ -157,7 +157,7 @@ const AddRecipe = () => {
                 <div className='text-gray-800 mt-4 mr-2 ml-2 text-center bg-gray-200'>
                     <form onSubmit={handleSubmit} className='space-y-4 p-6 rounded-2xl bg-gray-400 shadow-xl shadow-gray-800 w-full max-w-4xl'>
                         <div>
-                            <label htmlFor="recipeName" className="">שם המתכון</label>
+                            <label htmlFor="recipeName" className="font-bold rounded-lg">שם המתכון</label>
                             <input
                                 id="recipeName"
                                 type="text"
@@ -175,39 +175,39 @@ const AddRecipe = () => {
                             />
                         </div>
                         <div>
-                            <button type="button" className="bg-gray-600 text-white py-2 px-4 rounded" onClick={addProduct}>מוצרים</button>
+                            <button type="button" className="bg-gray-600 text-white py-2 px-4 rounded" onClick={addProduct}>+ מוצרים</button>
                             {recipeDetails.ProductsToRecipes.map((product, index) => (
                                 <input
                                     key={product.Id}
                                     value={product.Description}
                                     onChange={(e) => handleChangeProduct(index, e)}
                                     placeholder="הוסף מוצר וכמות"
-                                    className="p-2 m-2 border"
+                                    className="p-2 m-2 border rounded-lg"
                                     style={{ direction: 'rtl' }}
                                 />
                             ))}
                         </div>
                         <div>
-                            <button type="button" className="bg-gray-600 text-white py-2 px-4 rounded" onClick={addPreparationStep}>הוראות הכנה</button>
+                            <button type="button" className="bg-gray-600 text-white py-2 px-4 rounded" onClick={addPreparationStep}>+ הוראות הכנה</button>
                             {recipeDetails.Preparations.map((step, index) => (
                                 <input
                                     key={step.Id}
                                     value={step.Description}
                                     onChange={(e) => handleChangePreparationStep(index, e)}
                                     placeholder="הוסף שלב הכנה"
-                                    className="p-2 m-2 border"
+                                    className="p-2 m-2 border rounded-lg"
                                     style={{ direction: 'rtl' }}
                                 />
                             ))}
                         </div>
                         <div>
-                            <label htmlFor="personalWords" className="text-black">בנימה אישית</label>
+                            <label htmlFor="personalWords" className="font-bold">בנימה אישית</label>
                             <textarea
                                 id="personalWords"
                                 name="PersonalWords"
                                 value={recipeDetails.Recipy?.PersonalWords}
                                 onChange={handleChange}
-                                className="w-full p-2 border"
+                                className="w-full p-2 border rounded-lg"
                                 placeholder="כמה מילים אישיות על המתכון"
                                 style={{ direction: 'rtl' }}
                             />
