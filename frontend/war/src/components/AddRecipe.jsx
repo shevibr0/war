@@ -151,10 +151,10 @@ const AddRecipe = () => {
     };
 
     return (
-        <div className="bg-gray-200 h-screen flex flex-col">
+        <div className="bg-gray-200 h-screen">
             <Sidebar />
-            <div className="flex justify-center flex-1">
-                <div className='text-gray-800 mt-4 mr-2 ml-2 text-center bg-gray-200 flex-1'>
+            <div className="flex justify-center">
+                <div className='text-gray-800 mt-4 mr-2 ml-2 text-center bg-gray-200'>
                     <form onSubmit={handleSubmit} className='space-y-4 p-6 rounded-2xl bg-gray-400 shadow-xl shadow-gray-800 w-full max-w-4xl'>
                         <div className="flex flex-col space-y-4">
                             <label htmlFor="recipeName" className="font-bold rounded-xl text-lg">שם המתכון</label>
@@ -170,32 +170,32 @@ const AddRecipe = () => {
                                         Name: e.target.value
                                     }
                                 })}
-                                className="p-2 m-2 border rounded-xl w-full"
+                                className="p-2 m-2 border rounded-xl w-full md:w-2/3"
                                 style={{ direction: 'rtl' }}
                             />
                         </div>
                         <div className="flex flex-col space-y-4">
-                            <button type="button" className="bg-gray-600 text-white py-2 px-4 rounded-xl" onClick={addProduct}>+ מוצרים</button>
+                            <button type="button" className="bg-gray-600 text-white py-2 px-4 rounded-xl w-full md:w-2/3" onClick={addProduct}>+ מוצרים</button>
                             {recipeDetails.ProductsToRecipes.map((product, index) => (
                                 <input
-                                    key={index}
+                                    key={product.Id}
                                     value={product.Description}
                                     onChange={(e) => handleChangeProduct(index, e)}
                                     placeholder="הוסף מוצר וכמות"
-                                    className="p-2 m-2 border rounded-lg w-full"
+                                    className="p-2 m-2 border rounded-lg w-full md:w-2/3"
                                     style={{ direction: 'rtl' }}
                                 />
                             ))}
                         </div>
                         <div className="flex flex-col space-y-4">
-                            <button type="button" className="bg-gray-600 text-white py-2 px-4 rounded-xl" onClick={addPreparationStep}>+ הוראות הכנה</button>
+                            <button type="button" className="bg-gray-600 text-white py-2 px-4 rounded-xl w-full md:w-2/3" onClick={addPreparationStep}>+ הוראות הכנה</button>
                             {recipeDetails.Preparations.map((step, index) => (
                                 <input
-                                    key={index}
+                                    key={step.Id}
                                     value={step.Description}
                                     onChange={(e) => handleChangePreparationStep(index, e)}
                                     placeholder="הוסף שלב הכנה"
-                                    className="p-2 m-2 border rounded-xl w-full"
+                                    className="p-2 m-2 border rounded-xl w-full md:w-2/3"
                                     style={{ direction: 'rtl' }}
                                 />
                             ))}
@@ -207,7 +207,7 @@ const AddRecipe = () => {
                                 name="PersonalWords"
                                 value={recipeDetails.Recipy?.PersonalWords}
                                 onChange={handleChange}
-                                className="w-full p-2 border rounded-xl"
+                                className="w-full md:w-2/3 p-2 border rounded-xl"
                                 placeholder="כמה מילים אישיות על המתכון"
                                 style={{ direction: 'rtl' }}
                             />
