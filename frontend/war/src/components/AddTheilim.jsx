@@ -1,12 +1,35 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router'
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router';
 import { useSelector } from 'react-redux';
+import emailjs from 'emailjs-com';
 
 const AddTheilim = () => {
-
-    const nav = useNavigate()
+    const nav = useNavigate();
     const [isOpen, setIsOpen] = useState(false);
     const user = useSelector(state => state.user.connectedUser);
+
+    const sendEmailNotification = () => {
+        const templateParams = {
+            name: user.Name,
+            email: user.Email,
+            subject: 'New Tehilim Added',
+            message: `A new Tehilim has been added. View it at: https://matrysofwar.onrender.com/addTehilim`
+        };
+
+        emailjs.send('service_9rnvzfp', 'template_j3x5far', templateParams, "6no79izXNNDe1YECd")
+            .then((response) => {
+                console.log('SUCCESS!', response.status, response.text);
+            }, (error) => {
+                console.error('FAILED...', error);
+            });
+    };
+
+    const handleAddTehilim = () => {
+        // Add your logic for adding Tehilim here
+
+        // Send email notification
+        sendEmailNotification();
+    };
 
     return (
         <div className="bg-gray-200">
@@ -28,19 +51,12 @@ const AddTheilim = () => {
                             <div onClick={() => nav('/logOut')}>התנתקות</div>
                         </>
                     )}
-
-                    <div onClick={() => nav('/contact')}>
-                        צור קשר
-                    </div>
-                    <div onClick={() => nav('/soldiers')} className='font-bold'>
-                        חיפוש
-                    </div>
-                    <div onClick={() => nav('/homePage')} >
-                        אודות
-                    </div>
+                    <div onClick={() => nav('/contact')}>צור קשר</div>
+                    <div onClick={() => nav('/soldiers')} className='font-bold'>חיפוש</div>
+                    <div onClick={() => nav('/homePage')}>אודות</div>
                 </nav>
             )}
-            <nav className="hidden lg:flex md:flex sm:flex left-0 top-0 shadow bg-white  justify-center  items-center  text-black lg:text-2xl  lg:h-[47px] md:text-xl md:h-[40px] sm:text-s  sm:h-[20px] mt-4 sm:mt-0 font-normal font-['Alef'] leading-[45px] cursor-pointer space-x-11">
+            <nav className="hidden lg:flex md:flex sm:flex left-0 top-0 shadow bg-white justify-center items-center text-black lg:text-2xl lg:h-[47px] md:text-xl md:h-[40px] sm:text-s sm:h-[20px] mt-4 sm:mt-0 font-normal font-['Alef'] leading-[45px] cursor-pointer space-x-11">
                 {!user && (
                     <>
                         <div onClick={() => nav('/register')}>הרשמה</div>
@@ -52,22 +68,18 @@ const AddTheilim = () => {
                         <div onClick={() => nav('/logOut')}>התנתקות</div>
                     </>
                 )}
-                <div onClick={() => nav('/contact')}>
-                    צור קשר
-                </div>
-                <div onClick={() => nav('/soldiers')} className='font-bold'>
-                    חיפוש
-                </div>
-                <div onClick={() => nav('/homePage')}>
-                    אודות
-                </div>
+                <div onClick={() => nav('/contact')}>צור קשר</div>
+                <div onClick={() => nav('/soldiers')} className='font-bold'>חיפוש</div>
+                <div onClick={() => nav('/homePage')}>אודות</div>
             </nav>
-
             <div className='flex items-center mb-1'>
-                <img className="mt-3 ml-5 max-w-[1%] lg:max-w-[1%] lg:mr-15  md:max-w-[1%] sm:max-w-[1%]" src="/חץ חזור.svg" alt="Logo" onClick={() => nav(-1)} />
+                <img className="mt-3 ml-5 max-w-[1%] lg:max-w-[1%] lg:mr-15 md:max-w-[1%] sm:max-w-[1%]" src="/חץ חזור.svg" alt="Logo" onClick={() => nav(-1)} />
+            </div>
+            <div className='flex justify-center mt-4'>
+                <button onClick={handleAddTehilim} className="btn bg-gray-800 text-white py-2 px-4 rounded-md hover:animate-button-push">הוסף תהילים</button>
             </div>
         </div>
     )
 }
 
-export default AddTheilim
+export default AddTheilim;
