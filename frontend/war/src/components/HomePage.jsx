@@ -35,7 +35,7 @@ const HomePage = () => {
 
             <div className="w-full bottom-0 mt-7 left-0  flex justify-center bg-gray-200 text-gray-800">
                 <div className="flex items-center gap-4 rounded-lg">
-                    <div className="relative transition duration-100 hover:text-yellow-400  text-2xl">
+                    <div className="relative transition duration-100 hover:text-yellow-400 rounded-2xl text-2xl ">
                         <a href="https://www.linkedin.com/in/elisheva-einhoren-43b1b3220/" target="_blank" rel="noopener noreferrer">
                             <FontAwesomeIcon icon={faLinkedin} />
                         </a>
