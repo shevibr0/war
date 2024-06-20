@@ -33,27 +33,26 @@ const HomePage = () => {
                     חיפוש</button>
             </div>
 
-            <div className="w-full bottom-0 mt-7 left-0 flex justify-center bg-gray-200 text-gray-800">
-                <div className="flex items-center gap-4">
-                    <div className="relative transition duration-100 hover:text-yellow-400 text-2xl rounded-full p-2 bg-white shadow-lg">
+            <div className="w-full bottom-0 mt-7 left-0  flex justify-center bg-gray-200 text-gray-800">
+                <div className="flex items-center gap-4 rounded-lg">
+                    <div className="relative transition duration-100 hover:text-yellow-400 rounded-2xl text-2xl ">
                         <a href="https://www.linkedin.com/in/elisheva-einhoren-43b1b3220/" target="_blank" rel="noopener noreferrer">
-                            <FontAwesomeIcon icon={faLinkedin} />
+                            <FontAwesomeIcon icon={faLinkedin} className='rounded-full' />
                         </a>
                     </div>
 
-                    <div className="relative transition duration-100 hover:text-yellow-400 text-2xl rounded-full p-2 bg-white shadow-lg">
-                        <a href="mailto:mepe.leos@gmail.com">
+                    <div className="relative transition duration-100 hover:text-yellow-400  text-2xl">
+                        <a href="mailto:mepe.leos@gmail.com" className='rounded-full'>
                             <FontAwesomeIcon icon={faEnvelope} />
                         </a>
                     </div>
-                    <div className="relative transition duration-100 hover:text-yellow-400 text-2xl rounded-full p-2 bg-white shadow-lg">
-                        <a href="https://www.instagram.com/elisheva_einhoren/" target="_blank" rel="noopener noreferrer">
-                            <FontAwesomeIcon icon={faInstagram} />
+                    <div className="relative">
+                        <a className='transition duration-100 hover:text-yellow-400 text-2xl' href="https://www.instagram.com/elisheva_einhoren/" target="_blank" rel="noopener noreferrer">
+                            <FontAwesomeIcon icon={faInstagram} className='rounded-full' />
                         </a>
                     </div>
                 </div>
             </div>
-
         </div>
 
 

@@ -102,17 +102,17 @@ const Register = () => {
                 <div onClick={() => nav('/homePage')} className='transition duration-100 hover:text-yellow-400'><FaHome /></div>
             </nav>
             <div className="text-center mt-4">
-                <span>אם אתה רשום <span onClick={() => nav('/login')} className="text-blue-500 cursor-pointer">התחבר כעת</span></span>
+                <span>אם הנך רשום <span onClick={() => nav('/login')} className="text-blue-500 cursor-pointer">התחבר כעת</span></span>
             </div>
             <div className="flex justify-center mt-9 h-screen text-gray-800">
                 <div className="text-center mt-4 mr-5 ml-5">
                     <form onSubmit={handleRegistration} className="bg-white space-y-4 p-6 text-center w-full max-w-md shadow-top shadow-gray-800 rounded-2xl hover:animate-button-push hover:shadow-xl hover:shadow-gray-700">
-                        <input name="name" type="text" placeholder="הכנס שם" value={name} onChange={handleChangeName} style={{ direction: 'rtl' }} className="mb-2 bg-gray-200 rounded-lg p-2  text-center" />
-                        <input name="email" type="email" placeholder="הכנס מייל" value={email} onChange={handleChangeEmail} style={{ direction: 'rtl' }} className="mb-2 bg-gray-200 rounded-lg p-2  text-center" />
-                        <input name="password" type="password" placeholder="הכנס סיסמא" value={password} onChange={handleChangePassword} style={{ direction: 'rtl' }} className="mb-2 bg-gray-200 rounded-lg p-2  text-center" />
-                        <input name="phone" type="tel" placeholder="הכנס טלפון" value={phone} onChange={handleChangePhoneNumber} style={{ direction: 'rtl' }} className="mb-2 bg-gray-200 rounded-lg p-2  text-center" />
+                        <input name="name" type="text" placeholder="שם" value={name} onChange={handleChangeName} style={{ direction: 'rtl' }} className="mb-2 bg-gray-200 rounded-lg p-2  text-center" />
+                        <input name="email" type="email" placeholder="מייל" value={email} onChange={handleChangeEmail} style={{ direction: 'rtl' }} className="mb-2 bg-gray-200 rounded-lg p-2  text-center" />
+                        <input name="password" type="password" placeholder="סיסמא" value={password} onChange={handleChangePassword} style={{ direction: 'rtl' }} className="mb-2 bg-gray-200 rounded-lg p-2  text-center" />
+                        <input name="phone" type="tel" placeholder="טלפון" value={phone} onChange={handleChangePhoneNumber} style={{ direction: 'rtl' }} className="mb-2 bg-gray-200 rounded-lg p-2  text-center" /><br />
                         {error && <span className="text-red-500 mb-2">{error}</span>}<br />
-                        <button type="submit" className="btn bg-gray-800 text-white py-2 px-4 rounded-md hover:animate-button-push">הרשמה</button>
+                        <button type="submit" className="btn bg-gray-800 text-white py-2 px-4 rounded-md hover:animate-button-push">הרשם</button>
                     </form>
                 </div>
             </div>
