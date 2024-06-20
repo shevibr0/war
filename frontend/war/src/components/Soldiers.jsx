@@ -191,8 +191,8 @@ const Soldiers = () => {
                                         <img className="h-64 w-64 object-cover rounded-full" src={soldier.Image} alt={`${soldier.FirstName} ${soldier.LastName}`} />
                                     </div>
                                     <h3>{`${soldier.FirstName} ${soldier.LastName}`}</h3>
-                                    <p>{`גיל: ${soldier.Age}`}</p>
-                                    <p>{` ${soldier.DateOfDeath ? new Date(soldier.DateOfDeath).toDateString() : ''} תאריך פטירה:`}</p>
+                                    <p><strong>גיל</strong> {soldier.Age}</p>
+                                    <p><strong>תאריך פטירה</strong> {soldier.DateOfDeath ? new Date(soldier.DateOfDeath).toDateString() : 'לא זמין'}</p>
                                     <button className="btn bg-gray-300 font-bold text-gray-800 py-2 px-4 rounded-md hover:animate-button-push" onClick={() => nav(`/soldierInfo/${soldier.Id}`)}>עוד על {soldier.FirstName}</button>
                                     <div className='flex flex-col items-center mb-1'>
                                         <div className='flex justify-center'>
