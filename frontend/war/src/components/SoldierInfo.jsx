@@ -41,8 +41,8 @@ const SoldierInfo = () => {
             <div className='grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 gap-2 items-center mt-4 font-bold'>
                 <div className='flex cursor-pointer bg-white shadow-top shadow-gray-500  p-2 rounded-lg justify-center hover:animate-button-push' onClick={() => nav(`/soldierInfo/${id}/memories`)}>פתקי זכרון</div>
                 <div className='flex cursor-pointer  bg-white shadow-top shadow-gray-500  p-2 rounded-lg justify-center hover:animate-button-push' onClick={() => nav(`/soldierInfo/${id}/pictures`)}>תמונות</div>
-                <div className='flex cursor-pointer  bg-white shadow-top shadow-gray-500 p-2 rounded-lg justify-center hover:animate-button-push' onClick={() => nav(`/soldierInfo/${id}/theilim`)}>אמירת תהילים לעילוי נשמתו</div>
-                <div className='flex cursor-pointer  bg-white shadow-top shadow-gray-500 p-2 rounded-lg justify-center hover:animate-button-push' onClick={() => nav(`/soldierInfo/${id}/volunteering`)}>התנדבויות לעילוי נשמתו</div>
+                <div className='flex cursor-pointer  bg-white shadow-top shadow-gray-500 p-2 rounded-lg justify-center hover:animate-button-push' onClick={() => nav(`/soldierInfo/${id}/theilim`)}>אמירת תהילים </div>
+                <div className='flex cursor-pointer  bg-white shadow-top shadow-gray-500 p-2 rounded-lg justify-center hover:animate-button-push' onClick={() => nav(`/soldierInfo/${id}/volunteering`)}>התנדבויות</div>
                 <div className='flex cursor-pointer  bg-white shadow-top shadow-gray-500  p-2 rounded-lg justify-center hover:animate-button-push' onClick={() => nav(`/soldierInfo/${id}/recepies`)}>מתכונים</div>
             </div>
             <div className='flex justify-center items-center bg-gray-200 mt-8'>

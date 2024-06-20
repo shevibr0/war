@@ -124,7 +124,7 @@ const Theilim = () => {
             </div>
             <div className="bg-gray-200 min-h-screen flex flex-col items-center mt-0" style={{ direction: 'rtl' }}>
                 <h1 className="text-2xl text-gray-800 font-semibold mb-5">בחר פרק תהילים</h1>
-                <div className="grid lg:grid-cols-12 md:grid-cols-6 sm:grid-cols-3 gap-2">
+                <div className="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-12 gap-2">
                     {Array.from({ length: 150 }, (_, i) => (
                         <button
                             key={i + 1}
