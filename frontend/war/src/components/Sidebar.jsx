@@ -27,7 +27,7 @@ const Sidebar = () => {
                 <div onClick={() => nav('/homePage')} className='transition duration-100 hover:text-yellow-400'><FaHome /></div>
             </nav>
             <div className='flex items-center mb-1'>
-                <img className="mt-3 ml-5 w-[10px] mr-15 " src="/חץ חזור.svg" alt="Logo" onClick={() => nav(-1)} />
+                <img className="mt-3 ml-5 w-[10px] mr-15 " src="/חץ חזור.svg" alt="Logo" onClick={() => nav(-2)} />
             </div>
         </>
     );
