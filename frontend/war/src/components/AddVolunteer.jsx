@@ -28,7 +28,9 @@ const AddVolunteer = () => {
         const fetchVolunteeringOption = async () => {
             if (optionId) {
                 try {
+                    console.log("optionId", optionId);
                     const volunteeringOptionData = await getVolunteeringOptionByIdAsyncOptionId(id, optionId);
+                    console.log("volunteeringOptionData", volunteeringOptionData);
                     if (volunteeringOptionData && volunteeringOptionData.length > 0) {
                         setVolunteeringOption({ volunteeringOption: volunteeringOptionData[0] });
                     } else {
@@ -83,30 +85,30 @@ const AddVolunteer = () => {
     };
 
     return (
-        <div className="bg-gray-200 h-screen">
+        <div className="bg-gray-200">
             <Sidebar />
+            <h2 className='flex justify-center text-3xl font-bold '>{isEditing ? 'עריכת התנדבות' : 'הוספת התנדבות'}</h2>
+            {error && <p style={{ color: 'red' }}>{error}</p>}
             <div className="flex justify-center h-screen">
-                <div className='text-black mt-4 mr-2 ml-2 text-center'>
-                    <form onSubmit={handleSubmit} className='space-y-4 p-6 rounded-2xl bg-gray-400 shadow-xl shadow-gray-800 w-full max-w-4xl'>
+                <div className='text-black mt-3 w-80 text-center'>
+                    <form onSubmit={handleSubmit} className='flex flex-col py-6 px-4 border-2 border-black mt-0'>
                         <label className='flex flex-col'>
                             <textarea
                                 name="Description"
                                 value={volunteeringOption.volunteeringOption.Description}
                                 placeholder="הוסיפי קבלה שאת/ה מעוניינים לקבל לעילוי נשמתו/ה"
                                 onChange={handleChange}
-                                style={{ direction: 'rtl', wordWrap: 'break-word', whiteSpace: 'pre-wrap' }}
-                                className='text-gray-700 h-60 border border-gray-600 space-y-4 p-8 rounded-2xl mb-1'
-                            />
+                                style={{ direction: 'rtl' }}
+                                className='text-gray-700 h-60 border border-gray-600 rounded mb-1' />
                         </label>
-                        <div className='flex justify-center'>
-                            <button type="submit"
-                                disabled={isLoading}
-                                className={`btn bg-gray-900 text-white py-2 px-4 rounded-md ${isLoading ? 'opacity-50 cursor-not-allowed' : ' hover:animate-button-push'
-                                    }`}
-                            >
-                                {isLoading ? 'Adding...' : (isEditing ? 'עריכת התנדבות' : 'הוספת התנדבות')}
-                            </button>
-                        </div>
+                        <button
+                            type="submit"
+                            disabled={isLoading}
+                            className={`bg-gray-700 text-white py-2 px-4 rounded ${isLoading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-600 transition duration-300'
+                                }`}
+                        >
+                            {isLoading ? 'Adding...' : (isEditing ? 'עריכת התנדבות' : 'הוספת התנדבות')}
+                        </button>
                     </form>
                 </div>
             </div>
