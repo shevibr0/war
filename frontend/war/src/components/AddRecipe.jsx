@@ -157,7 +157,7 @@ const AddRecipe = () => {
                 <div className='text-gray-800 mt-4 mr-2 ml-2 text-center bg-gray-200'>
                     <form onSubmit={handleSubmit} className='space-y-4 p-6 rounded-2xl bg-gray-400 shadow-xl shadow-gray-800 w-full max-w-4xl'>
                         <div>
-                            <label htmlFor="recipeName" className="font-bold rounded-lg">שם המתכון</label>
+                            <label htmlFor="recipeName" className="font-bold rounded-xl text-lg">שם המתכון</label>
                             <input
                                 id="recipeName"
                                 type="text"
@@ -170,12 +170,12 @@ const AddRecipe = () => {
                                         Name: e.target.value
                                     }
                                 })}
-                                className="p-2 m-2 border"
+                                className="p-2 m-2 border rounded-xl"
                                 style={{ direction: 'rtl' }}
                             />
                         </div>
                         <div>
-                            <button type="button" className="bg-gray-600 text-white py-2 px-4 rounded" onClick={addProduct}>+ מוצרים</button>
+                            <button type="button" className="bg-gray-600 text-white py-2 px-4 rounded-xl" onClick={addProduct}>+ מוצרים</button>
                             {recipeDetails.ProductsToRecipes.map((product, index) => (
                                 <input
                                     key={product.Id}
@@ -188,32 +188,32 @@ const AddRecipe = () => {
                             ))}
                         </div>
                         <div>
-                            <button type="button" className="bg-gray-600 text-white py-2 px-4 rounded" onClick={addPreparationStep}>+ הוראות הכנה</button>
+                            <button type="button" className="bg-gray-600 text-white py-2 px-4 rounded-xl" onClick={addPreparationStep}>+ הוראות הכנה</button>
                             {recipeDetails.Preparations.map((step, index) => (
                                 <input
                                     key={step.Id}
                                     value={step.Description}
                                     onChange={(e) => handleChangePreparationStep(index, e)}
                                     placeholder="הוסף שלב הכנה"
-                                    className="p-2 m-2 border rounded-lg"
+                                    className="p-2 m-2 border rounded-xl"
                                     style={{ direction: 'rtl' }}
                                 />
                             ))}
                         </div>
                         <div>
-                            <label htmlFor="personalWords" className="font-bold">בנימה אישית</label>
+                            <label htmlFor="personalWords" className="font-bold text-lg">בנימה אישית</label>
                             <textarea
                                 id="personalWords"
                                 name="PersonalWords"
                                 value={recipeDetails.Recipy?.PersonalWords}
                                 onChange={handleChange}
-                                className="w-full p-2 border rounded-lg"
+                                className="w-full p-2 border rounded-xl"
                                 placeholder="כמה מילים אישיות על המתכון"
                                 style={{ direction: 'rtl' }}
                             />
                         </div>
                         <div className='flex justify-center'>
-                            <button type="submit" disabled={isLoading} className={`btn bg-gray-900 text-white py-2 px-4 rounded-md ${isLoading ? 'opacity-50 cursor-not-allowed' : ' hover:animate-button-push'}`}>
+                            <button type="submit" disabled={isLoading} className={`btn bg-gray-800 text-white py-2 px-4 rounded-md ${isLoading ? 'opacity-50 cursor-not-allowed' : ' hover:animate-button-push'}`}>
                                 {isLoading ? 'Adding...' : (isEditing ? 'עריכת מתכון' : 'הוספת מתכון')}
                             </button>
                         </div>
