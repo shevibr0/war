@@ -92,7 +92,7 @@ const AddVolunteer = () => {
                             <textarea
                                 name="Description"
                                 value={volunteeringOption.volunteeringOption.Description}
-                                placeholder="הוסיפי קבלה שאת/ה מעוניינים לקבל לעילוי נשמתו/ה"
+                                placeholder="הוסיפי קבלה שאת/ה מעוניין/ת לקבל לעילוי נשמתו/ה"
                                 onChange={handleChange}
                                 style={{ direction: 'rtl', wordWrap: 'break-word', whiteSpace: 'pre-wrap' }}
                                 className='text-gray-700 h-60 border border-gray-600 space-y-4 p-8 rounded-2xl mb-1'

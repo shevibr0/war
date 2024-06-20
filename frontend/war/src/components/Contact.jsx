@@ -49,12 +49,10 @@ const Contact = () => {
                     <h1 className="text-black text-4xl font-bold font-['Alef']  text-center">צור קשר</h1>
                     <div className="bg-gray-200" style={{ direction: 'rtl' }}>
                         <form onSubmit={sendEmail}>
-                            <label>שם</label>
-                            <input type="text" name="name" value={name} onChange={e => setName(e.target.value)} />
-                            <label>מייל</label>
-                            <input type="email" name="email" value={email} onChange={e => setEmail(e.target.value)} />
+                            <input placeholder='שם' type="text" name="name" value={name} onChange={e => setName(e.target.value)} />
+                            <input placeholder='מייל' type="email" name="email" value={email} onChange={e => setEmail(e.target.value)} />
                             <label>הודעה</label>
-                            <textarea name="massage" value={massage} onChange={e => setMassage(e.target.value)} />
+                            <textarea placeholder='דברו אלינו' name="massage" value={massage} onChange={e => setMassage(e.target.value)} />
                             <button type="submit" className="rounded-md text-right pr-6 pl-6 text-indigo-50 text-2xl font-bold font-['Alef']  bg-gray-600  hover:bg-white  hover:text-gray-600 hover:border border-gray-600" style={{ transitionProperty: 'background-color, color' }}>שלח</button>
                             {error && <div>{error}</div>}
                         </form>

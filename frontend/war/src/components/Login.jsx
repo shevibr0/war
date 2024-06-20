@@ -80,7 +80,7 @@ const Login = () => {
                         <input name="email" type="text" placeholder="הכנס מייל" value={email} onChange={handleChangeEmail} style={{ direction: 'rtl' }} className="mb-2 bg-gray-200 rounded-lg p-1" /><br />
                         <input name="password" type="text" placeholder="הכנס סיסמא" value={password} onChange={handleChangePassword} style={{ direction: 'rtl' }} className="mb-2 bg-gray-200 rounded-lg p-1" />
                         <span className="text-red-500 mb-2">{error}</span>
-                        <button onClick={handleClickLogin} className="btn bg-gray-800 text-white py-1 px-2 rounded-md hover:animate-button-push">התחברות</button>
+                        <button onClick={handleClickLogin} className="btn bg-gray-800 text-white py-1 px-2 rounded-md hover:animate-button-push">התחבר</button>
                     </div>
                 </div>
             </div>
