@@ -67,33 +67,29 @@ const SoldierInfo = () => {
                                 <span className="bg-black w-56 h-[0.2px] mt-5"></span>
                             </div>
                             <div className='text-center mt-4 space-y-2'>
-                                <p><strong>גיל</strong> {soldier.Age}</p>
-                                <p><strong>עיר</strong> {soldier.City}</p>
-                                <p>
-                                    {soldier.DateOfDeath
-                                        ? new Date(soldier.DateOfDeath).toLocaleDateString('he-IL', {
+                                {soldier.Age && <p><strong>גיל</strong> {soldier.Age}</p>}
+                                {soldier.City && <p><strong>עיר</strong> {soldier.City}</p>}
+                                {soldier.DateOfDeath && (
+                                    <p>
+                                        {new Date(soldier.DateOfDeath).toLocaleDateString('he-IL', {
                                             day: '2-digit',
                                             month: '2-digit',
                                             year: 'numeric'
-                                        })
-                                        : 'לא זמין'}
-                                    <strong> תאריך פטירה</strong>
-                                </p>                                     <p><strong>מקום הפטירה</strong> {soldier.PlaceOfDeath}</p>
-                                <p><strong>דרגה</strong> {soldier.RankName}</p>
-                                <p><strong>תפקיד</strong> {soldier.Role}</p>
-                                <p><strong>תאור קצר</strong> {soldier.ShortDescription}</p>
-
-                                <p><strong>תאור ארוך</strong><br />
-                                    {soldier.LongDescription}</p>
-
-                                {/* <p><strong>כתובת אתר למאמר</strong> <br />
-                                    <a target="_blank" href={soldier.UrlToArticle || '#'}>{soldier.UrlToArticle || 'לא זמין'}<br /></a>
-                                </p> */}
-                                <p><strong>מקום השירות</strong> {soldier.PlaceOfService}</p>
-                                <p><strong>מקום הקבורה</strong> {soldier.BurialPlace}</p>
-                                {/* <p><strong>ילד</strong> {soldier.IsChild ? 'כן' : 'לא'}</p> */}
-                                {/* <p><strong>חוליית חירום</strong> {soldier.IsEmergencySquad ? 'כן' : 'לא'}</p> */}
-                                {/* <p><strong>נהרג בנובה</strong> {soldier.AtNova ? 'כן' : 'לא'}</p> */}
+                                        })}
+                                        <strong> תאריך פטירה</strong>
+                                    </p>
+                                )}
+                                {soldier.PlaceOfDeath && <p><strong>מקום הפטירה</strong> {soldier.PlaceOfDeath}</p>}
+                                {soldier.RankName && <p><strong>דרגה</strong> {soldier.RankName}</p>}
+                                {soldier.Role && <p><strong>תפקיד</strong> {soldier.Role}</p>}
+                                {soldier.ShortDescription && <p><strong>תאור קצר</strong> {soldier.ShortDescription}</p>}
+                                {soldier.LongDescription && (
+                                    <p><strong>תאור ארוך</strong><br />
+                                        {soldier.LongDescription}
+                                    </p>
+                                )}
+                                {soldier.PlaceOfService && <p><strong>מקום השירות</strong> {soldier.PlaceOfService}</p>}
+                                {soldier.BurialPlace && <p><strong>מקום הקבורה</strong> {soldier.BurialPlace}</p>}
                             </div>
                         </div>
                     ) : (
