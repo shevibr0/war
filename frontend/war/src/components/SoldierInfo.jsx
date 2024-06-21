@@ -67,24 +67,24 @@ const SoldierInfo = () => {
                                 <span className="bg-black w-56 h-[0.2px] mt-5"></span>
                             </div>
                             <div className='text-center mt-4 space-y-2'>
-                                <p><strong>גיל</strong> {soldier.Age || 'לא זמין'}</p>
-                                <p><strong>עיר</strong> {soldier.City || 'לא זמין'}</p>
+                                <p><strong>גיל</strong> {soldier.Age}</p>
+                                <p><strong>עיר</strong> {soldier.City}</p>
                                 <p><strong>תאריך פטירה</strong> {soldier.DateOfDeath ? new Date(soldier.DateOfDeath).toDateString() : 'לא זמין'}</p>
-                                <p><strong>מקום הפטירה</strong> {soldier.PlaceOfDeath || 'לא זמין'}</p>
-                                <p><strong>דרגה</strong> {soldier.RankName || 'לא זמין'}</p>
-                                <p><strong>תפקיד</strong> {soldier.Role || 'לא זמין'}</p>
-                                <p><strong>תאור קצר</strong> {soldier.ShortDescription || 'לא זמין'}</p>
+                                <p><strong>מקום הפטירה</strong> {soldier.PlaceOfDeath}</p>
+                                <p><strong>דרגה</strong> {soldier.RankName}</p>
+                                <p><strong>תפקיד</strong> {soldier.Role}</p>
+                                <p><strong>תאור קצר</strong> {soldier.ShortDescription}</p>
 
                                 <p><strong>תאור ארוך</strong><br />
-                                    {soldier.LongDescription || 'לא זמין'}</p>
+                                    {soldier.LongDescription}</p>
 
-                                <p><strong>כתובת אתר למאמר</strong> <br />
+                                {/* <p><strong>כתובת אתר למאמר</strong> <br />
                                     <a target="_blank" href={soldier.UrlToArticle || '#'}>{soldier.UrlToArticle || 'לא זמין'}<br /></a>
-                                </p>
-                                <p><strong>מקום השירות</strong> {soldier.PlaceOfService || 'לא זמין'}</p>
-                                <p><strong>מקום הקבורה</strong> {soldier.BurialPlace || 'לא זמין'}</p>
-                                <p><strong>ילד</strong> {soldier.IsChild ? 'כן' : 'לא'}</p>
-                                <p><strong>חוליית חירום</strong> {soldier.IsEmergencySquad ? 'כן' : 'לא'}</p>
+                                </p> */}
+                                <p><strong>מקום השירות</strong> {soldier.PlaceOfService}</p>
+                                <p><strong>מקום הקבורה</strong> {soldier.BurialPlace}</p>
+                                {/* <p><strong>ילד</strong> {soldier.IsChild ? 'כן' : 'לא'}</p> */}
+                                {/* <p><strong>חוליית חירום</strong> {soldier.IsEmergencySquad ? 'כן' : 'לא'}</p> */}
                                 <p><strong>נהרג בנובה</strong> {soldier.AtNova ? 'כן' : 'לא'}</p>
                             </div>
                         </div>
