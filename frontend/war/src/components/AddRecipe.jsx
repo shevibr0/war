@@ -13,6 +13,7 @@ const AddRecipe = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
     const user = useSelector(state => state.user.connectedUser);
     const [isEditing, setIsEditing] = useState(Boolean(recipeId));
 
@@ -133,15 +134,23 @@ const AddRecipe = () => {
                 const addedRecipe = await addCompleteRecipe(completeRecipeData);
                 console.log('Recipe added successfully:', addedRecipe);
                 sendEmailNotification(completeRecipeData);
-                nav(`/soldierInfo/${id}/recepies`);
-                setError('')
+                setSuccessMessage('המתכון נוסף בהצלחה!');
+                setTimeout(() => {
+                    setSuccessMessage('');
+                    nav(`/soldierInfo/${id}/recepies`);
+                }, 3000);
+                setError('');
             } else {
                 console.log('Recipe recipeDetails:', recipeDetails);
                 const editRecipe = await updateRecipy(recipeDetails);
                 console.log('Recipe updated successfully:', editRecipe);
                 sendEmailNotification(recipeDetails.Recipy);
+                setSuccessMessage('המתכון עודכן בהצלחה!');
+                setTimeout(() => {
+                    setSuccessMessage('');
+                    nav(`/soldierInfo/${id}/recepies`);
+                }, 3000);
                 setError('');
-                nav(`/soldierInfo/${id}/recepies`);
             }
         } catch (error) {
             console.error('Error adding/updating recipe:', error);
@@ -234,7 +243,11 @@ const AddRecipe = () => {
                                 {isLoading ? 'Adding...' : (isEditing ? 'עריכת מתכון' : 'הוספת מתכון')}
                             </button>
                         </div>
+                        {isLoading && <div className="flex justify-center mt-4">
+                            <div className="w-12 h-12 border-4 border-t-4 border-gray-200 border-t-gray-600 rounded-full animate-spin"></div>
+                        </div>}
                         {error && <span className="text-red-500">{error}</span>}
+                        {successMessage && <span className="text-green-500">{successMessage}</span>}
                     </form>
                 </div>
             </div>

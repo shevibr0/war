@@ -92,7 +92,7 @@ const AddPicture = () => {
 
             console.log('Picture added successfully:', response);
             sendEmailNotification(downloadURL);
-            setSuccessMessage('התמונה נוספה בהצלחה!');
+            setSuccessMessage('התמונה נוספה בהצלחה');
             setTimeout(() => {
                 setSuccessMessage('');
                 nav(`/soldierInfo/${id}/pictures`);
@@ -128,7 +128,7 @@ const AddPicture = () => {
                 <div className='w-full text-center'>
                     {alertMessage && <p style={{ color: 'red' }}>{alertMessage}</p>}
                     {error && <p style={{ color: 'red' }}>{error}</p>}
-                    {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
+                    {successMessage && <p style={{ color: 'red' }}>{successMessage}</p>}
                 </div>
                 <div className="flex justify-center bg-gray-200 mt-4 mr-2 ml-2">
                     <form onSubmit={handleSubmit} className="bg-gray-400 space-y-4 p-8 rounded-2xl shadow-xl shadow-gray-700 text-center w-full max-w-lg mx-4">
