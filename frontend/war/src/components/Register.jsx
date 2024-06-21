@@ -47,6 +47,11 @@ const Register = () => {
             return;
         }
 
+        if (password.length > 20) {
+            setError('הסיסמה חייבת להכיל לכל היותר 20 תווים');
+            return;
+        }
+
         try {
             const newUser = { name, email, password, phone };
             const response = await addUser(newUser);
@@ -55,11 +60,11 @@ const Register = () => {
                 console.log("הרשמה הצליחה!");
                 nav("/login");
             } else {
-                setError("הרשמה נכשלה");
+                setError("הרשמה נכשלה: " + response.data.message);
             }
         } catch (error) {
             console.error("אירעה שגיאה:", error);
-            setError("אירעה שגיאה בעת ביצוע הבקשה");
+            setError("אירעה שגיאה בעת ביצוע הבקשה: " + error.response.data.message);
         }
     };
 
