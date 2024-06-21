@@ -10,6 +10,7 @@ const Pictures = () => {
     const nav = useNavigate();
     const { id } = useParams();
     const [isOpen, setIsOpen] = useState(false);
+    const [selectedImage, setSelectedImage] = useState(null);
     const [images, setImages] = useState([]);
     const user = useSelector(state => state.user.connectedUser);
 
@@ -55,6 +56,16 @@ const Pictures = () => {
         }
     };
 
+    const openModal = (image) => {
+        setSelectedImage(image);
+        setIsOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsOpen(false);
+        setSelectedImage(null);
+    };
+
     return (
         <div className="bg-gray-200 h-screen">
             <Sidebar />
@@ -71,6 +82,7 @@ const Pictures = () => {
                             loading="lazy"
                             src={image.Url}
                             alt={`Image ${index}`}
+                            onClick={() => openModal(image)}
                         />
                         <h3 className='font-bold text-gray-800'>בנימה אישית</h3>
                         {image.PersonalWords && <p className='text-sm italic text-gray-500 mb-2 break-words whitespace-pre-wrap'>{image.PersonalWords}</p>}
@@ -86,6 +98,17 @@ const Pictures = () => {
                     </div>
                 ))}
             </div>
+
+            {isOpen && selectedImage && (
+                <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center">
+                    <div className="bg-white p-4 rounded-lg shadow-lg">
+                        <button className="text-red-500 hover:text-red-700 font-bold" onClick={closeModal}>סגור</button>
+                        <img src={selectedImage.Url} alt="Enlarged Image" className="mt-4 max-h-96 object-contain" />
+                        <h3 className='font-bold text-gray-800'>בנימה אישית</h3>
+                        {selectedImage.PersonalWords && <p className='text-sm italic text-gray-500 mb-2 break-words whitespace-pre-wrap'>{selectedImage.PersonalWords}</p>}
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
