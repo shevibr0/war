@@ -27,46 +27,43 @@ const Register = () => {
 
     const handleRegistration = async (event) => {
         event.preventDefault();
-        console.log("Handling registration...");
-
         if (name === "" || email === "" || password === "" || phone === "") {
             setError('נא למלא את כל השדות');
-            console.log("All fields are required.");
             return;
         }
 
         if (!validateEmail(email)) {
             setError('נא להכניס כתובת מייל חוקית');
-            console.log("Invalid email address.");
             return;
         }
 
         if (!validatePhone(phone)) {
             setError('נא להכניס מספר טלפון חוקי');
-            console.log("Invalid phone number.");
             return;
         }
 
         if (password.length < 3) {
             setError('הסיסמה חייבת להכיל לפחות 3 תווים');
-            console.log("Password is too short.");
+            return;
+        }
+        if (password.length > 6) {
+            setError('הסיסמה חייבת להכיל לכל היותר 6 תווים');
+            console.log("Password is too long.");
             return;
         }
 
         try {
             const newUser = { name, email, password, phone };
-            console.log("Adding new user:", newUser);
             const response = await addUser(newUser);
-            console.log("API response:", response);
+            console.log(response);
             if (response.status === 200) {
-                console.log("Registration successful!");
+                console.log("הרשמה הצליחה");
                 nav("/login");
             } else {
                 setError("הרשמה נכשלה");
-                console.log("Registration failed.");
             }
         } catch (error) {
-            console.error("Error during registration:", error);
+            console.error("אירעה שגיאה:", error);
             setError("אירעה שגיאה בעת ביצוע הבקשה");
         }
     };
