@@ -9,6 +9,7 @@ const AddVolunteer = () => {
     const nav = useNavigate();
     const [isOpen, setIsOpen] = useState(false);
     const [error, setError] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
     const { id, optionId } = useParams();
     const user = useSelector(state => state.user.connectedUser);
     const [isLoading, setIsLoading] = useState(false);
@@ -70,12 +71,20 @@ const AddVolunteer = () => {
                 await updateVolunteeringOption(optionId, volunteeringOptionPayload);
                 console.log('Volunteering option updated successfully');
                 sendEmailNotification(volunteeringOptionPayload);
-                nav(`/soldierInfo/${id}/volunteering`);
+                setSuccessMessage('ההתנדבות עודכנה בהצלחה!');
+                setTimeout(() => {
+                    setSuccessMessage('');
+                    nav(`/soldierInfo/${id}/volunteering`);
+                }, 3000);
             } else {
                 await addVolunteeringOption(volunteeringOptionPayload);
                 console.log('Volunteering option added successfully');
                 sendEmailNotification(volunteeringOptionPayload);
-                nav(`/soldierInfo/${id}/volunteering`);
+                setSuccessMessage('ההתנדבות נוספה בהצלחה');
+                setTimeout(() => {
+                    setSuccessMessage('');
+                    nav(`/soldierInfo/${id}/volunteering`);
+                }, 3000);
             }
         } catch (error) {
             console.error('Error adding/updating volunteering:', error);
@@ -128,7 +137,11 @@ const AddVolunteer = () => {
                                 {isLoading ? 'Adding...' : (isEditing ? 'עריכת התנדבות' : 'הוספת התנדבות')}
                             </button>
                         </div>
-                    </form>
+                        {isLoading && <div className="flex justify-center mt-4">
+                            <div className="w-12 h-12 border-4 border-t-4 border-gray-200 border-t-gray-600 rounded-full animate-spin"></div>
+                        </div>}
+                        {error && <span className="text-red-500">{error}</span>}
+                        {successMessage && <span className="text-red-500 font-bold">{successMessage}</span>}                    </form>
                 </div>
             </div>
         </div>

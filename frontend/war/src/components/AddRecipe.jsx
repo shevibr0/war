@@ -134,7 +134,7 @@ const AddRecipe = () => {
                 const addedRecipe = await addCompleteRecipe(completeRecipeData);
                 console.log('Recipe added successfully:', addedRecipe);
                 sendEmailNotification(completeRecipeData);
-                setSuccessMessage('המתכון נוסף בהצלחה!');
+                setSuccessMessage('המתכון נוסף בהצלחה');
                 setTimeout(() => {
                     setSuccessMessage('');
                     nav(`/soldierInfo/${id}/recepies`);
@@ -247,7 +247,7 @@ const AddRecipe = () => {
                             <div className="w-12 h-12 border-4 border-t-4 border-gray-200 border-t-gray-600 rounded-full animate-spin"></div>
                         </div>}
                         {error && <span className="text-red-500">{error}</span>}
-                        {successMessage && <span className="text-green-500">{successMessage}</span>}
+                        {successMessage && <span className="text-red-500 font-bold">{successMessage}</span>}
                     </form>
                 </div>
             </div>

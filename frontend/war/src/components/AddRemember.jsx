@@ -11,6 +11,7 @@ const AddRemember = () => {
     const [error, setError] = useState('');
     const { id, memoryId } = useParams();
     const [isLoading, setIsLoading] = useState(false);
+    const [successMessage, setSuccessMessage] = useState('');
     const user = useSelector(state => state.user.connectedUser);
     const [isEditing, setIsEditing] = useState(Boolean(memoryId));
 
@@ -71,12 +72,20 @@ const AddRemember = () => {
                 await updateMemory(memoryId, memoryPayload);
                 console.log('Memory updated successfully');
                 sendEmailNotification(memoryPayload);
-                nav(`/soldierInfo/${id}/memories`);
+                setSuccessMessage('הזכרון עודכן בהצלחה!');
+                setTimeout(() => {
+                    setSuccessMessage('');
+                    nav(`/soldierInfo/${id}/memories`);
+                }, 3000);
             } else {
                 await addMemory(memoryPayload);
                 console.log('Memory added successfully');
                 sendEmailNotification(memoryPayload);
-                nav(`/soldierInfo/${id}/memories`);
+                setSuccessMessage('הזכרון נוסף בהצלחה');
+                setTimeout(() => {
+                    setSuccessMessage('');
+                    nav(`/soldierInfo/${id}/memories`);
+                }, 3000);
             }
         } catch (error) {
             console.error('Error adding/updating memory:', error);
@@ -127,6 +136,11 @@ const AddRemember = () => {
                                 {isLoading ? 'Adding...' : (isEditing ? 'עריכת זכרון' : 'הוספת זכרון')}
                             </button>
                         </div>
+                        {isLoading && <div className="flex justify-center mt-4">
+                            <div className="w-12 h-12 border-4 border-t-4 border-gray-200 border-t-gray-600 rounded-full animate-spin"></div>
+                        </div>}
+                        {error && <span className="text-red-500">{error}</span>}
+                        {successMessage && <span className="text-red-500 font-bold">{successMessage}</span>}
                     </form>
                 </div>
             </div>
