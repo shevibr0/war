@@ -15,6 +15,7 @@ const AddPicture = () => {
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [alertMessage, setAlertMessage] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
 
     const initialPictureDetails = {
         Picture: {
@@ -55,6 +56,7 @@ const AddPicture = () => {
             return;
         }
 
+        setIsLoading(true);
         const imageName = `images/${image.name + uuidv4()}`;
         const storageRef = ref(storage, imageName);
         const uploadTask = uploadBytesResumable(storageRef, image);
@@ -67,6 +69,7 @@ const AddPicture = () => {
             (error) => {
                 console.error('Upload error:', error);
                 setError('Error uploading image. Please try again.');
+                setIsLoading(false);
             },
             () => {
                 getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
@@ -89,7 +92,11 @@ const AddPicture = () => {
 
             console.log('Picture added successfully:', response);
             sendEmailNotification(downloadURL);
-            nav(`/soldierInfo/${id}/pictures`);
+            setSuccessMessage('התמונה נוספה בהצלחה!');
+            setTimeout(() => {
+                setSuccessMessage('');
+                nav(`/soldierInfo/${id}/pictures`);
+            }, 3000);
         } catch (error) {
             console.error('Error saving picture to database:', error);
             setError('Error saving picture. Please try again.');
@@ -121,6 +128,7 @@ const AddPicture = () => {
                 <div className='w-full text-center'>
                     {alertMessage && <p style={{ color: 'red' }}>{alertMessage}</p>}
                     {error && <p style={{ color: 'red' }}>{error}</p>}
+                    {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
                 </div>
                 <div className="flex justify-center bg-gray-200 mt-4 mr-2 ml-2">
                     <form onSubmit={handleSubmit} className="bg-gray-400 space-y-4 p-8 rounded-2xl shadow-xl shadow-gray-700 text-center w-full max-w-lg mx-4">
@@ -147,8 +155,13 @@ const AddPicture = () => {
                             />
                         </div>
                         <div className="flex justify-center">
-                            <button type="submit" disabled={isLoading} className="btn bg-gray-900 text-white py-2 px-4 rounded-md hover:animate-button-push">הוסף תמונה</button>
+                            <button type="submit" disabled={isLoading} className="btn bg-gray-900 text-white py-2 px-4 rounded-md hover:animate-button-push">
+                                {isLoading ? 'טוען...' : 'הוסף תמונה'}
+                            </button>
                         </div>
+                        {isLoading && <div className="flex justify-center mt-4">
+                            <div className="w-12 h-12 border-4 border-t-4 border-gray-200 border-t-gray-600 rounded-full animate-spin"></div>
+                        </div>}
                     </form>
                 </div>
             </div>
