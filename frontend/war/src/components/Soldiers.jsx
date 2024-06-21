@@ -191,6 +191,7 @@ const Soldiers = () => {
                                         <img className="h-64 w-64 object-cover rounded-full" src={soldier.Image} alt={`${soldier.FirstName} ${soldier.LastName}`} />
                                     </div>
                                     <h3>{`${soldier.FirstName} ${soldier.LastName} (${soldier.Age})`}</h3>
+                                    <p>{soldier.City}</p>
                                     <p>
                                         {soldier.DateOfDeath
                                             ? new Date(soldier.DateOfDeath).toLocaleDateString('he-IL', {
