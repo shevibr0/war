@@ -199,7 +199,6 @@ const Soldiers = () => {
                                                 year: 'numeric'
                                             })
                                             : 'לא זמין'}
-                                        <strong> תאריך פטירה</strong>
                                     </p>                                    <button className="btn bg-gray-300 font-bold text-gray-800 py-2 px-4 rounded-md hover:animate-button-push" onClick={() => nav(`/soldierInfo/${soldier.Id}`)}>עוד על {soldier.FirstName}</button>
                                     {/* <div className='flex flex-col items-center mb-1'>
                                         <div className='flex justify-center'>
