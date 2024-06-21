@@ -93,7 +93,7 @@ const SoldierInfo = () => {
                                 <p><strong>מקום הקבורה</strong> {soldier.BurialPlace}</p>
                                 {/* <p><strong>ילד</strong> {soldier.IsChild ? 'כן' : 'לא'}</p> */}
                                 {/* <p><strong>חוליית חירום</strong> {soldier.IsEmergencySquad ? 'כן' : 'לא'}</p> */}
-                                <p><strong>נהרג בנובה</strong> {soldier.AtNova ? 'כן' : 'לא'}</p>
+                                {/* <p><strong>נהרג בנובה</strong> {soldier.AtNova ? 'כן' : 'לא'}</p> */}
                             </div>
                         </div>
                     ) : (
