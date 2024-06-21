@@ -69,8 +69,16 @@ const SoldierInfo = () => {
                             <div className='text-center mt-4 space-y-2'>
                                 <p><strong>גיל</strong> {soldier.Age}</p>
                                 <p><strong>עיר</strong> {soldier.City}</p>
-                                <p><strong>תאריך פטירה</strong> {soldier.DateOfDeath ? new Date(soldier.DateOfDeath).toDateString() : 'לא זמין'}</p>
-                                <p><strong>מקום הפטירה</strong> {soldier.PlaceOfDeath}</p>
+                                <p>
+                                    {soldier.DateOfDeath
+                                        ? new Date(soldier.DateOfDeath).toLocaleDateString('he-IL', {
+                                            day: '2-digit',
+                                            month: '2-digit',
+                                            year: 'numeric'
+                                        })
+                                        : 'לא זמין'}
+                                    <strong> תאריך פטירה</strong>
+                                </p>                                     <p><strong>מקום הפטירה</strong> {soldier.PlaceOfDeath}</p>
                                 <p><strong>דרגה</strong> {soldier.RankName}</p>
                                 <p><strong>תפקיד</strong> {soldier.Role}</p>
                                 <p><strong>תאור קצר</strong> {soldier.ShortDescription}</p>
