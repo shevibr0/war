@@ -55,7 +55,8 @@ const Soldiers = () => {
                 setCount(res);
             });
         }
-        if ((isNext && searchQuery) || (isPrev && searchQuery)) {
+
+        if (searchQuery) {
             globalSearchSoldiers(searchQuery, currentPage).then(res => {
                 if (res.length > 30) {
                     setIsNext(true);
@@ -78,7 +79,7 @@ const Soldiers = () => {
         } else {
             fetchSoldiers(currentPage);
         }
-    }, [currentPage]);
+    }, [currentPage, searchQuery]);
 
     const handlePageChange = (newPage) => {
         setCurrentPage(newPage);
@@ -88,32 +89,7 @@ const Soldiers = () => {
         let searchValue = e.target.value;
         setSearchQuery(searchValue);
         setSearchMessage("");
-        if (searchValue !== "") {
-            globalSearchSoldiers(searchValue, currentPage).then(res => {
-                if (res.length > 30) {
-                    setIsNext(true);
-                    let a = res;
-                    a.splice(res.length - 1, 1);
-                    dispatch(setSearchSoliders(a));
-                } else {
-                    setIsNext(false);
-                    dispatch(setSearchSoliders(res));
-                    if (res.length === 0) {
-                        setSearchMessage("no result :(");
-                    }
-                }
-            });
-            if (currentPage > 1) {
-                setIsPrev(true);
-            } else {
-                setIsPrev(false);
-            }
-        } else {
-            setIsNext(false);
-            setIsPrev(false);
-            setCurrentPage(1);
-            dispatch(setSearchSoliders([]));
-        }
+        setCurrentPage(1); // Reset current page to 1 when a new search is performed
     };
 
     const handleCopyLink = () => {
@@ -132,7 +108,7 @@ const Soldiers = () => {
             <nav className="flex left-0 top-0 bg-gray-200 justify-center items-center text-3xl text-gray-800 h-[80px] cursor-pointer space-x-11">
                 {!user && (
                     <>
-                        <div onClick={() => nav('/register')} className='transition duration-100 hover:text-yellow-400'><RiLoginCircleFill /></div>
+                        {/* <div onClick={() => nav('/register')} className='transition duration-100 hover:text-yellow-400'><RiLoginCircleFill /></div> */}
                         <div onClick={() => nav('/login')} className='transition duration-100 hover:text-yellow-400'><IoMdLogIn /></div>
                     </>
                 )}
