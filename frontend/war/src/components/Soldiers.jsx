@@ -205,7 +205,7 @@ const Soldiers = () => {
                                 </button>
                             )}
                             <span className="text-lg font-bold mx-4">
-                                <span className="text-black">{currentPage}</span> / <span className="text-gray-400">{searchQuery ? searchSoliders.length : count}</span>
+                                <span className="text-black">{currentPage}</span> / <span className="text-gray-400">{searchQuery ? searchSoldiers.length : count}</span>
                             </span>
                             {isNext && (
                                 <button
