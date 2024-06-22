@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { ref, deleteObject } from "firebase/storage";
 import { storage } from "./firebase";
 import Sidebar from './Sidebar';
+import { getSoldiersById } from '../utils/SoldierUtil';
 
 const Pictures = () => {
     const nav = useNavigate();
@@ -12,7 +13,17 @@ const Pictures = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState(null);
     const [images, setImages] = useState([]);
+    const [soldier, setSoldier] = useState(null);
     const user = useSelector(state => state.user.connectedUser);
+
+    const fetchSoldierDetails = async () => {
+        try {
+            const soldierData = await getSoldiersById(id);
+            setSoldier(soldierData);
+        } catch (error) {
+            console.error('Error fetching soldier details:', error);
+        }
+    };
 
     useEffect(() => {
         const fetchPictures = async () => {
@@ -30,6 +41,7 @@ const Pictures = () => {
         };
 
         fetchPictures();
+        fetchSoldierDetails();
     }, [id]);
 
     const handleDelete = async (imageId, imageUrl) => {
@@ -67,8 +79,17 @@ const Pictures = () => {
     };
 
     return (
-        <div className="bg-gray-200 h-screen">
+        <div className="bg-gray-200 h-screen relative">
             <Sidebar />
+            {soldier && (
+                <div className="fixed top-20 right-4">
+                    {soldier.Image ? (
+                        <img className='h-12 w-12 object-cover rounded-full border-2 border-black' src={soldier.Image} alt={`${soldier.FirstName} ${soldier.LastName}`} />
+                    ) : (
+                        <div className='h-12 w-12 rounded-full border-2 border-black'></div>
+                    )}
+                </div>
+            )}
             <div className='mt-4 flex justify-center'>
                 <button className='btn bg-white font-bold cursor-pointer p-2 rounded-lg shadow-top shadow-gray-500 hover:animate-button-push' onClick={() => nav(`/soldierInfo/${id}/addPicture`)}>
                     + הוסף תמונה
