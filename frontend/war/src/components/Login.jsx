@@ -3,13 +3,13 @@ import api from "../api";// Make sure to import your API library
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setConnectedUser } from "../features/userSlice";
 import { GetByEmailAndPassword } from "../utils/UserUtil";
 import { FaHome, FaUserAlt, FaRegRegistered, FaComments } from 'react-icons/fa';
 import { IoMdLogIn } from "react-icons/io";
 import { RiLoginCircleFill } from "react-icons/ri";
 import { FaSearch } from "react-icons/fa";
 import { BiLogOutCircle } from "react-icons/bi";
+import { setConnectedUser, clearPageHistory } from '../features/userSlice';
 
 const Login = () => {
     const nav = useNavigate();
