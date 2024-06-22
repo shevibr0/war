@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router';
-import { useSelector } from 'react-redux';
+import { useNavigate, useParams, useLocation } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
 import emailjs from 'emailjs-com';
 import { addTehilim, getByUserCountTehilimForSoliderId, getCountTehilimBySoliderId, getTehilimBySoliderIdUser, updateTehilim } from '../utils/TehilimUtil';
 import { getSoldiersById } from '../utils/SoldierUtil';
 import Sidebar from './Sidebar';
+import { addPageToHistory } from '../features/userSlice';
 
 const Theilim = () => {
     const nav = useNavigate();
+    const location = useLocation();
+    const dispatch = useDispatch();
     const { id } = useParams();
     const user = useSelector(state => state.user.connectedUser);
     const [num, setNum] = useState(0);
@@ -61,7 +64,8 @@ const Theilim = () => {
         e.preventDefault();
         if (!user) {
             alert("בבקשה להתחבר על מנת להוסיף פרק תהילים");
-            nav('/register'); // Redirect to registration page
+            dispatch(addPageToHistory(location.pathname));
+            nav('/register');
             return;
         }
         if (theilimUser == null) {
