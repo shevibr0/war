@@ -15,12 +15,11 @@ const Remembers = () => {
 
     const fetchRemembers = async () => {
         try {
-            const data = await getMemoriesById(id); // Implement the getRemembers function
+            const data = await getMemoriesById(id);
             setRemembers(data);
             console.log('Remembers data:', data);
         } catch (error) {
             console.error('Error fetching remembers:', error);
-            // Handle error
         }
     };
 
@@ -34,36 +33,32 @@ const Remembers = () => {
     };
 
     useEffect(() => {
-        // Fetch remembers data from your API
         fetchRemembers();
         fetchSoldierDetails();
     }, [id]);
 
     const handleEdit = async (memoryId) => {
         nav(`${memoryId}/editMemory`);
-    }
+    };
 
     const handleDelete = async (id) => {
-        // חלון אישור עם אפשרות מחיקה או ביטול
         if (window.confirm("האם אתה בטוח שברצונך למחוק את הזיכרון?")) {
             try {
                 const data = await deleteMemory(id);
-                // עדכון המערך לאחר המחיקה
                 setRemembers(currentRemembers => currentRemembers.filter(memory => memory.Id !== id));
             } catch (error) {
                 console.error("Error deleting memory:", error);
             }
         } else {
-            // המשתמש בחר לא למחוק את הזיכרון
             console.log("מחיקת הזיכרון בוטלה");
         }
-    }
+    };
 
     return (
         <div className="bg-gray-200 h-screen text-gray-800 relative">
             <Sidebar />
             {soldier && (
-                <div className="absolute top-4 right-4">
+                <div className="fixed top-20 right-4">
                     {soldier.Image ? (
                         <img className='h-16 w-16 object-cover rounded-full border-2 border-black' src={soldier.Image} alt={`${soldier.FirstName} ${soldier.LastName}`} />
                     ) : (
@@ -71,7 +66,7 @@ const Remembers = () => {
                     )}
                 </div>
             )}
-            <div className='mt-4 flex justify-center pl-4'>
+            <div className='mt-4 flex justify-center'>
                 <button className='btn bg-white font-bold cursor-pointer p-2 rounded-lg shadow-top shadow-gray-500 hover:animate-button-push' onClick={() => nav(`/soldierInfo/${id}/addMemory`)}>
                     + הוסף זכרון
                 </button>
