@@ -6,6 +6,7 @@ import { setConnectedUser, clearPageHistory } from '../features/userSlice';
 import { FaHome, FaComments } from 'react-icons/fa';
 import { IoMdLogIn } from "react-icons/io";
 import { BiLogOutCircle } from "react-icons/bi";
+import { FaSearch } from "react-icons/fa";
 
 const Login = () => {
     const nav = useNavigate();
