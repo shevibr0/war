@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router';
-import { useSelector } from 'react-redux';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { GetCountSoliders, getSoldiers, globalSearchSoldiers } from '../utils/SoldierUtil';
+import { useDispatch, useSelector } from 'react-redux';
 import { setSearchSoliders, setSoliders } from '../features/soliderSlice';
 import { FaHome, FaUserAlt, FaRegRegistered, FaComments } from 'react-icons/fa';
 import { BiSearchAlt } from "react-icons/bi";
@@ -19,6 +19,7 @@ const Soldiers = () => {
     const solidersArr = searchSoldiers.length > 0 ? searchSoldiers : soldiers;
     const [currentPage, setCurrentPage] = useState(1);
     const [count, setCount] = useState(1);
+    const [searchResultsCount, setSearchResultsCount] = useState(0);
     const [isNext, setIsNext] = useState(false);
     const [isPrev, setIsPrev] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
@@ -58,6 +59,7 @@ const Soldiers = () => {
 
         if (searchQuery) {
             globalSearchSoldiers(searchQuery, currentPage).then(res => {
+                setSearchResultsCount(res.length); // שמירת מספר תוצאות החיפוש
                 if (res.length > 30) {
                     setIsNext(true);
                     let a = res;
@@ -108,7 +110,7 @@ const Soldiers = () => {
             <nav className="flex left-0 top-0 bg-gray-200 justify-center items-center text-3xl text-gray-800 h-[80px] cursor-pointer space-x-11">
                 {!user && (
                     <>
-                        <div onClick={() => nav('/register')} className='transition duration-100 hover:text-yellow-400'><RiLoginCircleFill /></div>
+                        {/* <div onClick={() => nav('/register')} className='transition duration-100 hover:text-yellow-400'><RiLoginCircleFill /></div> */}
                         <div onClick={() => nav('/login')} className='transition duration-100 hover:text-yellow-400'><IoMdLogIn /></div>
                     </>
                 )}
@@ -153,7 +155,7 @@ const Soldiers = () => {
                         </button>
                     )}
                     <span className="text-lg font-bold mx-4">
-                        <span className="text-black">{currentPage}</span> / <span className="text-gray-400">{searchQuery ? searchSoliders.length : count}</span>
+                        <span className="text-black">{currentPage}</span> / <span className="text-gray-400">{searchQuery ? Math.ceil(searchResultsCount / 30) : count}</span>
                     </span>
                     {isNext && (
                         <button
@@ -205,7 +207,7 @@ const Soldiers = () => {
                                 </button>
                             )}
                             <span className="text-lg font-bold mx-4">
-                                <span className="text-black">{currentPage}</span> / <span className="text-gray-400">{searchQuery ? searchSoliders.length : count}</span>
+                                <span className="text-black">{currentPage}</span> / <span className="text-gray-400">{searchQuery ? Math.ceil(searchResultsCount / 30) : count}</span>
                             </span>
                             {isNext && (
                                 <button
