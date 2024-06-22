@@ -51,7 +51,11 @@ const SoldierInfo = () => {
                         <div>
                             <h1 className='text-center text-2xl mb-2'>{`${soldier.FirstName} ${soldier.LastName}`}</h1>
                             <div className="flex justify-center mb-2">
-                                <img className='h-40 w-40 object-cover rounded-full' src={soldier.Image} alt={`${soldier.FirstName} ${soldier.LastName}`} />
+                                {soldier.Image ? (
+                                    <img className='h-40 w-40 object-cover rounded-full' src={soldier.Image} alt={`${soldier.FirstName} ${soldier.LastName}`} />
+                                ) : (
+                                    <div className='h-40 w-40 rounded-full border-2 border-black'></div>
+                                )}
                             </div>
                             <div className='flex flex-col items-center'>
                                 <div className='flex justify-center'>
@@ -67,7 +71,7 @@ const SoldierInfo = () => {
                                 <span className="bg-black w-56 h-[0.2px] mt-5"></span>
                             </div>
                             <div className='text-center mt-4 space-y-2'>
-                                {soldier.Age && <p><strong>גיל</strong> {soldier.Age}</p>}
+                                {soldier.Age !== null && soldier.Age !== undefined && <p><strong>גיל</strong> {soldier.Age}</p>}
                                 {soldier.City && <p><strong>עיר</strong> {soldier.City}</p>}
                                 {soldier.DateOfDeath && (
                                     <p>
