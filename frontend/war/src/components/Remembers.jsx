@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { deleteMemory, getMemoriesById } from '../utils/MemoryUtil';
-import { getSoldiersById } from '../utils/SoldierUtil';
 import { useNavigate, useParams } from 'react-router';
 import { useSelector } from 'react-redux';
 import Sidebar from './Sidebar';
+import { getSoldiersById } from '../utils/SoldierUtil';
 
 const Remembers = () => {
     const nav = useNavigate();
@@ -13,15 +13,9 @@ const Remembers = () => {
     const [soldier, setSoldier] = useState(null);
     const user = useSelector(state => state.user.connectedUser);
 
-    useEffect(() => {
-        // Fetch remembers data from your API
-        fetchRemembers();
-        fetchSoldierDetails();
-    }, [id]);
-
     const fetchRemembers = async () => {
         try {
-            const data = await getMemoriesById(id);
+            const data = await getMemoriesById(id); // Implement the getRemembers function
             setRemembers(data);
             console.log('Remembers data:', data);
         } catch (error) {
@@ -38,6 +32,12 @@ const Remembers = () => {
             console.error('Error fetching soldier details:', error);
         }
     };
+
+    useEffect(() => {
+        // Fetch remembers data from your API
+        fetchRemembers();
+        fetchSoldierDetails();
+    }, [id]);
 
     const handleEdit = async (memoryId) => {
         nav(`${memoryId}/editMemory`);
@@ -60,22 +60,26 @@ const Remembers = () => {
     }
 
     return (
-        <div className="bg-gray-200 h-screen text-gray-800">
+        <div className="bg-gray-200 h-screen text-gray-800 relative">
             <Sidebar />
-            <div className='mt-4 flex justify-between items-start'>
-                <button className='btn bg-white font-bold cursor-pointer p-2 rounded-lg shadow-top shadow-gray-500  hover:animate-button-push' onClick={() => nav(`/soldierInfo/${id}/addMemory`)}>
+            {soldier && (
+                <div className="absolute top-4 right-4">
+                    {soldier.Image ? (
+                        <img className='h-16 w-16 object-cover rounded-full border-2 border-black' src={soldier.Image} alt={`${soldier.FirstName} ${soldier.LastName}`} />
+                    ) : (
+                        <div className='h-16 w-16 rounded-full border-2 border-black'></div>
+                    )}
+                </div>
+            )}
+            <div className='mt-4 flex justify-start pl-4'>
+                <button className='btn bg-white font-bold cursor-pointer p-2 rounded-lg shadow-top shadow-gray-500 hover:animate-button-push' onClick={() => nav(`/soldierInfo/${id}/addMemory`)}>
                     + הוסף זכרון
                 </button>
-                {soldier && (
-                    <div className='w-16 h-16'>
-                        <img className='h-16 w-16 object-cover rounded-full' src={soldier.Image} alt={`${soldier.FirstName} ${soldier.LastName}`} />
-                    </div>
-                )}
             </div>
             <div className="mt-3">
                 <ul style={{ direction: 'rtl' }} className="flex flex-wrap justify-center bg-gray-200">
                     {remembers.map((remember, index) => (
-                        <li key={index} className="bg-yellow-100 shadow-lg p-4 m-2 rounded-lg hover:shadow-2xl transition-shadow duration-300 flex flex-col justify-between  w-60">
+                        <li key={index} className="bg-yellow-100 shadow-lg p-4 m-2 rounded-lg hover:shadow-2xl transition-shadow duration-300 flex flex-col justify-between w-60">
                             <strong className="break-words whitespace-pre-wrap">{remember.Remember}</strong><br />
                             <p className='text-gray-400 text-sm'>נכתב בתאריך {new Date(remember.Date).toLocaleDateString()}</p>
                             <p className='text-gray-400'>ע"י {remember.IdUserNavigation.Name}</p>
