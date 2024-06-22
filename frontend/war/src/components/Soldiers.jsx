@@ -136,11 +136,7 @@ const Soldiers = () => {
                         <div onClick={() => nav('/login')} className='transition duration-100 hover:text-yellow-400'><IoMdLogIn /></div>
                     </>
                 )}
-                {user && (
-                    <>
-                        <div onClick={() => nav('/logOut')} className='transition duration-100 hover:text-yellow-400'><BiLogOutCircle /></div>
-                    </>
-                )}
+
                 <div onClick={() => nav('/contact')} className='transition duration-100 hover:text-yellow-400'><FaComments /></div>
                 <div onClick={() => nav('/soldiers')} className='transition duration-100 hover:text-yellow-400'><FaSearch /></div>
                 <div onClick={() => nav('/homePage')} className='transition duration-100 hover:text-yellow-400'><FaHome /></div>
@@ -199,7 +195,7 @@ const Soldiers = () => {
                                 <div key={soldier.Id} className="bg-white text-center shadow-top shadow-gray-800 p-4 rounded-2xl hover:animate-button-push hover:shadow-xl hover:shadow-gray-700">
                                     <div className='flex justify-center mb-2'>
                                         {soldier.Image ? (
-                                            <img className="h-40 w-40 object-cover rounded-full border-2 border-black" src={soldier.Image} alt={`${soldier.FirstName || ''} ${soldier.LastName || ''}`} />
+                                            <img className="h-40 w-40 object-cover rounded-full" src={soldier.Image} alt={`${soldier.FirstName || ''} ${soldier.LastName || ''}`} />
                                         ) : (
                                             <div className='h-40 w-40 rounded-full border-2 border-black'></div>
                                         )}
