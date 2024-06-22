@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { addCompleteRecipe, getRecipyByRecipyId, updateRecipy } from '../utils/RecipyUtil';
-import { useNavigate, useParams } from 'react-router';
-import { useSelector } from 'react-redux';
+import { useNavigate, useParams, useLocation } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
 import { getProductsToRecipeById } from '../utils/ProductsToRecipeUtil';
 import { getPreparationById } from '../utils/PreparationUtil';
 import emailjs from 'emailjs-com';
 import Sidebar from './Sidebar';
 import { getSoldiersById } from '../utils/SoldierUtil';
+import { addPageToHistory } from '../features/userSlice';
 
 const AddRecipe = () => {
     const nav = useNavigate();
+    const dispatch = useDispatch();
+    const location = useLocation();
     const { id, recipeId } = useParams();
     const [isOpen, setIsOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -129,6 +132,7 @@ const AddRecipe = () => {
         e.preventDefault();
         if (!user) {
             alert("על מנת להוסיף מתכון יש להרשם/להתחבר לאתר");
+            dispatch(addPageToHistory(location.pathname));
             nav('/register');
             return;
         }

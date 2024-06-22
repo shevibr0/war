@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router';
+import { useNavigate, useParams, useLocation } from 'react-router';
 import { addVolunteeringOption, getVolunteeringOptionByIdAsyncOptionId, updateVolunteeringOption } from '../utils/VolunteeringOptionUtil';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import emailjs from 'emailjs-com';
 import Sidebar from './Sidebar';
 import { getSoldiersById } from '../utils/SoldierUtil';
+import { addPageToHistory } from '../features/userSlice';
 
 const AddVolunteer = () => {
     const nav = useNavigate();
+    const location = useLocation();
+    const dispatch = useDispatch();
     const [isOpen, setIsOpen] = useState(false);
     const [error, setError] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
@@ -74,6 +77,7 @@ const AddVolunteer = () => {
         e.preventDefault();
         if (!user) {
             alert("על מנת להוסיף התנדבות יש להרשם/להתחבר לאתר");
+            dispatch(addPageToHistory(location.pathname));
             nav('/register');
             return;
         }

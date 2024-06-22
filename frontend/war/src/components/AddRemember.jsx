@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { addMemory, getMemoryByIdAsyncRecipyId, updateMemory } from '../utils/MemoryUtil';
-import { useNavigate, useParams } from 'react-router';
-import { useSelector } from 'react-redux';
+import { useNavigate, useParams, useLocation } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
 import emailjs from 'emailjs-com';
 import Sidebar from './Sidebar';
 import { getSoldiersById } from '../utils/SoldierUtil';
+import { addPageToHistory } from '../features/userSlice';
 
 const AddRemember = () => {
     const nav = useNavigate();
+    const dispatch = useDispatch();
+    const location = useLocation();
     const [isOpen, setIsOpen] = useState(false);
     const [error, setError] = useState('');
     const { id, memoryId } = useParams();
@@ -76,6 +79,7 @@ const AddRemember = () => {
         event.preventDefault();
         if (!user) {
             alert("על מנת להוסיף זכרון יש להרשם/להתחבר לאתר");
+            dispatch(addPageToHistory(location.pathname));
             nav('/register');
             return;
         }
