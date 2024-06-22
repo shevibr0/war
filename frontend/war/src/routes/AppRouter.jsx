@@ -12,7 +12,7 @@ import AddPicture from '../components/AddPicture'
 import Pictures from '../components/Pictures'
 import Register from '../components/Register'
 import Contact from '../components/Contact'
-import AddTheilim from '../components/AddTheilim'
+// import AddTheilim from '../components/AddTheilim'
 import AddVolunteer from '../components/AddVolunteer'
 import Theilim from '../components/Theilim'
 import Voleenteerings from '../components/Voleenteerings'
@@ -39,7 +39,7 @@ export const AppRouter = () => {
             <Route path="soldierInfo/:id/recepies/:recipeId/editRecipe" element={<AddRecipe />} ></Route >
             <Route path="soldierInfo/:id/addMemory" element={<AddRemember />} ></Route >
             <Route path="soldierInfo/:id/addPicture" element={<AddPicture />}></Route>
-            <Route path="soldierInfo/:id/addTheilim" element={<AddTheilim />}></Route>
+            {/* <Route path="soldierInfo/:id/addTheilim" element={<AddTheilim />}></Route> */}
             <Route path="soldierInfo/:id/addVolunteer" element={<AddVolunteer />}></Route>
             <Route path="/soldierInfo/:id" element={<SoldierInfo />}> </Route>
             <Route path="/contact" element={<Contact />}> </Route >
