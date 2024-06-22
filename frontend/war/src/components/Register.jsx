@@ -60,7 +60,8 @@ const Register = () => {
             console.log(response);
             if (response.status === 200) {
                 console.log("הרשמה הצליחה");
-                nav("/login");
+                dispatch(addPageToHistory(location.pathname));
+                nav('/login');
             } else {
                 setError("הרשמה נכשלה");
             }
