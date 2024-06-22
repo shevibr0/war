@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { deleteMemory, getMemoriesById } from '../utils/MemoryUtil';
+import { getSoldiersById } from '../utils/SoldierUtil';
 import { useNavigate, useParams } from 'react-router';
 import { useSelector } from 'react-redux';
 import Sidebar from './Sidebar';
@@ -9,11 +10,18 @@ const Remembers = () => {
     const { id } = useParams();
     const [isOpen, setIsOpen] = useState(false);
     const [remembers, setRemembers] = useState([]);
+    const [soldier, setSoldier] = useState(null);
     const user = useSelector(state => state.user.connectedUser);
+
+    useEffect(() => {
+        // Fetch remembers data from your API
+        fetchRemembers();
+        fetchSoldierDetails();
+    }, [id]);
 
     const fetchRemembers = async () => {
         try {
-            const data = await getMemoriesById(id); // Implement the getRemembers function
+            const data = await getMemoriesById(id);
             setRemembers(data);
             console.log('Remembers data:', data);
         } catch (error) {
@@ -22,10 +30,14 @@ const Remembers = () => {
         }
     };
 
-    useEffect(() => {
-        // Fetch remembers data from your API
-        fetchRemembers();
-    }, [id]);
+    const fetchSoldierDetails = async () => {
+        try {
+            const soldierData = await getSoldiersById(id);
+            setSoldier(soldierData);
+        } catch (error) {
+            console.error('Error fetching soldier details:', error);
+        }
+    };
 
     const handleEdit = async (memoryId) => {
         nav(`${memoryId}/editMemory`);
@@ -50,10 +62,15 @@ const Remembers = () => {
     return (
         <div className="bg-gray-200 h-screen text-gray-800">
             <Sidebar />
-            <div className='mt-4 flex justify-center'>
+            <div className='mt-4 flex justify-between items-start'>
                 <button className='btn bg-white font-bold cursor-pointer p-2 rounded-lg shadow-top shadow-gray-500  hover:animate-button-push' onClick={() => nav(`/soldierInfo/${id}/addMemory`)}>
                     + הוסף זכרון
                 </button>
+                {soldier && (
+                    <div className='w-16 h-16'>
+                        <img className='h-16 w-16 object-cover rounded-full' src={soldier.Image} alt={`${soldier.FirstName} ${soldier.LastName}`} />
+                    </div>
+                )}
             </div>
             <div className="mt-3">
                 <ul style={{ direction: 'rtl' }} className="flex flex-wrap justify-center bg-gray-200">
@@ -75,7 +92,6 @@ const Remembers = () => {
                                         </svg>
                                     </button>
                                 </div>
-
                             )}
                         </li>
                     ))}
