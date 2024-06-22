@@ -115,6 +115,7 @@ const Soldiers = () => {
             dispatch(setSearchSoliders([]));
         }
     };
+
     const handleCopyLink = () => {
         const fullUrl = window.location.origin + location.pathname;
         navigator.clipboard.writeText(fullUrl).then(() => {
@@ -125,6 +126,7 @@ const Soldiers = () => {
             console.error('Failed to copy the link: ', err);
         });
     };
+
     return (
         <div className="bg-gray-200 h-screen">
             <nav className="flex left-0 top-0  bg-gray-200 justify-center items-center text-3xl text-gray-800 h-[80px]  cursor-pointer space-x-11">
@@ -193,9 +195,9 @@ const Soldiers = () => {
                                 <div key={soldier.Id} className="bg-white text-center shadow-top  shadow-gray-800 p-4 rounded-2xl hover:animate-button-push hover:shadow-xl hover:shadow-gray-700">
                                     <div className='flex justify-center mb-2'>
                                         {soldier.Image ? (
-                                            <img className="h-40 w-40 object-cover rounded-full border-2 border-black" src={soldier.Image} alt={`${soldier.FirstName || ''} ${soldier.LastName || ''}`} />
+                                            <img className="h-64 w-64 object-cover rounded-full" src={soldier.Image} alt={`${soldier.FirstName || ''} ${soldier.LastName || ''}`} />
                                         ) : (
-                                            <div className='h-40 w-40 rounded-full border-2 border-black'></div>
+                                            <div className='h-64 w-64 rounded-full border-2 border-black'></div>
                                         )}
                                     </div>
                                     <h3>{`${soldier.FirstName || ''} ${soldier.LastName || ''} (${soldier.Age || ''})`}</h3>
