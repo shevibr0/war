@@ -95,7 +95,7 @@ const Register = () => {
             <nav className="flex left-0 top-0  bg-gray-200 justify-center items-center text-3xl text-gray-800 h-[80px]  cursor-pointer space-x-11">
                 {!user && (
                     <>
-                        <div onClick={() => nav('/register')} className='transition duration-100 hover:text-yellow-400'><RiLoginCircleFill /></div>
+                        {/* <div onClick={() => nav('/register')} className='transition duration-100 hover:text-yellow-400'><RiLoginCircleFill /></div> */}
                         <div onClick={() => nav('/login')} className='transition duration-100 hover:text-yellow-400'> <IoMdLogIn /></div>
                     </>
                 )}
