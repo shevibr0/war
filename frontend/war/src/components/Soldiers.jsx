@@ -129,26 +129,26 @@ const Soldiers = () => {
 
     return (
         <div className="bg-gray-200 h-screen">
-            <nav className="flex left-0 top-0  bg-gray-200 justify-center items-center text-3xl text-gray-800 h-[80px]  cursor-pointer space-x-11">
+            <nav className="flex left-0 top-0 bg-gray-200 justify-center items-center text-3xl text-gray-800 h-[80px] cursor-pointer space-x-11">
                 {!user && (
                     <>
                         <div onClick={() => nav('/register')} className='transition duration-100 hover:text-yellow-400'><RiLoginCircleFill /></div>
-                        <div onClick={() => nav('/login')} className='transition duration-100 hover:text-yellow-400'> <IoMdLogIn /></div>
+                        <div onClick={() => nav('/login')} className='transition duration-100 hover:text-yellow-400'><IoMdLogIn /></div>
                     </>
                 )}
                 {user && (
                     <>
-                        <div onClick={() => nav('/logOut')} className='transition duration-100 hover:text-yellow-400' > <BiLogOutCircle /></div>
+                        <div onClick={() => nav('/logOut')} className='transition duration-100 hover:text-yellow-400'><BiLogOutCircle /></div>
                     </>
                 )}
-                <div onClick={() => nav('/contact')} className='transition duration-100 hover:text-yellow-400'> <FaComments /></div>
-                <div onClick={() => nav('/soldiers')} className='transition duration-100 hover:text-yellow-400' > <FaSearch /></div>
+                <div onClick={() => nav('/contact')} className='transition duration-100 hover:text-yellow-400'><FaComments /></div>
+                <div onClick={() => nav('/soldiers')} className='transition duration-100 hover:text-yellow-400'><FaSearch /></div>
                 <div onClick={() => nav('/homePage')} className='transition duration-100 hover:text-yellow-400'><FaHome /></div>
             </nav>
             <div className='flex justify-center mt-2 mb-2'>
                 {user && (
                     <div className="text-lg text-gray-800 font-semibold text-center">
-                        {user.Name}  שלום
+                        {user.Name} שלום
                     </div>
                 )}
             </div>
@@ -169,20 +169,24 @@ const Soldiers = () => {
                     </div>
                 </div>
                 <div className="flex justify-center items-center mt-4 mb-4">
-                    <button
-                        onClick={() => handlePageChange(currentPage - 1)}
-                        disabled={currentPage === 1 && !isPrev}
-                        className="btn bg-gray-200 text-gray-800 py-2 px-4 rounded-md hover:animate-button-push">
-                        <MdOutlineNavigateBefore className="text-2xl" />
-                    </button>
-                    <span className="text-lg font-bold mx-4">{currentPage}</span>
-                    <button
-                        onClick={() => handlePageChange(currentPage + 1)}
-                        disabled={(currentPage === count && !isNext) || !isNext}
-                        className="btn text-gray-800 py-2 px-4 rounded-md hover:animate-button-push"
-                    >
-                        <MdNavigateNext className="text-2xl" />
-                    </button>
+                    {isPrev && (
+                        <button
+                            onClick={() => handlePageChange(currentPage - 1)}
+                            className="btn bg-gray-200 text-gray-800 py-2 px-4 rounded-md hover:animate-button-push">
+                            <MdOutlineNavigateBefore className="text-2xl" />
+                        </button>
+                    )}
+                    <span className="text-lg font-bold mx-4">
+                        <span className="text-black">{currentPage}</span> / <span className="text-gray-400">{count}</span>
+                    </span>
+                    {isNext && (
+                        <button
+                            onClick={() => handlePageChange(currentPage + 1)}
+                            className="btn text-gray-800 py-2 px-4 rounded-md hover:animate-button-push"
+                        >
+                            <MdNavigateNext className="text-2xl" />
+                        </button>
+                    )}
                 </div>
                 {loading ? (
                     <div className='text-center'>
@@ -192,12 +196,12 @@ const Soldiers = () => {
                     <div className='ml-2 mr-2 text-gray-800'>
                         <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-3 gap-2 text-center w-full">
                             {searchMessage === "" ? solidersArr.map((soldier) => (
-                                <div key={soldier.Id} className="bg-white text-center shadow-top  shadow-gray-800 p-4 rounded-2xl hover:animate-button-push hover:shadow-xl hover:shadow-gray-700">
+                                <div key={soldier.Id} className="bg-white text-center shadow-top shadow-gray-800 p-4 rounded-2xl hover:animate-button-push hover:shadow-xl hover:shadow-gray-700">
                                     <div className='flex justify-center mb-2'>
                                         {soldier.Image ? (
-                                            <img className="h-64 w-64 object-cover rounded-full" src={soldier.Image} alt={`${soldier.FirstName || ''} ${soldier.LastName || ''}`} />
+                                            <img className="h-40 w-40 object-cover rounded-full border-2 border-black" src={soldier.Image} alt={`${soldier.FirstName || ''} ${soldier.LastName || ''}`} />
                                         ) : (
-                                            <div className='h-64 w-64 rounded-full border-2 border-black'></div>
+                                            <div className='h-40 w-40 rounded-full border-2 border-black'></div>
                                         )}
                                     </div>
                                     <h3>{`${soldier.FirstName || ''} ${soldier.LastName || ''} (${soldier.Age || ''})`}</h3>
@@ -216,21 +220,25 @@ const Soldiers = () => {
                             )) : <span>{searchMessage}</span>}
                         </div>
                         <div className="flex justify-center items-center mt-4 mb-4">
-                            <button
-                                onClick={() => handlePageChange(currentPage - 1)}
-                                disabled={currentPage === 1 && !isPrev}
-                                className="btn bg-gray-200 text-gray-800 py-2 px-4 rounded-md hover:animate-button-push"
-                            >
-                                <MdOutlineNavigateBefore className="text-2xl" />
-                            </button>
-                            <span className="text-lg font-bold mx-4">{currentPage}</span>
-                            <button
-                                onClick={() => handlePageChange(currentPage + 1)}
-                                disabled={(currentPage === count && !isNext) || !isNext}
-                                className="btn text-gray-800 py-2 px-4 rounded-md hover:animate-button-push"
-                            >
-                                <MdNavigateNext className="text-2xl" />
-                            </button>
+                            {isPrev && (
+                                <button
+                                    onClick={() => handlePageChange(currentPage - 1)}
+                                    className="btn bg-gray-200 text-gray-800 py-2 px-4 rounded-md hover:animate-button-push"
+                                >
+                                    <MdOutlineNavigateBefore className="text-2xl" />
+                                </button>
+                            )}
+                            <span className="text-lg font-bold mx-4">
+                                <span className="text-black">{currentPage}</span> / <span className="text-gray-400">{count}</span>
+                            </span>
+                            {isNext && (
+                                <button
+                                    onClick={() => handlePageChange(currentPage + 1)}
+                                    className="btn text-gray-800 py-2 px-4 rounded-md hover:animate-button-push"
+                                >
+                                    <MdNavigateNext className="text-2xl" />
+                                </button>
+                            )}
                         </div>
                     </div>
                 )}
