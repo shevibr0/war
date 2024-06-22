@@ -1,55 +1,72 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import { deleteVolunteeringOption, getVolunteeringOptionById } from '../utils/VolunteeringOptionUtil';
 import { useSelector } from 'react-redux';
 import Sidebar from './Sidebar';
+import { getSoldiersById } from '../utils/SoldierUtil';
 
 const Voleenteerings = () => {
-    const nav = useNavigate()
-    const [isOpen, setIsOpen] = useState(false);
+    const nav = useNavigate();
     const { id } = useParams();
     const user = useSelector(state => state.user.connectedUser);
     const [volunteeringOptions, setVolunteeringOptions] = useState([]);
+    const [soldier, setSoldier] = useState(null);
 
     const fetchVolunteeringOptions = async () => {
         try {
             const options = await getVolunteeringOptionById(id);
             setVolunteeringOptions(options);
-            console.log("volunteeringOptions", volunteeringOptions)
+            console.log("volunteeringOptions", options);
         } catch (error) {
             console.error('Error fetching volunteering options:', error);
-        };
-    }
+        }
+    };
+
+    const fetchSoldierDetails = async () => {
+        try {
+            const soldierData = await getSoldiersById(id);
+            setSoldier(soldierData);
+        } catch (error) {
+            console.error('Error fetching soldier details:', error);
+        }
+    };
 
     useEffect(() => {
         fetchVolunteeringOptions();
+        fetchSoldierDetails();
     }, [id]);
 
     const handleEdit = async (optionId) => {
         nav(`${optionId}/editVolunteering`);
-    }
+    };
 
     const handleDelete = async (id) => {
-        // חלון אישור עם אפשרות מחיקה או ביטול
         if (window.confirm("האם אתה בטוח שברצונך למחוק את ההתנדבות?")) {
             try {
-                const data = await deleteVolunteeringOption(id);
-                // עדכון המערך לאחר המחיקה
+                await deleteVolunteeringOption(id);
                 setVolunteeringOptions(currentVolunteeringOptions => currentVolunteeringOptions.filter(option => option.Id !== id));
             } catch (error) {
                 console.error("Error deleting volunteering option:", error);
             }
         } else {
-            // המשתמש בחר לא למחוק את ההתנדבות
             console.log("מחיקת ההתנדבות בוטלה");
         }
-    }
+    };
 
     return (
-        <div className="bg-gray-200 h-screen">
+        <div className="bg-gray-200 h-screen relative">
             <Sidebar />
+            {soldier && (
+                <div className="fixed top-20 right-4">
+                    {soldier.Image ? (
+                        <img className='h-12 w-12 object-cover rounded-full border-2 border-black' src={soldier.Image} alt={`${soldier.FirstName} ${soldier.LastName}`} />
+                    ) : (
+                        <div className='h-12 w-12 rounded-full border-2 border-black'></div>
+                    )}
+                </div>
+            )}
             <div className='mt-4 flex justify-center'>
-                <button className='btn bg-white font-bold cursor-pointer p-2 rounded-lg shadow-top shadow-gray-500  hover:animate-button-push' onClick={() => nav(`/soldierInfo/${id}/addVolunteer`)}>
+                <button className='btn bg-white font-bold cursor-pointer p-2 rounded-lg shadow-top shadow-gray-500 hover:animate-button-push' onClick={() => nav(`/soldierInfo/${id}/addVolunteer`)}>
                     + הוסף התנדבות
                 </button>
             </div>
@@ -59,7 +76,7 @@ const Voleenteerings = () => {
                         <li key={option.Id} className="bg-yellow-100 shadow-lg p-4 m-2 rounded-lg hover:shadow-2xl transition-shadow duration-300 flex flex-col justify-between  w-60">
                             <strong className="break-words whitespace-pre-wrap"> {option.Description} </strong><br />
                             <p className='text-gray-400 text-sm'>נכתב בתאריך {new Date(option.Date).toLocaleDateString()}</p>
-                            <p className=' text-gray-400'>ע"י {option.IdUserNavigation.Name}</p>
+                            <p className='text-gray-400'>ע"י {option.IdUserNavigation.Name}</p>
                             {user && user.Id === option.IdUser && (
                                 <div className="flex mt-0 pt-2 justify-end">
                                     <button onClick={() => handleEdit(option.Id)} className="text-black hover:text-red-700">
@@ -75,7 +92,7 @@ const Voleenteerings = () => {
                 </ul>
             </div>
         </div>
-    )
+    );
 }
 
 export default Voleenteerings;

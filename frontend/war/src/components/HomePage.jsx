@@ -22,7 +22,7 @@ const HomePage = () => {
 
                 <div className="flex items-center justify-center  flex-wrap">
                     <div className="max-w-lg w-full mx-4  mt-4 p-5 text-center text-gray-600 text-xl font-light bg-white shadow-lg shadow-gray-800 rounded-2xl">
-                        המיזם הוקם מתוך רצון עמוק להכיר מקרוב את גיבורינו שנפלו, להנציח את זיכרונם ולהשאיר אותו חקוק בלב כולם<br /><br />
+                        המיזם הוקם מתוך רצון עמוק להכיר מקרוב את גיבורינו שנפלו, להנציח את זכרם ולהשאיר אותו חקוק בלב כולם<br /><br />
                         לחלוק איתנו סיפורים, תמונות, מתכונים שאהבו וזכרונות מתוקים<br /><br />
                         אנו מזמינים אתכם לקחת חלק במסע מרגש זה, להקדיש מעשה טוב או פרק תהלים לעילוי נשמתם
                         <br />

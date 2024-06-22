@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router';
 import { useSelector } from 'react-redux';
 import emailjs from 'emailjs-com';
 import Sidebar from './Sidebar';
+import { getSoldiersById } from '../utils/SoldierUtil';
 
 const AddRemember = () => {
     const nav = useNavigate();
@@ -14,6 +15,7 @@ const AddRemember = () => {
     const [successMessage, setSuccessMessage] = useState('');
     const user = useSelector(state => state.user.connectedUser);
     const [isEditing, setIsEditing] = useState(Boolean(memoryId));
+    const [soldier, setSoldier] = useState(null);
 
     console.log('Connected user:', user); // Debugging line to check the user object
 
@@ -46,6 +48,18 @@ const AddRemember = () => {
         };
         fetchMemory();
     }, [id, memoryId]);
+
+    useEffect(() => {
+        const fetchSoldierDetails = async () => {
+            try {
+                const soldierData = await getSoldiersById(id);
+                setSoldier(soldierData);
+            } catch (error) {
+                console.error('Error fetching soldier details:', error);
+            }
+        };
+        fetchSoldierDetails();
+    }, [id]);
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -112,8 +126,17 @@ const AddRemember = () => {
     };
 
     return (
-        <div className="bg-gray-200 h-screen">
+        <div className="bg-gray-200 h-screen relative">
             <Sidebar />
+            {soldier && (
+                <div className="fixed top-20 right-4">
+                    {soldier.Image ? (
+                        <img className='h-12 w-12 object-cover rounded-full border-2 border-black' src={soldier.Image} alt={`${soldier.FirstName} ${soldier.LastName}`} />
+                    ) : (
+                        <div className='h-12 w-12 rounded-full border-2 border-black'></div>
+                    )}
+                </div>
+            )}
             <div className="flex justify-center">
                 <div className='text-gray-800 mt-4 mr-2 ml-2 text-center bg-gray-200'>
                     <form onSubmit={handleSubmit} className='space-y-4 p-6 rounded-2xl bg-gray-400 shadow-xl shadow-gray-800 w-full max-w-4xl'>

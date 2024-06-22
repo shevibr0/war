@@ -6,6 +6,7 @@ import { getProductsToRecipeById } from '../utils/ProductsToRecipeUtil';
 import { getPreparationById } from '../utils/PreparationUtil';
 import emailjs from 'emailjs-com';
 import Sidebar from './Sidebar';
+import { getSoldiersById } from '../utils/SoldierUtil';
 
 const AddRecipe = () => {
     const nav = useNavigate();
@@ -16,6 +17,7 @@ const AddRecipe = () => {
     const [successMessage, setSuccessMessage] = useState('');
     const user = useSelector(state => state.user.connectedUser);
     const [isEditing, setIsEditing] = useState(Boolean(recipeId));
+    const [soldier, setSoldier] = useState(null);
 
     const initialRecipeDetails = {
         Recipy: {
@@ -30,6 +32,18 @@ const AddRecipe = () => {
         Preparations: []
     };
     const [recipeDetails, setRecipeDetails] = useState(initialRecipeDetails);
+
+    useEffect(() => {
+        const fetchSoldierDetails = async () => {
+            try {
+                const soldierData = await getSoldiersById(id);
+                setSoldier(soldierData);
+            } catch (error) {
+                console.error('Error fetching soldier details:', error);
+            }
+        };
+        fetchSoldierDetails();
+    }, [id]);
 
     useEffect(() => {
         if (recipeId) {
@@ -177,8 +191,17 @@ const AddRecipe = () => {
     };
 
     return (
-        <div className="bg-gray-200 h-screen">
+        <div className="bg-gray-200 h-screen relative">
             <Sidebar />
+            {soldier && (
+                <div className="fixed top-20 right-4">
+                    {soldier.Image ? (
+                        <img className='h-12 w-12 object-cover rounded-full border-2 border-black' src={soldier.Image} alt={`${soldier.FirstName} ${soldier.LastName}`} />
+                    ) : (
+                        <div className='h-12 w-12 rounded-full border-2 border-black'></div>
+                    )}
+                </div>
+            )}
             <div className="flex justify-center bg-gray-200">
                 <div className='text-gray-800 mt-4 mr-2 ml-2 text-center mb-2 bg-gray-200'>
                     <form onSubmit={handleSubmit} className='space-y-4 p-6 rounded-2xl bg-gray-400 shadow-xl shadow-gray-800 w-full max-w-4xl'>
