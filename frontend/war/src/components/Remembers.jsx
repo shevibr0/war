@@ -60,9 +60,9 @@ const Remembers = () => {
             {soldier && (
                 <div className="fixed top-20 right-4">
                     {soldier.Image ? (
-                        <img className='h-16 w-16 object-cover rounded-full border-2 border-black' src={soldier.Image} alt={`${soldier.FirstName} ${soldier.LastName}`} />
+                        <img className='h-13 w-13 object-cover rounded-full border-2 border-black' src={soldier.Image} alt={`${soldier.FirstName} ${soldier.LastName}`} />
                     ) : (
-                        <div className='h-16 w-16 rounded-full border-2 border-black'></div>
+                        <div className='h-13 w-13 rounded-full border-2 border-black'></div>
                     )}
                 </div>
             )}

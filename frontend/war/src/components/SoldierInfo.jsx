@@ -49,10 +49,10 @@ const SoldierInfo = () => {
                 <div className="bg-white p-8 rounded-lg shadow-top shadow-gray-800 w-full max-w-4xl mb-6">
                     {soldier !== null ? (
                         <div>
-                            <h1 className='text-center text-2xl mb-2'>{`${soldier.FirstName} ${soldier.LastName}`}</h1>
+                            <h1 className='text-center text-2xl mb-2'>{`${soldier.FirstName || ''} ${soldier.LastName || ''}`}</h1>
                             <div className="flex justify-center mb-2">
                                 {soldier.Image ? (
-                                    <img className='h-40 w-40 object-cover rounded-full' src={soldier.Image} alt={`${soldier.FirstName} ${soldier.LastName}`} />
+                                    <img className='h-40 w-40 object-cover rounded-full border-2 border-black' src={soldier.Image} alt={`${soldier.FirstName} ${soldier.LastName}`} />
                                 ) : (
                                     <div className='h-40 w-40 rounded-full border-2 border-black'></div>
                                 )}
