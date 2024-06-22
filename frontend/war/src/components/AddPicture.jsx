@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router';
+import { useNavigate, useParams, useLocation } from 'react-router';
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import { storage } from "./firebase";
 import { v4 as uuidv4 } from "uuid";
@@ -20,6 +20,8 @@ const AddPicture = () => {
     const [alertMessage, setAlertMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
     const [soldier, setSoldier] = useState(null);
+    const pageHistory = useSelector(state => state.user.pageHistory);
+    const location = useLocation();
 
     const initialPictureDetails = {
         Picture: {
