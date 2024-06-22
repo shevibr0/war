@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { GetCountSoliders, getSoldiers, globalSearchSoldiers } from '../utils/SoldierUtil';
-import { useNavigate, useLocation } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSearchSoliders, setSoliders } from '../features/soliderSlice';
 import { FaHome, FaUserAlt, FaRegRegistered, FaComments } from 'react-icons/fa';
@@ -191,11 +191,15 @@ const Soldiers = () => {
                         <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-3 gap-2 text-center w-full">
                             {searchMessage === "" ? solidersArr.map((soldier) => (
                                 <div key={soldier.Id} className="bg-white text-center shadow-top  shadow-gray-800 p-4 rounded-2xl hover:animate-button-push hover:shadow-xl hover:shadow-gray-700">
-                                    <div className='flex justify-center'>
-                                        <img className="h-64 w-64 object-cover rounded-full" src={soldier.Image} alt={`${soldier.FirstName} ${soldier.LastName}`} />
+                                    <div className='flex justify-center mb-2'>
+                                        {soldier.Image ? (
+                                            <img className="h-40 w-40 object-cover rounded-full border-2 border-black" src={soldier.Image} alt={`${soldier.FirstName || ''} ${soldier.LastName || ''}`} />
+                                        ) : (
+                                            <div className='h-40 w-40 rounded-full border-2 border-black'></div>
+                                        )}
                                     </div>
-                                    <h3>{`${soldier.FirstName} ${soldier.LastName} (${soldier.Age})`}</h3>
-                                    <p>{soldier.City}</p>
+                                    <h3>{`${soldier.FirstName || ''} ${soldier.LastName || ''} (${soldier.Age || ''})`}</h3>
+                                    <p>{soldier.City || ''}</p>
                                     <p>
                                         {soldier.DateOfDeath
                                             ? new Date(soldier.DateOfDeath).toLocaleDateString('he-IL', {
@@ -204,19 +208,9 @@ const Soldiers = () => {
                                                 year: 'numeric'
                                             })
                                             : 'לא זמין'}
-                                    </p>                                    <button className="btn bg-gray-300 font-bold text-gray-800 py-2 px-4 rounded-md hover:animate-button-push" onClick={() => nav(`/soldierInfo/${soldier.Id}`)}>עוד על {soldier.FirstName}</button>
-                                    {/* <div className='flex flex-col items-center mb-1'>
-                                        <div className='flex justify-center'>
-                                            <a onClick={handleCopyLink} className="flex text-center hover:cursor-pointer">
-                                                <img className='w-5 h-5 bg-white mr-3 mt-1' src="/share.png" alt="share" />
-                                            </a>
-                                        </div>
-                                        <div>
-                                            {copySuccess && <p className="text-red-700">{copySuccess}</p>}
-                                        </div>
-                                    </div> */}
+                                    </p>
+                                    <button className="btn bg-gray-300 font-bold text-gray-800 py-2 px-4 rounded-md hover:animate-button-push" onClick={() => nav(`/soldierInfo/${soldier.Id}`)}>עוד על {soldier.FirstName || ''}</button>
                                 </div>
-
                             )) : <span>{searchMessage}</span>}
                         </div>
                         <div className="flex justify-center items-center mt-4 mb-4">

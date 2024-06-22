@@ -23,14 +23,14 @@ const Login = () => {
         event.preventDefault(); // Prevent the
         event.preventDefault(); // Prevent the default form submission
         if (email === "" || password === "") {
-            setError('Please enter both email and password');
+            setError('בבקשה הכנס מייל וסיסמא');
             return;
         }
         try {
             // Assuming `GetByEmailAndPassword` returns a Promise
             const res = await GetByEmailAndPassword(email, password);
             if (res === null) {
-                setError("Incorrect credentials");
+                setError("ההתחברות נכשלה");
             } else {
                 console.log("Login Successful!");
                 // Set the user data in state
