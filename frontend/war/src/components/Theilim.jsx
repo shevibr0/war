@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router';
 import { useSelector } from 'react-redux';
 import emailjs from 'emailjs-com';
 import { addTehilim, getByUserCountTehilimForSoliderId, getCountTehilimBySoliderId, getTehilimBySoliderIdUser, updateTehilim } from '../utils/TehilimUtil';
+import { getSoldiersById } from '../utils/SoldierUtil';
 import Sidebar from './Sidebar';
 
 const Theilim = () => {
@@ -15,6 +16,7 @@ const Theilim = () => {
     const [selectedPsalmsPart, setSelectedPsalmsPart] = useState(null);
     const [showPopup, setShowPopup] = useState(false);
     const [theilimUser, setTheilimUser] = useState(null);
+    const [soldier, setSoldier] = useState(null);
 
     useEffect(() => {
         if (selectedPsalms) {
@@ -41,8 +43,18 @@ const Theilim = () => {
         }
     };
 
+    const fetchSoldierDetails = async () => {
+        try {
+            const soldierData = await getSoldiersById(id);
+            setSoldier(soldierData);
+        } catch (error) {
+            console.error('Error fetching soldier details:', error);
+        }
+    };
+
     useEffect(() => {
         fetchTehilimBySoliderIdUser();
+        fetchSoldierDetails();
     }, [user]);
 
     const handleAddTheilimForSolider = async (e) => {
@@ -140,8 +152,17 @@ const Theilim = () => {
     };
 
     return (
-        <div className="bg-gray-200 min-h-screen">
+        <div className="bg-gray-200 min-h-screen relative">
             <Sidebar />
+            {soldier && (
+                <div className="fixed top-20 right-4">
+                    {soldier.Image ? (
+                        <img className='h-12 w-12 object-cover rounded-full border-2 border-black' src={soldier.Image} alt={`${soldier.FirstName} ${soldier.LastName}`} />
+                    ) : (
+                        <div className='h-12 w-12 rounded-full border-2 border-black'></div>
+                    )}
+                </div>
+            )}
             <div className='flex justify-center mt-4'>
                 <p>מספר פרקי תהילים שנאמרו: {num} | כמות משתתפים: {userNum}</p>
             </div>
