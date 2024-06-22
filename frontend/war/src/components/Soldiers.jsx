@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams, useLocation } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router';
+import { useSelector } from 'react-redux';
 import { GetCountSoliders, getSoldiers, globalSearchSoldiers } from '../utils/SoldierUtil';
-import { useDispatch, useSelector } from 'react-redux';
 import { setSearchSoliders, setSoliders } from '../features/soliderSlice';
 import { FaHome, FaUserAlt, FaRegRegistered, FaComments } from 'react-icons/fa';
 import { BiSearchAlt } from "react-icons/bi";
@@ -153,7 +153,7 @@ const Soldiers = () => {
                         </button>
                     )}
                     <span className="text-lg font-bold mx-4">
-                        <span className="text-black">{currentPage}</span> / <span className="text-gray-400">{searchQuery ? searchSoldiers.length : count}</span>
+                        <span className="text-black">{currentPage}</span> / <span className="text-gray-400">{searchQuery ? searchSoliders.length : count}</span>
                     </span>
                     {isNext && (
                         <button
@@ -205,7 +205,7 @@ const Soldiers = () => {
                                 </button>
                             )}
                             <span className="text-lg font-bold mx-4">
-                                <span className="text-black">{currentPage}</span> / <span className="text-gray-400">{searchQuery ? searchSoldiers.length : count}</span>
+                                <span className="text-black">{currentPage}</span> / <span className="text-gray-400">{searchQuery ? searchSoliders.length : count}</span>
                             </span>
                             {isNext && (
                                 <button

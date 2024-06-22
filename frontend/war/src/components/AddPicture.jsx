@@ -8,8 +8,11 @@ import { addPicture } from '../utils/PictureUtil';
 import emailjs from 'emailjs-com';
 import Sidebar from './Sidebar';
 import { getSoldiersById } from '../utils/SoldierUtil';
+import { useDispatch, useSelector } from 'react-redux';
+import { addPageToHistory } from '../features/userSlice';
 
 const AddPicture = () => {
+    const dispatch = useDispatch();
     const nav = useNavigate();
     const { id } = useParams();
     const user = useSelector(state => state.user.connectedUser);
@@ -61,6 +64,7 @@ const AddPicture = () => {
 
         if (!user) {
             setAlertMessage('על מנת להוסיף תמונה יש להרשם/להתחבר לאתר"');
+            dispatch(addPageToHistory(location.pathname));
             nav('/register');
             return;
         }
