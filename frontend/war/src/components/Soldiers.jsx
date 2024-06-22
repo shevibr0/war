@@ -108,7 +108,7 @@ const Soldiers = () => {
             <nav className="flex left-0 top-0 bg-gray-200 justify-center items-center text-3xl text-gray-800 h-[80px] cursor-pointer space-x-11">
                 {!user && (
                     <>
-                        {/* <div onClick={() => nav('/register')} className='transition duration-100 hover:text-yellow-400'><RiLoginCircleFill /></div> */}
+                        <div onClick={() => nav('/register')} className='transition duration-100 hover:text-yellow-400'><RiLoginCircleFill /></div>
                         <div onClick={() => nav('/login')} className='transition duration-100 hover:text-yellow-400'><IoMdLogIn /></div>
                     </>
                 )}
@@ -175,12 +175,12 @@ const Soldiers = () => {
                                 <div key={soldier.Id} className="bg-white text-center shadow-top shadow-gray-800 p-4 rounded-2xl hover:animate-button-push hover:shadow-xl hover:shadow-gray-700">
                                     <div className='flex justify-center mb-2'>
                                         {soldier.Image ? (
-                                            <img className="h-40 w-40 object-cover rounded-full" src={soldier.Image} alt={${soldier.FirstName || ''} ${soldier.LastName || ''}} />
+                                            <img className="h-40 w-40 object-cover rounded-full" src={soldier.Image} alt={`${soldier.FirstName || ''} ${soldier.LastName || ''}`} />
                                         ) : (
-                                        <div className='h-40 w-40 rounded-full border-2 border-black'></div>
+                                            <div className='h-40 w-40 rounded-full border-2 border-black'></div>
                                         )}
                                     </div>
-                                    <h3>{${soldier.FirstName || ''} ${soldier.LastName || ''} (${soldier.Age || ''})}</h3>
+                                    <h3>{`${soldier.FirstName || ''} ${soldier.LastName || ''} (${soldier.Age || ''})`}</h3>
                                     <p>{soldier.City || ''}</p>
                                     <p>
                                         {soldier.DateOfDeath
@@ -191,7 +191,7 @@ const Soldiers = () => {
                                             })
                                             : 'לא זמין'}
                                     </p>
-                                    <button className="btn bg-gray-300 font-bold text-gray-800 py-2 px-4 rounded-md hover:animate-button-push" onClick={() => nav(/soldierInfo/${ soldier.Id })}>עוד על {soldier.FirstName || ''}</button>
+                                    <button className="btn bg-gray-300 font-bold text-gray-800 py-2 px-4 rounded-md hover:animate-button-push" onClick={() => nav(`/soldierInfo/${soldier.Id}`)}>עוד על {soldier.FirstName || ''}</button>
                                 </div>
                             )) : <span>{searchMessage}</span>}
                         </div>
