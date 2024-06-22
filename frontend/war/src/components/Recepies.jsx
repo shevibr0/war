@@ -5,6 +5,7 @@ import { getPreparationById } from '../utils/PreparationUtil';
 import { getProductsToRecipeById } from '../utils/ProductsToRecipeUtil';
 import { useSelector } from 'react-redux';
 import Sidebar from './Sidebar';
+import { getSoldiersById } from '../utils/SoldierUtil';
 
 const Recepies = () => {
     const nav = useNavigate();
@@ -13,6 +14,7 @@ const Recepies = () => {
     const [recepies, setRecepies] = useState([]);
     const [preparations, setPreparations] = useState([]);
     const [productsToRecipes, setProductsToRecipes] = useState([]);
+    const [soldier, setSoldier] = useState(null);
     const user = useSelector(state => state.user.connectedUser);
 
     const fetchRecipyById = async () => {
@@ -50,8 +52,18 @@ const Recepies = () => {
         }
     };
 
+    const fetchSoldierDetails = async () => {
+        try {
+            const soldierData = await getSoldiersById(id);
+            setSoldier(soldierData);
+        } catch (error) {
+            console.error('Error fetching soldier details:', error);
+        }
+    };
+
     useEffect(() => {
         fetchRecipyById();
+        fetchSoldierDetails();
     }, [id]);
 
     const handleEdit = (recipeId) => {
@@ -72,8 +84,17 @@ const Recepies = () => {
     };
 
     return (
-        <div className="bg-gray-200 min-h-screen">
+        <div className="bg-gray-200 min-h-screen relative">
             <Sidebar />
+            {soldier && (
+                <div className="fixed top-20 right-4">
+                    {soldier.Image ? (
+                        <img className='h-12 w-12 object-cover rounded-full border-2 border-black' src={soldier.Image} alt={`${soldier.FirstName} ${soldier.LastName}`} />
+                    ) : (
+                        <div className='h-12 w-12 rounded-full border-2 border-black'></div>
+                    )}
+                </div>
+            )}
             <div className='mt-4 flex justify-center'>
                 <button className='btn bg-white font-bold cursor-pointer p-2 rounded-lg shadow-top shadow-gray-500 hover:animate-button-push' onClick={() => nav(`/soldierInfo/${id}/addRecepy`)}>
                     + הוסף מתכון
