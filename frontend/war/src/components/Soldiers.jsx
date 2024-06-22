@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setSearchSoliders, setSoliders } from '../features/soliderSlice';
 import { FaHome, FaUserAlt, FaRegRegistered, FaComments } from 'react-icons/fa';
 import { BiSearchAlt } from "react-icons/bi";
+import { FaSearch } from "react-icons/fa";
+import { RiLoginCircleFill } from "react-icons/ri";
 import { IoMdLogIn } from "react-icons/io";
 import { BiLogOutCircle } from "react-icons/bi";
 import { MdNavigateNext, MdOutlineNavigateBefore } from "react-icons/md";

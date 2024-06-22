@@ -5,6 +5,8 @@ import { useSelector } from 'react-redux';
 import { FaHome, FaUserAlt, FaRegRegistered, FaComments } from 'react-icons/fa';
 import { IoMdLogIn } from "react-icons/io";
 import { BiLogOutCircle } from "react-icons/bi";
+import { RiLoginCircleFill } from "react-icons/ri";
+import { FaSearch } from "react-icons/fa";
 
 const Register = () => {
     const nav = useNavigate();

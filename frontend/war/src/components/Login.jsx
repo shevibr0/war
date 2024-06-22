@@ -7,6 +7,8 @@ import { setConnectedUser } from "../features/userSlice";
 import { GetByEmailAndPassword } from "../utils/UserUtil";
 import { FaHome, FaUserAlt, FaRegRegistered, FaComments } from 'react-icons/fa';
 import { IoMdLogIn } from "react-icons/io";
+import { RiLoginCircleFill } from "react-icons/ri";
+import { FaSearch } from "react-icons/fa";
 import { BiLogOutCircle } from "react-icons/bi";
 
 const Login = () => {
