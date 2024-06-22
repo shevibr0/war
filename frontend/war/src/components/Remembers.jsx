@@ -71,7 +71,7 @@ const Remembers = () => {
                     )}
                 </div>
             )}
-            <div className='mt-4 flex justify-start pl-4'>
+            <div className='mt-4 flex justify-center pl-4'>
                 <button className='btn bg-white font-bold cursor-pointer p-2 rounded-lg shadow-top shadow-gray-500 hover:animate-button-push' onClick={() => nav(`/soldierInfo/${id}/addMemory`)}>
                     + הוסף זכרון
                 </button>
