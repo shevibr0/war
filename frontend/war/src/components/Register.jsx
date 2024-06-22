@@ -1,20 +1,24 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, useLocation } from "react-router";
 import { addUser } from "../utils/UserUtil";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { FaHome, FaUserAlt, FaRegRegistered, FaComments } from 'react-icons/fa';
 import { IoMdLogIn } from "react-icons/io";
 import { BiLogOutCircle } from "react-icons/bi";
 import { RiLoginCircleFill } from "react-icons/ri";
 import { FaSearch } from "react-icons/fa";
+import { addPageToHistory } from "../features/userSlice";
 
 const Register = () => {
     const nav = useNavigate();
+    const location = useLocation();
+    const dispatch = useDispatch();
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [phone, setPhone] = useState('');
     const [error, setError] = useState('');
+    const pageHistory = useSelector(state => state.user.pageHistory);
     const user = useSelector(state => state.user.connectedUser);
 
     const validateEmail = (email) => {
