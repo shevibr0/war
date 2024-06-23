@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { GetCountSoliders, getSoldiers, globalSearchSoldiers } from '../utils/SoldierUtil';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSearchSoliders, setSoliders } from '../features/soliderSlice';
-import { FaHome, FaComments, FaSearch } from 'react-icons/fa';
+import { FaHome, FaUserAlt, FaRegRegistered, FaComments } from 'react-icons/fa';
+import { BiSearchAlt } from "react-icons/bi";
+import { FaSearch } from "react-icons/fa";
+import { RiLoginCircleFill } from "react-icons/ri";
 import { IoMdLogIn } from "react-icons/io";
 import { BiLogOutCircle } from "react-icons/bi";
 import { MdNavigateNext, MdOutlineNavigateBefore } from "react-icons/md";
@@ -31,15 +34,8 @@ const Soldiers = () => {
         try {
             const data = await getSoldiers(page);
             dispatch(setSoliders(data));
-            if (page === 1) {
-                setIsPrev(false);
-                setIsNext(data.length > 0);
-            } else if (page < count) {
-                setIsNext(true);
-                setIsPrev(true);
-            } else if (page === count) {
-                setIsNext(false);
-            }
+            setIsNext(data.length === 30);
+            setIsPrev(page > 1);
         } catch (error) {
             console.error(error);
         } finally {
@@ -48,39 +44,38 @@ const Soldiers = () => {
     };
 
     useEffect(() => {
-        if (count === 1 && !isNext && !isPrev) {
-            GetCountSoliders().then(res => {
-                setCount(res);
-            });
-        }
-
-        if (searchQuery) {
+        if (!searchQuery) {
+            fetchSoldiers(currentPage);
+            if (count === 1 && !isNext && !isPrev) {
+                GetCountSoliders().then(res => setCount(res));
+            }
+        } else {
+            setLoading(true);
             globalSearchSoldiers(searchQuery, currentPage).then(res => {
                 const totalPages = Math.ceil(res.length / 30);
                 setTotalSearchPages(totalPages);
                 setIsNext(currentPage < totalPages);
                 setIsPrev(currentPage > 1);
-                if (res.length > 0) {
-                    dispatch(setSearchSoliders(res));
-                } else {
-                    dispatch(setSearchSoliders([]));
+                dispatch(setSearchSoliders(res.slice((currentPage - 1) * 30, currentPage * 30)));
+                if (res.length === 0) {
                     setSearchMessage("no result :(");
+                } else {
+                    setSearchMessage("");
                 }
-            });
-        } else {
-            fetchSoldiers(currentPage);
+            }).finally(() => setLoading(false));
         }
     }, [currentPage, searchQuery]);
 
     const handlePageChange = (newPage) => {
-        setCurrentPage(newPage);
+        if (newPage > 0 && newPage <= (searchQuery ? totalSearchPages : count)) {
+            setCurrentPage(newPage);
+        }
     };
 
     const handleSearchValue = (e) => {
-        let searchValue = e.target.value;
-        setSearchQuery(searchValue);
+        setSearchQuery(e.target.value);
         setSearchMessage("");
-        setCurrentPage(1); // Reset current page to 1 when a new search is performed
+        setCurrentPage(1);
     };
 
     const handleCopyLink = () => {
@@ -98,10 +93,14 @@ const Soldiers = () => {
         <div className="bg-gray-200 h-screen">
             <nav className="flex left-0 top-0 bg-gray-200 justify-center items-center text-3xl text-gray-800 h-[80px] cursor-pointer space-x-11">
                 {!user && (
-                    <div onClick={() => nav('/login')} className='transition duration-100 hover:text-yellow-400'><IoMdLogIn /></div>
+                    <>
+                        <div onClick={() => nav('/login')} className='transition duration-100 hover:text-yellow-400'><IoMdLogIn /></div>
+                    </>
                 )}
                 {user && (
-                    <div onClick={() => nav('/logOut')} className='transition duration-100 hover:text-yellow-400'><BiLogOutCircle /></div>
+                    <>
+                        <div onClick={() => nav('/logOut')} className='transition duration-100 hover:text-yellow-400'><BiLogOutCircle /></div>
+                    </>
                 )}
                 <div onClick={() => nav('/contact')} className='transition duration-100 hover:text-yellow-400'><FaComments /></div>
                 <div onClick={() => nav('/soldiers')} className='transition duration-100 hover:text-yellow-400'><FaSearch /></div>
@@ -130,13 +129,71 @@ const Soldiers = () => {
                         />
                     </div>
                 </div>
-                {solidersArr.length > 0 ? (
-                    <>
+                <div className="flex justify-center items-center mt-4 mb-4">
+                    {isPrev && (
+                        <button
+                            onClick={() => handlePageChange(currentPage - 1)}
+                            className="btn bg-gray-200 text-gray-800 py-2 px-4 rounded-md hover:animate-button-push">
+                            <MdOutlineNavigateBefore className="text-2xl" />
+                        </button>
+                    )}
+                    <span className="text-lg font-bold mx-4">
+                        {searchQuery ? (
+                            <>
+                                <span className="text-black">{currentPage}</span> / <span className="text-gray-400">{totalSearchPages}</span>
+                            </>
+                        ) : (
+                            <>
+                                <span className="text-black">{currentPage}</span> / <span className="text-gray-400">{count}</span>
+                            </>
+                        )}
+                    </span>
+                    {isNext && (
+                        <button
+                            onClick={() => handlePageChange(currentPage + 1)}
+                            className="btn text-gray-800 py-2 px-4 rounded-md hover:animate-button-push"
+                        >
+                            <MdNavigateNext className="text-2xl" />
+                        </button>
+                    )}
+                </div>
+                {loading ? (
+                    <div className='text-center'>
+                        <p className='text-gray-800'>Loading...</p>
+                    </div>
+                ) : (
+                    <div className='ml-2 mr-2 text-gray-800'>
+                        <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-3 gap-2 text-center w-full">
+                            {searchMessage === "" ? solidersArr.map((soldier) => (
+                                <div key={soldier.Id} className="bg-white text-center shadow-top shadow-gray-800 p-4 rounded-2xl hover:animate-button-push hover:shadow-xl hover:shadow-gray-700">
+                                    <div className='flex justify-center mb-2'>
+                                        {soldier.Image ? (
+                                            <img className="h-40 w-40 object-cover rounded-full" src={soldier.Image} alt={`${soldier.FirstName || ''} ${soldier.LastName || ''}`} />
+                                        ) : (
+                                            <div className='h-40 w-40 rounded-full border-2 border-black'></div>
+                                        )}
+                                    </div>
+                                    <h3>{`${soldier.FirstName || ''} ${soldier.LastName || ''} (${soldier.Age || ''})`}</h3>
+                                    <p>{soldier.City || ''}</p>
+                                    <p>
+                                        {soldier.DateOfDeath
+                                            ? new Date(soldier.DateOfDeath).toLocaleDateString('he-IL', {
+                                                day: '2-digit',
+                                                month: '2-digit',
+                                                year: 'numeric'
+                                            })
+                                            : 'לא זמין'}
+                                    </p>
+                                    <button className="btn bg-gray-300 font-bold text-gray-800 py-2 px-4 rounded-md hover:animate-button-push" onClick={() => nav(`/soldierInfo/${soldier.Id}`)}>עוד על {soldier.FirstName || ''}</button>
+                                </div>
+                            )) : <span>{searchMessage}</span>}
+                        </div>
                         <div className="flex justify-center items-center mt-4 mb-4">
                             {isPrev && (
                                 <button
                                     onClick={() => handlePageChange(currentPage - 1)}
-                                    className="btn bg-gray-200 text-gray-800 py-2 px-4 rounded-md hover:animate-button-push">
+                                    className="btn bg-gray-200 text-gray-800 py-2 px-4 rounded-md hover:animate-button-push"
+                                >
                                     <MdOutlineNavigateBefore className="text-2xl" />
                                 </button>
                             )}
@@ -160,37 +217,6 @@ const Soldiers = () => {
                                 </button>
                             )}
                         </div>
-                        <div className='ml-2 mr-2 text-gray-800'>
-                            <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-3 gap-2 text-center w-full">
-                                {solidersArr.map((soldier) => (
-                                    <div key={soldier.Id} className="bg-white text-center shadow-top shadow-gray-800 p-4 rounded-2xl hover:animate-button-push hover:shadow-xl hover:shadow-gray-700">
-                                        <div className='flex justify-center mb-2'>
-                                            {soldier.Image ? (
-                                                <img className="h-40 w-40 object-cover rounded-full" src={soldier.Image} alt={`${soldier.FirstName || ''} ${soldier.LastName || ''}`} />
-                                            ) : (
-                                                <div className='h-40 w-40 rounded-full border-2 border-black'></div>
-                                            )}
-                                        </div>
-                                        <h3>{`${soldier.FirstName || ''} ${soldier.LastName || ''} (${soldier.Age || ''})`}</h3>
-                                        <p>{soldier.City || ''}</p>
-                                        <p>
-                                            {soldier.DateOfDeath
-                                                ? new Date(soldier.DateOfDeath).toLocaleDateString('he-IL', {
-                                                    day: '2-digit',
-                                                    month: '2-digit',
-                                                    year: 'numeric'
-                                                })
-                                                : 'לא זמין'}
-                                        </p>
-                                        <button className="btn bg-gray-300 font-bold text-gray-800 py-2 px-4 rounded-md hover:animate-button-push" onClick={() => nav(`/soldierInfo/${soldier.Id}`)}>עוד על {soldier.FirstName || ''}</button>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    </>
-                ) : (
-                    <div className='text-center'>
-                        <p className='text-gray-800'>{searchMessage}</p>
                     </div>
                 )}
             </div>
