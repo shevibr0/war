@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setSearchSoliders, setSoliders } from '../features/soliderSlice';
 import { FaHome, FaUserAlt, FaRegRegistered, FaComments } from 'react-icons/fa';
 import { BiSearchAlt } from "react-icons/bi";
-import { FaSearch } from "react-icons/fa";
+import { FaSearch } from "react-icons/fa';
 import { RiLoginCircleFill } from "react-icons/ri";
 import { IoMdLogIn } from "react-icons/io";
 import { BiLogOutCircle } from "react-icons/bi";
@@ -18,8 +18,8 @@ const Soldiers = () => {
     const searchSoldiers = useSelector(state => state.solider.searchSoliders);
     const solidersArr = searchSoldiers.length > 0 ? searchSoldiers : soldiers;
     const [currentPage, setCurrentPage] = useState(1);
-    const [totalSearchPages, setTotalSearchPages] = useState(1); // מספר דפי החיפוש
     const [count, setCount] = useState(1);
+    const [totalSearchPages, setTotalSearchPages] = useState(1);
     const [isNext, setIsNext] = useState(false);
     const [isPrev, setIsPrev] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
@@ -59,11 +59,9 @@ const Soldiers = () => {
 
         if (searchQuery) {
             globalSearchSoldiers(searchQuery, currentPage).then(res => {
-                const totalResults = res.length;
-                const pages = Math.ceil(totalResults / 30); // נניח שכל דף מכיל 30 תוצאות
-                setTotalSearchPages(pages);
-
-                if (totalResults > 30) {
+                const totalPages = Math.ceil(res.length / 30);
+                setTotalSearchPages(totalPages);
+                if (res.length > 30) {
                     setIsNext(true);
                     let a = res;
                     a.splice(res.length - 1, 1);
