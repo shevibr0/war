@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { deleteMemory, getMemoriesById } from '../utils/MemoryUtil';
-import { useNavigate, useParams } from 'react-router';
-import { useSelector } from 'react-redux';
+import { useNavigate, useParams, useLocation } from 'react-router';
+import { useSelector, useDispatch } from 'react-redux';
 import Sidebar from './Sidebar';
 import { getSoldiersById } from '../utils/SoldierUtil';
+import { addPageToHistory } from '../features/userSlice';
 
 const Remembers = () => {
     const nav = useNavigate();
+    const dispatch = useDispatch();
+    const location = useLocation();
     const { id } = useParams();
     const [isOpen, setIsOpen] = useState(false);
     const [remembers, setRemembers] = useState([]);
@@ -54,6 +57,15 @@ const Remembers = () => {
         }
     };
 
+    const handleAddMemory = () => {
+        if (!user) {
+            dispatch(addPageToHistory(location.pathname));
+            nav('/register');
+        } else {
+            nav(`/soldierInfo/${id}/addMemory`);
+        }
+    };
+
     return (
         <div className="bg-gray-200 h-screen text-gray-800 relative">
             <Sidebar />
@@ -67,7 +79,7 @@ const Remembers = () => {
                 </div>
             )}
             <div className='mt-4 flex justify-center'>
-                <button className='btn bg-white font-bold cursor-pointer p-2 rounded-lg shadow-top shadow-gray-500 hover:animate-button-push' onClick={() => nav(`/soldierInfo/${id}/addMemory`)}>
+                <button className='btn bg-white font-bold cursor-pointer p-2 rounded-lg shadow-top shadow-gray-500 hover:animate-button-push' onClick={handleAddMemory}>
                     + הוסף זכרון
                 </button>
             </div>

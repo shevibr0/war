@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router';
+import { useNavigate, useParams, useLocation } from 'react-router';
 import { deleteVolunteeringOption, getVolunteeringOptionById } from '../utils/VolunteeringOptionUtil';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Sidebar from './Sidebar';
 import { getSoldiersById } from '../utils/SoldierUtil';
+import { addPageToHistory } from '../features/userSlice';
 
 const Voleenteerings = () => {
     const nav = useNavigate();
+    const dispatch = useDispatch();
+    const location = useLocation();
     const { id } = useParams();
     const user = useSelector(state => state.user.connectedUser);
     const [volunteeringOptions, setVolunteeringOptions] = useState([]);
@@ -53,6 +56,15 @@ const Voleenteerings = () => {
         }
     };
 
+    const handleAddVolunteering = () => {
+        if (!user) {
+            dispatch(addPageToHistory(location.pathname));
+            nav('/register');
+        } else {
+            nav(`/soldierInfo/${id}/addVolunteer`);
+        }
+    };
+
     return (
         <div className="bg-gray-200 h-screen relative">
             <Sidebar />
@@ -66,7 +78,7 @@ const Voleenteerings = () => {
                 </div>
             )}
             <div className='mt-4 flex justify-center'>
-                <button className='btn bg-white font-bold cursor-pointer p-2 rounded-lg shadow-top shadow-gray-500 hover:animate-button-push' onClick={() => nav(`/soldierInfo/${id}/addVolunteer`)}>
+                <button className='btn bg-white font-bold cursor-pointer p-2 rounded-lg shadow-top shadow-gray-500 hover:animate-button-push' onClick={handleAddVolunteering}>
                     + הוסף התנדבות
                 </button>
             </div>

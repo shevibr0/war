@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams, useLocation } from 'react-router';
 import { deleteRecipy, getRecipyById } from '../utils/RecipyUtil';
-import { useNavigate, useParams } from 'react-router';
 import { getPreparationById } from '../utils/PreparationUtil';
 import { getProductsToRecipeById } from '../utils/ProductsToRecipeUtil';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Sidebar from './Sidebar';
 import { getSoldiersById } from '../utils/SoldierUtil';
+import { addPageToHistory } from '../features/userSlice';
 
 const Recepies = () => {
     const nav = useNavigate();
+    const dispatch = useDispatch();
+    const location = useLocation();
     const { id } = useParams();
     const [isOpen, setIsOpen] = useState(false);
     const [recepies, setRecepies] = useState([]);
@@ -83,6 +86,15 @@ const Recepies = () => {
         }
     };
 
+    const handleAddRecipe = () => {
+        if (!user) {
+            dispatch(addPageToHistory(location.pathname));
+            nav('/register');
+        } else {
+            nav(`/soldierInfo/${id}/addRecepy`);
+        }
+    };
+
     return (
         <div className="bg-gray-200 min-h-screen relative">
             <Sidebar />
@@ -96,7 +108,7 @@ const Recepies = () => {
                 </div>
             )}
             <div className='mt-4 flex justify-center'>
-                <button className='btn bg-white font-bold cursor-pointer p-2 rounded-lg shadow-top shadow-gray-500 hover:animate-button-push' onClick={() => nav(`/soldierInfo/${id}/addRecepy`)}>
+                <button className='btn bg-white font-bold cursor-pointer p-2 rounded-lg shadow-top shadow-gray-500 hover:animate-button-push' onClick={handleAddRecipe}>
                     + הוסף מתכון
                 </button>
             </div>
