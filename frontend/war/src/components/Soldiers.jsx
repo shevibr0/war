@@ -57,6 +57,11 @@ const Soldiers = () => {
 
     const handlePageChange = (newPage) => {
         setCurrentPage(newPage);
+        if (searchQuery) {
+            searchSoldiersDebounced(searchQuery, newPage);
+        } else {
+            fetchSoldiers(newPage);
+        }
     };
 
     const handleSearchValue = (e) => {
