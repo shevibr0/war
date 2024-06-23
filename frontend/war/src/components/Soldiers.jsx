@@ -42,7 +42,15 @@ const Soldiers = () => {
     };
 
     useEffect(() => {
-        if (!searchQuery) {
+        if (count === 1 && !isNext && !isPrev) {
+            GetCountSoliders().then(res => {
+                setCount(res);
+            });
+        }
+
+        if (searchQuery) {
+            searchSoldiersDebounced(searchQuery, currentPage);
+        } else {
             fetchSoldiers(currentPage);
         }
     }, [currentPage, searchQuery]);
@@ -56,7 +64,6 @@ const Soldiers = () => {
         setSearchQuery(searchValue);
         setSearchMessage("");
         setCurrentPage(1); // Reset current page to 1 when a new search is performed
-
         if (searchValue === "") {
             dispatch(clearSearchSoliders());
             fetchSoldiers(1);
@@ -76,6 +83,7 @@ const Soldiers = () => {
         });
     };
 
+    // Using useCallback to debounce the search function
     const searchSoldiersDebounced = useCallback(
         debounce(async (query, page) => {
             setLoading(true);
