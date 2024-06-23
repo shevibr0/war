@@ -150,7 +150,7 @@ const Theilim = () => {
 
     const numberToHebrewLetter = (num) => {
         const hebrewLetters = [
-            "א'", 'ב', 'ג', 'ד', 'ה', 'ו', 'ז', 'ח', 'ט', 'י',
+            "א", 'ב', 'ג', 'ד', 'ה', 'ו', 'ז', 'ח', 'ט', 'י',
             'יא', 'יב', 'יג', 'יד', 'טו', 'טז', 'יז', 'יח', 'יט', 'כ',
             'כא', 'כב', 'כג', 'כד', 'כה', 'כו', 'כז', 'כח', 'כט', 'ל',
             'לא', 'לב', 'לג', 'לד', 'לה', 'לו', 'לז', 'לח', 'לט', 'מ',
@@ -198,7 +198,11 @@ const Theilim = () => {
                 </div>
             )}
             <div className='flex justify-center mt-4'>
-                <p>מספר פרקי תהילים שנאמרו: {num} | כמות משתתפים: {userNum} | מספר ספרים: {books}</p>
+                <div className='flex flex-col items-center'>
+                    <p>מספר פרקי תהילים שנאמרו: {num}</p>
+                    <p>כמות משתתפים: {userNum}</p>
+                    <p>מספר ספרים: {books}</p>
+                </div>
             </div>
             <div className="bg-gray-200 min-h-screen flex flex-col items-center mt-0" style={{ direction: 'rtl' }}>
                 <h1 className="text-2xl text-gray-800 font-semibold mb-5">בחר פרק תהילים</h1>
