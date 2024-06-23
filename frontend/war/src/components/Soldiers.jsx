@@ -57,6 +57,11 @@ const Soldiers = () => {
 
     const handlePageChange = (newPage) => {
         setCurrentPage(newPage);
+        if (searchQuery) {
+            searchSoldiersDebounced(searchQuery, newPage);
+        } else {
+            fetchSoldiers(newPage);
+        }
     };
 
     const handleSearchValue = (e) => {
@@ -65,14 +70,11 @@ const Soldiers = () => {
         setSearchMessage("");
         setCurrentPage(1); // Reset current page to 1 when a new search is performed
         if (searchValue === "") {
-            refreshPage();
+            dispatch(clearSearchSoliders());
+            fetchSoldiers(1);
         } else {
             searchSoldiersDebounced(searchValue, 1);
         }
-    };
-
-    const refreshPage = () => {
-        window.location.reload();
     };
 
     const handleCopyLink = () => {
