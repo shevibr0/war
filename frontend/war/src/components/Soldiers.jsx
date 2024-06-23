@@ -34,12 +34,13 @@ const Soldiers = () => {
             dispatch(setSoliders(data));
             if (page === 1) {
                 setIsPrev(false);
-                setIsNext(data.length === 30);
-            } else if (page < count) {
+                setIsNext(data.length > 30);
+            } else if (data.length > 30) {
                 setIsNext(true);
                 setIsPrev(true);
-            } else if (page === count) {
+            } else {
                 setIsNext(false);
+                setIsPrev(true);
             }
         } catch (error) {
             console.error(error);
@@ -49,19 +50,20 @@ const Soldiers = () => {
     };
 
     useEffect(() => {
-        if (searchQuery === "") {
+        if (count === 1 && !isNext && !isPrev) {
+            GetCountSoliders().then(res => {
+                setCount(res);
+            });
+        }
+
+        if (searchQuery === '') {
+            setTotalSearchPages(1);
+            dispatch(clearSearchSoliders());
             fetchSoldiers(currentPage);
         } else {
             searchSoldiersDebounced(searchQuery, currentPage);
         }
     }, [currentPage, searchQuery]);
-
-    useEffect(() => {
-        if (searchQuery === "") {
-            setCurrentPage(1);
-            fetchSoldiers(1);
-        }
-    }, [searchQuery]);
 
     const handlePageChange = (newPage) => {
         setCurrentPage(newPage);
@@ -95,8 +97,8 @@ const Soldiers = () => {
                 const totalPages = Math.ceil(totalResults / 30);
                 setTotalSearchPages(totalPages);
 
-                if (res.length > 30) {
-                    setIsNext(true);
+                if (totalResults > 30) {
+                    setIsNext(page < totalPages);
                     const pageResults = res.slice((page - 1) * 30, page * 30);
                     dispatch(setSearchSoliders(pageResults));
                 } else {
