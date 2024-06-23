@@ -71,7 +71,7 @@ const Soldiers = () => {
         setCurrentPage(1); // Reset current page to 1 when a new search is performed
         if (searchValue === "") {
             dispatch(clearSearchSoliders());
-            fetchSoldiers(1);
+            window.location.reload(); // Refresh the page to reset to initial state
         } else {
             searchSoldiersDebounced(searchValue, 1);
         }
