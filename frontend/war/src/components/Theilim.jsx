@@ -96,7 +96,7 @@ const Theilim = () => {
             await addTehilim(theilimEmpty).then(res => {
                 setTheilimUser(theilimEmpty);
                 setNum(prevNum => prevNum + 1);
-                setUserNum(prevUserNum + 1);
+                setUserNum(prevUserNum => prevUserNum + 1);
                 setShowPopup(false);
                 console.log("Sending email notification for new Tehilim");
                 sendEmailNotification(theilimEmpty);
@@ -109,7 +109,7 @@ const Theilim = () => {
             console.log(_theilimUser);
             await updateTehilim(_theilimUser.Id, _theilimUser).then(res => {
                 setTheilimUser(_theilimUser);
-                setNum(prevNum + 1);
+                setNum(prevNum => prevNum + 1);
                 setShowPopup(false);
                 console.log("Sending email notification for updated Tehilim");
                 sendEmailNotification(_theilimUser);
@@ -124,7 +124,7 @@ const Theilim = () => {
             await fetch(`/api/Tehilim/UpdateBookCount/${id}`, { method: 'POST' });
             setNum(0);
             setCompletedPsalms(new Set());
-            setBooks(prevBooks + 1);
+            setBooks(prevBooks => prevBooks + 1);
         } else {
             setCompletedPsalms(prev => new Set(prev).add(selectedPsalmsPart));
         }
