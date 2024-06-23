@@ -77,5 +77,19 @@ namespace MartrysOfWar.Controllers
             await _tehilimBL.DeleteTehilimAsync(id);
             return Ok(); // or return appropriate HTTP response for success
         }
+
+        [HttpPost("UpdateBookCount/{soldierId}")]
+        public async Task<IActionResult> UpdateBookCount(int soldierId)
+        {
+            await _tehilimBL.UpdateBookCountAsync(soldierId);
+            return Ok();
+        }
+
+        [HttpGet("BookCount/{soldierId}")]
+        public async Task<ActionResult<int>> GetBookCount(int soldierId)
+        {
+            var count = await _tehilimBL.GetBookCountAsync(soldierId);
+            return Ok(count);
+        }
     }
 }

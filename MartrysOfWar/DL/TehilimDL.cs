@@ -108,5 +108,26 @@ namespace DL
                 throw ex;
             }
 }
+        public async Task UpdateBookCountAsync(int soldierId)
+        {
+            var book = await _martyrsofwarContext.Books.FirstOrDefaultAsync(b => b.IdSoldier == soldierId);
+            if (book != null)
+            {
+                book.Count++;
+                _martyrsofwarContext.Books.Update(book);
+            }
+            else
+            {
+                book = new Book { IdSoldier = soldierId, Count = 1 };
+                await _martyrsofwarContext.Books.AddAsync(book);
+            }
+            await _martyrsofwarContext.SaveChangesAsync();
+        }
+
+        public async Task<int> GetBookCountAsync(int soldierId)
+        {
+            var book = await _martyrsofwarContext.Books.FirstOrDefaultAsync(b => b.IdSoldier == soldierId);
+            return book != null ? book.Count : 0;
+        }
     }
 }

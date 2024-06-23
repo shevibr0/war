@@ -11,5 +11,7 @@ namespace DL
         Task<int> GetCountTehilimForSoliderAsync(int soliderId);
         Task<int> GetByUserCountTehilimForSolider(int soliderId);
         Task UpdateTehilimAsync(int tehilimId, Tehilim updatedTehilim);
+        Task UpdateBookCountAsync(int soldierId);
+        Task<int> GetBookCountAsync(int soldierId);
     }
 }

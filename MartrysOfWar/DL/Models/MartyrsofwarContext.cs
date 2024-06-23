@@ -27,7 +27,7 @@ namespace DL.Models
         public virtual DbSet<User> Users { get; set; } = null!;
         public virtual DbSet<Volunteering> Volunteerings { get; set; } = null!;
         public virtual DbSet<VolunteeringOption> VolunteeringOptions { get; set; } = null!;
-
+        public virtual DbSet<Book> Books { get; set; } = null!;
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -349,6 +349,22 @@ namespace DL.Models
                     .HasForeignKey(d => d.IdUser)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__VOLUNTEER__ID_US__787EE5A0");
+            });
+            modelBuilder.Entity<Book>(entity =>
+            {
+                entity.ToTable("BOOKS");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.IdSoldier).HasColumnName("ID_SOLDIER");
+
+                entity.Property(e => e.Count).HasColumnName("COUNT");
+
+                entity.HasOne(d => d.IdSoldierNavigation)
+                    .WithMany(p => p.Books)
+                    .HasForeignKey(d => d.IdSoldier)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__BOOKS__ID_SOLDIER");
             });
 
 

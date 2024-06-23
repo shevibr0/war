@@ -12,6 +12,7 @@ namespace DL.Models
             Recipies = new HashSet<Recipy>();
             Tehilims = new HashSet<Tehilim>();
             VolunteeringOptions = new HashSet<VolunteeringOption>();
+            Books = new HashSet<Book>();
         }
 
         public int Id { get; set; }
@@ -43,5 +44,6 @@ namespace DL.Models
         public virtual ICollection<Recipy> Recipies { get; set; }
         public virtual ICollection<Tehilim> Tehilims { get; set; }
         public virtual ICollection<VolunteeringOption> VolunteeringOptions { get; set; }
+        public virtual ICollection<Book> Books { get; set; }
     }
 }

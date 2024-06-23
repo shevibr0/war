@@ -20,6 +20,7 @@ const Theilim = () => {
     const [showPopup, setShowPopup] = useState(false);
     const [theilimUser, setTheilimUser] = useState(null);
     const [soldier, setSoldier] = useState(null);
+    const [completedPsalms, setCompletedPsalms] = useState(new Set());
 
     useEffect(() => {
         if (selectedPsalms) {
@@ -69,7 +70,6 @@ const Theilim = () => {
             return;
         }
         if (theilimUser == null) {
-            // add new theilim
             const theilimEmpty = {
                 Id: 0,
                 IdSoldier: id,
@@ -84,19 +84,30 @@ const Theilim = () => {
                 setShowPopup(false);
                 console.log("Sending email notification for new Tehilim");
                 sendEmailNotification(theilimEmpty);
+                updateBookCountIfNeeded();
             });
         } else {
             let _theilimUser = { ...theilimUser };
             _theilimUser.Count = _theilimUser.Count + 1;
             console.log(_theilimUser);
-            //update theilim
             await updateTehilim(_theilimUser.Id, _theilimUser).then(res => {
                 setTheilimUser(_theilimUser);
                 setNum(prevNum => prevNum + 1);
                 setShowPopup(false);
                 console.log("Sending email notification for updated Tehilim");
                 sendEmailNotification(_theilimUser);
+                updateBookCountIfNeeded();
             });
+        }
+    };
+
+    const updateBookCountIfNeeded = async () => {
+        if (num + 1 === 150) { // Assuming 150 psalms
+            await fetch(`/api/Tehilim/UpdateBookCount/${id}`, { method: 'POST' });
+            setNum(0);
+            setCompletedPsalms(new Set());
+        } else {
+            setCompletedPsalms(prev => new Set(prev).add(selectedPsalmsPart));
         }
     };
 
@@ -145,7 +156,7 @@ const Theilim = () => {
             const data = await response.json();
             if (data && data[`Psalms.${part}`] && data[`Psalms.${part}`].he) {
                 setSelectedPsalms(data[`Psalms.${part}`].he);
-                setSelectedPsalmsPart(numberToHebrewLetter(part));
+                setSelectedPsalmsPart(part);
                 setShowPopup(true);
             } else {
                 console.error('Hebrew text not found');
@@ -176,8 +187,10 @@ const Theilim = () => {
                     {Array.from({ length: 150 }, (_, i) => (
                         <button
                             key={i + 1}
-                            className="bg-gray-600 hover:bg-white text-white hover:text-gray-600 hover:border border-gray-600 font-bold py-2 px-7 rounded mb-2"
-                            onClick={() => fetchPsalms(i + 1)}>
+                            className={`font-bold py-2 px-7 rounded mb-2 ${completedPsalms.has(i + 1) ? 'bg-white text-gray-600 border border-gray-600' : 'bg-gray-600 text-white hover:bg-white hover:text-gray-600 hover:border border-gray-600'}`}
+                            onClick={() => fetchPsalms(i + 1)}
+                            disabled={completedPsalms.has(i + 1)}
+                        >
                             {numberToHebrewLetter(i + 1)}
                         </button>
                     ))}
@@ -185,7 +198,7 @@ const Theilim = () => {
                 {showPopup && (
                     <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center overflow-y-auto">
                         <div className="bg-white p-5 rounded-lg max-w-lg w-full mx-2 my-4">
-                            <h2 className="font-bold text-xl mb-2">תהילים פרק {selectedPsalmsPart}</h2>
+                            <h2 className="font-bold text-xl mb-2">תהילים פרק {numberToHebrewLetter(selectedPsalmsPart)}</h2>
                             <div className='h-[350px] overflow-y-auto'>
                                 <p className="whitespace-pre-line" dangerouslySetInnerHTML={{ __html: selectedPsalms }} />
                             </div>
