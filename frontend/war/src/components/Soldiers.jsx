@@ -6,7 +6,7 @@ import { setSearchSoliders, setSoliders, clearSearchSoliders } from '../features
 import { FaHome, FaComments, FaSearch } from 'react-icons/fa';
 import { IoMdLogIn } from "react-icons/io";
 import { BiLogOutCircle } from "react-icons/bi";
-import { MdNavigateNext, MdOutlineNavigateBefore } from "react-icons/md';
+import { MdNavigateNext, MdOutlineNavigateBefore } from "react-icons/md";
 import { debounce } from 'lodash';
 
 const Soldiers = () => {
