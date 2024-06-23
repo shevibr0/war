@@ -14,9 +14,12 @@ const soliderSlice = createSlice({
         },
         setSearchSoliders: (state, action) => {
             state.searchSoliders = action.payload;
+        },
+        clearSearchSoliders: (state) => {
+            state.searchSoliders = [];
         }
     }
 });
 
-export const { setSoliders, setSearchSoliders } = soliderSlice.actions;
+export const { setSoliders, setSearchSoliders, clearSearchSoliders } = soliderSlice.actions;
 export default soliderSlice.reducer;

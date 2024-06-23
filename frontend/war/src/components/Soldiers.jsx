@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { GetCountSoliders, getSoldiers, globalSearchSoldiers } from '../utils/SoldierUtil';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSearchSoliders, setSoliders, clearSearchSoliders } from '../features/soliderSlice'; // Make sure to import clearSearchSoliders
+import { setSearchSoliders, setSoliders, clearSearchSoliders } from '../features/soliderSlice';
 import { FaHome, FaComments, FaSearch } from 'react-icons/fa';
 import { IoMdLogIn } from "react-icons/io";
 import { BiLogOutCircle } from "react-icons/bi";
@@ -32,15 +32,8 @@ const Soldiers = () => {
         try {
             const data = await getSoldiers(page);
             dispatch(setSoliders(data));
-            if (page === 1) {
-                setIsPrev(false);
-                setIsNext(data.length === 30);
-            } else if (data.length < 30) {
-                setIsNext(false);
-            } else {
-                setIsPrev(true);
-                setIsNext(true);
-            }
+            setIsPrev(page > 1);
+            setIsNext(data.length === 30);
         } catch (error) {
             console.error(error);
         } finally {
@@ -95,18 +88,14 @@ const Soldiers = () => {
                 const totalPages = Math.ceil(totalResults / 30);
                 setTotalSearchPages(totalPages);
 
-                if (totalResults > 30) {
-                    setIsNext(page < totalPages);
-                    const pageResults = res.slice((page - 1) * 30, page * 30);
-                    dispatch(setSearchSoliders(pageResults));
-                } else {
-                    setIsNext(false);
-                    dispatch(setSearchSoliders(res));
-                    if (res.length === 0) {
-                        setSearchMessage("no result :(");
-                    }
-                }
+                const pageResults = res.slice((page - 1) * 30, page * 30);
+                dispatch(setSearchSoliders(pageResults));
+
                 setIsPrev(page > 1);
+                setIsNext(page < totalPages);
+                if (pageResults.length === 0) {
+                    setSearchMessage("no result :(");
+                }
             } catch (error) {
                 console.error(error);
             } finally {
