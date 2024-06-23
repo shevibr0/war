@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import emailjs from 'emailjs-com';
-import { addTehilim, getByUserCountTehilimForSoliderId, getCountTehilimBySoliderId, getTehilimBySoliderIdUser, updateTehilim } from '../utils/TehilimUtil';
+import { addTehilim, getByUserCountTehilimForSoliderId, getCountTehilimBySoliderId, getTehilimBySoliderIdUser, updateTehilim, getBooksCountForSolider } from '../utils/TehilimUtil';
 import { getSoldiersById } from '../utils/SoldierUtil';
 import Sidebar from './Sidebar';
 import { addPageToHistory } from '../features/userSlice';
@@ -15,6 +15,7 @@ const Theilim = () => {
     const user = useSelector(state => state.user.connectedUser);
     const [num, setNum] = useState(0);
     const [userNum, setUserNum] = useState(0);
+    const [books, setBooks] = useState(0);
     const [selectedPsalms, setSelectedPsalms] = useState(null);
     const [selectedPsalmsPart, setSelectedPsalmsPart] = useState(null);
     const [showPopup, setShowPopup] = useState(false);
@@ -42,6 +43,9 @@ const Theilim = () => {
 
             const dataCountUser = await getByUserCountTehilimForSoliderId(id);
             setUserNum(dataCountUser);
+
+            const booksCount = await getBooksCountForSolider(id);
+            setBooks(booksCount);
         } catch (error) {
             console.log(error);
         }
@@ -106,6 +110,7 @@ const Theilim = () => {
             await fetch(`/api/Tehilim/UpdateBookCount/${id}`, { method: 'POST' });
             setNum(0);
             setCompletedPsalms(new Set());
+            setBooks(prevBooks => prevBooks + 1);
         } else {
             setCompletedPsalms(prev => new Set(prev).add(selectedPsalmsPart));
         }
@@ -179,7 +184,7 @@ const Theilim = () => {
                 </div>
             )}
             <div className='flex justify-center mt-4'>
-                <p>מספר פרקי תהילים שנאמרו: {num} | כמות משתתפים: {userNum}</p>
+                <p>מספר פרקי תהילים שנאמרו: {num} | כמות משתתפים: {userNum} | מספר ספרים: {books}</p>
             </div>
             <div className="bg-gray-200 min-h-screen flex flex-col items-center mt-0" style={{ direction: 'rtl' }}>
                 <h1 className="text-2xl text-gray-800 font-semibold mb-5">בחר פרק תהילים</h1>

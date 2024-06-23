@@ -129,5 +129,20 @@ namespace DL
             var book = await _martyrsofwarContext.Books.FirstOrDefaultAsync(b => b.IdSoldier == soldierId);
             return book != null ? book.Count : 0;
         }
+        public async Task<int> GetBooksCountForSoliderAsync(int soliderId)
+        {
+            try
+            {
+                var bookCount = await _martyrsofwarContext.Books
+                    .Where(b => b.IdSoldier == soliderId)
+                    .SumAsync(b => b.Count);
+                return bookCount;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
     }
 }

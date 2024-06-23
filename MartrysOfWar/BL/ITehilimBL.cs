@@ -13,6 +13,7 @@ namespace BL
         Task<int> GetByUserCountTehilimForSolider(int soliderId);
         Task UpdateTehilimAsync(int tehilimId, TehilimDTO updatedTehilimDTO);
         Task UpdateBookCountAsync(int soldierId);
+        Task<int> GetBooksCountForSoliderAsync(int soliderId);
         Task<int> GetBookCountAsync(int soldierId);
     }
 }

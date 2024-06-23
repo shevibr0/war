@@ -69,5 +69,10 @@ namespace BL
         {
             return await _tehilimDL.GetBookCountAsync(soldierId);
         }
+        public async Task<int> GetBooksCountForSoliderAsync(int soliderId)
+        {
+            return await _tehilimDL.GetBooksCountForSoliderAsync(soliderId);
+        }
+
     }
 }

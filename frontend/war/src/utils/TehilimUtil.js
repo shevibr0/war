@@ -14,7 +14,9 @@ const getCountTehilimBySoliderId = async (soliderId) => {
 const getByUserCountTehilimForSoliderId = async (soliderId) => {
     return await api.get(`/Tehilim/GetByUserCountTehilimForSolider/${soliderId}`).then(res => res.data)
 }
-
+const getBooksCountForSolider = async (soliderId) => {
+    return await api.get(`Tehilim/GetBooksCountForSolider/${soliderId}`).then(res => res.data)
+}
 const addTehilim = async (tehilim) => {
     return await api.post("Tehilim", tehilim).then(res => res.data)
 }
@@ -27,5 +29,5 @@ const deleteTehilim = async (id) => {
 
 export {
     getTehilim, getTehilimBySoliderIdUser, getCountTehilimBySoliderId, getByUserCountTehilimForSoliderId,
-    addTehilim, updateTehilim, deleteTehilim
+    addTehilim, updateTehilim, deleteTehilim, getBooksCountForSolider
 }

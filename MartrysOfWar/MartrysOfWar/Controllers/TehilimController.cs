@@ -91,5 +91,12 @@ namespace MartrysOfWar.Controllers
             var count = await _tehilimBL.GetBookCountAsync(soldierId);
             return Ok(count);
         }
+        [HttpGet("GetBooksCountForSolider/{soldier}")]
+        public async Task<ActionResult<int>> GetBooksCountForSolider(int soldier)
+        {
+            int count = await _tehilimBL.GetBooksCountForSoliderAsync(soldier);
+            return Ok(count);
+        }
+
     }
 }
