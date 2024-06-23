@@ -64,7 +64,12 @@ const Soldiers = () => {
         setSearchQuery(searchValue);
         setSearchMessage("");
         setCurrentPage(1); // Reset current page to 1 when a new search is performed
-        dispatch(clearSearchSoliders()); // Clear previous search results
+        if (searchValue === "") {
+            dispatch(clearSearchSoliders());
+            fetchSoldiers(1);
+        } else {
+            searchSoldiersDebounced(searchValue, 1);
+        }
     };
 
     const handleCopyLink = () => {
