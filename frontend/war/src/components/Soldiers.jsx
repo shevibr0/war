@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { GetCountSoliders, getSoldiers, globalSearchSoldiers } from '../utils/SoldierUtil';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSearchSoliders, setSoliders, clearSearchSoliders } from '../features/soliderSlice';
-import { FaHome, FaUserAlt, FaRegRegistered, FaComments, FaSearch } from 'react-icons/fa';
+import { FaHome, FaComments, FaSearch } from 'react-icons/fa';
 import { IoMdLogIn } from "react-icons/io";
 import { BiLogOutCircle } from "react-icons/bi";
 import { MdNavigateNext, MdOutlineNavigateBefore } from "react-icons/md";
@@ -32,16 +32,8 @@ const Soldiers = () => {
         try {
             const data = await getSoldiers(page);
             dispatch(setSoliders(data));
-            if (page === 1) {
-                setIsPrev(false);
-                setIsNext(data.length > 30);
-            } else if (data.length > 30) {
-                setIsNext(true);
-                setIsPrev(true);
-            } else {
-                setIsNext(false);
-                setIsPrev(true);
-            }
+            setIsPrev(page > 1);
+            setIsNext(data.length === 30);
         } catch (error) {
             console.error(error);
         } finally {
@@ -56,12 +48,10 @@ const Soldiers = () => {
             });
         }
 
-        if (searchQuery === '') {
-            setTotalSearchPages(1);
-            dispatch(clearSearchSoliders());
-            fetchSoldiers(currentPage);
-        } else {
+        if (searchQuery) {
             searchSoldiersDebounced(searchQuery, currentPage);
+        } else {
+            fetchSoldiers(currentPage);
         }
     }, [currentPage, searchQuery]);
 
@@ -74,6 +64,12 @@ const Soldiers = () => {
         setSearchQuery(searchValue);
         setSearchMessage("");
         setCurrentPage(1); // Reset current page to 1 when a new search is performed
+        if (searchValue === "") {
+            dispatch(clearSearchSoliders());
+            fetchSoldiers(1);
+        } else {
+            searchSoldiersDebounced(searchValue, 1);
+        }
     };
 
     const handleCopyLink = () => {
@@ -97,18 +93,14 @@ const Soldiers = () => {
                 const totalPages = Math.ceil(totalResults / 30);
                 setTotalSearchPages(totalPages);
 
-                if (totalResults > 30) {
-                    setIsNext(page < totalPages);
-                    const pageResults = res.slice((page - 1) * 30, page * 30);
-                    dispatch(setSearchSoliders(pageResults));
-                } else {
-                    setIsNext(false);
-                    dispatch(setSearchSoliders(res));
-                    if (res.length === 0) {
-                        setSearchMessage("no result :(");
-                    }
-                }
+                const pageResults = res.slice((page - 1) * 30, page * 30);
+                dispatch(setSearchSoliders(pageResults));
+
                 setIsPrev(page > 1);
+                setIsNext(page < totalPages);
+                if (pageResults.length === 0) {
+                    setSearchMessage("no result :(");
+                }
             } catch (error) {
                 console.error(error);
             } finally {
