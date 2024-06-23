@@ -15,9 +15,8 @@ const Soldiers = () => {
     const searchSoldiers = useSelector(state => state.solider.searchSoliders);
     const solidersArr = searchSoldiers.length > 0 ? searchSoldiers : soldiers;
     const [currentPage, setCurrentPage] = useState(1);
-    const [totalCount, setTotalCount] = useState(1);
+    const [count, setCount] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
-    const [searchTotalPages, setSearchTotalPages] = useState(1);
     const [isNext, setIsNext] = useState(false);
     const [isPrev, setIsPrev] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
@@ -34,11 +33,11 @@ const Soldiers = () => {
             dispatch(setSoliders(data));
             if (page === 1) {
                 setIsPrev(false);
-                setIsNext(totalPages > 1);
-            } else if (page < totalPages) {
+                setIsNext(true);
+            } else if (page < count) {
                 setIsNext(true);
                 setIsPrev(true);
-            } else if (page === totalPages) {
+            } else if (page === count) {
                 setIsNext(false);
             }
         } catch (error) {
@@ -49,17 +48,16 @@ const Soldiers = () => {
     };
 
     useEffect(() => {
-        if (totalCount === 1 && !isNext && !isPrev) {
+        if (count === 1 && !isNext && !isPrev) {
             GetCountSoliders().then(res => {
-                setTotalCount(res);
-                setTotalPages(Math.ceil(res / 30));
+                setCount(res);
             });
         }
 
         if (searchQuery) {
             globalSearchSoldiers(searchQuery, currentPage).then(res => {
                 const pages = Math.ceil(res.length / 30);
-                setSearchTotalPages(pages);
+                setTotalPages(pages);
                 if (res.length > 30) {
                     setIsNext(true);
                     let a = res;
@@ -84,7 +82,7 @@ const Soldiers = () => {
     }, [currentPage, searchQuery]);
 
     const handlePageChange = (newPage) => {
-        if (newPage > 0 && (searchQuery ? newPage <= searchTotalPages : newPage <= totalPages)) {
+        if (newPage > 0 && newPage <= totalPages) {
             setCurrentPage(newPage);
         }
     };
@@ -93,7 +91,7 @@ const Soldiers = () => {
         let searchValue = e.target.value;
         setSearchQuery(searchValue);
         setSearchMessage("");
-        setCurrentPage(1); // Reset current page to 1 when a new search is performed
+        setCurrentPage(1);
     };
 
     const handleCopyLink = () => {
@@ -156,7 +154,7 @@ const Soldiers = () => {
                         </button>
                     )}
                     <span className="text-lg font-bold mx-4">
-                        <span className="text-black">{currentPage}</span> / <span className="text-gray-400">{searchQuery ? searchTotalPages : totalPages}</span>
+                        <span className="text-black">{currentPage}</span> / <span className="text-gray-400">{totalPages}</span>
                     </span>
                     {isNext && (
                         <button
@@ -208,7 +206,7 @@ const Soldiers = () => {
                                 </button>
                             )}
                             <span className="text-lg font-bold mx-4">
-                                <span className="text-black">{currentPage}</span> / <span className="text-gray-400">{searchQuery ? searchTotalPages : totalPages}</span>
+                                <span className="text-black">{currentPage}</span> / <span className="text-gray-400">{totalPages}</span>
                             </span>
                             {isNext && (
                                 <button
