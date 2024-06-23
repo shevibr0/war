@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { GetCountSoliders, getSoldiers, globalSearchSoldiers } from '../utils/SoldierUtil';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSearchSoliders, setSoliders } from '../features/soliderSlice';
-import { FaHome, FaUserAlt, FaRegRegistered, FaComments } from 'react-icons/fa';
-import { BiSearchAlt } from "react-icons/bi";
-import { FaSearch } from "react-icons/fa";
-import { RiLoginCircleFill } from "react-icons/ri";
+import { FaHome, FaComments, FaSearch } from 'react-icons/fa';
 import { IoMdLogIn } from "react-icons/io";
 import { BiLogOutCircle } from "react-icons/bi";
 import { MdNavigateNext, MdOutlineNavigateBefore } from "react-icons/md";
@@ -19,7 +16,7 @@ const Soldiers = () => {
     const solidersArr = searchSoldiers.length > 0 ? searchSoldiers : soldiers;
     const [currentPage, setCurrentPage] = useState(1);
     const [count, setCount] = useState(1);
-    const [totalSearchPages, setTotalSearchPages] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
     const [isNext, setIsNext] = useState(false);
     const [isPrev, setIsPrev] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
@@ -59,8 +56,8 @@ const Soldiers = () => {
 
         if (searchQuery) {
             globalSearchSoldiers(searchQuery, currentPage).then(res => {
-                const totalPages = Math.ceil(res.length / 30);
-                setTotalSearchPages(totalPages);
+                const pages = Math.ceil(res.length / 30);
+                setTotalPages(pages);
                 if (res.length > 30) {
                     setIsNext(true);
                     let a = res;
@@ -85,14 +82,16 @@ const Soldiers = () => {
     }, [currentPage, searchQuery]);
 
     const handlePageChange = (newPage) => {
-        setCurrentPage(newPage);
+        if (newPage > 0 && newPage <= totalPages) {
+            setCurrentPage(newPage);
+        }
     };
 
     const handleSearchValue = (e) => {
         let searchValue = e.target.value;
         setSearchQuery(searchValue);
         setSearchMessage("");
-        setCurrentPage(1); // Reset current page to 1 when a new search is performed
+        setCurrentPage(1);
     };
 
     const handleCopyLink = () => {
@@ -155,15 +154,7 @@ const Soldiers = () => {
                         </button>
                     )}
                     <span className="text-lg font-bold mx-4">
-                        {searchQuery ? (
-                            <>
-                                <span className="text-black">{currentPage}</span> / <span className="text-gray-400">{totalSearchPages}</span>
-                            </>
-                        ) : (
-                            <>
-                                <span className="text-black">{currentPage}</span> / <span className="text-gray-400">{count}</span>
-                            </>
-                        )}
+                        <span className="text-black">{currentPage}</span> / <span className="text-gray-400">{totalPages}</span>
                     </span>
                     {isNext && (
                         <button
@@ -215,15 +206,7 @@ const Soldiers = () => {
                                 </button>
                             )}
                             <span className="text-lg font-bold mx-4">
-                                {searchQuery ? (
-                                    <>
-                                        <span className="text-black">{currentPage}</span> / <span className="text-gray-400">{totalSearchPages}</span>
-                                    </>
-                                ) : (
-                                    <>
-                                        <span className="text-black">{currentPage}</span> / <span className="text-gray-400">{count}</span>
-                                    </>
-                                )}
+                                <span className="text-black">{currentPage}</span> / <span className="text-gray-400">{totalPages}</span>
                             </span>
                             {isNext && (
                                 <button
