@@ -1,15 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams, useLocation } from 'react-router-dom';
+import React, { useState, useEffect, useCallback } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { GetCountSoliders, getSoldiers, globalSearchSoldiers } from '../utils/SoldierUtil';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSearchSoliders, setSoliders } from '../features/soliderSlice';
-import { FaHome, FaUserAlt, FaRegRegistered, FaComments } from 'react-icons/fa';
-import { BiSearchAlt } from "react-icons/bi";
-import { FaSearch } from "react-icons/fa";
-import { RiLoginCircleFill } from "react-icons/ri";
+import { FaHome, FaUserAlt, FaRegRegistered, FaComments, FaSearch } from 'react-icons/fa';
 import { IoMdLogIn } from "react-icons/io";
 import { BiLogOutCircle } from "react-icons/bi";
 import { MdNavigateNext, MdOutlineNavigateBefore } from "react-icons/md";
+import { debounce } from 'lodash';
 
 const Soldiers = () => {
     const location = useLocation();
@@ -58,42 +56,14 @@ const Soldiers = () => {
         }
 
         if (searchQuery) {
-            setLoading(true);
-            globalSearchSoldiers(searchQuery).then(res => {
-                console.log('Search results:', res);
-                dispatch(setSearchSoliders(res));
-                const totalPages = Math.ceil(res.length / 30);
-                setTotalSearchPages(totalPages);
-                setCurrentPage(1);
-                setLoading(false);
-                if (res.length === 0) {
-                    setSearchMessage("no result :(");
-                }
-            }).catch(error => {
-                console.error('Error during search:', error);
-                setLoading(false);
-            });
+            searchSoldiersDebounced(searchQuery, currentPage);
         } else {
             fetchSoldiers(currentPage);
-            setSearchMessage("");
         }
-    }, [searchQuery]);
+    }, [currentPage, searchQuery]);
 
     const handlePageChange = (newPage) => {
         setCurrentPage(newPage);
-        setLoading(true);
-        if (searchQuery) {
-            globalSearchSoldiers(searchQuery).then(res => {
-                console.log('Search results for page change:', res);
-                dispatch(setSearchSoliders(res));
-                setLoading(false);
-            }).catch(error => {
-                console.error('Error during page change:', error);
-                setLoading(false);
-            });
-        } else {
-            fetchSoldiers(newPage);
-        }
     };
 
     const handleSearchValue = (e) => {
@@ -113,6 +83,36 @@ const Soldiers = () => {
             console.error('Failed to copy the link: ', err);
         });
     };
+
+    // Using useCallback to debounce the search function
+    const searchSoldiersDebounced = useCallback(
+        debounce(async (query, page) => {
+            setLoading(true);
+            try {
+                const res = await globalSearchSoldiers(query, page);
+                const totalPages = Math.ceil(res.length / 30);
+                setTotalSearchPages(totalPages);
+                if (res.length > 30) {
+                    setIsNext(true);
+                    let a = res;
+                    a.splice(res.length - 1, 1);
+                    dispatch(setSearchSoliders(a));
+                } else {
+                    setIsNext(false);
+                    dispatch(setSearchSoliders(res));
+                    if (res.length === 0) {
+                        setSearchMessage("no result :(");
+                    }
+                }
+                setIsPrev(page > 1);
+            } catch (error) {
+                console.error(error);
+            } finally {
+                setLoading(false);
+            }
+        }, 500), // 500ms debounce time
+        []
+    );
 
     return (
         <div className="bg-gray-200 h-screen">
