@@ -32,8 +32,15 @@ const Soldiers = () => {
         try {
             const data = await getSoldiers(page);
             dispatch(setSoliders(data));
-            setIsPrev(page > 1);
-            setIsNext(data.length === 30);
+            if (page === 1) {
+                setIsPrev(false);
+                setIsNext(true);
+            } else if (page < count) {
+                setIsNext(true);
+                setIsPrev(true);
+            } else if (page === count) {
+                setIsNext(false);
+            }
         } catch (error) {
             console.error(error);
         } finally {
@@ -51,7 +58,9 @@ const Soldiers = () => {
         if (searchQuery) {
             searchSoldiersDebounced(searchQuery, currentPage);
         } else {
-            fetchSoldiers(currentPage);
+            dispatch(clearSearchSoliders());
+            setCurrentPage(1);
+            fetchSoldiers(1);
         }
     }, [currentPage, searchQuery]);
 
@@ -64,12 +73,6 @@ const Soldiers = () => {
         setSearchQuery(searchValue);
         setSearchMessage("");
         setCurrentPage(1); // Reset current page to 1 when a new search is performed
-        if (searchValue === "") {
-            dispatch(clearSearchSoliders());
-            fetchSoldiers(1);
-        } else {
-            searchSoldiersDebounced(searchValue, 1);
-        }
     };
 
     const handleCopyLink = () => {
@@ -93,14 +96,18 @@ const Soldiers = () => {
                 const totalPages = Math.ceil(totalResults / 30);
                 setTotalSearchPages(totalPages);
 
-                const pageResults = res.slice((page - 1) * 30, page * 30);
-                dispatch(setSearchSoliders(pageResults));
-
-                setIsPrev(page > 1);
-                setIsNext(page < totalPages);
-                if (pageResults.length === 0) {
-                    setSearchMessage("no result :(");
+                if (res.length > 30) {
+                    setIsNext(true);
+                    const pageResults = res.slice((page - 1) * 30, page * 30);
+                    dispatch(setSearchSoliders(pageResults));
+                } else {
+                    setIsNext(false);
+                    dispatch(setSearchSoliders(res));
+                    if (res.length === 0) {
+                        setSearchMessage("no result :(");
+                    }
                 }
+                setIsPrev(page > 1);
             } catch (error) {
                 console.error(error);
             } finally {
