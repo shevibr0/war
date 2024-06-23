@@ -93,28 +93,28 @@ const Theilim = () => {
                 Count: 1,
                 Date: new Date().toISOString()
             };
-            await addTehilim(theilimEmpty).then(res => {
+            await addTehilim(theilimEmpty).then(async res => {
                 setTheilimUser(theilimEmpty);
                 setNum(prevNum => prevNum + 1);
                 setUserNum(prevUserNum => prevUserNum + 1);
                 setShowPopup(false);
                 console.log("Sending email notification for new Tehilim");
                 sendEmailNotification(theilimEmpty);
+                await addCompletedPsalm({ SoldierID: id, UserID: user.Id, PsalmNumber: selectedPsalmsPart });
                 updateBookCountIfNeeded();
-                addCompletedPsalm({ SoldierID: id, UserID: user.Id, PsalmNumber: selectedPsalmsPart });
             });
         } else {
             let _theilimUser = { ...theilimUser };
             _theilimUser.Count = _theilimUser.Count + 1;
             console.log(_theilimUser);
-            await updateTehilim(_theilimUser.Id, _theilimUser).then(res => {
+            await updateTehilim(_theilimUser.Id, _theilimUser).then(async res => {
                 setTheilimUser(_theilimUser);
                 setNum(prevNum => prevNum + 1);
                 setShowPopup(false);
                 console.log("Sending email notification for updated Tehilim");
                 sendEmailNotification(_theilimUser);
+                await addCompletedPsalm({ SoldierID: id, UserID: user.Id, PsalmNumber: selectedPsalmsPart });
                 updateBookCountIfNeeded();
-                addCompletedPsalm({ SoldierID: id, UserID: user.Id, PsalmNumber: selectedPsalmsPart });
             });
         }
     };
@@ -244,4 +244,3 @@ const Theilim = () => {
 }
 
 export default Theilim;
-//בבה
