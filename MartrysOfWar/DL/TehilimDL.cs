@@ -12,7 +12,7 @@ namespace DL
     public class TehilimDL : ITehilimDL
     {
         private MartyrsofwarContext _martyrsofwarContext = new MartyrsofwarContext();
-        
+
         public async Task<IEnumerable<Tehilim>> GetAllTehilimsAsync()
         {
             try
@@ -36,6 +36,7 @@ namespace DL
                 throw ex;
             }
         }
+
         public async Task<Tehilim> AddTehilimAsync(Tehilim tehilim)
         {
             try
@@ -49,6 +50,7 @@ namespace DL
                 throw ex;
             }
         }
+
         public async Task UpdateTehilimAsync(int tehilimId, Tehilim updatedTehilim)
         {
             try
@@ -60,13 +62,13 @@ namespace DL
                     _martyrsofwarContext.Entry(existingTehilim).CurrentValues.SetValues(updatedTehilim);
                     await _martyrsofwarContext.SaveChangesAsync();
                 }
-                // Handle case where user with the specified ID is not found
             }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
+
         public async Task DeleteTehilimAsync(int tehilimId)
         {
             try
@@ -78,7 +80,6 @@ namespace DL
                     _martyrsofwarContext.Tehilims.Remove(tehilimToDelete);
                     await _martyrsofwarContext.SaveChangesAsync();
                 }
-                // Handle case where user with the specified ID is not found
             }
             catch (Exception ex)
             {
@@ -88,8 +89,9 @@ namespace DL
 
         public async Task<int> GetCountTehilimForSoliderAsync(int soliderId)
         {
-            try { 
-                 return await _martyrsofwarContext.Tehilims.Where(t => t.IdSoldier == soliderId).SumAsync(t => t.Count);
+            try
+            {
+                return await _martyrsofwarContext.Tehilims.Where(t => t.IdSoldier == soliderId).SumAsync(t => t.Count);
             }
             catch (Exception ex)
             {
@@ -107,36 +109,66 @@ namespace DL
             {
                 throw ex;
             }
-}
-        public async Task UpdateBookCountAsync(int soldierId)
-        {
-            var book = await _martyrsofwarContext.Books.FirstOrDefaultAsync(b => b.IdSoldier == soldierId);
-            if (book != null)
-            {
-                book.Count++;
-                _martyrsofwarContext.Books.Update(book);
-            }
-            else
-            {
-                book = new Book { IdSoldier = soldierId, Count = 1 };
-                await _martyrsofwarContext.Books.AddAsync(book);
-            }
-            await _martyrsofwarContext.SaveChangesAsync();
         }
 
-        public async Task<int> GetBookCountAsync(int soldierId)
-        {
-            var book = await _martyrsofwarContext.Books.FirstOrDefaultAsync(b => b.IdSoldier == soldierId);
-            return book != null ? book.Count : 0;
-        }
         public async Task<int> GetBooksCountForSoliderAsync(int soliderId)
         {
             try
             {
-                var bookCount = await _martyrsofwarContext.Books
-                    .Where(b => b.IdSoldier == soliderId)
-                    .SumAsync(b => b.Count);
-                return bookCount;
+                var soldierBooks = await _martyrsofwarContext.Books.Where(b => b.IdSoldier == soliderId).FirstOrDefaultAsync();
+                return soldierBooks?.Count ?? 0;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<IEnumerable<int>> GetCompletedPsalmsAsync(int soldierId)
+        {
+            try
+            {
+                return await _martyrsofwarContext.CompletedPsalms
+                    .Where(cp => cp.SoldierId == soldierId)
+                    .Select(cp => cp.PsalmNumber)
+                    .ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task AddCompletedPsalmAsync(CompletedPsalm completedPsalm)
+        {
+            try
+            {
+                _martyrsofwarContext.CompletedPsalms.Add(completedPsalm);
+                await _martyrsofwarContext.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task UpdateBookCountAsync(int soldierId)
+        {
+            try
+            {
+                var book = await _martyrsofwarContext.Books.FirstOrDefaultAsync(b => b.IdSoldier == soldierId);
+
+                if (book != null)
+                {
+                    book.Count += 1;
+                }
+                else
+                {
+                    book = new Book { IdSoldier = soldierId, Count = 1 };
+                    _martyrsofwarContext.Books.Add(book);
+                }
+
+                await _martyrsofwarContext.SaveChangesAsync();
             }
             catch (Exception ex)
             {

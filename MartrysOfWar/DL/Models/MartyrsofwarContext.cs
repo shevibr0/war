@@ -28,6 +28,8 @@ namespace DL.Models
         public virtual DbSet<Volunteering> Volunteerings { get; set; } = null!;
         public virtual DbSet<VolunteeringOption> VolunteeringOptions { get; set; } = null!;
         public virtual DbSet<Book> Books { get; set; } = null!;
+        public virtual DbSet<CompletedPsalm> CompletedPsalms { get; set; } = null!;
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -70,7 +72,7 @@ namespace DL.Models
 
             modelBuilder.Entity<PersonalVolunteering>(entity =>
             {
-                entity.ToTable("PERSONAL VOLUNTEERING");
+                entity.ToTable("PERSONAL_VOLUNTEERING");
 
                 entity.Property(e => e.Id).HasColumnName("ID");
 
@@ -151,7 +153,7 @@ namespace DL.Models
                     .WithMany(p => p.ProductsToRecipes)
                     .HasForeignKey(d => d.IdRec)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__PRODUCTS __ID_RE__76969D2E");
+                    .HasConstraintName("FK__PRODUCTS__ID_REC__76969D2E");
             });
 
             modelBuilder.Entity<Recipy>(entity =>
@@ -189,55 +191,56 @@ namespace DL.Models
 
             modelBuilder.Entity<Soldier>(entity =>
             {
-            entity.ToTable("SOLDIERS");
+                entity.ToTable("SOLDIERS");
 
-            entity.Property(e => e.Id)
-                .ValueGeneratedNever()
-                .HasColumnName("id");
+                entity.Property(e => e.Id)
+                    .ValueGeneratedNever()
+                    .HasColumnName("id");
 
-            entity.Property(e => e.Age).HasColumnName("age");
+                entity.Property(e => e.Age).HasColumnName("age");
 
-            entity.Property(e => e.AtNova).HasColumnName("at_nova");
+                entity.Property(e => e.AtNova).HasColumnName("at_nova");
 
-            entity.Property(e => e.BurialPlace).HasColumnName("burial_place");
+                entity.Property(e => e.BurialPlace).HasColumnName("burial_place");
 
-            entity.Property(e => e.City)
-                .HasMaxLength(20)
-                .HasColumnName("city");
+                entity.Property(e => e.City)
+                    .HasMaxLength(20)
+                    .HasColumnName("city");
 
-            entity.Property(e => e.Classification).HasColumnName("classification");
+                entity.Property(e => e.Classification).HasColumnName("classification");
 
-            entity.Property(e => e.DateOfDeath)
-                .HasColumnType("date")
-                .HasColumnName("date_of_death");
+                entity.Property(e => e.DateOfDeath)
+                    .HasColumnType("date")
+                    .HasColumnName("date_of_death");
 
-            entity.Property(e => e.FirstName)
-                .HasMaxLength(30)
-                .HasColumnName("first_name");
+                entity.Property(e => e.FirstName)
+                    .HasMaxLength(30)
+                    .HasColumnName("first_name");
 
-            entity.Property(e => e.Gender)
-                .HasMaxLength(10)
-                .HasColumnName("gender");
+                entity.Property(e => e.Gender)
+                    .HasMaxLength(10)
+                    .HasColumnName("gender");
 
-            entity.Property(e => e.HebrewDate).HasColumnName("hebrew_date");
+                entity.Property(e => e.HebrewDate).HasColumnName("hebrew_date");
 
-            entity.Property(e => e.Image).HasColumnName("image");
+                entity.Property(e => e.Image).HasColumnName("image");
 
-            entity.Property(e => e.IsApproved).HasColumnName("is_approved");
+                entity.Property(e => e.IsApproved).HasColumnName("is_approved");
 
-            entity.Property(e => e.IsChild).HasColumnName("is_child");
+                entity.Property(e => e.IsChild).HasColumnName("is_child");
 
-            entity.Property(e => e.IsEmergencySquad).HasColumnName("is_emergency_squad");
+                entity.Property(e => e.IsEmergencySquad).HasColumnName("is_emergency_squad");
 
-            entity.Property(e => e.LastName)
-                .HasMaxLength(30)
-                .HasColumnName("last_name");
+                entity.Property(e => e.LastName)
+                    .HasMaxLength(30)
+                    .HasColumnName("last_name");
 
-            entity.Property(e => e.LongDescription).HasColumnName("long_description");
+                entity.Property(e => e.LongDescription).HasColumnName("long_description");
 
-            entity.Property(e => e.PlaceOfDeath).HasColumnName("place_of_death");
+                entity.Property(e => e.PlaceOfDeath).HasColumnName("place_of_death");
 
-            entity.Property(e => e.PlaceOfService).HasColumnName("place_of_service");
+                entity.Property(e => e.PlaceOfService).HasColumnName("place_of_service");
+
                 entity.Property(e => e.RankName).HasColumnName("rank_name");
 
                 entity.Property(e => e.RankOrganization).HasColumnName("rank_organization");
@@ -324,7 +327,7 @@ namespace DL.Models
 
             modelBuilder.Entity<VolunteeringOption>(entity =>
             {
-                entity.ToTable("VOLUNTEERING_OPTIONS"); // שינוי שם הטבלה כאן
+                entity.ToTable("VOLUNTEERING_OPTIONS");
 
                 entity.Property(e => e.Id).HasColumnName("ID");
 
@@ -350,6 +353,7 @@ namespace DL.Models
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__VOLUNTEER__ID_US__787EE5A0");
             });
+
             modelBuilder.Entity<Book>(entity =>
             {
                 entity.ToTable("BOOKS");
@@ -367,6 +371,28 @@ namespace DL.Models
                     .HasConstraintName("FK__BOOKS__ID_SOLDIER");
             });
 
+            modelBuilder.Entity<CompletedPsalm>(entity =>
+            {
+                entity.ToTable("CompletedPsalms");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.SoldierId).HasColumnName("SoldierID");
+                entity.Property(e => e.UserId).HasColumnName("UserID");
+                entity.Property(e => e.PsalmNumber).HasColumnName("PsalmNumber");
+
+                entity.HasOne(d => d.Soldier)
+                    .WithMany(p => p.CompletedPsalms)
+                    .HasForeignKey(d => d.SoldierId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_CompletedPsalms_Soldiers");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.CompletedPsalms)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_CompletedPsalms_Users");
+            });
 
             OnModelCreatingPartial(modelBuilder);
         }

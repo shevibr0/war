@@ -1,18 +1,21 @@
 ﻿using DL.Models;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace DL
 {
     public interface ITehilimDL
     {
-        Task<Tehilim> AddTehilimAsync(Tehilim tehilim);
-        Task DeleteTehilimAsync(int tehilimId);
         Task<IEnumerable<Tehilim>> GetAllTehilimsAsync();
         Task<Tehilim> GetTehilimBySoliderIdUserAsync(int userId, int soliderId);
+        Task<Tehilim> AddTehilimAsync(Tehilim tehilim);
+        Task UpdateTehilimAsync(int tehilimId, Tehilim updatedTehilim);
+        Task DeleteTehilimAsync(int tehilimId);
         Task<int> GetCountTehilimForSoliderAsync(int soliderId);
         Task<int> GetByUserCountTehilimForSolider(int soliderId);
-        Task UpdateTehilimAsync(int tehilimId, Tehilim updatedTehilim);
-        Task UpdateBookCountAsync(int soldierId);
-        Task<int> GetBookCountAsync(int soldierId);
         Task<int> GetBooksCountForSoliderAsync(int soliderId);
+        Task<IEnumerable<int>> GetCompletedPsalmsAsync(int soldierId);
+        Task AddCompletedPsalmAsync(CompletedPsalm completedPsalm);
+        Task UpdateBookCountAsync(int soldierId);
     }
 }

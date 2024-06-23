@@ -26,8 +26,14 @@ const updateTehilim = async (id, tehilim) => {
 const deleteTehilim = async (id) => {
     return await api.delete(`Tehilim/${id}`).then(res => res.data)
 }
+const getCompletedPsalms = async (soldierId) => {
+    return await api.get(`Tehilim/GetCompletedPsalms/${soldierId}`).then(res => res.data);
+}
 
+const addCompletedPsalm = async (completedPsalm) => {
+    return await api.post("Tehilim/AddCompletedPsalm", completedPsalm).then(res => res.data);
+}
 export {
     getTehilim, getTehilimBySoliderIdUser, getCountTehilimBySoliderId, getByUserCountTehilimForSoliderId,
-    addTehilim, updateTehilim, deleteTehilim, getBooksCountForSolider
+    addTehilim, updateTehilim, deleteTehilim, getBooksCountForSolider, getCompletedPsalms, addCompletedPsalm
 }

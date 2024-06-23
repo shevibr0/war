@@ -2,7 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import emailjs from 'emailjs-com';
-import { addTehilim, getByUserCountTehilimForSoliderId, getCountTehilimBySoliderId, getTehilimBySoliderIdUser, updateTehilim, getBooksCountForSolider } from '../utils/TehilimUtil';
+import {
+    addTehilim,
+    getByUserCountTehilimForSoliderId,
+    getCountTehilimBySoliderId,
+    getTehilimBySoliderIdUser,
+    updateTehilim,
+    getBooksCountForSolider,
+    getCompletedPsalms,
+    addCompletedPsalm
+} from '../utils/TehilimUtil';
 import { getSoldiersById } from '../utils/SoldierUtil';
 import Sidebar from './Sidebar';
 import { addPageToHistory } from '../features/userSlice';
@@ -46,6 +55,9 @@ const Theilim = () => {
 
             const booksCount = await getBooksCountForSolider(id);
             setBooks(booksCount);
+
+            const completedPsalmsData = await getCompletedPsalms(id);
+            setCompletedPsalms(new Set(completedPsalmsData));
         } catch (error) {
             console.log(error);
         }
@@ -89,6 +101,7 @@ const Theilim = () => {
                 console.log("Sending email notification for new Tehilim");
                 sendEmailNotification(theilimEmpty);
                 updateBookCountIfNeeded();
+                addCompletedPsalm({ SoldierID: id, UserID: user.Id, PsalmNumber: selectedPsalmsPart });
             });
         } else {
             let _theilimUser = { ...theilimUser };
@@ -101,6 +114,7 @@ const Theilim = () => {
                 console.log("Sending email notification for updated Tehilim");
                 sendEmailNotification(_theilimUser);
                 updateBookCountIfNeeded();
+                addCompletedPsalm({ SoldierID: id, UserID: user.Id, PsalmNumber: selectedPsalmsPart });
             });
         }
     };

@@ -1,19 +1,22 @@
-﻿using DL.Models;
-using Entities.DTO;
+﻿using Entities.DTO;
+using DL.Models;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BL
 {
     public interface ITehilimBL
     {
-        Task<TehilimDTO> AddTehilimAsync(TehilimDTO tehilimDTO);
-        Task DeleteTehilimAsync(int TehilimId);
         Task<IEnumerable<TehilimDTO>> GetAllTehilimsAsync();
+        Task<TehilimDTO> AddTehilimAsync(TehilimDTO tehilimDTO);
+        Task UpdateTehilimAsync(int tehilimId, TehilimDTO updatedTehilimDTO);
+        Task DeleteTehilimAsync(int tehilimId);
         Task<TehilimDTO> GetTehilimBySoliderIdUserAsync(int userId, int soliderId);
         Task<int> GetCountTehilimForSoliderAsync(int soliderId);
         Task<int> GetByUserCountTehilimForSolider(int soliderId);
-        Task UpdateTehilimAsync(int tehilimId, TehilimDTO updatedTehilimDTO);
-        Task UpdateBookCountAsync(int soldierId);
         Task<int> GetBooksCountForSoliderAsync(int soliderId);
-        Task<int> GetBookCountAsync(int soldierId);
+        Task<IEnumerable<int>> GetCompletedPsalmsAsync(int soldierId);
+        Task AddCompletedPsalmAsync(CompletedPsalm completedPsalm);
+        Task UpdateBookCountAsync(int soldierId);
     }
 }

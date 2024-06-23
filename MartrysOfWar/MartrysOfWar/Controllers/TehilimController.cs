@@ -18,84 +18,87 @@ namespace MartrysOfWar.Controllers
             _tehilimBL = tehilimBL;
         }
         // GET: api/<MemoryController>
+
         [HttpGet]
         public async Task<IEnumerable<TehilimDTO>> GetAllTehilims()
         {
             return await _tehilimBL.GetAllTehilimsAsync();
         }
 
-        // GET api/<MemoryController>/5
         [HttpGet("GetTehilimBySoliderIdUser")]
-        public async Task<ActionResult<TehilimDTO>> GetTehilimById([FromQuery]int id,[FromQuery] int soldier)
+        public async Task<ActionResult<TehilimDTO>> GetTehilimById([FromQuery] int id, [FromQuery] int soldier)
         {
             var tehilim = await _tehilimBL.GetTehilimBySoliderIdUserAsync(id, soldier);
 
             if (tehilim == null)
             {
-                return NoContent(); // or return appropriate HTTP response for not found
+                return NoContent();
             }
 
             return Ok(tehilim);
         }
 
-        // GET api/<MemoryController>/5
         [HttpGet("GetCountTehilimForSolider/{soldier}")]
         public async Task<ActionResult<int>> GetCountTehilimForSolider(int soldier)
         {
             int count = await _tehilimBL.GetCountTehilimForSoliderAsync(soldier);
-
             return Ok(count);
         }
 
-
-        // GET api/<MemoryController>/5
         [HttpGet("GetByUserCountTehilimForSolider/{soldier}")]
         public async Task<ActionResult<int>> GetByUserCountTehilimForSolider(int soldier)
         {
             int count = await _tehilimBL.GetByUserCountTehilimForSolider(soldier);
-
             return Ok(count);
+        }
+
+        [HttpGet("GetBooksCountForSolider/{soldier}")]
+        public async Task<ActionResult<int>> GetBooksCountForSolider(int soldier)
+        {
+            int count = await _tehilimBL.GetBooksCountForSoliderAsync(soldier);
+            return Ok(count);
+        }
+
+        [HttpGet("GetCompletedPsalms/{soldierId}")]
+        public async Task<ActionResult<IEnumerable<int>>> GetCompletedPsalms(int soldierId)
+        {
+            var completedPsalms = await _tehilimBL.GetCompletedPsalmsAsync(soldierId);
+            return Ok(completedPsalms);
+        }
+
+        [HttpPost("AddCompletedPsalm")]
+        public async Task<ActionResult> AddCompletedPsalm([FromBody] CompletedPsalm completedPsalm)
+        {
+            await _tehilimBL.AddCompletedPsalmAsync(completedPsalm);
+            return Ok();
+        }
+
+        [HttpPost("UpdateBookCount/{soldierId}")]
+        public async Task<ActionResult> UpdateBookCount(int soldierId)
+        {
+            await _tehilimBL.UpdateBookCountAsync(soldierId);
+            return Ok();
         }
 
         [HttpPost]
         public async Task<ActionResult<TehilimDTO>> AddTehilim([FromBody] TehilimDTO tehilimDto)
         {
             var addTehilim = await _tehilimBL.AddTehilimAsync(tehilimDto);
-            return Ok(addTehilim); // or return appropriate HTTP response for success
+            return Ok(addTehilim);
         }
 
         [HttpPut("{id}")]
         public async Task<ActionResult> UpdateTehilim(int id, [FromBody] TehilimDTO updatedTehilimDto)
         {
             await _tehilimBL.UpdateTehilimAsync(id, updatedTehilimDto);
-            return Ok(); // or return appropriate HTTP response for success
+            return Ok();
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteTehilim(int id)
         {
             await _tehilimBL.DeleteTehilimAsync(id);
-            return Ok(); // or return appropriate HTTP response for success
-        }
-
-        [HttpPost("UpdateBookCount/{soldierId}")]
-        public async Task<IActionResult> UpdateBookCount(int soldierId)
-        {
-            await _tehilimBL.UpdateBookCountAsync(soldierId);
             return Ok();
-        }
-
-        [HttpGet("BookCount/{soldierId}")]
-        public async Task<ActionResult<int>> GetBookCount(int soldierId)
-        {
-            var count = await _tehilimBL.GetBookCountAsync(soldierId);
-            return Ok(count);
-        }
-        [HttpGet("GetBooksCountForSolider/{soldier}")]
-        public async Task<ActionResult<int>> GetBooksCountForSolider(int soldier)
-        {
-            int count = await _tehilimBL.GetBooksCountForSoliderAsync(soldier);
-            return Ok(count);
         }
 
     }
