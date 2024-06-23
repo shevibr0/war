@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { GetCountSoliders, getSoldiers, globalSearchSoldiers } from '../utils/SoldierUtil';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSearchSoliders, setSoliders } from '../features/soliderSlice';
+import { setSearchSoliders, setSoliders, clearSearchSoliders } from '../features/soliderSlice'; // Make sure to import clearSearchSoliders
 import { FaHome, FaComments, FaSearch } from 'react-icons/fa';
 import { IoMdLogIn } from "react-icons/io";
 import { BiLogOutCircle } from "react-icons/bi";
@@ -71,6 +71,7 @@ const Soldiers = () => {
         setSearchQuery(searchValue);
         setSearchMessage("");
         setCurrentPage(1); // Reset current page to 1 when a new search is performed
+        dispatch(clearSearchSoliders()); // Clear previous search results
     };
 
     const handleCopyLink = () => {
