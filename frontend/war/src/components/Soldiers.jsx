@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { GetCountSoliders, getSoldiers, globalSearchSoldiers } from '../utils/SoldierUtil';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSearchSoliders, setSoliders, clearSearchSoliders } from '../features/soliderSlice';
-import { FaHome, FaComments, FaSearch } from 'react-icons/fa';
+import { FaHome, FaUserAlt, FaRegRegistered, FaComments, FaSearch } from 'react-icons/fa';
 import { IoMdLogIn } from "react-icons/io";
 import { BiLogOutCircle } from "react-icons/bi";
 import { MdNavigateNext, MdOutlineNavigateBefore } from "react-icons/md";
@@ -34,12 +34,13 @@ const Soldiers = () => {
             dispatch(setSoliders(data));
             if (page === 1) {
                 setIsPrev(false);
-                setIsNext(true);
-            } else if (page < count) {
+                setIsNext(data.length > 30);
+            } else if (data.length > 30) {
                 setIsNext(true);
                 setIsPrev(true);
-            } else if (page === count) {
+            } else {
                 setIsNext(false);
+                setIsPrev(true);
             }
         } catch (error) {
             console.error(error);
@@ -55,12 +56,12 @@ const Soldiers = () => {
             });
         }
 
-        if (searchQuery) {
-            searchSoldiersDebounced(searchQuery, currentPage);
-        } else {
+        if (searchQuery === '') {
+            setTotalSearchPages(1);
             dispatch(clearSearchSoliders());
-            setCurrentPage(1);
-            fetchSoldiers(1);
+            fetchSoldiers(currentPage);
+        } else {
+            searchSoldiersDebounced(searchQuery, currentPage);
         }
     }, [currentPage, searchQuery]);
 
@@ -96,8 +97,8 @@ const Soldiers = () => {
                 const totalPages = Math.ceil(totalResults / 30);
                 setTotalSearchPages(totalPages);
 
-                if (res.length > 30) {
-                    setIsNext(true);
+                if (totalResults > 30) {
+                    setIsNext(page < totalPages);
                     const pageResults = res.slice((page - 1) * 30, page * 30);
                     dispatch(setSearchSoliders(pageResults));
                 } else {
