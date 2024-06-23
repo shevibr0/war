@@ -90,13 +90,14 @@ const Soldiers = () => {
             setLoading(true);
             try {
                 const res = await globalSearchSoldiers(query, page);
-                const totalPages = Math.ceil(res.length / 30);
+                const totalResults = res.length;
+                const totalPages = Math.ceil(totalResults / 30);
                 setTotalSearchPages(totalPages);
+
                 if (res.length > 30) {
                     setIsNext(true);
-                    let a = res;
-                    a.splice(res.length - 1, 1);
-                    dispatch(setSearchSoliders(a));
+                    const pageResults = res.slice((page - 1) * 30, page * 30);
+                    dispatch(setSearchSoliders(pageResults));
                 } else {
                     setIsNext(false);
                     dispatch(setSearchSoliders(res));
