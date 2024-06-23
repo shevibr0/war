@@ -96,7 +96,7 @@ const Theilim = () => {
             await addTehilim(theilimEmpty).then(res => {
                 setTheilimUser(theilimEmpty);
                 setNum(prevNum => prevNum + 1);
-                setUserNum(prevUserNum => prevUserNum + 1);
+                setUserNum(prevUserNum + 1);
                 setShowPopup(false);
                 console.log("Sending email notification for new Tehilim");
                 sendEmailNotification(theilimEmpty);
@@ -109,7 +109,7 @@ const Theilim = () => {
             console.log(_theilimUser);
             await updateTehilim(_theilimUser.Id, _theilimUser).then(res => {
                 setTheilimUser(_theilimUser);
-                setNum(prevNum => prevNum + 1);
+                setNum(prevNum + 1);
                 setShowPopup(false);
                 console.log("Sending email notification for updated Tehilim");
                 sendEmailNotification(_theilimUser);
@@ -120,11 +120,11 @@ const Theilim = () => {
     };
 
     const updateBookCountIfNeeded = async () => {
-        if (num + 1 === 150) { // Assuming 150 psalms
+        if (completedPsalms.size + 1 === 150) { // Assuming 150 psalms
             await fetch(`/api/Tehilim/UpdateBookCount/${id}`, { method: 'POST' });
             setNum(0);
             setCompletedPsalms(new Set());
-            setBooks(prevBooks => prevBooks + 1);
+            setBooks(prevBooks + 1);
         } else {
             setCompletedPsalms(prev => new Set(prev).add(selectedPsalmsPart));
         }
@@ -150,7 +150,7 @@ const Theilim = () => {
 
     const numberToHebrewLetter = (num) => {
         const hebrewLetters = [
-            "א", 'ב', 'ג', 'ד', 'ה', 'ו', 'ז', 'ח', 'ט', 'י',
+            "א'", 'ב', 'ג', 'ד', 'ה', 'ו', 'ז', 'ח', 'ט', 'י',
             'יא', 'יב', 'יג', 'יד', 'טו', 'טז', 'יז', 'יח', 'יט', 'כ',
             'כא', 'כב', 'כג', 'כד', 'כה', 'כו', 'כז', 'כח', 'כט', 'ל',
             'לא', 'לב', 'לג', 'לד', 'לה', 'לו', 'לז', 'לח', 'לט', 'מ',
