@@ -1,13 +1,12 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { GetCountSoliders, getSoldiers, globalSearchSoldiers } from '../utils/SoldierUtil';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSearchSoliders, setSoliders } from '../features/soliderSlice';
-import { FaHome, FaUserAlt, FaRegRegistered, FaComments, FaSearch } from 'react-icons/fa';
-import { IoMdLogIn } from "react-icons/io";
-import { BiLogOutCircle } from "react-icons/bi";
-import { MdNavigateNext, MdOutlineNavigateBefore } from "react-icons/md";
-import { debounce } from 'lodash';
+import { FaHome, FaComments, FaSearch } from 'react-icons/fa';
+import { IoMdLogIn } from 'react-icons/io';
+import { BiLogOutCircle } from 'react-icons/bi';
+import { MdNavigateNext, MdOutlineNavigateBefore } from 'react-icons/md';
 
 const Soldiers = () => {
     const location = useLocation();
@@ -34,12 +33,12 @@ const Soldiers = () => {
             dispatch(setSoliders(data));
             if (page === 1) {
                 setIsPrev(false);
-                setIsNext(true);
-            } else if (page < count) {
-                setIsNext(true);
-                setIsPrev(true);
-            } else if (page === count) {
+                setIsNext(data.length > 30);
+            } else if (data.length <= 30) {
                 setIsNext(false);
+            } else {
+                setIsPrev(true);
+                setIsNext(true);
             }
         } catch (error) {
             console.error(error);
@@ -56,7 +55,26 @@ const Soldiers = () => {
         }
 
         if (searchQuery) {
-            searchSoldiersDebounced(searchQuery, currentPage);
+            globalSearchSoldiers(searchQuery, currentPage).then(res => {
+                const totalResults = res.length;
+                const totalPages = Math.ceil(totalResults / 30);
+                setTotalSearchPages(totalPages);
+                if (totalResults > 30) {
+                    setIsNext(true);
+                    dispatch(setSearchSoliders(res.slice(0, 30)));
+                } else {
+                    setIsNext(false);
+                    dispatch(setSearchSoliders(res));
+                }
+                if (currentPage > 1) {
+                    setIsPrev(true);
+                } else {
+                    setIsPrev(false);
+                }
+                if (res.length === 0) {
+                    setSearchMessage("no result :(");
+                }
+            });
         } else {
             fetchSoldiers(currentPage);
         }
@@ -83,37 +101,6 @@ const Soldiers = () => {
             console.error('Failed to copy the link: ', err);
         });
     };
-
-    // Using useCallback to debounce the search function
-    const searchSoldiersDebounced = useCallback(
-        debounce(async (query, page) => {
-            setLoading(true);
-            try {
-                const res = await globalSearchSoldiers(query, page);
-                const totalResults = res.length;
-                const totalPages = Math.ceil(totalResults / 30);
-                setTotalSearchPages(totalPages);
-
-                if (res.length > 30) {
-                    setIsNext(true);
-                    const pageResults = res.slice((page - 1) * 30, page * 30);
-                    dispatch(setSearchSoliders(pageResults));
-                } else {
-                    setIsNext(false);
-                    dispatch(setSearchSoliders(res));
-                    if (res.length === 0) {
-                        setSearchMessage("no result :(");
-                    }
-                }
-                setIsPrev(page > 1);
-            } catch (error) {
-                console.error(error);
-            } finally {
-                setLoading(false);
-            }
-        }, 500), // 500ms debounce time
-        []
-    );
 
     return (
         <div className="bg-gray-200 h-screen">
