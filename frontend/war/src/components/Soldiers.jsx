@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams, useLocation } from 'react-router-dom';
-import { GetCountSoliders, getSoldiers, globalSearchSoldiers } from '../utils/SoldierUtil';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { getSoldiers, globalSearchSoldiers } from '../utils/SoldierUtil';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSearchSoliders, setSoliders } from '../features/soliderSlice';
-import { FaHome, FaUserAlt, FaRegRegistered, FaComments } from 'react-icons/fa';
-import { BiSearchAlt } from "react-icons/bi";
-import { FaSearch } from "react-icons/fa";
-import { RiLoginCircleFill } from "react-icons/ri";
+import { FaHome, FaComments, FaSearch } from 'react-icons/fa';
 import { IoMdLogIn } from "react-icons/io";
 import { BiLogOutCircle } from "react-icons/bi";
-import { MdNavigateNext, MdOutlineNavigateBefore } from "react-icons/md";
+import { MdNavigateNext, MdOutlineNavigateBefore } from "react-icons/md';
 
 const Soldiers = () => {
     const location = useLocation();
@@ -18,10 +15,6 @@ const Soldiers = () => {
     const searchSoldiers = useSelector(state => state.solider.searchSoliders);
     const solidersArr = searchSoldiers.length > 0 ? searchSoldiers : soldiers;
     const [currentPage, setCurrentPage] = useState(1);
-    const [count, setCount] = useState(1);
-    const [totalSearchPages, setTotalSearchPages] = useState(1);
-    const [isNext, setIsNext] = useState(false);
-    const [isPrev, setIsPrev] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
     const [searchMessage, setSearchMessage] = useState('');
     const [loading, setLoading] = useState(false);
@@ -29,13 +22,12 @@ const Soldiers = () => {
     const user = useSelector(state => state.user.connectedUser);
     const dispatch = useDispatch();
 
-    const fetchSoldiers = async (page) => {
+    const fetchSoldiers = async () => {
         setLoading(true);
         try {
-            const data = await getSoldiers(page);
+            const data = await getSoldiers();
             dispatch(setSoliders(data));
-            setIsNext(data.length === 30);
-            setIsPrev(page > 1);
+            setCurrentPage(1);
         } catch (error) {
             console.error(error);
         } finally {
@@ -44,38 +36,35 @@ const Soldiers = () => {
     };
 
     useEffect(() => {
-        if (!searchQuery) {
-            fetchSoldiers(currentPage);
-            if (count === 1 && !isNext && !isPrev) {
-                GetCountSoliders().then(res => setCount(res));
-            }
-        } else {
+        fetchSoldiers();
+    }, []);
+
+    useEffect(() => {
+        if (searchQuery) {
             setLoading(true);
-            globalSearchSoldiers(searchQuery, currentPage).then(res => {
-                const totalPages = Math.ceil(res.length / 30);
-                setTotalSearchPages(totalPages);
-                setIsNext(currentPage < totalPages);
-                setIsPrev(currentPage > 1);
-                dispatch(setSearchSoliders(res.slice((currentPage - 1) * 30, currentPage * 30)));
+            globalSearchSoldiers(searchQuery).then(res => {
+                dispatch(setSearchSoliders(res));
+                setCurrentPage(1);
+                setLoading(false);
                 if (res.length === 0) {
                     setSearchMessage("no result :(");
-                } else {
-                    setSearchMessage("");
                 }
-            }).finally(() => setLoading(false));
+            });
+        } else {
+            dispatch(setSearchSoliders([]));
+            setSearchMessage("");
+            setCurrentPage(1);
         }
-    }, [currentPage, searchQuery]);
+    }, [searchQuery]);
 
     const handlePageChange = (newPage) => {
-        if (newPage > 0 && newPage <= (searchQuery ? totalSearchPages : count)) {
-            setCurrentPage(newPage);
-        }
+        setCurrentPage(newPage);
     };
 
     const handleSearchValue = (e) => {
-        setSearchQuery(e.target.value);
+        let searchValue = e.target.value;
+        setSearchQuery(searchValue);
         setSearchMessage("");
-        setCurrentPage(1);
     };
 
     const handleCopyLink = () => {
@@ -88,6 +77,10 @@ const Soldiers = () => {
             console.error('Failed to copy the link: ', err);
         });
     };
+
+    const pageSize = 30;
+    const totalSearchPages = Math.ceil(searchSoldiers.length / pageSize);
+    const displayedSoldiers = searchSoldiers.slice((currentPage - 1) * pageSize, currentPage * pageSize);
 
     return (
         <div className="bg-gray-200 h-screen">
@@ -130,7 +123,7 @@ const Soldiers = () => {
                     </div>
                 </div>
                 <div className="flex justify-center items-center mt-4 mb-4">
-                    {isPrev && (
+                    {currentPage > 1 && (
                         <button
                             onClick={() => handlePageChange(currentPage - 1)}
                             className="btn bg-gray-200 text-gray-800 py-2 px-4 rounded-md hover:animate-button-push">
@@ -138,17 +131,9 @@ const Soldiers = () => {
                         </button>
                     )}
                     <span className="text-lg font-bold mx-4">
-                        {searchQuery ? (
-                            <>
-                                <span className="text-black">{currentPage}</span> / <span className="text-gray-400">{totalSearchPages}</span>
-                            </>
-                        ) : (
-                            <>
-                                <span className="text-black">{currentPage}</span> / <span className="text-gray-400">{count}</span>
-                            </>
-                        )}
+                        <span className="text-black">{currentPage}</span> / <span className="text-gray-400">{totalSearchPages}</span>
                     </span>
-                    {isNext && (
+                    {currentPage < totalSearchPages && (
                         <button
                             onClick={() => handlePageChange(currentPage + 1)}
                             className="btn text-gray-800 py-2 px-4 rounded-md hover:animate-button-push"
@@ -164,7 +149,7 @@ const Soldiers = () => {
                 ) : (
                     <div className='ml-2 mr-2 text-gray-800'>
                         <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-3 gap-2 text-center w-full">
-                            {searchMessage === "" ? solidersArr.map((soldier) => (
+                            {searchMessage === "" ? displayedSoldiers.map((soldier) => (
                                 <div key={soldier.Id} className="bg-white text-center shadow-top shadow-gray-800 p-4 rounded-2xl hover:animate-button-push hover:shadow-xl hover:shadow-gray-700">
                                     <div className='flex justify-center mb-2'>
                                         {soldier.Image ? (
@@ -189,7 +174,7 @@ const Soldiers = () => {
                             )) : <span>{searchMessage}</span>}
                         </div>
                         <div className="flex justify-center items-center mt-4 mb-4">
-                            {isPrev && (
+                            {currentPage > 1 && (
                                 <button
                                     onClick={() => handlePageChange(currentPage - 1)}
                                     className="btn bg-gray-200 text-gray-800 py-2 px-4 rounded-md hover:animate-button-push"
@@ -198,17 +183,9 @@ const Soldiers = () => {
                                 </button>
                             )}
                             <span className="text-lg font-bold mx-4">
-                                {searchQuery ? (
-                                    <>
-                                        <span className="text-black">{currentPage}</span> / <span className="text-gray-400">{totalSearchPages}</span>
-                                    </>
-                                ) : (
-                                    <>
-                                        <span className="text-black">{currentPage}</span> / <span className="text-gray-400">{count}</span>
-                                    </>
-                                )}
+                                <span className="text-black">{currentPage}</span> / <span className="text-gray-400">{totalSearchPages}</span>
                             </span>
-                            {isNext && (
+                            {currentPage < totalSearchPages && (
                                 <button
                                     onClick={() => handlePageChange(currentPage + 1)}
                                     className="btn text-gray-800 py-2 px-4 rounded-md hover:animate-button-push"

@@ -115,34 +115,28 @@ namespace DL
             return _martyrsofwarContext.Soldiers.Count() / 30 + 1;
         }
 
-        public async Task<IEnumerable<Soldier>> GlobalSearchSoldiersAsync(string searchValue, int page)
+        public async Task<IEnumerable<Soldier>> GlobalSearchSoldiersAsync(string searchValue)
         {
+            try
             {
-                try
-                {
-                    int pageSize = 30;
-                    int startIndex = (page - 1) * pageSize;
-                    // Start with the full set of soldiers
-                    //IQueryable<Soldier> query = _martyrsofwarContext.Soldiers.AsQueryable();
+                // חיפוש חיילים על פי מחרוזת החיפוש
+                List<Soldier> result = await _martyrsofwarContext.Soldiers.Where(s =>
+                    (s.FirstName != null && s.FirstName.Contains(searchValue)) ||
+                    (s.LastName != null && s.LastName.Contains(searchValue)) ||
+                    (s.Age.HasValue && s.Age.ToString().Contains(searchValue)) ||
+                    (s.City != null && s.City.Contains(searchValue))
+                ).OrderByDescending(s => s.Id).ToListAsync();
 
-                    // Execute the query and return the results
-                    List<Soldier> result = await _martyrsofwarContext.Soldiers.Where(s =>
-                      (s.FirstName != null && s.FirstName.Contains(searchValue)) ||
-                        (s.LastName != null && s.LastName.Contains(searchValue)) ||
-                        (s.Age.HasValue && s.Age.ToString().Contains(searchValue)) || // Assuming Age is Nullable<int>
-                        (s.City != null && s.City.Contains(searchValue)) 
-                        //||(s.Role != null && s.Role.Contains(searchValue))
-                        ).
-                        OrderByDescending(s => s.Id).Skip(startIndex).Take(pageSize + 1).ToListAsync();
-                    return result;
-                }
-                catch (Exception ex)
-                {
-                    // Handle the exception or log it
-                    throw ex;
-                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                // טיפול בשגיאה או רישום השגיאה
+                throw ex;
             }
         }
+
     }
+}
 
 }

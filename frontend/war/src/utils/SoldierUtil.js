@@ -22,7 +22,7 @@ const deleteSoldier = async (id) => {
     return await api.post(`Soldier/${id}`).then(res => res.data)
 }
 
-const globalSearchSoldiers = async (searchValue, page) => {
-    return await api.get(`Soldier/GlobalSearchSoldiers?searchValue=${searchValue}&page=${page}`).then(res => res.data)
+const globalSearchSoldiers = async (searchValue) => {
+    return await api.get(`Soldier/GlobalSearchSoldiers?searchValue=${searchValue}`).then(res => res.data);
 }
 export { getSoldiers, FetchDataFromApiAsync, GetCountSoliders, getSoldiersById, addSoldier, updateSoldier, deleteSoldier, globalSearchSoldiers }

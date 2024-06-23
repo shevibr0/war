@@ -76,11 +76,11 @@ namespace MartrysOfWar.Controllers
 
         [HttpGet]
         [Route("GlobalSearchSoldiers")]
-        public async Task<ActionResult<IEnumerable<SoldierDTO>>> GlobalSearchSoldiers([FromQuery] string searchValue, [FromQuery] int page)
+        public async Task<ActionResult<IEnumerable<SoldierDTO>>> GlobalSearchSoldiers([FromQuery] string searchValue)
         {
             try
             {
-                var result = await _soldierBL.GlobalSearchSoldiersAsync(searchValue, page);
+                var result = await _soldierBL.GlobalSearchSoldiersAsync(searchValue);
                 return Ok(result);
             }
             catch (Exception ex)
