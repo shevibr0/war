@@ -115,6 +115,7 @@ const Soldiers = () => {
         []
     );
 
+
     return (
         <div className="bg-gray-200 h-screen">
             <nav className="flex left-0 top-0 bg-gray-200 justify-center items-center text-3xl text-gray-800 h-[80px] cursor-pointer space-x-11">
