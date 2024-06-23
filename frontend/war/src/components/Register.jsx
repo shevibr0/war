@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router";
 import { addUser } from "../utils/UserUtil";
 import { useDispatch, useSelector } from 'react-redux';
-import { FaHome, FaUserAlt, FaRegRegistered, FaComments } from 'react-icons/fa';
+import { FaHome, FaUserAlt, FaRegRegistered, FaComments, FaEye, FaEyeSlash } from 'react-icons/fa';
 import { IoMdLogIn } from "react-icons/io";
 import { BiLogOutCircle } from "react-icons/bi";
 import { RiLoginCircleFill } from "react-icons/ri";
@@ -16,6 +16,7 @@ const Register = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
     const [phone, setPhone] = useState('');
     const [error, setError] = useState('');
     const pageHistory = useSelector(state => state.user.pageHistory);
@@ -95,6 +96,10 @@ const Register = () => {
         setPhone(event.target.value);
     };
 
+    const toggleShowPassword = () => {
+        setShowPassword(!showPassword);
+    };
+
     return (
         <div className="bg-gray-200">
             <nav className="flex left-0 top-0  bg-gray-200 justify-center items-center text-3xl text-gray-800 h-[80px]  cursor-pointer space-x-11">
@@ -121,7 +126,12 @@ const Register = () => {
                     <form onSubmit={handleRegistration} className="bg-white space-y-4 p-6 text-center w-full max-w-md shadow-top shadow-gray-800 rounded-2xl hover:animate-button-push hover:shadow-xl hover:shadow-gray-700">
                         <input name="name" type="text" placeholder="שם" value={name} onChange={handleChangeName} style={{ direction: 'rtl' }} className="mb-2 bg-gray-300 rounded-lg p-2 text-center" />
                         <input name="email" type="email" placeholder="מייל" value={email} onChange={handleChangeEmail} style={{ direction: 'rtl' }} className="mb-2 bg-gray-300 rounded-lg p-2 text-center" />
-                        <input name="password" type="password" placeholder="סיסמא" value={password} onChange={handleChangePassword} style={{ direction: 'rtl' }} className="mb-2 bg-gray-300 rounded-lg p-2 text-center" />
+                        <div className="relative">
+                            <input name="password" type={showPassword ? "text" : "password"} placeholder="סיסמא" value={password} onChange={handleChangePassword} style={{ direction: 'rtl' }} className="mb-2 bg-gray-300 rounded-lg p-2 text-center w-full" />
+                            <span onClick={toggleShowPassword} className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-700 cursor-pointer">
+                                {showPassword ? <FaEyeSlash /> : <FaEye />}
+                            </span>
+                        </div>
                         <input name="phone" type="tel" placeholder="טלפון" value={phone} onChange={handleChangePhoneNumber} style={{ direction: 'rtl' }} className="mb-2 bg-gray-300 rounded-lg p-2 text-center" /><br />
                         {error && <span className="text-red-500 mb-2">{error}</span>}<br />
                         <button type="submit" className="btn bg-gray-800 text-white py-2 px-4 rounded-md hover:animate-button-push">הרשם</button>
