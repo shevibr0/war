@@ -1,5 +1,4 @@
-﻿
-using AutoMapper;
+﻿using AutoMapper;
 using DL.Models;
 using Entities.DTO;
 using System;
@@ -8,10 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace Entities
 {
-    public class AutoMapping: Profile
+    public class AutoMapping : Profile
     {
         public AutoMapping()
         {
@@ -42,6 +40,9 @@ namespace Entities
                 .ForMember(dest => dest.ShortDescription, opt => opt.MapFrom(src => src.short_description))
                 .ForMember(dest => dest.UrlToArticle, opt => opt.MapFrom(src => src.url_to_article))
                 .ReverseMap();
+
+            // הוספת מיפויים עבור CompletedPsalm ו-CompletedPsalmDTO
+            CreateMap<CompletedPsalmDTO, CompletedPsalm>().ReverseMap();
         }
     }
 }
