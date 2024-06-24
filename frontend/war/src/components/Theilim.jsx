@@ -86,6 +86,12 @@ const Theilim = () => {
             nav('/register');
             return;
         }
+
+        if (selectedPsalmsPart === null) {
+            alert("בבקשה לבחור פרק תהילים לפני השליחה");
+            return;
+        }
+
         if (theilimUser == null) {
             const theilimEmpty = {
                 Id: 0,
@@ -101,7 +107,7 @@ const Theilim = () => {
                 setUserNum(prevUserNum => prevUserNum + 1);
                 setShowPopup(false);
                 sendEmailNotification(theilimEmpty);
-                await addCompletedPsalm({ IdSoldier: id, IdUser: user.Id, PsalmNumber: selectedPsalmsPart });
+                await addCompletedPsalm({ Id: 0, IdSoldier: id, IdUser: user.Id, PsalmNumber: selectedPsalmsPart });
                 await updateBookCountIfNeeded(id);
             } catch (error) {
                 console.error("Error adding Tehilim:", error);
@@ -115,7 +121,7 @@ const Theilim = () => {
                 setNum(prevNum => prevNum + 1);
                 setShowPopup(false);
                 sendEmailNotification(_theilimUser);
-                await addCompletedPsalm({ IdSoldier: id, IdUser: user.Id, PsalmNumber: selectedPsalmsPart });
+                await addCompletedPsalm({ Id: 0, IdSoldier: id, IdUser: user.Id, PsalmNumber: selectedPsalmsPart });
                 await updateBookCountIfNeeded(id);
             } catch (error) {
                 console.error("Error updating Tehilim:", error);
