@@ -30,8 +30,8 @@ const getCompletedPsalms = async (soldierId) => {
     return await api.get(`Tehilim/GetCompletedPsalms/${soldierId}`).then(res => res.data);
 }
 
-const addCompletedPsalm = async (completedPsalm) => {
-    return await api.post("Tehilim/AddCompletedPsalm", completedPsalm).then(res => res.data);
+const addCompletedPsalm = async (completedPsalms) => {
+    return await api.post("Tehilim/AddCompletedPsalm", completedPsalms).then(res => res.data);
 }
 const updateBookCountIfNeeded = async (soldierId) => {
     return await api.post(`/Tehilim/UpdateBookCount/${soldierId}`).then(res => res.data);
