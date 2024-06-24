@@ -66,12 +66,20 @@ namespace MartrysOfWar.Controllers
             return Ok(completedPsalms);
         }
 
-        [HttpPost("AddCompletedPsalm")]
         public async Task<ActionResult> AddCompletedPsalm([FromBody] CompletedPsalm completedPsalm)
         {
-            await _tehilimBL.AddCompletedPsalmAsync(completedPsalm);
-            return Ok();
+            try
+            {
+                await _tehilimBL.AddCompletedPsalmAsync(completedPsalm);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+      
+                return StatusCode(500, "Internal server error");
+            }
         }
+
 
         [HttpPost("UpdateBookCount/{soldierId}")]
         public async Task<ActionResult> UpdateBookCount(int soldierId)
