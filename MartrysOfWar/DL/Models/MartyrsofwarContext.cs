@@ -370,29 +370,28 @@ namespace DL.Models
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__BOOKS__ID_SOLDIER");
             });
-
             modelBuilder.Entity<CompletedPsalm>(entity =>
             {
                 entity.ToTable("CompletedPsalms");
 
                 entity.Property(e => e.Id).HasColumnName("ID");
-
-                entity.Property(e => e.SoldierId).HasColumnName("SoldierID");
-                entity.Property(e => e.UserId).HasColumnName("UserID");
-                entity.Property(e => e.PsalmNumber).HasColumnName("PsalmNumber");
+                entity.Property(e => e.IdSoldier).HasColumnName("ID_SOLDIER");
+                entity.Property(e => e.IdUser).HasColumnName("ID_USER");
+                entity.Property(e => e.PsalmNumber).HasColumnName("PSALM_NUMBER");
 
                 entity.HasOne(d => d.Soldier)
                     .WithMany(p => p.CompletedPsalms)
-                    .HasForeignKey(d => d.SoldierId)
+                    .HasForeignKey(d => d.IdSoldier)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_CompletedPsalms_Soldiers");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.CompletedPsalms)
-                    .HasForeignKey(d => d.UserId)
+                    .HasForeignKey(d => d.IdUser)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_CompletedPsalms_Users");
             });
+
 
             OnModelCreatingPartial(modelBuilder);
         }

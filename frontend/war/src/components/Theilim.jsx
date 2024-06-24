@@ -101,7 +101,7 @@ const Theilim = () => {
                 setShowPopup(false);
                 console.log("Sending email notification for new Tehilim");
                 sendEmailNotification(theilimEmpty);
-                await addCompletedPsalm({ SoldierID: id, UserID: user.Id, PsalmNumber: selectedPsalmsPart });
+                await addCompletedPsalm({ IdSoldier: id, IdUser: user.Id, PsalmNumber: selectedPsalmsPart });
                 await updateBookCountIfNeeded(id);
             });
         } else {
@@ -114,7 +114,7 @@ const Theilim = () => {
                 setShowPopup(false);
                 console.log("Sending email notification for updated Tehilim");
                 sendEmailNotification(_theilimUser);
-                await addCompletedPsalm({ SoldierID: id, UserID: user.Id, PsalmNumber: selectedPsalmsPart });
+                await addCompletedPsalm({ IdSoldier: id, IdUser: user.Id, PsalmNumber: selectedPsalmsPart });
                 await updateBookCountIfNeeded(id);
             });
         }
