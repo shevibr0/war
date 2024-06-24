@@ -69,15 +69,9 @@ namespace MartrysOfWar.Controllers
         [HttpPost("AddCompletedPsalm")]
         public async Task<ActionResult> AddCompletedPsalm([FromBody] CompletedPsalm completedPsalm)
         {
-            if (completedPsalm.IdSoldierNavigation != null || completedPsalm.IdUserNavigation != null)
-            {
-                completedPsalm.IdSoldierNavigation = null;
-                completedPsalm.IdUserNavigation = null;
-            }
             await _tehilimBL.AddCompletedPsalmAsync(completedPsalm);
             return Ok();
         }
-
 
         [HttpPost("UpdateBookCount/{soldierId}")]
         public async Task<ActionResult> UpdateBookCount(int soldierId)
