@@ -379,13 +379,13 @@ namespace DL.Models
                 entity.Property(e => e.IdUser).HasColumnName("ID_USER");
                 entity.Property(e => e.PsalmNumber).HasColumnName("PSALM_NUMBER");
 
-                entity.HasOne(d => d.Soldier)
+                entity.HasOne(d => d.IdSoldierNavigation)
                     .WithMany(p => p.CompletedPsalms)
                     .HasForeignKey(d => d.IdSoldier)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_CompletedPsalms_Soldiers");
 
-                entity.HasOne(d => d.User)
+                entity.HasOne(d => d.IdUserNavigation)
                     .WithMany(p => p.CompletedPsalms)
                     .HasForeignKey(d => d.IdUser)
                     .OnDelete(DeleteBehavior.ClientSetNull)
