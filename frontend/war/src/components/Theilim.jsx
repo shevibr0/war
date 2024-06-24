@@ -86,15 +86,15 @@ const Theilim = () => {
             nav('/register');
             return;
         }
-        try {
-            if (theilimUser == null) {
-                const theilimEmpty = {
-                    Id: 0,
-                    IdSoldier: id,
-                    IdUser: user.Id,
-                    Count: 1,
-                    Date: new Date().toISOString()
-                };
+        if (theilimUser == null) {
+            const theilimEmpty = {
+                Id: 0,
+                IdSoldier: id,
+                IdUser: user.Id,
+                Count: 1,
+                Date: new Date().toISOString()
+            };
+            try {
                 await addTehilim(theilimEmpty);
                 setTheilimUser(theilimEmpty);
                 setNum(prevNum => prevNum + 1);
@@ -103,9 +103,13 @@ const Theilim = () => {
                 sendEmailNotification(theilimEmpty);
                 await addCompletedPsalm({ IdSoldier: id, IdUser: user.Id, PsalmNumber: selectedPsalmsPart });
                 await updateBookCountIfNeeded(id);
-            } else {
-                let _theilimUser = { ...theilimUser };
-                _theilimUser.Count = _theilimUser.Count + 1;
+            } catch (error) {
+                console.error("Error adding Tehilim:", error);
+            }
+        } else {
+            let _theilimUser = { ...theilimUser };
+            _theilimUser.Count = _theilimUser.Count + 1;
+            try {
                 await updateTehilim(_theilimUser.Id, _theilimUser);
                 setTheilimUser(_theilimUser);
                 setNum(prevNum => prevNum + 1);
@@ -113,10 +117,9 @@ const Theilim = () => {
                 sendEmailNotification(_theilimUser);
                 await addCompletedPsalm({ IdSoldier: id, IdUser: user.Id, PsalmNumber: selectedPsalmsPart });
                 await updateBookCountIfNeeded(id);
+            } catch (error) {
+                console.error("Error updating Tehilim:", error);
             }
-        } catch (error) {
-            console.error("Error adding or updating Tehilim:", error);
-            alert("שגיאה בהוספת או עדכון תהילים");
         }
     };
 
