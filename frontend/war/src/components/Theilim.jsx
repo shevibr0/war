@@ -10,7 +10,8 @@ import {
     updateTehilim,
     getBooksCountForSolider,
     getCompletedPsalms,
-    addCompletedPsalm
+    addCompletedPsalm,
+    updateBookCountIfNeeded
 } from '../utils/TehilimUtil';
 import { getSoldiersById } from '../utils/SoldierUtil';
 import Sidebar from './Sidebar';
@@ -101,7 +102,7 @@ const Theilim = () => {
                 console.log("Sending email notification for new Tehilim");
                 sendEmailNotification(theilimEmpty);
                 await addCompletedPsalm({ SoldierID: id, UserID: user.Id, PsalmNumber: selectedPsalmsPart });
-                updateBookCountIfNeeded();
+                await updateBookCountIfNeeded(id);
             });
         } else {
             let _theilimUser = { ...theilimUser };
@@ -114,19 +115,8 @@ const Theilim = () => {
                 console.log("Sending email notification for updated Tehilim");
                 sendEmailNotification(_theilimUser);
                 await addCompletedPsalm({ SoldierID: id, UserID: user.Id, PsalmNumber: selectedPsalmsPart });
-                updateBookCountIfNeeded();
+                await updateBookCountIfNeeded(id);
             });
-        }
-    };
-
-    const updateBookCountIfNeeded = async () => {
-        if (completedPsalms.size + 1 === 150) { // Assuming 150 psalms
-            await fetch(`/api/Tehilim/UpdateBookCount/${id}`, { method: 'POST' });
-            setNum(0);
-            setCompletedPsalms(new Set());
-            setBooks(prevBooks => prevBooks + 1);
-        } else {
-            setCompletedPsalms(prev => new Set(prev).add(selectedPsalmsPart));
         }
     };
 
