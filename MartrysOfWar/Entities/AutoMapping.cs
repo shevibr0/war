@@ -33,10 +33,5 @@ public class AutoMapping : Profile
             .ForMember(dest => dest.ShortDescription, opt => opt.MapFrom(src => src.short_description))
             .ForMember(dest => dest.UrlToArticle, opt => opt.MapFrom(src => src.url_to_article))
             .ReverseMap();
-
-        CreateMap<CompletedPsalmDTO, CompletedPsalm>()
-            .ForMember(dest => dest.Soldier, opt => opt.Ignore())
-            .ForMember(dest => dest.User, opt => opt.Ignore())
-            .ReverseMap();
     }
 }
