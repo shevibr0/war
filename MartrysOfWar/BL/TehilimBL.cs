@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BL
 {
-    public class TehilimBL :ITehilimBL
+    public class TehilimBL : ITehilimBL
     {
 
         private ITehilimDL _tehilimDL;
@@ -72,14 +72,50 @@ namespace BL
             return await _tehilimDL.GetCompletedPsalmsAsync(soldierId);
         }
 
-        public async Task AddCompletedPsalmAsync(CompletedPsalm completedPsalm)
+        public async Task AddCompletedPsalmAsync(CompletedPsalmDTO completedPsalmDto)
         {
+            var completedPsalm = new CompletedPsalm
+            {
+                IdSoldier = completedPsalmDto.IdSoldier,
+                IdUser = completedPsalmDto.IdUser,
+                PsalmNumber = completedPsalmDto.PsalmNumber
+            };
+
             await _tehilimDL.AddCompletedPsalmAsync(completedPsalm);
+
+            // בדיקת האם כל הפרקים נלחצו
+            bool areAllPsalmsCompleted = await _tehilimDL.AreAllPsalmsCompleted(completedPsalmDto.IdSoldier);
+
+            if (areAllPsalmsCompleted)
+            {
+                // עדכון ספירת הספרים וניקוי CompletedPsalms
+                await _tehilimDL.UpdateBookCountIfNeeded(completedPsalmDto.IdSoldier);
+                await _tehilimDL.ClearCompletedPsalmsForSoldier(completedPsalmDto.IdSoldier);
+            }
         }
 
         public async Task UpdateBookCountAsync(int soldierId)
         {
-            await _tehilimDL.UpdateBookCountAsync(soldierId);
+            await _tehilimDL.UpdateBookCountIfNeeded(soldierId);
+        }
+
+        public async Task ClearCompletedPsalmsForSoldierAsync(int soldierId)
+        {
+            await _tehilimDL.ClearCompletedPsalmsForSoldier(soldierId);
+        }
+
+        public async Task<bool> AreAllPsalmsCompletedAsync(int soldierId)
+        {
+            return await _tehilimDL.AreAllPsalmsCompleted(soldierId);
+        }
+
+        public async Task DeleteCompletedPsalmsBySoldierAsync(int soldierId)
+        {
+            await _tehilimDL.DeleteCompletedPsalmsBySoldierAsync(soldierId);
+        }
+        public async Task<int> GetCountCompletedPsalmsForSoldierAsync(int soldierId)
+        {
+            return await _tehilimDL.GetCountCompletedPsalmsForSoldierAsync(soldierId);
         }
 
     }

@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using DL.Models;
+using System.ComponentModel.DataAnnotations;
 
-namespace DL.Models
+public class CompletedPsalm
 {
-    public partial class CompletedPsalm
-    {
-        public int Id { get; set; }
-        public int IdSoldier { get; set; }
-        public int IdUser { get; set; }
-        public int PsalmNumber { get; set; }
-
-      
-    }
+    public int Id { get; set; }
+    public int IdSoldier { get; set; }
+    public int IdUser { get; set; }
+    public int PsalmNumber { get; set; }
+    public virtual Soldier IdSoldierNavigation { get; set; } = null!;
+    public virtual User IdUserNavigation { get; set; } = null!;
 }

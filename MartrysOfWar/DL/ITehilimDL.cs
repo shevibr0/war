@@ -16,6 +16,10 @@ namespace DL
         Task<int> GetBooksCountForSoliderAsync(int soliderId);
         Task<IEnumerable<int>> GetCompletedPsalmsAsync(int soldierId);
         Task AddCompletedPsalmAsync(CompletedPsalm completedPsalm);
-        Task UpdateBookCountAsync(int soldierId);
+        Task UpdateBookCountIfNeeded(int soldierId);
+        Task<bool> AreAllPsalmsCompleted(int soldierId);
+        Task ClearCompletedPsalmsForSoldier(int soldierId);
+        Task DeleteCompletedPsalmsBySoldierAsync(int soldierId);
+        Task<int> GetCountCompletedPsalmsForSoldierAsync(int soldierId);
     }
 }

@@ -124,6 +124,7 @@ const Register = () => {
             <div className="flex justify-center mt-9 h-screen text-gray-800">
                 <div className="text-center mt-4 mr-5 ml-5">
                     <form onSubmit={handleRegistration} className="bg-white space-y-4 p-6 text-center w-full max-w-md shadow-top shadow-gray-800 rounded-2xl hover:animate-button-push hover:shadow-xl hover:shadow-gray-700">
+                        <h1 className="text-3xl font-bold mb-6">הרשמה</h1>
                         <input name="name" type="text" placeholder="שם" value={name} onChange={handleChangeName} style={{ direction: 'rtl' }} className="mb-2 bg-gray-300 rounded-lg p-2 text-center w-full" />
                         <input name="email" type="email" placeholder="מייל" value={email} onChange={handleChangeEmail} style={{ direction: 'rtl' }} className="mb-2 bg-gray-300 rounded-lg p-2 text-center w-full" />
                         <div className="relative w-full">

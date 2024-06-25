@@ -11,7 +11,9 @@ import {
     getBooksCountForSolider,
     getCompletedPsalms,
     addCompletedPsalm,
-    updateBookCountIfNeeded
+    updateBookCountIfNeeded,
+    deleteCompletedPsalmsBySoldierId,
+    getCountCompletedPsalmsForSoldier
 } from '../utils/TehilimUtil';
 import { getSoldiersById } from '../utils/SoldierUtil';
 import Sidebar from './Sidebar';
@@ -34,24 +36,35 @@ const Theilim = () => {
     const [completedPsalms, setCompletedPsalms] = useState(new Set());
 
     useEffect(() => {
-        if (selectedPsalms) {
-            console.log("Selected Psalms Updated:", selectedPsalms);
+        console.log("completedPsalms.length", num);
+        fetchTehilimBySoliderIdUser();
+        fetchSoldierDetails();
+    }, [user]);
+
+    const fetchSoldierDetails = async () => {
+        try {
+            const soldierData = await getSoldiersById(id);
+            setSoldier(soldierData);
+        } catch (error) {
+            console.error('Error fetching soldier details:', error);
         }
-    }, [selectedPsalms]);
+    };
 
     const fetchTehilimBySoliderIdUser = async () => {
-        if (!user) return;
         try {
-            const res = await getTehilimBySoliderIdUser(user.Id, id);
-            if (res.status === 204) {
-                setTheilimUser(null);
-            } else {
-                setTheilimUser(res.data);
+            if (user) {
+                const res = await getTehilimBySoliderIdUser(user?.Id, id);
+                if (res.status === 204) {
+                    setTheilimUser(null);
+                } else {
+                    setTheilimUser(res.data);
+                }
             }
             const dataCount = await getCountTehilimBySoliderId(id);
             setNum(dataCount);
 
             const dataCountUser = await getByUserCountTehilimForSoliderId(id);
+            console.log("משתמשים", dataCountUser);
             setUserNum(dataCountUser);
 
             const booksCount = await getBooksCountForSolider(id);
@@ -63,20 +76,6 @@ const Theilim = () => {
             console.log(error);
         }
     };
-
-    const fetchSoldierDetails = async () => {
-        try {
-            const soldierData = await getSoldiersById(id);
-            setSoldier(soldierData);
-        } catch (error) {
-            console.error('Error fetching soldier details:', error);
-        }
-    };
-
-    useEffect(() => {
-        fetchTehilimBySoliderIdUser();
-        fetchSoldierDetails();
-    }, [user]);
 
     const handleAddTheilimForSolider = async (e) => {
         e.preventDefault();
@@ -92,64 +91,42 @@ const Theilim = () => {
             return;
         }
 
-        if (theilimUser == null) {
-            const theilimEmpty = {
-                Id: 0,
-                IdSoldier: id,
-                IdUser: user.Id,
-                Count: 1,
-                Date: new Date().toISOString()
-            };
-            try {
-                await addTehilim(theilimEmpty);
-                setTheilimUser(theilimEmpty);
-                setNum(prevNum => prevNum + 1);
-                setUserNum(prevUserNum => prevUserNum + 1);
-                setShowPopup(false);
-                sendEmailNotification(theilimEmpty);
-                await addCompletedPsalm({ Id: 0, IdSoldier: id, IdUser: user.Id, PsalmNumber: selectedPsalmsPart });
-                await updateBookCountIfNeeded(id);
-            } catch (error) {
-                console.error("Error adding Tehilim:", error);
-            }
-        } else {
-            let _theilimUser = { ...theilimUser };
-            _theilimUser.Count = _theilimUser.Count + 1;
-            try {
-                await updateTehilim(_theilimUser.Id, _theilimUser);
-                setTheilimUser(_theilimUser);
-                setNum(prevNum => prevNum + 1);
-                setShowPopup(false);
-                sendEmailNotification(_theilimUser);
-                await addCompletedPsalm({ Id: 0, IdSoldier: id, IdUser: user.Id, PsalmNumber: selectedPsalmsPart });
-                await updateBookCountIfNeeded(id);
-            } catch (error) {
-                console.error("Error updating Tehilim:", error);
-            }
-        }
-    };
-
-    const sendEmailNotification = (tehilimData) => {
-        const templateParams = {
-            name: user.Name,
-            email: user.Email,
-            subject: 'New Tehilim Added',
-            message: `A new Tehilim has been added. User: ${user.Name}, Soldier ID: ${tehilimData.IdSoldier}, Count: ${tehilimData.Count}. View it at: https://matrysofwar.onrender.com/soldierInfo/${id}/theilim`
+        const theilimEmpty = {
+            Id: 0,
+            IdSoldier: parseInt(id),
+            IdUser: user.Id,
+            Count: 1,
+            Date: new Date().toISOString()
         };
-        //
-        console.log('Sending email with params:', templateParams);
 
-        emailjs.send('service_9rnvzfp', 'template_j3x5far', templateParams, "6no79izXNNDe1YECd")
-            .then((response) => {
-                console.log('SUCCESS!', response.status, response.text);
-            }, (error) => {
-                console.error('FAILED...', error);
-            });
+        try {
+            await addTehilim(theilimEmpty);
+            setTheilimUser(theilimEmpty);
+            setNum(prevNum => prevNum + 1);
+            const dataCountUser = await getByUserCountTehilimForSoliderId(id);
+            setUserNum(dataCountUser);
+            setShowPopup(false);
+            await addCompletedPsalm({ Id: 0, IdSoldier: parseInt(id), IdUser: user.Id, PsalmNumber: selectedPsalmsPart });
+            const completedPsalms = await getCompletedPsalms(id);
+            setCompletedPsalms(new Set(completedPsalms));
+
+            const completedPsalmsCount = await getCountCompletedPsalmsForSoldier(id);
+            console.log("completedPsalmsCount", completedPsalmsCount)
+            if (completedPsalmsCount === 151) {
+                alert("כל פרקי התהילים הושלמו!");
+                await deleteCompletedPsalmsBySoldierId(id);
+                setCompletedPsalms(new Set());
+                fetchTehilimBySoliderIdUser();
+            }
+
+        } catch (error) {
+            console.error("Error adding Tehilim:", error);
+        }
     };
 
     const numberToHebrewLetter = (num) => {
         const hebrewLetters = [
-            "א'", 'ב', 'ג', 'ד', 'ה', 'ו', 'ז', 'ח', 'ט', 'י',
+            "א", 'ב', 'ג', 'ד', 'ה', 'ו', 'ז', 'ח', 'ט', 'י',
             'יא', 'יב', 'יג', 'יד', 'טו', 'טז', 'יז', 'יח', 'יט', 'כ',
             'כא', 'כב', 'כג', 'כד', 'כה', 'כו', 'כז', 'כח', 'כט', 'ל',
             'לא', 'לב', 'לג', 'לד', 'לה', 'לו', 'לז', 'לח', 'לט', 'מ',
@@ -210,7 +187,14 @@ const Theilim = () => {
                         <button
                             key={i + 1}
                             className={`font-bold py-2 px-7 rounded mb-2 ${completedPsalms.has(i + 1) ? 'bg-white text-gray-600 border border-gray-600' : 'bg-gray-600 text-white hover:bg-white hover:text-gray-600 hover:border border-gray-600'}`}
-                            onClick={() => fetchPsalms(i + 1)}
+                            onClick={() => {
+                                if (user) {
+                                    fetchPsalms(i + 1);
+                                } else {
+                                    dispatch(addPageToHistory(location.pathname));
+                                    nav('/register');
+                                }
+                            }}
                             disabled={completedPsalms.has(i + 1)}
                         >
                             {numberToHebrewLetter(i + 1)}

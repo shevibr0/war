@@ -356,28 +356,38 @@ namespace DL.Models
 
             modelBuilder.Entity<Book>(entity =>
             {
-                entity.ToTable("BOOKS");
+                entity.ToTable("Books");
 
                 entity.Property(e => e.Id).HasColumnName("ID");
-
                 entity.Property(e => e.IdSoldier).HasColumnName("ID_SOLDIER");
-
                 entity.Property(e => e.Count).HasColumnName("COUNT");
 
                 entity.HasOne(d => d.IdSoldierNavigation)
-                    .WithMany(p => p.Books)
-                    .HasForeignKey(d => d.IdSoldier)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__BOOKS__ID_SOLDIER");
+                      .WithMany(p => p.Books)
+                      .HasForeignKey(d => d.IdSoldier)
+                      .OnDelete(DeleteBehavior.ClientSetNull)
+                      .HasConstraintName("FK_Books_Soldier");
             });
             modelBuilder.Entity<CompletedPsalm>(entity =>
             {
-                entity.ToTable("CompletedPsalms");
+                entity.HasKey(e => e.Id);
 
                 entity.Property(e => e.Id).HasColumnName("ID");
                 entity.Property(e => e.IdSoldier).HasColumnName("ID_SOLDIER");
                 entity.Property(e => e.IdUser).HasColumnName("ID_USER");
                 entity.Property(e => e.PsalmNumber).HasColumnName("PSALM_NUMBER");
+
+                entity.HasOne(d => d.IdSoldierNavigation)
+                    .WithMany(p => p.CompletedPsalms)
+                    .HasForeignKey(d => d.IdSoldier)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_COMPLETEDPSALMS_SOLDIERS");
+
+                entity.HasOne(d => d.IdUserNavigation)
+                    .WithMany(p => p.CompletedPsalms)
+                    .HasForeignKey(d => d.IdUser)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_COMPLETEDPSALMS_USERS");
             });
 
             OnModelCreatingPartial(modelBuilder);

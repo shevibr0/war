@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Entities.DTO
+﻿namespace Entities.DTO
 {
     public class CompletedPsalmDTO
     {
@@ -12,6 +6,8 @@ namespace Entities.DTO
         public int IdSoldier { get; set; }
         public int IdUser { get; set; }
         public int PsalmNumber { get; set; }
-    }
 
+        public virtual SoldierDTO Soldier { get; set; }
+        public virtual UserDTO User { get; set; }
+    }
 }

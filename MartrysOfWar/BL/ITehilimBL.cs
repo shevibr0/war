@@ -16,7 +16,11 @@ namespace BL
         Task<int> GetByUserCountTehilimForSolider(int soliderId);
         Task<int> GetBooksCountForSoliderAsync(int soliderId);
         Task<IEnumerable<int>> GetCompletedPsalmsAsync(int soldierId);
-        Task AddCompletedPsalmAsync(CompletedPsalm completedPsalm);
+        Task AddCompletedPsalmAsync(CompletedPsalmDTO completedPsalmDto);
         Task UpdateBookCountAsync(int soldierId);
+        Task ClearCompletedPsalmsForSoldierAsync(int soldierId);
+        Task<bool> AreAllPsalmsCompletedAsync(int soldierId);
+        Task DeleteCompletedPsalmsBySoldierAsync(int soldierId);
+        Task<int> GetCountCompletedPsalmsForSoldierAsync(int soldierId);
     }
 }

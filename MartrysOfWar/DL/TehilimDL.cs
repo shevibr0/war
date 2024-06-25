@@ -89,31 +89,40 @@ namespace DL
         {
             try
             {
-                return await _martyrsofwarContext.Tehilims.Where(t => t.IdSoldier == soliderId).SumAsync(t => t.Count);
+                return await _martyrsofwarContext.Tehilims
+                    .Where(t => t.IdSoldier == soliderId)
+                    .SumAsync(t => t.Count);
             }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
+
 
         public async Task<int> GetByUserCountTehilimForSolider(int soliderId)
         {
             try
             {
-                return await _martyrsofwarContext.Tehilims.Where(t => t.IdSoldier == soliderId).CountAsync();
+                return await _martyrsofwarContext.Tehilims
+                    .Where(t => t.IdSoldier == soliderId)
+                    .Select(t => t.IdUser)
+                    .Distinct()
+                    .CountAsync();
             }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
-
         public async Task<int> GetBooksCountForSoliderAsync(int soliderId)
         {
             try
             {
-                var soldierBooks = await _martyrsofwarContext.Books.Where(b => b.IdSoldier == soliderId).FirstOrDefaultAsync();
+                var soldierBooks = await _martyrsofwarContext.Books
+                    .Where(b => b.IdSoldier == soliderId)
+                    .FirstOrDefaultAsync();
+
                 return soldierBooks?.Count ?? 0;
             }
             catch (Exception ex)
@@ -150,7 +159,38 @@ namespace DL
             }
         }
 
-        public async Task UpdateBookCountAsync(int soldierId)
+        public async Task<bool> AreAllPsalmsCompleted(int soldierId)
+        {
+            try
+            {
+                int completedPsalmsCount = await _martyrsofwarContext.CompletedPsalms
+                    .Where(cp => cp.IdSoldier == soldierId)
+                    .CountAsync();
+                return completedPsalmsCount == 150;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task ClearCompletedPsalmsForSoldier(int soldierId)
+        {
+            try
+            {
+                var completedPsalms = _martyrsofwarContext.CompletedPsalms
+                    .Where(cp => cp.IdSoldier == soldierId);
+
+                _martyrsofwarContext.CompletedPsalms.RemoveRange(completedPsalms);
+                await _martyrsofwarContext.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task UpdateBookCountIfNeeded(int soldierId)
         {
             try
             {
@@ -173,6 +213,26 @@ namespace DL
                 throw ex;
             }
         }
+        public async Task DeleteCompletedPsalmsBySoldierAsync(int soldierId)
+        {
+            var completedPsalms = _martyrsofwarContext.CompletedPsalms.Where(cp => cp.IdSoldier == soldierId);
+            _martyrsofwarContext.CompletedPsalms.RemoveRange(completedPsalms);
+            await _martyrsofwarContext.SaveChangesAsync();
+        }
+        public async Task<int> GetCountCompletedPsalmsForSoldierAsync(int soldierId)
+        {
+            try
+            {
+                return await _martyrsofwarContext.CompletedPsalms
+                    .Where(cp => cp.IdSoldier == soldierId)
+                    .CountAsync();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
 
     }
 }

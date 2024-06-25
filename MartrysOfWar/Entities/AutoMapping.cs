@@ -18,6 +18,7 @@ public class AutoMapping : Profile
         CreateMap<VolunteeringOptionDTO, VolunteeringOption>().ReverseMap();
         CreateMap<ProductsToRecipeDTO, ProductsToRecipe>().ReverseMap();
         CreateMap<apiResponseModel, SoldierApiDTO>().ReverseMap();
+
         CreateMap<SoldierApiDTO, Soldier>()
             .ForMember(dest => dest.DateOfDeath, opt => opt.MapFrom(src => src.date_of_death))
             .ForMember(dest => dest.IsEmergencySquad, opt => opt.MapFrom(src => src.is_emergency_squad))
@@ -33,5 +34,6 @@ public class AutoMapping : Profile
             .ForMember(dest => dest.ShortDescription, opt => opt.MapFrom(src => src.short_description))
             .ForMember(dest => dest.UrlToArticle, opt => opt.MapFrom(src => src.url_to_article))
             .ReverseMap();
+        CreateMap<CompletedPsalmDTO, CompletedPsalm>().ReverseMap();
     }
 }

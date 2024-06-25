@@ -51,7 +51,6 @@ namespace MartrysOfWar.Controllers
             int count = await _tehilimBL.GetByUserCountTehilimForSolider(soldier);
             return Ok(count);
         }
-
         [HttpGet("GetBooksCountForSolider/{soldier}")]
         public async Task<ActionResult<int>> GetBooksCountForSolider(int soldier)
         {
@@ -71,20 +70,27 @@ namespace MartrysOfWar.Controllers
         //{
         //    await _tehilimBL.AddCompletedPsalmAsync(completedPsalm);
         //    return Ok();
+
         //}
         [HttpPost("AddCompletedPsalm")]
-        public async Task<ActionResult> AddCompletedPsalm([FromBody] CompletedPsalm completedPsalm)
+        public async Task<ActionResult> AddCompletedPsalm([FromBody] CompletedPsalmDTO completedPsalmDto)
         {
+            if (completedPsalmDto == null)
+            {
+                return BadRequest("Invalid data.");
+            }
+
             try
             {
-                await _tehilimBL.AddCompletedPsalmAsync(completedPsalm);
+                await _tehilimBL.AddCompletedPsalmAsync(completedPsalmDto);
                 return Ok();
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { message = ex.Message, stackTrace = ex.StackTrace });
+                return StatusCode(500, $"Error saving CompletedPsalm: {ex.Message}");
             }
         }
+
 
 
         [HttpPost("UpdateBookCount/{soldierId}")]
@@ -93,7 +99,6 @@ namespace MartrysOfWar.Controllers
             await _tehilimBL.UpdateBookCountAsync(soldierId);
             return Ok();
         }
-
         [HttpPost]
         public async Task<ActionResult<TehilimDTO>> AddTehilim([FromBody] TehilimDTO tehilimDto)
         {
@@ -114,6 +119,27 @@ namespace MartrysOfWar.Controllers
             await _tehilimBL.DeleteTehilimAsync(id);
             return Ok();
         }
+
+        [HttpDelete("DeleteCompletedPsalmsBySoldier/{soldierId}")]
+        public async Task<ActionResult> DeleteCompletedPsalmsBySoldier(int soldierId)
+        {
+            try
+            {
+                await _tehilimBL.DeleteCompletedPsalmsBySoldierAsync(soldierId);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error deleting completed psalms: {ex.Message}");
+            }
+        }
+        [HttpGet("GetCountCompletedPsalmsForSoldier/{soldierId}")]
+        public async Task<ActionResult<int>> GetCountCompletedPsalmsForSoldier(int soldierId)
+        {
+            int count = await _tehilimBL.GetCountCompletedPsalmsForSoldierAsync(soldierId);
+            return Ok(count);
+        }
+
 
     }
 }
