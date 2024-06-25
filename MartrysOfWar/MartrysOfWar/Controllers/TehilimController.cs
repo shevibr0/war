@@ -66,12 +66,26 @@ namespace MartrysOfWar.Controllers
             return Ok(completedPsalms);
         }
 
+        //[HttpPost("AddCompletedPsalm")]
+        //public async Task<ActionResult> AddCompletedPsalm([FromBody] CompletedPsalm completedPsalm)
+        //{
+        //    await _tehilimBL.AddCompletedPsalmAsync(completedPsalm);
+        //    return Ok();
+        //}
         [HttpPost("AddCompletedPsalm")]
         public async Task<ActionResult> AddCompletedPsalm([FromBody] CompletedPsalm completedPsalm)
         {
-            await _tehilimBL.AddCompletedPsalmAsync(completedPsalm);
-            return Ok();
+            try
+            {
+                await _tehilimBL.AddCompletedPsalmAsync(completedPsalm);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = ex.Message, stackTrace = ex.StackTrace });
+            }
         }
+
 
         [HttpPost("UpdateBookCount/{soldierId}")]
         public async Task<ActionResult> UpdateBookCount(int soldierId)

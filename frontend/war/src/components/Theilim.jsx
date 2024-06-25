@@ -32,6 +32,7 @@ const Theilim = () => {
     const [theilimUser, setTheilimUser] = useState(null);
     const [soldier, setSoldier] = useState(null);
     const [completedPsalms, setCompletedPsalms] = useState(new Set());
+    const [allCompleted, setAllCompleted] = useState(false);
 
     useEffect(() => {
         if (selectedPsalms) {
@@ -92,40 +93,17 @@ const Theilim = () => {
             return;
         }
 
-        if (theilimUser == null) {
-            const theilimEmpty = {
-                Id: 0,
-                IdSoldier: id,
-                IdUser: user.Id,
-                Count: 1,
-                Date: new Date().toISOString()
-            };
-            try {
-                await addTehilim(theilimEmpty);
-                setTheilimUser(theilimEmpty);
-                setNum(prevNum => prevNum + 1);
-                setUserNum(prevUserNum => prevUserNum + 1);
-                setShowPopup(false);
-                sendEmailNotification(theilimEmpty);
-                await addCompletedPsalm({ Id: 0, IdSoldier: id, IdUser: user.Id, PsalmNumber: selectedPsalmsPart });
+        try {
+            await addCompletedPsalm({ IdSoldier: id, IdUser: user.Id, PsalmNumber: selectedPsalmsPart });
+            setCompletedPsalms(prevCompletedPsalms => new Set([...prevCompletedPsalms, selectedPsalmsPart]));
+            if (completedPsalms.size + 1 === 150) {
                 await updateBookCountIfNeeded(id);
-            } catch (error) {
-                console.error("Error adding Tehilim:", error);
+                setAllCompleted(true);
+                setCompletedPsalms(new Set());
             }
-        } else {
-            let _theilimUser = { ...theilimUser };
-            _theilimUser.Count = _theilimUser.Count + 1;
-            try {
-                await updateTehilim(_theilimUser.Id, _theilimUser);
-                setTheilimUser(_theilimUser);
-                setNum(prevNum => prevNum + 1);
-                setShowPopup(false);
-                sendEmailNotification(_theilimUser);
-                await addCompletedPsalm({ Id: 0, IdSoldier: id, IdUser: user.Id, PsalmNumber: selectedPsalmsPart });
-                await updateBookCountIfNeeded(id);
-            } catch (error) {
-                console.error("Error updating Tehilim:", error);
-            }
+            setShowPopup(false);
+        } catch (error) {
+            console.error("Error adding Tehilim:", error);
         }
     };
 
