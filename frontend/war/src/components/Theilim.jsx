@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, lazy, Suspense } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import emailjs from 'emailjs-com';
@@ -16,8 +16,9 @@ import {
     getCountCompletedPsalmsForSoldier
 } from '../utils/TehilimUtil';
 import { getSoldiersById } from '../utils/SoldierUtil';
-import Sidebar from './Sidebar';
 import { addPageToHistory } from '../features/userSlice';
+
+const Sidebar = lazy(() => import('./Sidebar'));
 
 const Theilim = () => {
     const nav = useNavigate();
@@ -36,21 +37,11 @@ const Theilim = () => {
     const [completedPsalms, setCompletedPsalms] = useState(new Set());
 
     useEffect(() => {
-        console.log("completedPsalms.length", num);
-        fetchTehilimBySoliderIdUser();
+        fetchTehilimData();
         fetchSoldierDetails();
     }, [user]);
 
-    const fetchSoldierDetails = async () => {
-        try {
-            const soldierData = await getSoldiersById(id);
-            setSoldier(soldierData);
-        } catch (error) {
-            console.error('Error fetching soldier details:', error);
-        }
-    };
-
-    const fetchTehilimBySoliderIdUser = async () => {
+    const fetchTehilimData = async () => {
         try {
             if (user) {
                 const res = await getTehilimBySoliderIdUser(user?.Id, id);
@@ -64,7 +55,6 @@ const Theilim = () => {
             setNum(dataCount);
 
             const dataCountUser = await getByUserCountTehilimForSoliderId(id);
-            console.log("משתמשים", dataCountUser);
             setUserNum(dataCountUser);
 
             const booksCount = await getBooksCountForSolider(id);
@@ -74,6 +64,15 @@ const Theilim = () => {
             setCompletedPsalms(new Set(completedPsalmsData));
         } catch (error) {
             console.log(error);
+        }
+    };
+
+    const fetchSoldierDetails = async () => {
+        try {
+            const soldierData = await getSoldiersById(id);
+            setSoldier(soldierData);
+        } catch (error) {
+            console.error('Error fetching soldier details:', error);
         }
     };
 
@@ -111,12 +110,11 @@ const Theilim = () => {
             setCompletedPsalms(new Set(completedPsalms));
 
             const completedPsalmsCount = await getCountCompletedPsalmsForSoldier(id);
-            console.log("completedPsalmsCount", completedPsalmsCount)
             if (completedPsalmsCount === 151) {
                 alert("כל פרקי התהילים הושלמו!");
                 await deleteCompletedPsalmsBySoldierId(id);
                 setCompletedPsalms(new Set());
-                fetchTehilimBySoliderIdUser();
+                fetchTehilimData();
             }
 
         } catch (error) {
@@ -163,7 +161,9 @@ const Theilim = () => {
 
     return (
         <div className="bg-gray-200 min-h-screen relative">
-            <Sidebar />
+            <Suspense fallback={<div>Loading...</div>}>
+                <Sidebar />
+            </Suspense>
             {soldier && (
                 <div className="fixed top-20 right-4">
                     {soldier.Image ? (
