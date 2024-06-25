@@ -108,6 +108,7 @@ const Theilim = () => {
             const dataCountUser = await getByUserCountTehilimForSoliderId(id);
             setUserNum(dataCountUser);
             setShowPopup(false);
+            sendEmailNotification(theilimEmpty);
             await addCompletedPsalm({ Id: 0, IdSoldier: parseInt(id), IdUser: user.Id, PsalmNumber: selectedPsalmsPart });
             const completedPsalms = await getCompletedPsalms(id);
             setCompletedPsalms(new Set(completedPsalms));
@@ -125,6 +126,23 @@ const Theilim = () => {
         } finally {
             setLoading(false); // סיום מצב טעינה
         }
+    };
+    const sendEmailNotification = (tehilimData) => {
+        const templateParams = {
+            name: user.Name,
+            email: user.Email,
+            subject: 'New Tehilim Added',
+            message: `A new Tehilim has been added. User: ${user.Name}, Soldier ID: ${tehilimData.IdSoldier}, Count: ${tehilimData.Count}. View it at: https://matrysofwar.onrender.com/soldierInfo/${id}/theilim`
+        };
+
+        console.log('Sending email with params:', templateParams);
+
+        emailjs.send('service_9rnvzfp', 'template_j3x5far', templateParams, "6no79izXNNDe1YECd")
+            .then((response) => {
+                console.log('SUCCESS!', response.status, response.text);
+            }, (error) => {
+                console.error('FAILED...', error);
+            });
     };
 
     const numberToHebrewLetter = (num) => {
