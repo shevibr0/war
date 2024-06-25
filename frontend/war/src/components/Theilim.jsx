@@ -35,6 +35,7 @@ const Theilim = () => {
     const [theilimUser, setTheilimUser] = useState(null);
     const [soldier, setSoldier] = useState(null);
     const [completedPsalms, setCompletedPsalms] = useState(new Set());
+    const [loading, setLoading] = useState(false); // מצב טעינה חדש
 
     useEffect(() => {
         fetchTehilimData();
@@ -98,6 +99,8 @@ const Theilim = () => {
             Date: new Date().toISOString()
         };
 
+        setLoading(true); // התחלת מצב טעינה
+
         try {
             await addTehilim(theilimEmpty);
             setTheilimUser(theilimEmpty);
@@ -119,6 +122,8 @@ const Theilim = () => {
 
         } catch (error) {
             console.error("Error adding Tehilim:", error);
+        } finally {
+            setLoading(false); // סיום מצב טעינה
         }
     };
 
@@ -195,7 +200,7 @@ const Theilim = () => {
                                     nav('/register');
                                 }
                             }}
-                            disabled={completedPsalms.has(i + 1)}
+                            disabled={loading || completedPsalms.has(i + 1)} // נעל את הכפתור בזמן טעינה או אם הוא כבר נלחץ
                         >
                             {numberToHebrewLetter(i + 1)}
                         </button>
@@ -210,7 +215,9 @@ const Theilim = () => {
                             </div>
                             <div className='flex justify-center'>
                                 <button onClick={handleAddTheilimForSolider}
-                                    className="btn mt-4 bg-gray-600 hover:bg-white text-white hover:text-gray-600 hover:border border-gray-600 font-bold py-2 px-4 rounded">
+                                    className="btn mt-4 bg-gray-600 hover:bg-white text-white hover:text-gray-600 hover:border border-gray-600 font-bold py-2 px-4 rounded"
+                                    disabled={loading} // נעל את הכפתור בזמן טעינה
+                                >
                                     קראתי את הפרק
                                 </button>
                                 <button onClick={() => setShowPopup(false)}
