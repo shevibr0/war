@@ -213,7 +213,7 @@ const Theilim = () => {
                     <p>ספרים: {books}</p>
                 </div>
             </div>
-            <div className='flex justify-center mb-3 mt-2'>
+            <div className='flex-col justify-center mb-3 mt-2'>
                 <div className='flex flex-col items-center border border-gray-800 rounded-full'>
                     <a onClick={handleCopyLink} className="flex text-center hover:cursor-pointe p-1">
                         <IoShareSocial />
