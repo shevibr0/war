@@ -194,7 +194,7 @@ const Soldiers = () => {
                                 <div key={soldier.Id} className="bg-white text-center shadow-top shadow-gray-800 p-4 rounded-2xl hover:animate-button-push hover:shadow-xl hover:shadow-gray-700">
                                     <div className='flex justify-center mb-2'>
                                         {soldier.Image ? (
-                                            <img className="h-40 w-40 object-cover rounded-full" src={soldier.Image} alt={`${soldier.FirstName || ''} ${soldier.LastName || ''}`} />
+                                            <img className="h-40 w-40 object-cover rounded-full" loading="lazy" src={soldier.Image} alt={`${soldier.FirstName || ''} ${soldier.LastName || ''}`} />
                                         ) : (
                                             <div className='h-40 w-40 rounded-full border-2 border-black'></div>
                                         )}
