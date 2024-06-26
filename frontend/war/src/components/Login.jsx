@@ -17,7 +17,7 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState('');
-    const [user, setUser] = useState(null);
+    const user = useSelector(state => state.user.connectedUser);
 
     const handleClickLogin = async (event) => {
         event.preventDefault();
@@ -30,9 +30,8 @@ const Login = () => {
             if (res === null) {
                 setError("ההתחברות נכשלה");
             } else {
-                setUser(res);
-                localStorage.setItem('user', JSON.stringify(res));
                 dispatch(setConnectedUser(res));
+                localStorage.setItem('user', JSON.stringify(res));
                 if (pageHistory.length > 0) {
                     const lastPage = pageHistory[pageHistory.length - 1];
                     nav(lastPage);
