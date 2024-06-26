@@ -93,6 +93,9 @@ const Pictures = () => {
     return (
         <div className="bg-gray-200 h-screen relative">
             <Sidebar />
+            <div className='flex items-center mb-1'>
+                <img className="mt-3 ml-5 w-[10px] mr-15 " src="/חץ חזור.svg" alt="Logo" onClick={() => nav(`/soldierInfo/${soldier.Id}`)} />
+            </div>
             {soldier && (
                 <div className="fixed top-20 right-4">
                     {soldier.Image ? (

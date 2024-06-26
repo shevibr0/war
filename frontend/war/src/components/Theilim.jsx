@@ -197,6 +197,9 @@ const Theilim = () => {
         <div className="bg-gray-200 min-h-screen relative">
             <Suspense fallback={<div>Loading...</div>}>
                 <Sidebar />
+                <div className='flex items-center mb-1'>
+                    <img className="mt-3 ml-5 w-[10px] mr-15 " src="/חץ חזור.svg" alt="Logo" onClick={() => nav(`/soldierInfo/${soldier.Id}`)} />
+                </div>
             </Suspense>
             {soldier && (
                 <div className="fixed top-20 right-4">

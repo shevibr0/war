@@ -40,6 +40,9 @@ const SoldierInfo = () => {
         <div className="bg-gray-200 min-h-screen text-gray-800 px-4">
             <Suspense fallback={<div>Loading Sidebar...</div>}>
                 <Sidebar />
+                <div className='flex items-center mb-1'>
+                    <img className="mt-3 ml-5 w-[10px] mr-15 " src="/חץ חזור.svg" alt="Logo" onClick={() => nav("/soldiers")} />
+                </div>
             </Suspense>
             <div className='grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 gap-2 items-center mt-4 font-bold'>
                 <div className='flex cursor-pointer bg-white shadow-top shadow-gray-500 p-2 rounded-lg justify-center hover:animate-button-push' onClick={() => nav(`/soldierInfo/${id}/memories`)}>פתקי זכרון</div>
