@@ -121,7 +121,7 @@ const AddRemember = () => {
             message: `A new memory has been added. Memory: ${memoryPayload.Remember}. View it at: https://matrysofwar.onrender.com/soldierInfo/${id}/memories`
         };
 
-        emailjs.send('service_9rnvzfp', 'template_j3x5far', templateParams, "6no79izXNNDe1YECd")
+        emailjs.send('service_9rnvzfp', 'template_j3x5far', templateParams, "PfoRzhpOYEmi5Zxch")
             .then((response) => {
                 console.log('SUCCESS!', response.status, response.text);
             }, (error) => {

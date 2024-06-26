@@ -132,7 +132,7 @@ const AddPicture = () => {
             message: `A new picture has been added by ${user.Name}. URL: ${downloadURL}, Personal Words: ${pictureDetails.Picture.PersonalWords}. View at: https://matrysofwar.onrender.com/soldierInfo/${id}/pictures`
         };
 
-        emailjs.send('service_9rnvzfp', 'template_j3x5far', templateParams, "6no79izXNNDe1YECd")
+        emailjs.send('service_9rnvzfp', 'template_j3x5far', templateParams, "PfoRzhpOYEmi5Zxch")
             .then((response) => {
                 console.log('SUCCESS!', response.status, response.text);
             }, (error) => {
