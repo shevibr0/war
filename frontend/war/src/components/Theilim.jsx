@@ -1,4 +1,4 @@
-import React, { useEffect, useState, lazy, Suspense } from 'react';
+import React, { useEffect, useState, lazy, Suspense, useCallback } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import emailjs from 'emailjs-com';
@@ -7,11 +7,9 @@ import {
     getByUserCountTehilimForSoliderId,
     getCountTehilimBySoliderId,
     getTehilimBySoliderIdUser,
-    updateTehilim,
     getBooksCountForSolider,
     getCompletedPsalms,
     addCompletedPsalm,
-    updateBookCountIfNeeded,
     deleteCompletedPsalmsBySoldierId,
     getCountCompletedPsalmsForSoldier
 } from '../utils/TehilimUtil';
@@ -35,14 +33,9 @@ const Theilim = () => {
     const [theilimUser, setTheilimUser] = useState(null);
     const [soldier, setSoldier] = useState(null);
     const [completedPsalms, setCompletedPsalms] = useState(new Set());
-    const [loading, setLoading] = useState(false); // מצב טעינה חדש
+    const [loading, setLoading] = useState(false);
 
-    useEffect(() => {
-        fetchTehilimData();
-        fetchSoldierDetails();
-    }, [user]);
-
-    const fetchTehilimData = async () => {
+    const fetchTehilimData = useCallback(async () => {
         try {
             if (user) {
                 const res = await getTehilimBySoliderIdUser(user?.Id, id);
@@ -52,30 +45,33 @@ const Theilim = () => {
                     setTheilimUser(res.data);
                 }
             }
-            const dataCount = await getCountTehilimBySoliderId(id);
+            const [dataCount, dataCountUser, booksCount, completedPsalmsData] = await Promise.all([
+                getCountTehilimBySoliderId(id),
+                getByUserCountTehilimForSoliderId(id),
+                getBooksCountForSolider(id),
+                getCompletedPsalms(id)
+            ]);
             setNum(dataCount);
-
-            const dataCountUser = await getByUserCountTehilimForSoliderId(id);
             setUserNum(dataCountUser);
-
-            const booksCount = await getBooksCountForSolider(id);
             setBooks(booksCount);
-
-            const completedPsalmsData = await getCompletedPsalms(id);
             setCompletedPsalms(new Set(completedPsalmsData));
         } catch (error) {
             console.log(error);
         }
-    };
+    }, [id, user]);
 
-    const fetchSoldierDetails = async () => {
-        try {
-            const soldierData = await getSoldiersById(id);
-            setSoldier(soldierData);
-        } catch (error) {
-            console.error('Error fetching soldier details:', error);
-        }
-    };
+    useEffect(() => {
+        fetchTehilimData();
+        const fetchSoldierDetails = async () => {
+            try {
+                const soldierData = await getSoldiersById(id);
+                setSoldier(soldierData);
+            } catch (error) {
+                console.error('Error fetching soldier details:', error);
+            }
+        };
+        fetchSoldierDetails();
+    }, [user, fetchTehilimData, id]);
 
     const handleAddTheilimForSolider = async (e) => {
         e.preventDefault();
@@ -99,7 +95,7 @@ const Theilim = () => {
             Date: new Date().toISOString()
         };
 
-        setLoading(true); // התחלת מצב טעינה
+        setLoading(true);
 
         try {
             await addTehilim(theilimEmpty);
@@ -124,9 +120,10 @@ const Theilim = () => {
         } catch (error) {
             console.error("Error adding Tehilim:", error);
         } finally {
-            setLoading(false); // סיום מצב טעינה
+            setLoading(false);
         }
     };
+
     const sendEmailNotification = (tehilimData) => {
         const templateParams = {
             name: user.Name,
