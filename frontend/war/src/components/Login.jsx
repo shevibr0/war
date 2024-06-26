@@ -33,7 +33,8 @@ const Login = () => {
                 dispatch(setConnectedUser(res));
                 localStorage.setItem('user', JSON.stringify(res));
                 if (pageHistory.length > 0) {
-                    const lastPage = pageHistory[pageHistory.length - 1];
+                    const lastPage = pageHistory[pageHistory.length - 2];
+                    console.log("lastPage", lastPage)
                     nav(lastPage);
                     dispatch(clearPageHistory());
                 } else {
