@@ -1,22 +1,22 @@
-import React, { useEffect, useState } from 'react';
-import { deleteMemory, getMemoriesById } from '../utils/MemoryUtil';
+import React, { useEffect, useState, useCallback, Suspense, lazy } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router';
+import { deleteMemory, getMemoriesById } from '../utils/MemoryUtil';
 import { useSelector, useDispatch } from 'react-redux';
-import Sidebar from './Sidebar';
 import { getSoldiersById } from '../utils/SoldierUtil';
 import { addPageToHistory } from '../features/userSlice';
+
+const Sidebar = lazy(() => import('./Sidebar'));
 
 const Remembers = () => {
     const nav = useNavigate();
     const dispatch = useDispatch();
     const location = useLocation();
     const { id } = useParams();
-    const [isOpen, setIsOpen] = useState(false);
     const [remembers, setRemembers] = useState([]);
     const [soldier, setSoldier] = useState(null);
     const user = useSelector(state => state.user.connectedUser);
 
-    const fetchRemembers = async () => {
+    const fetchRemembers = useCallback(async () => {
         try {
             const data = await getMemoriesById(id);
             setRemembers(data);
@@ -24,31 +24,31 @@ const Remembers = () => {
         } catch (error) {
             console.error('Error fetching remembers:', error);
         }
-    };
+    }, [id]);
 
-    const fetchSoldierDetails = async () => {
+    const fetchSoldierDetails = useCallback(async () => {
         try {
             const soldierData = await getSoldiersById(id);
             setSoldier(soldierData);
         } catch (error) {
             console.error('Error fetching soldier details:', error);
         }
-    };
+    }, [id]);
 
     useEffect(() => {
         fetchRemembers();
         fetchSoldierDetails();
-    }, [id]);
+    }, [fetchRemembers, fetchSoldierDetails]);
 
     const handleEdit = async (memoryId) => {
         nav(`${memoryId}/editMemory`);
     };
 
-    const handleDelete = async (id) => {
+    const handleDelete = async (memoryId) => {
         if (window.confirm("האם אתה בטוח שברצונך למחוק את הזיכרון?")) {
             try {
-                const data = await deleteMemory(id);
-                setRemembers(currentRemembers => currentRemembers.filter(memory => memory.Id !== id));
+                await deleteMemory(memoryId);
+                setRemembers(currentRemembers => currentRemembers.filter(memory => memory.Id !== memoryId));
             } catch (error) {
                 console.error("Error deleting memory:", error);
             }
@@ -68,7 +68,9 @@ const Remembers = () => {
 
     return (
         <div className="bg-gray-200 h-screen text-gray-800 relative">
-            <Sidebar />
+            <Suspense fallback={<div>Loading Sidebar...</div>}>
+                <Sidebar />
+            </Suspense>
             {soldier && (
                 <div className="fixed top-20 right-4">
                     {soldier.Image ? (
@@ -109,7 +111,7 @@ const Remembers = () => {
                 </ul>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default Remembers;

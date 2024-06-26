@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback, lazy, Suspense } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router';
 import { deleteVolunteeringOption, getVolunteeringOptionById } from '../utils/VolunteeringOptionUtil';
 import { useSelector, useDispatch } from 'react-redux';
-import Sidebar from './Sidebar';
 import { getSoldiersById } from '../utils/SoldierUtil';
 import { addPageToHistory } from '../features/userSlice';
+
+const Sidebar = lazy(() => import('./Sidebar'));
 
 const Voleenteerings = () => {
     const nav = useNavigate();
@@ -15,7 +16,7 @@ const Voleenteerings = () => {
     const [volunteeringOptions, setVolunteeringOptions] = useState([]);
     const [soldier, setSoldier] = useState(null);
 
-    const fetchVolunteeringOptions = async () => {
+    const fetchVolunteeringOptions = useCallback(async () => {
         try {
             const options = await getVolunteeringOptionById(id);
             setVolunteeringOptions(options);
@@ -23,31 +24,31 @@ const Voleenteerings = () => {
         } catch (error) {
             console.error('Error fetching volunteering options:', error);
         }
-    };
+    }, [id]);
 
-    const fetchSoldierDetails = async () => {
+    const fetchSoldierDetails = useCallback(async () => {
         try {
             const soldierData = await getSoldiersById(id);
             setSoldier(soldierData);
         } catch (error) {
             console.error('Error fetching soldier details:', error);
         }
-    };
+    }, [id]);
 
     useEffect(() => {
         fetchVolunteeringOptions();
         fetchSoldierDetails();
-    }, [id]);
+    }, [fetchVolunteeringOptions, fetchSoldierDetails]);
 
     const handleEdit = async (optionId) => {
         nav(`${optionId}/editVolunteering`);
     };
 
-    const handleDelete = async (id) => {
+    const handleDelete = async (optionId) => {
         if (window.confirm("האם אתה בטוח שברצונך למחוק את ההתנדבות?")) {
             try {
-                await deleteVolunteeringOption(id);
-                setVolunteeringOptions(currentVolunteeringOptions => currentVolunteeringOptions.filter(option => option.Id !== id));
+                await deleteVolunteeringOption(optionId);
+                setVolunteeringOptions(currentVolunteeringOptions => currentVolunteeringOptions.filter(option => option.Id !== optionId));
             } catch (error) {
                 console.error("Error deleting volunteering option:", error);
             }
@@ -67,7 +68,9 @@ const Voleenteerings = () => {
 
     return (
         <div className="bg-gray-200 h-screen relative">
-            <Sidebar />
+            <Suspense fallback={<div>Loading Sidebar...</div>}>
+                <Sidebar />
+            </Suspense>
             {soldier && (
                 <div className="fixed top-20 right-4">
                     {soldier.Image ? (

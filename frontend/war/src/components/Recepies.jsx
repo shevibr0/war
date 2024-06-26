@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router';
 import { deleteRecipy, getRecipyById } from '../utils/RecipyUtil';
 import { getPreparationById } from '../utils/PreparationUtil';
 import { getProductsToRecipeById } from '../utils/ProductsToRecipeUtil';
 import { useSelector, useDispatch } from 'react-redux';
-import Sidebar from './Sidebar';
 import { getSoldiersById } from '../utils/SoldierUtil';
 import { addPageToHistory } from '../features/userSlice';
+
+const Sidebar = React.lazy(() => import('./Sidebar'));
 
 const Recepies = () => {
     const nav = useNavigate();
@@ -20,54 +21,46 @@ const Recepies = () => {
     const [soldier, setSoldier] = useState(null);
     const user = useSelector(state => state.user.connectedUser);
 
-    const fetchRecipyById = async () => {
+    const fetchRecipyById = useCallback(async () => {
         try {
             const data = await getRecipyById(id);
             console.log("recepies", data);
             setRecepies(data);
-            const firstRecipyId = data[0]?.Id;
-            if (firstRecipyId) {
-                fetchPreparationById(firstRecipyId);
-                fetchProductsToRecipesById(firstRecipyId);
+            if (data.length > 0) {
+                const recipeIds = data.map(recipe => recipe.Id);
+                await fetchPreparationAndProducts(recipeIds);
             }
         } catch (error) {
             console.error('Error fetching recipes:', error);
         }
-    };
+    }, [id]);
 
-    const fetchPreparationById = async (recipeId) => {
+    const fetchPreparationAndProducts = useCallback(async (recipeIds) => {
         try {
-            const data = await getPreparationById(recipeId);
-            console.log("Preparations:", data);
-            setPreparations(data);
+            const [preparationsData, productsData] = await Promise.all([
+                Promise.all(recipeIds.map(recipeId => getPreparationById(recipeId))),
+                Promise.all(recipeIds.map(recipeId => getProductsToRecipeById(recipeId)))
+            ]);
+            setPreparations(preparationsData.flat());
+            setProductsToRecipes(productsData.flat());
         } catch (error) {
-            console.error('Error fetching preparations:', error);
+            console.error('Error fetching preparations and products to recipes:', error);
         }
-    };
+    }, []);
 
-    const fetchProductsToRecipesById = async (recipeId) => {
-        try {
-            const data = await getProductsToRecipeById(recipeId);
-            console.log("Products to Recipes:", data);
-            setProductsToRecipes(data);
-        } catch (error) {
-            console.error('Error fetching products to recipes:', error);
-        }
-    };
-
-    const fetchSoldierDetails = async () => {
+    const fetchSoldierDetails = useCallback(async () => {
         try {
             const soldierData = await getSoldiersById(id);
             setSoldier(soldierData);
         } catch (error) {
             console.error('Error fetching soldier details:', error);
         }
-    };
+    }, [id]);
 
     useEffect(() => {
         fetchRecipyById();
         fetchSoldierDetails();
-    }, [id]);
+    }, [fetchRecipyById, fetchSoldierDetails]);
 
     const handleEdit = (recipeId) => {
         nav(`${recipeId}/editRecipe`);
@@ -97,7 +90,9 @@ const Recepies = () => {
 
     return (
         <div className="bg-gray-200 min-h-screen relative">
-            <Sidebar />
+            <React.Suspense fallback={<div>Loading Sidebar...</div>}>
+                <Sidebar />
+            </React.Suspense>
             {soldier && (
                 <div className="fixed top-20 right-4">
                     {soldier.Image ? (
