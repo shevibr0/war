@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback, lazy, Suspense } from 'react';
 import { addCompleteRecipe, getRecipyByRecipyId, updateRecipy } from '../utils/RecipyUtil';
 import { useNavigate, useParams, useLocation } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProductsToRecipeById } from '../utils/ProductsToRecipeUtil';
 import { getPreparationById } from '../utils/PreparationUtil';
 import emailjs from 'emailjs-com';
-import Sidebar from './Sidebar';
 import { getSoldiersById } from '../utils/SoldierUtil';
 import { addPageToHistory } from '../features/userSlice';
+
+const Sidebar = lazy(() => import('./Sidebar'));
 
 const AddRecipe = () => {
     const nav = useNavigate();
     const dispatch = useDispatch();
     const location = useLocation();
     const { id, recipeId } = useParams();
-    const [isOpen, setIsOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
@@ -36,52 +36,49 @@ const AddRecipe = () => {
     };
     const [recipeDetails, setRecipeDetails] = useState(initialRecipeDetails);
 
-    useEffect(() => {
-        const fetchSoldierDetails = async () => {
-            try {
-                const soldierData = await getSoldiersById(id);
-                setSoldier(soldierData);
-            } catch (error) {
-                console.error('Error fetching soldier details:', error);
-            }
-        };
-        fetchSoldierDetails();
+    const fetchSoldierDetails = useCallback(async () => {
+        try {
+            const soldierData = await getSoldiersById(id);
+            setSoldier(soldierData);
+        } catch (error) {
+            console.error('Error fetching soldier details:', error);
+        }
     }, [id]);
 
-    useEffect(() => {
+    const fetchRecipeDetails = useCallback(async () => {
         if (recipeId) {
-            console.log("Fetching data for recipeId:", recipeId);
-            Promise.all([
-                getRecipyByRecipyId(recipeId),
-                getProductsToRecipeById(recipeId),
-                getPreparationById(recipeId)
-            ]).then(([recipeData, productsData, preparationData]) => {
-                if (recipeData) {
-                    console.log("Recipe data:", recipeData);
-                    console.log("Products data:", productsData);
-                    console.log("Preparation data:", preparationData);
-                    setRecipeDetails({
-                        Recipy: {
-                            id: recipeData[0].Id,
-                            Name: recipeData[0].Name,
-                            IdSoldier: recipeData[0].IdSoldier,
-                            IdUser: recipeData[0].IdUser,
-                            Date: recipeData[0].Date,
-                            PersonalWords: recipeData[0].PersonalWords
-                        },
-                        ProductsToRecipes: productsData.filter(product => product.IdRec === recipeData[0].Id),
-                        Preparations: preparationData.filter(step => step.IdRec === recipeData[0].Id)
-                    });
-                } else {
-                    setError('Recipe not found.');
-                    setRecipeDetails(initialRecipeDetails);
-                }
-            }).catch(error => {
+            try {
+                const [recipeData, productsData, preparationData] = await Promise.all([
+                    getRecipyByRecipyId(recipeId),
+                    getProductsToRecipeById(recipeId),
+                    getPreparationById(recipeId)
+                ]);
+                setRecipeDetails({
+                    Recipy: {
+                        id: recipeData[0].Id,
+                        Name: recipeData[0].Name,
+                        IdSoldier: recipeData[0].IdSoldier,
+                        IdUser: recipeData[0].IdUser,
+                        Date: recipeData[0].Date,
+                        PersonalWords: recipeData[0].PersonalWords
+                    },
+                    ProductsToRecipes: productsData.filter(product => product.IdRec === recipeData[0].Id),
+                    Preparations: preparationData.filter(step => step.IdRec === recipeData[0].Id)
+                });
+            } catch (error) {
                 console.error('Error fetching full recipe details:', error);
                 setError('Failed to load recipe details. Please try again.');
-            });
+            }
         }
-    }, [recipeId, user?.Id]);
+    }, [recipeId]);
+
+    useEffect(() => {
+        fetchSoldierDetails();
+    }, [fetchSoldierDetails]);
+
+    useEffect(() => {
+        fetchRecipeDetails();
+    }, [fetchRecipeDetails]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -137,7 +134,6 @@ const AddRecipe = () => {
             return;
         }
         setIsLoading(true);
-        console.log("Submitting this data:", recipeDetails);
         const completeRecipeData = {
             Name: recipeDetails.Recipy?.Name,
             IdSoldier: recipeDetails.IdSoldier,
@@ -150,7 +146,6 @@ const AddRecipe = () => {
         try {
             if (!isEditing) {
                 const addedRecipe = await addCompleteRecipe(completeRecipeData);
-                console.log('Recipe added successfully:', addedRecipe);
                 sendEmailNotification(completeRecipeData);
                 setSuccessMessage('המתכון נוסף בהצלחה');
                 setTimeout(() => {
@@ -159,9 +154,7 @@ const AddRecipe = () => {
                 }, 3000);
                 setError('');
             } else {
-                console.log('Recipe recipeDetails:', recipeDetails);
                 const editRecipe = await updateRecipy(recipeDetails);
-                console.log('Recipe updated successfully:', editRecipe);
                 sendEmailNotification(recipeDetails.Recipy);
                 setSuccessMessage('המתכון עודכן בהצלחה!');
                 setTimeout(() => {
@@ -196,7 +189,9 @@ const AddRecipe = () => {
 
     return (
         <div className="bg-gray-200 h-screen relative">
-            <Sidebar />
+            <Suspense fallback={<div>Loading Sidebar...</div>}>
+                <Sidebar />
+            </Suspense>
             {soldier && (
                 <div className="fixed top-20 right-4">
                     {soldier.Image ? (

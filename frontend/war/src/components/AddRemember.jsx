@@ -1,68 +1,68 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { addMemory, getMemoryByIdAsyncRecipyId, updateMemory } from '../utils/MemoryUtil';
 import { useNavigate, useParams, useLocation } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import emailjs from 'emailjs-com';
-import Sidebar from './Sidebar';
 import { getSoldiersById } from '../utils/SoldierUtil';
 import { addPageToHistory } from '../features/userSlice';
+
+const Sidebar = React.lazy(() => import('./Sidebar'));
 
 const AddRemember = () => {
     const nav = useNavigate();
     const dispatch = useDispatch();
     const location = useLocation();
-    const [isOpen, setIsOpen] = useState(false);
-    const [error, setError] = useState('');
     const { id, memoryId } = useParams();
+    const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [successMessage, setSuccessMessage] = useState('');
     const user = useSelector(state => state.user.connectedUser);
     const [isEditing, setIsEditing] = useState(Boolean(memoryId));
     const [soldier, setSoldier] = useState(null);
 
-    console.log('Connected user:', user); // Debugging line to check the user object
-
     const initialMemoryDetails = {
         Memory: {
             id: 0,
             IdSoldier: id,
-            IdUser: user?.Id || null, // Ensure user ID is set correctly
+            IdUser: user?.Id || null,
             Remember: '',
             Date: new Date().toISOString()
         }
     };
     const [memory, setMemory] = useState(initialMemoryDetails);
 
-    useEffect(() => {
-        const fetchMemory = async () => {
-            if (memoryId) {
-                try {
-                    const memoryData = await getMemoryByIdAsyncRecipyId(id, memoryId);
-                    if (memoryData && memoryData.length > 0) {
-                        setMemory({ Memory: memoryData[0] });
-                    } else {
-                        console.log("No memory found");
-                    }
-                } catch (error) {
-                    console.error("Error fetching memory:", error);
-                    setError('Error fetching memory. Please try again.');
+    const fetchMemoryDetails = useCallback(async () => {
+        if (memoryId) {
+            try {
+                const memoryData = await getMemoryByIdAsyncRecipyId(id, memoryId);
+                if (memoryData && memoryData.length > 0) {
+                    setMemory({ Memory: memoryData[0] });
+                } else {
+                    console.log("No memory found");
                 }
+            } catch (error) {
+                console.error("Error fetching memory:", error);
+                setError('Error fetching memory. Please try again.');
             }
-        };
-        fetchMemory();
+        }
     }, [id, memoryId]);
 
-    useEffect(() => {
-        const fetchSoldierDetails = async () => {
-            try {
-                const soldierData = await getSoldiersById(id);
-                setSoldier(soldierData);
-            } catch (error) {
-                console.error('Error fetching soldier details:', error);
-            }
-        };
-        fetchSoldierDetails();
+    const fetchSoldierDetails = useCallback(async () => {
+        try {
+            const soldierData = await getSoldiersById(id);
+            setSoldier(soldierData);
+        } catch (error) {
+            console.error('Error fetching soldier details:', error);
+        }
     }, [id]);
+
+    useEffect(() => {
+        fetchMemoryDetails();
+    }, [fetchMemoryDetails]);
+
+    useEffect(() => {
+        fetchSoldierDetails();
+    }, [fetchSoldierDetails]);
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -88,23 +88,17 @@ const AddRemember = () => {
             const memoryPayload = memory.Memory;
             if (memoryId) {
                 await updateMemory(memoryId, memoryPayload);
-                console.log('Memory updated successfully');
                 sendEmailNotification(memoryPayload);
                 setSuccessMessage('הזכרון עודכן בהצלחה!');
-                setTimeout(() => {
-                    setSuccessMessage('');
-                    nav(`/soldierInfo/${id}/memories`);
-                }, 3000);
             } else {
                 await addMemory(memoryPayload);
-                console.log('Memory added successfully');
                 sendEmailNotification(memoryPayload);
                 setSuccessMessage('הזכרון נוסף בהצלחה');
-                setTimeout(() => {
-                    setSuccessMessage('');
-                    nav(`/soldierInfo/${id}/memories`);
-                }, 3000);
             }
+            setTimeout(() => {
+                setSuccessMessage('');
+                nav(`/soldierInfo/${id}/memories`);
+            }, 3000);
         } catch (error) {
             console.error('Error adding/updating memory:', error);
             setError('Error adding/updating memory. Please try again.');
@@ -131,7 +125,9 @@ const AddRemember = () => {
 
     return (
         <div className="bg-gray-200 h-screen relative">
-            <Sidebar />
+            <React.Suspense fallback={<div>Loading Sidebar...</div>}>
+                <Sidebar />
+            </React.Suspense>
             {soldier && (
                 <div className="fixed top-20 right-4">
                     {soldier.Image ? (

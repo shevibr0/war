@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router';
 import { addVolunteeringOption, getVolunteeringOptionByIdAsyncOptionId, updateVolunteeringOption } from '../utils/VolunteeringOptionUtil';
 import { useDispatch, useSelector } from 'react-redux';
 import emailjs from 'emailjs-com';
-import Sidebar from './Sidebar';
 import { getSoldiersById } from '../utils/SoldierUtil';
 import { addPageToHistory } from '../features/userSlice';
+
+const Sidebar = React.lazy(() => import('./Sidebar'));
 
 const AddVolunteer = () => {
     const nav = useNavigate();
     const location = useLocation();
     const dispatch = useDispatch();
-    const [isOpen, setIsOpen] = useState(false);
     const [error, setError] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
     const { id, optionId } = useParams();
@@ -31,36 +31,38 @@ const AddVolunteer = () => {
     };
     const [volunteeringOption, setVolunteeringOption] = useState(initialVolunteeringOptionDetails);
 
-    useEffect(() => {
-        const fetchVolunteeringOption = async () => {
-            if (optionId) {
-                try {
-                    const volunteeringOptionData = await getVolunteeringOptionByIdAsyncOptionId(id, optionId);
-                    if (volunteeringOptionData && volunteeringOptionData.length > 0) {
-                        setVolunteeringOption({ volunteeringOption: volunteeringOptionData[0] });
-                    } else {
-                        console.log("No volunteering option found");
-                    }
-                } catch (error) {
-                    console.error("Error fetching volunteering option data:", error);
-                    setError('Error fetching volunteering option data. Please try again.');
+    const fetchVolunteeringOption = useCallback(async () => {
+        if (optionId) {
+            try {
+                const volunteeringOptionData = await getVolunteeringOptionByIdAsyncOptionId(id, optionId);
+                if (volunteeringOptionData && volunteeringOptionData.length > 0) {
+                    setVolunteeringOption({ volunteeringOption: volunteeringOptionData[0] });
+                } else {
+                    console.log("No volunteering option found");
                 }
+            } catch (error) {
+                console.error("Error fetching volunteering option data:", error);
+                setError('Error fetching volunteering option data. Please try again.');
             }
-        };
-        fetchVolunteeringOption();
+        }
     }, [id, optionId]);
 
-    useEffect(() => {
-        const fetchSoldierDetails = async () => {
-            try {
-                const soldierData = await getSoldiersById(id);
-                setSoldier(soldierData);
-            } catch (error) {
-                console.error('Error fetching soldier details:', error);
-            }
-        };
-        fetchSoldierDetails();
+    const fetchSoldierDetails = useCallback(async () => {
+        try {
+            const soldierData = await getSoldiersById(id);
+            setSoldier(soldierData);
+        } catch (error) {
+            console.error('Error fetching soldier details:', error);
+        }
     }, [id]);
+
+    useEffect(() => {
+        fetchVolunteeringOption();
+    }, [fetchVolunteeringOption]);
+
+    useEffect(() => {
+        fetchSoldierDetails();
+    }, [fetchSoldierDetails]);
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -87,23 +89,17 @@ const AddVolunteer = () => {
             const volunteeringOptionPayload = volunteeringOption.volunteeringOption;
             if (optionId) {
                 await updateVolunteeringOption(optionId, volunteeringOptionPayload);
-                console.log('Volunteering option updated successfully');
                 sendEmailNotification(volunteeringOptionPayload);
                 setSuccessMessage('ההתנדבות עודכנה בהצלחה!');
-                setTimeout(() => {
-                    setSuccessMessage('');
-                    nav(`/soldierInfo/${id}/volunteering`);
-                }, 3000);
             } else {
                 await addVolunteeringOption(volunteeringOptionPayload);
-                console.log('Volunteering option added successfully');
                 sendEmailNotification(volunteeringOptionPayload);
                 setSuccessMessage('ההתנדבות נוספה בהצלחה');
-                setTimeout(() => {
-                    setSuccessMessage('');
-                    nav(`/soldierInfo/${id}/volunteering`);
-                }, 3000);
             }
+            setTimeout(() => {
+                setSuccessMessage('');
+                nav(`/soldierInfo/${id}/volunteering`);
+            }, 3000);
         } catch (error) {
             console.error('Error adding/updating volunteering:', error);
             setError('Error adding/updating volunteering. Please try again.');
@@ -120,8 +116,6 @@ const AddVolunteer = () => {
             message: `A new volunteering option has been added. Description: ${volunteeringData.Description}. View it at: https://matrysofwar.onrender.com/soldierInfo/${id}/volunteering`
         };
 
-        console.log('Sending email with params:', templateParams);
-
         emailjs.send('service_9rnvzfp', 'template_j3x5far', templateParams, "PfoRzhpOYEmi5Zxch")
             .then((response) => {
                 console.log('SUCCESS!', response.status, response.text);
@@ -132,7 +126,9 @@ const AddVolunteer = () => {
 
     return (
         <div className="bg-gray-200 h-screen relative">
-            <Sidebar />
+            <React.Suspense fallback={<div>Loading Sidebar...</div>}>
+                <Sidebar />
+            </React.Suspense>
             {soldier && (
                 <div className="fixed top-20 right-4">
                     {soldier.Image ? (
@@ -168,7 +164,8 @@ const AddVolunteer = () => {
                             <div className="w-12 h-12 border-4 border-t-4 border-gray-200 border-t-gray-600 rounded-full animate-spin"></div>
                         </div>}
                         {error && <span className="text-red-500">{error}</span>}
-                        {successMessage && <span className="text-red-500 font-bold">{successMessage}</span>}                    </form>
+                        {successMessage && <span className="text-red-500 font-bold">{successMessage}</span>}
+                    </form>
                 </div>
             </div>
         </div>
