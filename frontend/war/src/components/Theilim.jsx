@@ -218,8 +218,8 @@ const Theilim = () => {
                     <a onClick={handleCopyLink} className="flex text-center hover:cursor-pointe p-1">
                         <IoShareSocial />
                     </a>
-                    {copySuccess && <p className="text-red-700">{copySuccess}</p>}
                 </div>
+                {copySuccess && <p className="text-red-700">{copySuccess}</p>}
             </div>
 
             <div className="bg-gray-200 min-h-screen flex flex-col items-center mt-0" style={{ direction: 'rtl' }}>
