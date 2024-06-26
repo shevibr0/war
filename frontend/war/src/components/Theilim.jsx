@@ -15,6 +15,7 @@ import {
 } from '../utils/TehilimUtil';
 import { getSoldiersById } from '../utils/SoldierUtil';
 import { addPageToHistory } from '../features/userSlice';
+import { IoShareSocial } from "react-icons/io5";
 
 const Sidebar = lazy(() => import('./Sidebar'));
 
@@ -215,7 +216,7 @@ const Theilim = () => {
             <div className='flex justify-center mb-4'>
                 <div className='flex flex-col items-center '>
                     <a onClick={handleCopyLink} className="flex text-center hover:cursor-pointe">
-                        <img className='w-5 h-5 bg-white mr-3 mt-1 rounded-sm' src="/share.png" alt="share" />
+                        <IoShareSocial />
                     </a>
                     {copySuccess && <p className="text-red-700">{copySuccess}</p>}
                 </div>
