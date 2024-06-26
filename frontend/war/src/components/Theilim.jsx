@@ -215,11 +215,12 @@ const Theilim = () => {
             <div className='flex justify-center mb-4'>
                 <div className='flex flex-col items-center'>
                     <a onClick={handleCopyLink} className="flex text-center hover:cursor-pointer">
-                        <img className='w-5 h-5 bg-white mr-3 mt-1' src="/share.png" alt="share" />
+                        <img className='w-5 h-5 bg-white mr-3 mt-1 rounded-full border-2 border-gray-500' src="/share.png" alt="share" />
                     </a>
                     {copySuccess && <p className="text-red-700">{copySuccess}</p>}
                 </div>
             </div>
+
             <div className="bg-gray-200 min-h-screen flex flex-col items-center mt-0" style={{ direction: 'rtl' }}>
                 <h1 className="text-2xl text-gray-800 font-semibold mb-5">בחר פרק תהילים</h1>
                 <div className="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-12 gap-2">
