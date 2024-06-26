@@ -215,7 +215,7 @@ const Theilim = () => {
             <div className='flex justify-center mb-4'>
                 <div className='flex flex-col items-center'>
                     <a onClick={handleCopyLink} className="flex text-center hover:cursor-pointer">
-                        <img className='w-5 h-5 bg-white mr-3 mt-1 rounded-full border-2 border-gray-500' src="/share.png" alt="share" />
+                        <img className='w-7 h-7 bg-white mr-3 mt-1 rounded-full' src="/share.png" alt="share" />
                     </a>
                     {copySuccess && <p className="text-red-700">{copySuccess}</p>}
                 </div>
