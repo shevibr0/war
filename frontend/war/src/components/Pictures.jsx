@@ -113,7 +113,7 @@ const Pictures = () => {
                         <img
                             className="w-full object-cover rounded-t-lg"
                             loading="lazy"
-                            src={image.Url}
+                            src={image.ThumbnailUrl || image.Url} // השתמש ב-thumbnail אם קיים
                             alt={`Image ${index}`}
                             onClick={() => openModal(image)}
                         />
