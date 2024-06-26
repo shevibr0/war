@@ -68,6 +68,23 @@ const Theilim = () => {
             try {
                 const soldierData = await getSoldiersById(id);
                 setSoldier(soldierData);
+
+                // Update Open Graph tags
+                if (soldierData && soldierData.Image) {
+                    const metaTitle = document.querySelector('meta[property="og:title"]');
+                    const metaDescription = document.querySelector('meta[property="og:description"]');
+                    const metaImage = document.querySelector('meta[property="og:image"]');
+
+                    if (metaTitle) {
+                        metaTitle.setAttribute('content', `${soldierData.FirstName} ${soldierData.LastName}`);
+                    }
+                    if (metaDescription) {
+                        metaDescription.setAttribute('content', 'דף תהילים לזכרו/ה של החייל/ת');
+                    }
+                    if (metaImage) {
+                        metaImage.setAttribute('content', soldierData.Image);
+                    }
+                }
             } catch (error) {
                 console.error('Error fetching soldier details:', error);
             }
