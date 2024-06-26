@@ -34,6 +34,7 @@ const Theilim = () => {
     const [soldier, setSoldier] = useState(null);
     const [completedPsalms, setCompletedPsalms] = useState(new Set());
     const [loading, setLoading] = useState(false);
+    const [copySuccess, setCopySuccess] = useState('');
 
     const fetchTehilimData = useCallback(async () => {
         try {
@@ -142,6 +143,17 @@ const Theilim = () => {
             });
     };
 
+    const handleCopyLink = () => {
+        const fullUrl = window.location.origin + location.pathname;
+        navigator.clipboard.writeText(fullUrl).then(() => {
+            setCopySuccess('הקישור הועתק');
+            setTimeout(() => setCopySuccess(''), 3000);
+        }, (err) => {
+            setCopySuccess('Failed to copy the link');
+            console.error('Failed to copy the link: ', err);
+        });
+    };
+
     const numberToHebrewLetter = (num) => {
         const hebrewLetters = [
             "א", 'ב', 'ג', 'ד', 'ה', 'ו', 'ז', 'ח', 'ט', 'י',
@@ -198,6 +210,14 @@ const Theilim = () => {
                     <p>מספר פרקי תהילים שנאמרו: {num}</p>
                     <p>כמות משתתפים: {userNum}</p>
                     <p>מספר ספרים: {books}</p>
+                </div>
+            </div>
+            <div className='flex justify-center mb-4'>
+                <div className='flex flex-col items-center'>
+                    <a onClick={handleCopyLink} className="flex text-center hover:cursor-pointer">
+                        <img className='w-5 h-5 bg-white mr-3 mt-1' src="/share.png" alt="share" />
+                    </a>
+                    {copySuccess && <p className="text-red-700">{copySuccess}</p>}
                 </div>
             </div>
             <div className="bg-gray-200 min-h-screen flex flex-col items-center mt-0" style={{ direction: 'rtl' }}>
