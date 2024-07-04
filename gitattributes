@@ -1,1 +1,10 @@
-*.pb linguist-detectable=false
+# Force detection of specific file types
+*.cs linguist-detectable=true
+*.js linguist-detectable=true
+*.jsx linguist-detectable=true
+*.css linguist-detectable=true
+
+# Optional: Exclude certain directories if necessary
+node_modules/* linguist-detectable=false
+dist/* linguist-detectable=false
+build/* linguist-detectable=false
