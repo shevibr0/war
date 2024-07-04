@@ -54,6 +54,7 @@ public async Task<IEnumerable<UserDTO>> GetAllUsers()
             return Ok("Success"); // or return appropriate HTTP response for success
         }
 
+
         [HttpPut("{id}")]
         public async Task<ActionResult> UpdateUser(int id, [FromBody] UserDTO updatedUserDTO)
         {
