@@ -1,4 +1,4 @@
-https://matrysofwar.onrender.com/homePage  - קישור ישירות לאתר
+https://matrysofwar.onrender.com/  - קישור ישירות לאתר
 
 https://github.com/shevibr0/war/assets/120101073/abfa3685-658f-4507-8d24-a8a1e29fb17c
 
