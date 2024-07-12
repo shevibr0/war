@@ -1,7 +1,7 @@
 import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { getSoldiersById } from '../utils/SoldierUtil';
-import { useSelector } from 'react-redux';
+
 
 const Sidebar = lazy(() => import('./Sidebar'));
 
@@ -11,7 +11,6 @@ const SoldierInfo = () => {
     const { id } = useParams();
     const [soldier, setSoldier] = useState(null);
     const [copySuccess, setCopySuccess] = useState('');
-    const user = useSelector(state => state.user.connectedUser);
 
     useEffect(() => {
         const fetchSoldierDetails = async () => {

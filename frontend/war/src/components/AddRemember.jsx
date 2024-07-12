@@ -17,7 +17,7 @@ const AddRemember = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [successMessage, setSuccessMessage] = useState('');
     const user = useSelector(state => state.user.connectedUser);
-    const [isEditing, setIsEditing] = useState(Boolean(memoryId));
+    const [isEditing, _] = useState(Boolean(memoryId));
     const [soldier, setSoldier] = useState(null);
 
     const initialMemoryDetails = {
@@ -89,7 +89,7 @@ const AddRemember = () => {
             if (memoryId) {
                 await updateMemory(memoryId, memoryPayload);
                 sendEmailNotification(memoryPayload);
-                setSuccessMessage('הזכרון עודכן בהצלחה!');
+                setSuccessMessage('הזכרון עודכן בהצלחה');
             } else {
                 await addMemory(memoryPayload);
                 sendEmailNotification(memoryPayload);
@@ -166,7 +166,7 @@ const AddRemember = () => {
                             <div className="w-12 h-12 border-4 border-t-4 border-gray-200 border-t-gray-600 rounded-full animate-spin"></div>
                         </div>}
                         {error && <span className="text-red-500">{error}</span>}
-                        {successMessage && <span className="text-red-500 font-bold">{successMessage}</span>}
+                        {successMessage && <span className="text-yellow-700 font-bold">{successMessage}</span>}
                     </form>
                 </div>
             </div>

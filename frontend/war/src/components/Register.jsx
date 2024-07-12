@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { FaHome, FaComments, FaEye, FaEyeSlash } from 'react-icons/fa';
 import { IoMdLogIn } from "react-icons/io";
 import { BiLogOutCircle } from "react-icons/bi";
-import { RiLoginCircleFill } from "react-icons/ri";
 import { FaSearch } from "react-icons/fa";
 import { addPageToHistory } from "../features/userSlice";
 
@@ -19,7 +18,6 @@ const Register = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [phone, setPhone] = useState('');
     const [error, setError] = useState('');
-    const pageHistory = useSelector(state => state.user.pageHistory);
     const user = useSelector(state => state.user.connectedUser);
 
     const validateEmail = (email) => {

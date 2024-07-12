@@ -31,7 +31,7 @@ const Theilim = () => {
     const [selectedPsalms, setSelectedPsalms] = useState(null);
     const [selectedPsalmsPart, setSelectedPsalmsPart] = useState(null);
     const [showPopup, setShowPopup] = useState(false);
-    const [theilimUser, setTheilimUser] = useState(null);
+    const [_, setTheilimUser] = useState(null);
     const [soldier, setSoldier] = useState(null);
     const [completedPsalms, setCompletedPsalms] = useState(new Set());
     const [loading, setLoading] = useState(false);
@@ -258,7 +258,7 @@ const Theilim = () => {
                                     nav('/register');
                                 }
                             }}
-                            disabled={loading || completedPsalms.has(i + 1)} // נעל את הכפתור בזמן טעינה או אם הוא כבר נלחץ
+                            disabled={loading || completedPsalms.has(i + 1)}
                         >
                             {numberToHebrewLetter(i + 1)}
                         </button>
@@ -274,7 +274,7 @@ const Theilim = () => {
                             <div className='flex justify-center'>
                                 <button onClick={handleAddTheilimForSolider}
                                     className="btn mt-4 bg-gray-600 hover:bg-white text-white hover:text-gray-600 hover:border border-gray-600 font-bold py-2 px-4 rounded"
-                                    disabled={loading} // נעל את הכפתור בזמן טעינה
+                                    disabled={loading}
                                 >
                                     קראתי את הפרק
                                 </button>

@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     connectedUser: JSON.parse(localStorage.getItem('user')) || null,
     users: [],
-    pageHistory: [] // שדה להיסטוריית הדפים
+    pageHistory: []
 }
 
 const userSlice = createSlice({

@@ -14,7 +14,6 @@ const Recepies = () => {
     const dispatch = useDispatch();
     const location = useLocation();
     const { id } = useParams();
-    const [isOpen, setIsOpen] = useState(false);
     const [recepies, setRecepies] = useState([]);
     const [preparations, setPreparations] = useState([]);
     const [productsToRecipes, setProductsToRecipes] = useState([]);

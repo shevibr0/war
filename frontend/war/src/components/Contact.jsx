@@ -1,16 +1,12 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router';
-import { useSelector } from 'react-redux';
 import emailjs from 'emailjs-com';
 import Sidebar from './Sidebar';
 
 const Contact = () => {
-    const nav = useNavigate();
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
-    const user = useSelector(state => state.user.connectedUser);
 
     const sendEmail = (e) => {
         e.preventDefault();

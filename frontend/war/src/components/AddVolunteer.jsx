@@ -90,7 +90,7 @@ const AddVolunteer = () => {
             if (optionId) {
                 await updateVolunteeringOption(optionId, volunteeringOptionPayload);
                 sendEmailNotification(volunteeringOptionPayload);
-                setSuccessMessage('ההתנדבות עודכנה בהצלחה!');
+                setSuccessMessage('ההתנדבות עודכנה בהצלחה');
             } else {
                 await addVolunteeringOption(volunteeringOptionPayload);
                 sendEmailNotification(volunteeringOptionPayload);
@@ -167,7 +167,7 @@ const AddVolunteer = () => {
                             <div className="w-12 h-12 border-4 border-t-4 border-gray-200 border-t-gray-600 rounded-full animate-spin"></div>
                         </div>}
                         {error && <span className="text-red-500">{error}</span>}
-                        {successMessage && <span className="text-red-500 font-bold">{successMessage}</span>}
+                        {successMessage && <span className="text-yellow-700 font-bold">{successMessage}</span>}
                     </form>
                 </div>
             </div>

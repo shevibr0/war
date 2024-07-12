@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import React from 'react'
 import { useNavigate } from 'react-router';
 import Sidebar from './Sidebar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,8 +8,6 @@ import { faLinkedin, faInstagram } from '@fortawesome/free-brands-svg-icons';
 
 const HomePage = () => {
     const nav = useNavigate();
-    const [isOpen, setIsOpen] = useState(false);
-    const user = useSelector(state => state.user.connectedUser);
 
     return (
         <div className="bg-gray-200 h-screen font-sans">
@@ -55,8 +52,6 @@ const HomePage = () => {
                 </div>
             </div>
         </div>
-
-
     )
 }
 

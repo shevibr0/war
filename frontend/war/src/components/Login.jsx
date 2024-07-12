@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate, useLocation } from "react-router";
+import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { GetByEmailAndPassword } from "../utils/UserUtil";
 import { setConnectedUser, clearPageHistory } from '../features/userSlice';
@@ -10,7 +10,6 @@ import { FaSearch } from "react-icons/fa";
 
 const Login = () => {
     const nav = useNavigate();
-    const location = useLocation();
     const dispatch = useDispatch();
     const pageHistory = useSelector(state => state.user.pageHistory);
     const [email, setEmail] = useState('');
@@ -65,14 +64,10 @@ const Login = () => {
         <div className="bg-gray-200">
             <nav className="flex left-0 top-0 bg-gray-200 justify-center items-center text-3xl text-gray-800 h-[80px] cursor-pointer space-x-11">
                 {!user && (
-                    <>
-                        <div onClick={() => nav('/login')} className='transition duration-100 hover:text-yellow-400'> <IoMdLogIn /></div>
-                    </>
+                    <div onClick={() => nav('/login')} className='transition duration-100 hover:text-yellow-400'> <IoMdLogIn /></div>
                 )}
                 {user && (
-                    <>
-                        <div onClick={() => nav('/logOut')} className='transition duration-100 hover:text-yellow-400' > <BiLogOutCircle /></div>
-                    </>
+                    <div onClick={() => nav('/logOut')} className='transition duration-100 hover:text-yellow-400' > <BiLogOutCircle /></div>
                 )}
                 <div onClick={() => nav('/contact')} className='transition duration-100 hover:text-yellow-400'> <FaComments /></div>
                 <div onClick={() => nav('/soldiers')} className='transition duration-100 hover:text-yellow-400'><FaSearch /></div>

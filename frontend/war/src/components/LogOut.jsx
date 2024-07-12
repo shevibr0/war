@@ -8,9 +8,8 @@ const LogOut = () => {
     const nav = useNavigate();
 
     const handleLogout = () => {
-        localStorage.removeItem('user'); // מחיקת המשתמש מ-localStorage
-        dispatch(setUnConnectedUser()); // מחיקת המשתמש מה-Redux store
-        nav('/soldiers'); // ניווט חזרה לדף הבית או לדף ההתחברות
+        dispatch(setUnConnectedUser());
+        nav('/soldiers');
     };
 
     return (

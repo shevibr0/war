@@ -23,7 +23,7 @@ const Soldiers = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [searchMessage, setSearchMessage] = useState('');
     const [loading, setLoading] = useState(false);
-    const [copySuccess, setCopySuccess] = useState('');
+    const [_, setCopySuccess] = useState('');
     const user = useSelector(state => state.user.connectedUser);
     const dispatch = useDispatch();
 
@@ -63,7 +63,7 @@ const Soldiers = () => {
             fetchSoldiers(newPage);
         }
     };
-
+    //
     const handleSearchValue = (e) => {
         let searchValue = e.target.value;
         setSearchQuery(searchValue);
@@ -119,14 +119,10 @@ const Soldiers = () => {
         <div className="bg-gray-200 h-screen">
             <nav className="flex left-0 top-0 bg-gray-200 justify-center items-center text-3xl text-gray-800 h-[80px] cursor-pointer space-x-11">
                 {!user && (
-                    <>
-                        <div onClick={() => nav('/login')} className='transition duration-100 hover:text-yellow-400'><IoMdLogIn /></div>
-                    </>
+                    <div onClick={() => nav('/login')} className='transition duration-100 hover:text-yellow-400'><IoMdLogIn /></div>
                 )}
                 {user && (
-                    <>
-                        <div onClick={() => nav('/logOut')} className='transition duration-100 hover:text-yellow-400'><BiLogOutCircle /></div>
-                    </>
+                    <div onClick={() => nav('/logOut')} className='transition duration-100 hover:text-yellow-400'><BiLogOutCircle /></div>
                 )}
                 <div onClick={() => nav('/contact')} className='transition duration-100 hover:text-yellow-400'><FaComments /></div>
                 <div onClick={() => nav('/soldiers')} className='transition duration-100 hover:text-yellow-400'><FaSearch /></div>
@@ -140,9 +136,6 @@ const Soldiers = () => {
                 )}
             </div>
             <div className="bg-gray-200">
-                <div className=''>
-                    <h2 className="text-gray-800 text-4xl font-bold mb-6 mt-6 text-center"></h2>
-                </div>
                 <div className="text-center mb-4">
                     <div className="relative flex items-center justify-center">
                         <input
