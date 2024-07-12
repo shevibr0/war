@@ -1,7 +1,4 @@
 ﻿using DL.Models;
-using Microsoft.EntityFrameworkCore;
-using System.Net;
-using System.Text.Json;
 namespace DL
 {
     public class ApiServiceDL : IApiServiceDL

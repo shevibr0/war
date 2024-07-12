@@ -1,18 +1,10 @@
 ﻿using AutoMapper;
 using DL;
 using DL.Models;
-using DL;
-using Entities;
 using Entities.DTO;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Hosting; // For BackgroundService
-using System.Threading;             // For CancellationToken
-using System.Threading.Tasks;
+
 
 namespace BL.Services
 {

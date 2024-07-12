@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using BL.Services;
+﻿using BL.Services;
 using Entities.DTO;
 using Microsoft.AspNetCore.Mvc;
 

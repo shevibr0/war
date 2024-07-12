@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace Entities.DTO
 {
-   using Entities;
+  
     public class apiResponseModel
     {
         public int count { get; set; }

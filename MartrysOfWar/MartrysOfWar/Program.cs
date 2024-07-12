@@ -2,10 +2,9 @@ using BL;
 using BL.Services;
 using DL;
 using DL.Models;
-using Entities;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.EntityFrameworkCore;
-using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
+
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Logging.ClearProviders();

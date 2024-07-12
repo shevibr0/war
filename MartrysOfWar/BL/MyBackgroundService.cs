@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Hosting; // For BackgroundService
+﻿using Microsoft.Extensions.Hosting; // For BackgroundService
 using Microsoft.Extensions.Logging;  // For ILogger
-using System.Threading;             // For CancellationToken
-using System.Threading.Tasks;
 using BL.Services;
 using Microsoft.Extensions.DependencyInjection;
 

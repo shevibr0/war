@@ -1,6 +1,4 @@
 ﻿using BL;
-using DL;
-using DL.Models;
 using Entities.DTO;
 using Microsoft.AspNetCore.Mvc;
 

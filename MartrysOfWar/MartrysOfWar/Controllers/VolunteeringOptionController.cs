@@ -1,10 +1,7 @@
 ﻿using BL;
-using DL;
-using DL.Models;
 using Entities.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
