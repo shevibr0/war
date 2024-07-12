@@ -63,7 +63,7 @@ const Soldiers = () => {
             fetchSoldiers(newPage);
         }
     };
-    //
+
     const handleSearchValue = (e) => {
         let searchValue = e.target.value;
         setSearchQuery(searchValue);
