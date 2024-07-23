@@ -6,7 +6,6 @@ import { faLinkedin, faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { FaHome, FaComments } from 'react-icons/fa';
 import { IoMdLogIn } from "react-icons/io";
 import { BiLogOutCircle } from "react-icons/bi";
-import { useNavigate } from 'react-router';
 import { useSelector } from 'react-redux';
 import { FaSearch } from "react-icons/fa";
 
