@@ -1,14 +1,13 @@
 import React from 'react'
 import { useNavigate } from 'react-router';
-import Sidebar from './Sidebar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { faLinkedin, faInstagram } from '@fortawesome/free-brands-svg-icons';
-
+import { useSelector } from 'react-redux';
 
 const HomePage = () => {
     const nav = useNavigate();
-
+    const user = useSelector(state => state.user.connectedUser);
     return (
         <div className="bg-gray-200 h-screen font-sans">
             <>
