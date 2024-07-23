@@ -27,7 +27,7 @@ const HomePage = () => {
                     <div onClick={() => nav('/soldiers')} className='transition duration-100 hover:text-yellow-400' > <FaSearch /></div>
                     <div onClick={() => nav('/homePage')} className='transition duration-100 hover:text-yellow-400'><FaHome /></div>
                 </nav>
-                <h3 className='flex justify-center mt-2 mb-2 text-red-600 text-xs'>"המידע אודות החיילים מתעדכן מידי יום מהאתר "דבר</h3>
+                <h3 className='flex justify-center mt-2 mb-2 text-red-600 text-xs'>"המידע אודות הנופלים מתעדכן מידי יום מהאתר "דבר</h3>
                 <h3 className='flex justify-center text-red-600 text-sm underline'><a href="https://www.davar1.co.il/" target="_blank" rel="noopener noreferrer">קרדיט לאתר דבר </a></h3>
                 <div className='flex justify-center mt-2 mb-2'>
                     {user && (
