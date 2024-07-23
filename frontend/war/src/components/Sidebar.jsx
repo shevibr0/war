@@ -26,7 +26,7 @@ const Sidebar = () => {
                 <div onClick={() => nav('/soldiers')} className='transition duration-100 hover:text-yellow-400' > <FaSearch /></div>
                 <div onClick={() => nav('/homePage')} className='transition duration-100 hover:text-yellow-400'><FaHome /></div>
             </nav>
-            <h6 className='flex justify-center mt-2 mb-2'>davar המידע אודות החיילים מתעדכן מידי יום מהאתר</h6>
+            <h3 className='flex justify-center mt-2 mb-2 text-red-600 text-sm'>davar המידע אודות החיילים מתעדכן מידי יום מהאתר</h3>
             <h3 className='flex justify-center'>https://www.davar1.co.il/ :קרדיט</h3>
             <div className='flex justify-center mt-2 mb-2'>
                 {user && (
